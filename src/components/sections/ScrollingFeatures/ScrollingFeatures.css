@@ -1,0 +1,224 @@
+.kokotina {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1 0 0px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 600px;
+  height: min-content;
+  justify-content: center;
+  overflow: hidden;
+  padding: 120px 0;
+  position: relative;
+  width: 1px
+}
+
+.section {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: min-content;
+  justify-content: center;
+  overflow: visible;
+  padding: 78px 32px 120px;
+  position: relative;
+  width: 100%
+}
+
+.container-features {
+  align-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex: 1 0 0px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 60px;
+  height: min-content;
+  justify-content: center;
+  max-width: 1200px;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+
+}
+
+.aspect-video {
+  gap: 60px;
+  height: 585px;
+  overflow: hidden;
+  position: relative;
+  justify-self: center;
+  width: 285px;
+  will-change: transform;
+}
+
+.kokot {
+  flex: none;
+  height: 100%;
+  left: calc(50.00000000000002% - 100% / 2);
+  overflow: visible;
+  position: absolute;
+  top: calc(50.00000000000002% - 100% / 2);
+  width: 100%
+}
+
+.flex-badges {
+  display: flex;
+}
+
+.picus {
+
+  aspect-ratio: 1.3571428571428572 / 1;
+  flex: 1 0 0px;
+  height: 397px;
+
+  /* KĽÚČ: sticky voči viewportu s offsetom 125px */
+  position: sticky;
+  top: 125px;
+
+  /* v flex kontejnery zabezpečí, že nebude centrovaný */
+  align-self: flex-start;
+
+  z-index: 1;
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure {
+  margin: 0
+}
+
+a {
+  text-decoration: none;
+  color: white !important;
+}
+
+.learn-more {
+  font-weight: 700;
+  height: 50px;
+  padding: 0 25px;
+  border-radius: 15px;
+  background-color: var(--accent-blue);
+  border: none;
+}
+
+
+
+@media (min-width: 810px) and (max-width: 1199px) {
+
+  .pome {
+    width: 80%;
+  }
+
+  .container-features {
+    gap: 0px;
+  }
+
+  .sticky {
+    height: 293px;
+    order: 0
+  }
+
+  .kokotina {
+    align-content: flex-start;
+    align-items: flex-start;
+    flex: .8 0 0px;
+    gap: 320px;
+    order: 1;
+    padding: 80px 0
+  }
+
+
+}
+
+@media (max-width: 999px) {
+  .badges {
+    display: none;
+  }
+}
+
+@media (max-width: 809px) {
+
+
+
+
+  .container-features {
+    flex: none;
+    gap: 32px;
+    width: 100%
+  }
+
+  .kokotina {
+    gap: 32px;
+    padding: 0 0 9px
+  }
+
+
+
+
+
+
+}
+
+
+
+
+
+
+@media (max-width: 809px) {
+  .container-features {
+    flex-direction: column;
+    gap: 32px;
+    padding: 20px;
+  }
+
+  .feature-block-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .feature-img-mobile {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    background: #444;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: white;
+  }
+
+  .aspect-video {
+    align-self: center;
+    height: 480px;
+    margin-top: 60px;
+  }
+
+  .section {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,101 @@
+.privacy-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    padding: var(--spacing-xxl) 0;
+}
+
+.privacy-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    margin-top: 150px;
+}
+
+.privacy-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: var(--spacing-xxl);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+     padding: 30px;
+}
+
+.privacy-card h2 {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+   
+    background-clip: text;
+}
+
+.privacy-text {
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+.privacy-text h3 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin: var(--spacing-xl) 0 var(--spacing-md) 0;
+    border-left: 4px solid var(--accent-primary);
+    padding-left: var(--spacing-md);
+}
+
+.privacy-text p {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+}
+
+.privacy-text p strong {
+    color: var(--text-primary);
+    font-weight: var(--font-semibold);
+}
+
+.last-updated {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg);
+}
+
+.last-updated p {
+    color: var(--text-tertiary);
+    font-size: var(--text-sm);
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .privacy-page {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .privacy-section {
+        padding: 0 var(--spacing-md);
+    }
+
+    .privacy-card {
+        padding: var(--spacing-lg);
+        border-radius: 15px;
+    }
+
+    .privacy-card h2 {
+        font-size: var(--text-2xl);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .privacy-text h3 {
+        font-size: var(--text-lg);
+        margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
+    }
+
+    .privacy-text p {
+        font-size: var(--text-sm);
+    }
+}

@@ -1,0 +1,320 @@
+/* Download Page Styles */
+
+.download-page {
+  min-height: 900px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.download-page .light-rays-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  z-index: -1;
+}
+
+/* Hero Section */
+.download-hero {
+  text-align: center;
+  padding: var(--spacing-6xl) 0;
+  position: relative;
+  z-index: 1;
+}
+
+.download-title {
+  font-size: var(--text-5xl);
+  font-weight: var(--font-extrabold);
+  margin-bottom: var(--spacing-xl);
+  letter-spacing: -0.02em;
+}
+
+.download-subtitle {
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 600px;
+  margin: 0 auto var(--spacing-4xl);
+}
+
+/* Download Links */
+.download-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.download-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+}
+
+.download-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl), var(--shadow-glow);
+  border-color: var(--accent-blue);
+}
+
+.download-card.primary {
+  border-color: var(--accent-blue);
+  background: linear-gradient(135deg, rgba(58, 41, 255, 0.1), rgba(102, 126, 234, 0.05));
+}
+
+.download-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  /* background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)); */
+  /* border: 1px solid rgba(255, 255, 255, 0.1); */
+  color: var(--text-primary);
+}
+
+.download-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Platform-specific icon colors */
+.download-card[data-platform="iOS"] .download-icon {
+  /* background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08)); */
+  color: #ffffff;
+}
+
+.download-card[data-platform="Android"] .download-icon {
+  /* background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1)); */
+  color: #4CAF50;
+}
+
+.download-info {
+  flex: 1;
+  text-align: left;
+}
+
+.download-platform {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-primary);
+}
+
+.download-store {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.download-btn {
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-weight: var(--font-medium);
+}
+
+/* Features Section */
+.download-features {
+  background: var(--secondary-bg);
+  position: relative;
+  z-index: 1;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-3xl);
+}
+
+.feature-item {
+  text-align: center;
+  padding: var(--spacing-xl);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+}
+
+.feature-item:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl), var(--shadow-glow);
+}
+
+.feature-item .feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.feature-item .feature-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.feature-item .feature-description {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* System Requirements */
+.system-requirements {
+  background: var(--primary-bg);
+  position: relative;
+  z-index: 1;
+}
+
+.requirements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-3xl);
+}
+
+.requirement-card {
+  padding: var(--spacing-2xl);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+}
+
+.requirement-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.requirement-card h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+}
+
+.requirement-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.requirement-card li {
+  padding: var(--spacing-sm) 0;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.requirement-card li:last-child {
+  border-bottom: none;
+}
+
+.requirement-card li::before {
+  content: '✓';
+  color: var(--accent-green);
+  font-weight: bold;
+  margin-right: var(--spacing-sm);
+}
+
+/* CTA Section */
+.download-cta {
+  background: var(--secondary-bg);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--spacing-lg);
+}
+
+.cta-description {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--spacing-2xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-actions {
+  display: flex;
+  gap: var(--spacing-lg);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .download-title {
+    font-size: var(--text-4xl);
+  }
+  
+  .download-subtitle {
+    font-size: var(--text-lg);
+  }
+  
+  .download-card {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-md);
+  }
+  
+  .download-info {
+    text-align: center;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .requirements-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .cta-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-actions .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .download-hero {
+    padding: var(--spacing-4xl) 0;
+  }
+  
+  .download-title {
+    font-size: var(--text-3xl);
+  }
+  
+  .cta-title {
+    font-size: var(--text-3xl);
+  }
+}
+@media (max-width: 768px) {
+    .section {
+        margin-top: 70px;
+    }
+}
