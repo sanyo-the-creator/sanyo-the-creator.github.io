@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter  as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home/Home';
 import Welcome from './pages/Welcome/Welcome';
@@ -23,7 +23,8 @@ function App() {
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Navigate to="/download" replace />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/about" element={<About />} />
           <Route path="/features" element={<Features />} />

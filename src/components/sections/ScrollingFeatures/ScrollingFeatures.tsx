@@ -77,8 +77,6 @@ const useUpshiftAnimator = () => {
 };
 
 const useScrollAnimation = (activeIndex: number) => {
-  const [animations, setAnimations] = useState<{ [key: string]: any }>({});
-
   const animateElement = useCallback((element: HTMLElement, options: any) => {
     if (!element) return;
 
@@ -90,8 +88,8 @@ const useScrollAnimation = (activeIndex: number) => {
   }, []);
 
   useEffect(() => {
+    // Animácia text elementov
     const tabItems = document.querySelectorAll('[data-upshift-name="Tab item"]');
-
     tabItems.forEach((item, index) => {
       const element = item as HTMLElement;
       if (index === activeIndex) {
@@ -109,22 +107,21 @@ const useScrollAnimation = (activeIndex: number) => {
       }
     });
 
+    // Animácia obrázkov - bez delay, priamo podľa activeIndex
     const images = document.querySelectorAll('[data-upshift-name^="Image"]');
+    
+
     images.forEach((img, index) => {
       const element = img as HTMLElement;
-      const delay = index * 100;
-
-      setTimeout(() => {
-        if (index === activeIndex) {
-          animateElement(element, { opacity: 1 });
-        } else {
-          animateElement(element, { opacity: 0 });
-        }
-      }, delay);
+      const dataName = element.getAttribute('data-upshift-name');
+      
+      if (index === activeIndex) {
+        animateElement(element, { opacity: 1 });
+      } else {
+        animateElement(element, { opacity: 0 });
+      }
     });
   }, [activeIndex, animateElement]);
-
-  return animations;
 };
 
 const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
@@ -135,6 +132,11 @@ const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Zabezpečíme, že sa vždy začne od indexu 0
+  useEffect(() => {
+    setActiveFeature(0);
+  }, []);
 
   // Tu je správne použitie useState a useEffect
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -147,8 +149,7 @@ const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
 
   const isMobileView = windowWidth <= 809;
 
-  const { createSpring, easings } = useUpshiftAnimator();
-  useScrollAnimation(activeFeature);
+  // useScrollAnimation(activeFeature); // Dočasne vypnuté pre debugging
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -162,15 +163,12 @@ const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
   }, []);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let lastTime = Date.now();
-
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const currentTime = Date.now();
       const windowHeight = window.innerHeight;
+      const viewportCenter = scrollY + windowHeight / 2;
 
-      let closestIndex = activeFeature;
+      let closestIndex = 0;
       let minDistance = Number.POSITIVE_INFINITY;
 
       featureRefs.current.forEach((featureEl, index) => {
@@ -179,35 +177,34 @@ const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
         const rect = featureEl.getBoundingClientRect();
         const elementTop = rect.top + scrollY;
         const elementCenter = elementTop + rect.height / 2;
-        const viewportCenter = scrollY + windowHeight / 2;
 
         const distanceFromCenter = Math.abs(viewportCenter - elementCenter);
-        const normalizedDistance = distanceFromCenter / (rect.height / 2);
 
+        // Použijeme jednoduchšiu logiku - najbližší element k centru viewportu
         if (distanceFromCenter < minDistance) {
           minDistance = distanceFromCenter;
           closestIndex = index;
         }
 
         if (isVisible) {
+          const normalizedDistance = distanceFromCenter / (rect.height / 2);
           const dynamicOpacity = Math.max(0, 1 - normalizedDistance);
           featureEl.style.setProperty('--dynamic-opacity', dynamicOpacity.toString());
         }
       });
 
+      // Aktualizujeme iba ak sa index skutočne zmenil
       if (closestIndex !== activeFeature) {
+      ;
         setActiveFeature(closestIndex);
       }
-
-      lastScrollY = scrollY;
-      lastTime = currentTime;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isVisible, activeFeature]);
+  }, [isVisible]); // Odstránené activeFeature z dependency array
 
   useEffect(() => {
     if (isVisible && sectionRef.current) {
@@ -283,17 +280,23 @@ const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
           <>
             <div className="picus mb-8">
               <div className="relative aspect-video rounded-2xl overflow-hidden">
-                {features.map((feature, index) => (
-                  <div
-                    key={feature.id}
-                    className="absolute inset-0 transition-opacity duration-700 kokot"
-                    data-upshift-name={`Image ${index + 1}`}
-                    style={{
-                      opacity: activeFeature === index ? 1 : 0,
-                      transform: `scale(${activeFeature === index ? 1 : 0.95})`
-                    }}
-                    data-appear-animation
-                  >
+          
+                {features.map((feature, index) => {
+                  const isActive = activeFeature === index;
+                  console.log(`Rendering image ${index}: ${feature.id}, active: ${isActive}, screenshot: ${feature.screenshot}`);
+
+                  return (
+                    <div
+                      key={feature.id}
+                      className="absolute inset-0 transition-opacity duration-700 kokot"
+                      data-upshift-name={`Image ${index}`}
+                      style={{
+                        opacity: isActive ? 1 : 0,
+                        transform: `scale(${isActive ? 1 : 0.95})`,
+                        zIndex: isActive ? 10 : 1
+                      }}
+                      data-appear-animation
+                    >
                     <div style={{
                       position: 'absolute',
                       borderRadius: 'inherit',
@@ -323,7 +326,8 @@ const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -355,7 +359,7 @@ const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
                       {feature.description}
                     </p>
                     <button className="learn-more">
-                      <a href="/features">Learn More</a>
+                      <a href="/#/features">Learn More</a>
                     </button>
                   </div>
                 </div>

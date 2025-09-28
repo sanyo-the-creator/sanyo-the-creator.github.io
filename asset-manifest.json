@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/upshift-web/static/css/main.ff196369.css",
+    "main.js": "/upshift-web/static/js/main.8c01330a.js",
+    "static/js/453.cf098fa7.chunk.js": "/upshift-web/static/js/453.cf098fa7.chunk.js",
+    "static/media/upshift-profile.png": "/upshift-web/static/media/upshift-profile.b28081a386c6426e070f.png",
+    "static/media/upshift-home.png": "/upshift-web/static/media/upshift-home.53c469a5cb81ef1f4d25.png",
+    "static/media/upshift-goals-list.png": "/upshift-web/static/media/upshift-goals-list.276cee2258dd702c1b91.png",
+    "static/media/goals-screen.jpg": "/upshift-web/static/media/goals-screen.c867aba9400f609b9cbb.jpg",
+    "static/media/home-screen.jpg": "/upshift-web/static/media/home-screen.cebf97c432b24cb71096.jpg",
+    "static/media/friends-screen.jpg": "/upshift-web/static/media/friends-screen.079646f390c80f1390f8.jpg",
+    "static/media/time-tracker-screen.jpg": "/upshift-web/static/media/time-tracker-screen.a2b55918704721245345.jpg",
+    "static/media/profile-screen.jpg": "/upshift-web/static/media/profile-screen.2a72cc9ae108d50cee79.jpg",
+    "static/media/group-list-screen.jpg": "/upshift-web/static/media/group-list-screen.69b7750d96ce84a03f66.jpg",
+    "static/media/upshift_icon_mini.svg": "/upshift-web/static/media/upshift_icon_mini.204a16196503a1cd0025c5f55112e624.svg",
+    "index.html": "/upshift-web/index.html",
+    "main.ff196369.css.map": "/upshift-web/static/css/main.ff196369.css.map",
+    "main.8c01330a.js.map": "/upshift-web/static/js/main.8c01330a.js.map",
+    "453.cf098fa7.chunk.js.map": "/upshift-web/static/js/453.cf098fa7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff196369.css",
+    "static/js/main.8c01330a.js"
+  ]
+}

@@ -302,8 +302,11 @@ a:hover {
   }
 
   .section {
-    padding: var(--spacing-3xl) 0;
+    padding: var(--spacing-3xl) 20px;
   }
+  .about-hero {
+    padding-top: var(--spacing-6xl);
+}
 
   h1 {
     font-size: var(--text-4xl);

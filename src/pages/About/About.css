@@ -274,7 +274,10 @@
   position: relative;
   z-index: 1;
      margin-top: var(--spacing-2xl);
-         padding: var(--spacing-6xl) 0;
-             padding-bottom: 10px;
+         /* padding: var(--spacing-6xl) 0; */
+             /* padding-bottom: 10px; */
+}
+.about-hero {
+  padding-top: var(--spacing-6xl);
 }
 

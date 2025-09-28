@@ -1,9 +1,20 @@
 import React from 'react';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
 import LightRays from '../../components/common/LightRays/LightRays';
+import { useMeta } from '../../hooks/useMeta';
 import './Download.css';
 
 const Download: React.FC = () => {
+  // Nastavenie meta tagov pre Download stránku
+  useMeta({
+    title: 'Download Upshift - Level up your life',
+    description: 'Download Upshift app for iOS and Android. Transform your life with the most engaging personal development app.',
+    keywords: 'download upshift, ios app, android app, personal development app, habit tracker download',
+    ogTitle: 'Download Upshift - Level up your life',
+    ogDescription: 'Download Upshift app for iOS and Android',
+    ogImage: 'https://jerguslejko.github.io/upshift-web/static/media/upshift-home.53c469a5cb81ef1f4d25.png'
+  });
+
   const downloadLinks = [
     {
       platform: 'iOS',
@@ -14,7 +25,7 @@ const Download: React.FC = () => {
       ),
       title: 'Download for iPhone',
       subtitle: 'Available on the App Store',
-      url: '#',
+      url: 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316',
       primary: true
     },
     {
@@ -26,7 +37,7 @@ const Download: React.FC = () => {
       ),
       title: 'Download for Android',
       subtitle: 'Coming Soon on Google Play',
-      url: '#',
+      url: '',
       primary: true
     }
   ];
@@ -85,10 +96,21 @@ const Download: React.FC = () => {
             
             <div className="download-links">
               {downloadLinks.map((link, index) => (
-                <div
+                <a
                   key={index}
+                  href={link.url || undefined}
+                  target={link.url ? "_blank" : undefined}
+                  rel={link.url ? "noopener noreferrer" : undefined}
                   className={`download-card ${link.primary ? 'primary' : 'secondary'}`}
                   data-platform={link.platform}
+                  style={{ cursor: link.url ? 'pointer' : 'default' }}
+                  onClick={(e) => {
+                    if (!link.url) {
+                      e.preventDefault();
+                      // Môžete pridať notifikáciu "Coming Soon" alebo iné správanie
+                      // console.log('Link not available yet');
+                    }
+                  }}
                 >
                   <div className="download-icon">{link.icon}</div>
                   <div className="download-info">
@@ -101,7 +123,7 @@ const Download: React.FC = () => {
                   >
                     Download
                   </StarBorder>
-                </div>
+                </a>
               ))}
             </div>
           </div>

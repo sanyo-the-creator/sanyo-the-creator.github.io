@@ -15,12 +15,21 @@ import friendsImage  from '../../assets/images/friends-screen.jpg';
 import groupImage  from '../../assets/images/group-list-screen.jpg';
 import CountUp from '../../components/common/CountUp/CountUp'
 import ProfileCard from '../../components/common/ProfileCard/ProfileCard'
-
+import { useMeta } from '../../hooks/useMeta';
 
 import './Home.css';
 import { MagicBento } from '../../components/common';
 
 const Home: React.FC = () => {
+  // Nastavenie meta tagov pre Home stránku
+  useMeta({
+    title: 'Upshift - Level up your life',
+    description: 'Transform your life with Upshift - The most engaging personal development app. Build habits, track progress, and achieve your goals with gamification.',
+    keywords: 'personal development, habit tracking, goal setting, productivity, gamification, life improvement',
+    ogTitle: 'Upshift - Level up your life',
+    ogDescription: 'Transform your life with the most engaging personal development app',
+  });
+
   // Scrolling Features Data
   const scrollingFeatures = [
     {
@@ -265,7 +274,7 @@ const Home: React.FC = () => {
       {/* CTA Section */}
       <section className="cta-section">
 
-        <button className="btn btn-primary btn-lg btn-cta glow-effect mb-6"  onClick={() => window.location.href = '/download'}>
+        <button className="btn btn-primary btn-lg btn-cta glow-effect mb-6"  onClick={() => window.location.href = '/#/download'}>
           <span className="btn-icon">🚀</span>
           Download Upshift Now
         </button>

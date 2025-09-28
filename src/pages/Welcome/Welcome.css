@@ -518,13 +518,32 @@
   }
 
   .welcome-hero {
-    padding: var(--spacing-3xl) 0;
+    padding: var(--spacing-4xl) 0;
+        margin-top: 100px;
   }
-
+  .welcome-subtitle{
+    font-size: 1.05rem;
+        padding-left: 10px;
+        padding-right: 10px;
+  }
   .section {
     padding: var(--spacing-3xl) 0;
   }
+  .welcome-title {
+    font-size: var(--text-3xl);
+  }
+  
+  .cta-title {
+    font-size: var(--text-3xl);
+  }
+  .welcome-page {
+    height: auto;
+    position: relative;
+    overflow-x: hidden;
+    margin-bottom: 70px;
 }
+}
+
 
 /* Enhanced React Bits Styling */
 .section-title {

@@ -3,9 +3,20 @@ import ScrollReveal from '../../components/common/ScrollReveal/ScrollReveal';
 import SpotlightCard from '../../components/common/SpotlightCard/SpotlightCard';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
 import LightRays from '../../components/common/LightRays/LightRays';
+import { useMeta } from '../../hooks/useMeta';
 import './About.css';
 
 const About: React.FC = () => {
+  // Nastavenie meta tagov pre About stránku
+  useMeta({
+    title: 'About Upshift - Our Mission',
+    description: 'Learn about Upshift mission to transform lives through gamified personal development. Discover our story and vision.',
+    keywords: 'about upshift, mission, personal development, gamification, life transformation',
+    ogTitle: 'About Upshift - Our Mission',
+    ogDescription: 'Learn about Upshift mission to transform lives',
+    ogImage: 'https://jerguslejko.github.io/upshift-web/static/media/upshift-home.53c469a5cb81ef1f4d25.png'
+  });
+
   return (
     <div className="about-page">
       {/* Hero Section */}
@@ -126,9 +137,10 @@ const About: React.FC = () => {
           </div>
 
           <div className="about-cta text-center">
+            <a href="/#/download">
             <StarBorder className="btn btn-primary btn-lg">
               🚀 Start Your Journey
-            </StarBorder>
+            </StarBorder></a>
           </div>
         </div>
       </section>

@@ -51,6 +51,7 @@
 }
 
 .kokot-grid {
+  padding: 0 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-2xl);
@@ -201,4 +202,31 @@ li {
   .additional-features-title {
     font-size: var(--text-3xl);
   }
+}
+
+@media (max-width: 768px) {
+  .features-title {
+    font-size: var(--text-4xl);
+  }
+
+  .features-subtitle {
+    font-size: var(--text-lg);
+  }
+
+  
+}
+
+@media (max-width: 480px) {
+
+  .features-subtitle{
+    font-size: 1.05rem;
+        padding-left: 10px;
+        padding-right: 10px;
+  }
+
+  .features-title {
+    font-size: var(--text-3xl);
+  }
+  
+
 }

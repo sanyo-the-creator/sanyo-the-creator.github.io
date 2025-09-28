@@ -216,6 +216,7 @@ a {
     align-self: center;
     height: 480px;
     margin-top: 60px;
+    width: auto;
   }
 
   .section {

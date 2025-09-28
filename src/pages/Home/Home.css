@@ -850,7 +850,7 @@
     font-size: var(--text-3xl);
   }
 
-  .phone-mockup {
+  /* .phone-mockup {
     width: 200px;
     height: 400px;
   }
@@ -859,7 +859,7 @@
     width: 160px;
     height: 360px;
     padding: var(--spacing-md);
-  }
+  } */
 
   .cta-card {
     padding: var(--spacing-2xl);

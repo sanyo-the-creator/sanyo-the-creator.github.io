@@ -182,7 +182,7 @@ const Header: React.FC<CardNavProps> = ({
             type="button"
             className="card-nav-cta-button"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-            onClick={() => window.location.href = '/download'}
+            onClick={() => window.location.href = '/#/download'}
           >
             Get Started
           </button>
@@ -202,7 +202,23 @@ const Header: React.FC<CardNavProps> = ({
               </div>
               <div className="nav-card-links">
                 {item.links?.map((lnk, i) => (
-                  <a key={`${lnk.label}-${i}`} className="nav-card-link" href={lnk.href} aria-label={lnk.ariaLabel}>
+                  <a
+                    key={`${lnk.label}-${i}`}
+                    className="nav-card-link"
+                    href={lnk.href}
+                    aria-label={lnk.ariaLabel}
+                    onClick={() => {
+                      // Zatvoríme menu po kliknutí na link
+                      if (isExpanded) {
+                        setIsHamburgerOpen(false);
+                        const tl = tlRef.current;
+                        if (tl) {
+                          tl.eventCallback('onReverseComplete', () => setIsExpanded(false));
+                          tl.reverse();
+                        }
+                      }
+                    }}
+                  >
                     {/* Option 1: Type assertion to fix the icon */}
                     {React.createElement(GoArrowUpRight as React.ComponentType<any>, {
                       className: "nav-card-link-icon",

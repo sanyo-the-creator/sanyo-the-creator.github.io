@@ -3,6 +3,7 @@ import SpotlightCard from '../../components/common/SpotlightCard/SpotlightCard';
 import TextType from '../../components/common/TextType/TextType';
 import { Link } from 'react-router-dom';
 import { featuresList } from '../../data/features';
+import { useMeta } from '../../hooks/useMeta';
 import './Features.css';
 import ScrollVelocity from '../../components/common/ScrollVelocity/ScrollVelocity';
 
@@ -46,6 +47,15 @@ const additionalFeatures = [
 ];
 
 const Features: React.FC = () => {
+  // Nastavenie meta tagov pre Features stránku
+  useMeta({
+    title: 'Features - Upshift App',
+    description: 'Discover all features of Upshift: habit tracking, goal setting, time tracking, app blocking, and more. Level up your life with gamification.',
+    keywords: 'upshift features, habit tracking, goal setting, time tracker, app blocker, productivity features',
+    ogTitle: 'Features - Upshift App',
+    ogDescription: 'Discover all features of Upshift app',
+    ogImage: 'https://jerguslejko.github.io/upshift-web/static/media/upshift-home.53c469a5cb81ef1f4d25.png'
+  });
 
   return (
     <div className="features-page">
@@ -97,13 +107,13 @@ const Features: React.FC = () => {
           <div className="kokot-grid">
             {featuresList.map((feature, index) => (
               <SpotlightCard className="feature-card" spotlightColor="rgba(57, 70, 255, 0.2)">
-                <div className="feature-icon-large">{feature.icon}</div>
-                <h3 className="feature-title">{feature.title}</h3>
+                {/* <div className="feature-icon-large">{feature.icon}</div> */}
+                <h3 className="feature-title">{feature.icon} {feature.title}</h3>
                 <p className="feature-description">{feature.description}</p>
                 <ul className="feature-details">
                   {feature.details.map((detail, detailIndex) => (
                     <li key={detailIndex}>
-                      <span className="detail-bullet">✨</span>
+                      <span className="detail-bullet">- </span>
                       {detail}
                     </li>
                   ))}

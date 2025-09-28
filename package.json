@@ -32,7 +32,9 @@
     "start": "set NODE_OPTIONS=--max-old-space-size=8192 && react-scripts start",
     "build": "set NODE_OPTIONS=--max-old-space-size=8192 && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
