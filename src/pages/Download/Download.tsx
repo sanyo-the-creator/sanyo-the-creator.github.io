@@ -25,7 +25,7 @@ const Download: React.FC = () => {
       ),
       title: 'Download for iPhone',
       subtitle: 'Available on the App Store',
-      url: 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316',
+      url: 'https://apps.apple.com/gb/app/upshift-level-up-your-life/id6749509316',
       primary: true
     },
     {
