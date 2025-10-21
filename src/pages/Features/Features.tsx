@@ -113,7 +113,8 @@ const Features: React.FC = () => {
                 <ul className="feature-details">
                   {feature.details.map((detail, detailIndex) => (
                     <li key={detailIndex}>
-                      <span className="detail-bullet">- </span>
+                      <span className="detail-bullet">&nbsp; 
+ </span>
                       {detail}
                     </li>
                   ))}

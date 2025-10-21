@@ -34,7 +34,7 @@ const Home: React.FC = () => {
   const scrollingFeatures = [
     {
       id: 'dashboard',
-      title: '🎯 Quests and Sidequest',
+      title: '⚔️ Quests and Sidequest',
       description: 'Get a comprehensive overview of your journey with Upshift. Monitor your streaks, visualize progress over time, and gain valuable insights to stay on track and achieve lasting freedom.',
       screenshot: upshiftHomeImage,
       highlights: [
@@ -56,7 +56,7 @@ const Home: React.FC = () => {
     },
     {
       id: 'analytics',
-      title: '🥅 Goals with Journal',
+      title: '🎯 Goals with Journal',
       description: 'Gain an in-depth look at your recovery journey. Explore detailed analytics, track your progress, identify key patterns, and use actionable insights to build stronger habits and maintain your momentum.',
       screenshot: upshiftGoalsImage,
       highlights: [
