@@ -36,8 +36,8 @@ const Download: React.FC = () => {
         </svg>
       ),
       title: 'Download for Android',
-      subtitle: 'Coming Soon on Google Play',
-      url: '',
+      subtitle: 'Join Waitlist Right Now!',
+      url: 'https://forms.gle/iJa3K3p6LmWkmHxn6#',
       primary: true
     }
   ];
