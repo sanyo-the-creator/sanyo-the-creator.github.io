@@ -365,12 +365,7 @@ const Features: React.FC = () => {
       {/* Hero Section */}
       <section className="features-hero">
         <div className="" style={{maxWidth: '1200px', margin: '0 auto', padding: '0 2rem'}}>
-          <Breadcrumbs
-            customItems={[
-              { label: 'Home', path: '/' },
-              { label: 'Features', path: '/features' }
-            ]}
-          />
+          
           <h1 className="features-title gradient-text">Features</h1>
         </div>
       </section>
