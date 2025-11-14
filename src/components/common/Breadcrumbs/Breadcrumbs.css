@@ -1,6 +1,14 @@
 .breadcrumbs {
   padding: 1rem 0;
   margin-bottom: 1.5rem;
+  display: none; /* Hidden on mobile by default */
+}
+
+/* Show breadcrumbs on tablets and larger screens */
+@media (min-width: 768px) {
+  .breadcrumbs {
+    display: block;
+  }
 }
 
 .breadcrumbs-list {
