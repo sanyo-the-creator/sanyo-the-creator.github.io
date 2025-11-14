@@ -1,0 +1,135 @@
+.articles-page {
+  min-height: 100vh;
+  padding: 10rem 0;
+}
+
+.articles-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.articles-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  color: #333;
+  margin-bottom: 3rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     background-size: auto !important;
+}
+
+.articles-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.light-rays-container {
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    z-index: -1;
+}
+.article-item {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.article-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-image {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  margin-right: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.article-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.article-content {
+  flex: 1;
+}
+
+.article-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.article-subtitle {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .articles-container {
+    padding: 0 1rem;
+  }
+  
+  .articles-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .article-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
+  }
+  
+  .article-image {
+    width: 100px;
+    height: 100px;
+    margin: 0 0 1rem 0;
+  }
+  
+  .article-title {
+    font-size: 1.1rem;
+  }
+  
+  .article-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .articles-title {
+    font-size: 2rem;
+  }
+  
+  .article-item {
+    padding: 1rem;
+  }
+  
+  .article-image {
+    width: 80px;
+    height: 80px;
+  }
+}

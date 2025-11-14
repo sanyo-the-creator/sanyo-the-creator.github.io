@@ -65,8 +65,8 @@ const Footer: React.FC = () => {
                             <h4 className="footer-section-title">Company</h4>
                             <ul className="footer-link-list">
                                 <li>
-                                    <Link to="/about" className="footer-link">
-                                        About
+                                    <Link to="/articles" className="footer-link">
+                                        Articles
                                     </Link>
                                 </li>
                                 <li>
@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
                         <p>&copy; 2025 Upshift. All rights reserved.</p>
                     </div>
                     <div className="footer-social">
-                        <p className="footer-version">Version 1.0.0</p>
+                        <p className="footer-version">Version 1.1</p>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ const About: React.FC = () => {
     keywords: 'about upshift, mission, personal development, gamification, life transformation',
     ogTitle: 'About Upshift - Our Mission',
     ogDescription: 'Learn about Upshift mission to transform lives',
-    ogImage: 'https://jerguslejko.github.io/upshift-web/static/media/upshift-home.53c469a5cb81ef1f4d25.png'
+    ogImage: 'https://joinupshift.com/icon.png'
   });
 
   return (

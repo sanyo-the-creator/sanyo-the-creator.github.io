@@ -1,9 +1,23 @@
 import React from 'react';
 import './Terms.css';
-
+import LightRays from '../../components/common/LightRays/LightRays';
 const Terms: React.FC = () => {
     return (
         <div className="terms-page">
+             <LightRays 
+        raysOrigin="top-center"
+        raysColor="#667EEA"
+        raysSpeed={0.6}
+        lightSpread={1.5}
+        rayLength={2}
+        pulsating={true}
+        fadeDistance={1.2}
+        saturation={0.8}
+        followMouse={true}
+        mouseInfluence={0.1}
+        noiseAmount={0.05}
+        distortion={0.1}
+      />
             <div className="terms-section">
                 <div className="terms-card">
                     <h2>Terms & Conditions</h2>

@@ -1,9 +1,24 @@
 import React from 'react';
 import './Privacy.css';
+import LightRays from '../../components/common/LightRays/LightRays';
 
 const Privacy: React.FC = () => {
     return (
         <div className="privacy-page">
+             <LightRays 
+        raysOrigin="top-center"
+        raysColor="#667EEA"
+        raysSpeed={0.6}
+        lightSpread={1.5}
+        rayLength={2}
+        pulsating={true}
+        fadeDistance={1.2}
+        saturation={0.8}
+        followMouse={true}
+        mouseInfluence={0.1}
+        noiseAmount={0.05}
+        distortion={0.1}
+      />
             <div className="privacy-section">
                 <div className="privacy-card">
                     <h2>Privacy Policy</h2>

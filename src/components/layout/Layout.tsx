@@ -1,5 +1,5 @@
 import React from 'react';
-import { href, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Header from '../common/Header/Header';
 import { Footer } from '../common';
 import UpshiftLogo from '../../assets/icons/upshift_icon_mini.svg';
@@ -10,22 +10,32 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const items = [
-    {
-      label: "Home",
-      bgColor: "#0D0716",
+     {
+      label: "General Information",
+      bgColor: "#0d0716",
       textColor: "#fff",
-      text: 'General information about Upshift',
+      text: 'Explore our in-app features, faq and reviews',
       links: [
-        { label: "Home", ariaLabel: "Home", href: '/#/home' },
+        { label: "Explore", ariaLabel: "In-App features", href: '/#/features' },
       ]
     },
     {
-      label: "Features",
-      bgColor: "#170D27",
+      label: "Download",
+      bgColor: "#170d27",
       textColor: "#fff",
-      text: 'Explore our in-app features',
+      text: 'Get Upshift from your preferred store',
       links: [
-        { label: "Features", ariaLabel: "In-App features", href: '/#/features' },
+        { label: "Get Upshift", ariaLabel: "Home", href: '/#/download' },
+      ]
+    },
+   
+    {
+      label: "Articles",
+      bgColor: "#271e37",
+      textColor: "#fff",
+      text: 'Read helpful articles about productivity',
+      links: [
+        { label: "Read articles", ariaLabel: "Articles", href: '/#/articles' },
       ]
     },
     {

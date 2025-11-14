@@ -39,6 +39,7 @@
     font-size: var(--text-sm);
     line-height: 1.6;
     margin: 0;
+    max-width: 250px;
 }
 
 .footer-links {

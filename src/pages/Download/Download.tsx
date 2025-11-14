@@ -12,7 +12,7 @@ const Download: React.FC = () => {
     keywords: 'download upshift, ios app, android app, personal development app, habit tracker download',
     ogTitle: 'Download Upshift - Level up your life',
     ogDescription: 'Download Upshift app for iOS and Android',
-    ogImage: 'https://jerguslejko.github.io/upshift-web/static/media/upshift-home.53c469a5cb81ef1f4d25.png'
+    ogImage: 'https://joinupshift.com/icon.png'
   });
 
   const downloadLinks = [
@@ -130,7 +130,7 @@ const Download: React.FC = () => {
         </div>
       </section>
 
-   
+      
     </div>
   );
 };

@@ -10,7 +10,14 @@
     padding: 0 var(--spacing-lg);
     margin-top: 150px;
 }
-
+.light-rays-container {
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    z-index: -1;
+}
 .privacy-card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
