@@ -4,6 +4,8 @@ import { getArticleBySlug } from '../../data/articles';
 import { ArticleContent } from '../../types/articles';
 import './ArticleDetail.css';
 import LightRays from '../../components/common/LightRays/LightRays';
+import { SEO, StructuredData } from '../../components/common/SEO';
+import Breadcrumbs from '../../components/common/Breadcrumbs/Breadcrumbs';
 
 const ArticleDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -78,7 +80,25 @@ const ArticleDetail: React.FC = () => {
 
   return (
     <div className="article-detail-page">
-       <LightRays 
+      <SEO
+        title={`${articleContent.title} | Upshift`}
+        description={articleContent.subtitle}
+        image={articleContent.mainImage}
+        article={true}
+        author="Upshift Team"
+        publishedTime={new Date().toISOString()}
+        type="article"
+      />
+      <StructuredData
+        type="article"
+        title={articleContent.title}
+        description={articleContent.subtitle}
+        image={articleContent.mainImage}
+        datePublished={new Date().toISOString()}
+        author="Upshift Team"
+        url={`https://joinupshift.com/articles/${slug}`}
+      />
+       <LightRays
         raysOrigin="top-center"
         raysColor="#667EEA"
         raysSpeed={0.6}
@@ -93,12 +113,19 @@ const ArticleDetail: React.FC = () => {
         distortion={0.1}
       />
       <div className="article-detail-container">
+        <Breadcrumbs
+          customItems={[
+            { label: 'Home', path: '/' },
+            { label: 'Articles', path: '/articles' },
+            { label: articleContent.title, path: `/articles/${slug}` }
+          ]}
+        />
         <header className="article-header">
           <h1 className="article-detail-title">{articleContent.title}</h1>
           <p className="article-detail-subtitle">{articleContent.subtitle}</p>
           <div className="article-main-image">
-            <img 
-              src={articleContent.mainImage} 
+            <img
+              src={articleContent.mainImage}
               alt={articleContent.title}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -107,8 +134,8 @@ const ArticleDetail: React.FC = () => {
             />
           </div>
         </header>
-        
-        <div 
+
+        <div
           className="article-content"
           dangerouslySetInnerHTML={{ __html: articleContent.htmlContent }}
         />

@@ -3,22 +3,25 @@ import ScrollReveal from '../../components/common/ScrollReveal/ScrollReveal';
 import SpotlightCard from '../../components/common/SpotlightCard/SpotlightCard';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
 import LightRays from '../../components/common/LightRays/LightRays';
-import { useMeta } from '../../hooks/useMeta';
+import { SEO, StructuredData } from '../../components/common/SEO';
 import './About.css';
 
 const About: React.FC = () => {
-  // Nastavenie meta tagov pre About stránku
-  useMeta({
-    title: 'About Upshift - Our Mission',
-    description: 'Learn about Upshift mission to transform lives through gamified personal development. Discover our story and vision.',
-    keywords: 'about upshift, mission, personal development, gamification, life transformation',
-    ogTitle: 'About Upshift - Our Mission',
-    ogDescription: 'Learn about Upshift mission to transform lives',
-    ogImage: 'https://joinupshift.com/icon.png'
-  });
-
   return (
     <div className="about-page">
+      <SEO
+        title="About Upshift - Our Mission | Personal Development App"
+        description="Learn about Upshift's mission to transform lives through gamified personal development. Discover our story, vision, and commitment to helping you achieve your goals."
+        keywords="about upshift, mission, personal development, gamification, life transformation, productivity app, our story"
+        image="https://joinupshift.com/icon.png"
+        type="website"
+      />
+      <StructuredData
+        type="webpage"
+        title="About Upshift - Our Mission"
+        description="Learn about Upshift's mission to transform lives through personal development"
+        url="https://joinupshift.com/about"
+      />
       {/* Hero Section */}
       <section className="about-hero section">
         <div className="container">
@@ -137,7 +140,7 @@ const About: React.FC = () => {
           </div>
 
           <div className="about-cta text-center">
-            <a href="/#/download">
+            <a href="/download">
             <StarBorder className="btn btn-primary btn-lg">
               🚀 Start Your Journey
             </StarBorder></a>

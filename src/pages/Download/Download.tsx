@@ -1,19 +1,10 @@
 import React from 'react';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
 import LightRays from '../../components/common/LightRays/LightRays';
-import { useMeta } from '../../hooks/useMeta';
+import { SEO, StructuredData } from '../../components/common/SEO';
 import './Download.css';
 
 const Download: React.FC = () => {
-  // Nastavenie meta tagov pre Download stránku
-  useMeta({
-    title: 'Download Upshift - Level up your life',
-    description: 'Download Upshift app for iOS and Android. Transform your life with the most engaging personal development app.',
-    keywords: 'download upshift, ios app, android app, personal development app, habit tracker download',
-    ogTitle: 'Download Upshift - Level up your life',
-    ogDescription: 'Download Upshift app for iOS and Android',
-    ogImage: 'https://joinupshift.com/icon.png'
-  });
 
   const downloadLinks = [
     {
@@ -67,7 +58,20 @@ const Download: React.FC = () => {
 
   return (
     <div className="download-page">
-      <LightRays 
+      <SEO
+        title="Download Upshift - Level up your life | iOS & Android App"
+        description="Download Upshift app for iOS and Android. Transform your life with the most engaging personal development app. Block distracting apps, set goals, and track your progress."
+        keywords="download upshift, ios app, android app, personal development app, habit tracker download, productivity app, app blocker, screen time management"
+        image="https://joinupshift.com/icon.png"
+        type="website"
+      />
+      <StructuredData
+        type="webpage"
+        title="Download Upshift"
+        description="Download Upshift app for iOS and Android"
+        url="https://joinupshift.com/download"
+      />
+      <LightRays
         raysOrigin="top-center"
         raysColor="#667EEA"
         raysSpeed={0.6}

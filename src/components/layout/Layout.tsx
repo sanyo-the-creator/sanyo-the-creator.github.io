@@ -16,7 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       textColor: "#fff",
       text: 'Explore our in-app features, faq and reviews',
       links: [
-        { label: "Explore", ariaLabel: "In-App features", href: '/#/features' },
+        { label: "Explore", ariaLabel: "In-App features", href: '/features' },
       ]
     },
     {
@@ -25,17 +25,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       textColor: "#fff",
       text: 'Get Upshift from your preferred store',
       links: [
-        { label: "Get Upshift", ariaLabel: "Home", href: '/#/download' },
+        { label: "Get Upshift", ariaLabel: "Home", href: '/download' },
       ]
     },
-   
+
     {
       label: "Articles",
       bgColor: "#271e37",
       textColor: "#fff",
       text: 'Read helpful articles about productivity',
       links: [
-        { label: "Read articles", ariaLabel: "Articles", href: '/#/articles' },
+        { label: "Read articles", ariaLabel: "Articles", href: '/articles' },
       ]
     },
     {
@@ -44,7 +44,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       textColor: "#fff",
       text: 'About this project and our journey',
       links: [
-        { label: "About", ariaLabel: "About us", href: '/#/about' },
+        { label: "About", ariaLabel: "About us", href: '/about' },
       ]
     }
   ];

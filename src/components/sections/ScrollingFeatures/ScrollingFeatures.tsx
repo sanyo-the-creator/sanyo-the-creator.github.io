@@ -359,7 +359,7 @@ const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
                       {feature.description}
                     </p>
                     <button className="learn-more">
-                      <a href="/#/features">Learn More</a>
+                      <a href="/features">Learn More</a>
                     </button>
                   </div>
                 </div>

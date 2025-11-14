@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useMeta } from '../../hooks/useMeta';
+import { SEO, StructuredData } from '../../components/common/SEO';
 import './Features.css';
 import LightRays from '../../components/common/LightRays/LightRays';
+import Breadcrumbs from '../../components/common/Breadcrumbs/Breadcrumbs';
 // Import all images
 import affiliateScreen from '../../assets/images/affiliateScreen2.jpeg';
 import appBlocker from '../../assets/images/appBlocker.jpeg';
@@ -328,23 +329,26 @@ const faqItems = [
 const Features: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
-  // Nastavenie meta tagov pre Features stránku
-  useMeta({
-    title: 'Features - Upshift App',
-    description: 'Discover all features of Upshift: habit tracking, goal setting, time tracking, app blocking, and more. Level up your life with gamification.',
-    keywords: 'upshift features, habit tracking, goal setting, time tracker, app blocker, productivity features',
-    ogTitle: 'Features - Upshift App',
-    ogDescription: 'Discover all features of Upshift app',
-    ogImage: 'https://joinupshift.com/icon.png'
-  });
-
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
   return (
     <div className="features-page">
-       <LightRays 
+      <SEO
+        title="Features - Upshift App | Productivity & Personal Development Tools"
+        description="Discover all features of Upshift: habit tracking, goal setting, time tracking, app blocking, quest system, groups, leaderboards, and more. Level up your life with gamification."
+        keywords="upshift features, habit tracking, goal setting, time tracker, app blocker, productivity features, quest system, gamification, focus timer, porn blocker, screen time management"
+        image="https://joinupshift.com/icon.png"
+        type="website"
+      />
+      <StructuredData
+        type="webpage"
+        title="Upshift Features - All Productivity Tools"
+        description="Discover all features of Upshift app"
+        url="https://joinupshift.com/features"
+      />
+       <LightRays
         raysOrigin="top-center"
         raysColor="#667EEA"
         raysSpeed={0.6}
@@ -360,7 +364,13 @@ const Features: React.FC = () => {
       />
       {/* Hero Section */}
       <section className="features-hero">
-        <div className="">
+        <div className="" style={{maxWidth: '1200px', margin: '0 auto', padding: '0 2rem'}}>
+          <Breadcrumbs
+            customItems={[
+              { label: 'Home', path: '/' },
+              { label: 'Features', path: '/features' }
+            ]}
+          />
           <h1 className="features-title gradient-text">Features</h1>
         </div>
       </section>

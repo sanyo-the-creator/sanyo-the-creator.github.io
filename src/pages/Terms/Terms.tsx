@@ -1,10 +1,26 @@
 import React from 'react';
 import './Terms.css';
 import LightRays from '../../components/common/LightRays/LightRays';
+import { SEO, StructuredData } from '../../components/common/SEO';
+
 const Terms: React.FC = () => {
     return (
         <div className="terms-page">
-             <LightRays 
+            <SEO
+                title="Terms & Conditions - Upshift | User Agreement"
+                description="Read Upshift's Terms and Conditions to understand the rules and guidelines for using our productivity and personal development app."
+                keywords="upshift terms and conditions, user agreement, terms of service, legal, app usage"
+                image="https://upshift-web.vercel.app/icon.png"
+                type="website"
+                noindex={false}
+            />
+            <StructuredData
+                type="webpage"
+                title="Terms & Conditions - Upshift"
+                description="Upshift Terms and Conditions and user agreement"
+                url="https://upshift-web.vercel.app/terms"
+            />
+             <LightRays
         raysOrigin="top-center"
         raysColor="#667EEA"
         raysSpeed={0.6}

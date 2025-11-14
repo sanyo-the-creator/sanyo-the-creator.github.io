@@ -1,11 +1,26 @@
 import React from 'react';
 import './Privacy.css';
 import LightRays from '../../components/common/LightRays/LightRays';
+import { SEO, StructuredData } from '../../components/common/SEO';
 
 const Privacy: React.FC = () => {
     return (
         <div className="privacy-page">
-             <LightRays 
+            <SEO
+                title="Privacy Policy - Upshift | Your Data Protection & Privacy"
+                description="Read Upshift's Privacy Policy to understand how we collect, use, and protect your personal information. Your privacy is our priority."
+                keywords="upshift privacy policy, data protection, privacy, personal information, user data, GDPR"
+                image="https://upshift-web.vercel.app/icon.png"
+                type="website"
+                noindex={false}
+            />
+            <StructuredData
+                type="webpage"
+                title="Privacy Policy - Upshift"
+                description="Upshift Privacy Policy and data protection information"
+                url="https://upshift-web.vercel.app/privacy"
+            />
+             <LightRays
         raysOrigin="top-center"
         raysColor="#667EEA"
         raysSpeed={0.6}
