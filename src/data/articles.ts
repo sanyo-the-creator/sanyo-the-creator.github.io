@@ -45,14 +45,14 @@ export const articles: Article[] = [
     htmlContentPath: '/articles/how-to-limit-screen-time-iphone-upshift.html',
     slug: 'how-to-limit-screen-time-iphone-upshift'
   },
-  {
-    id: '5',
-    title: 'How To Lock Apps on iPhone',
-    subtitle: 'Learn how to lock & hide apps on iPhone using iOS 18 features and Upshift',
-    mainImage: blockSocials,
-    htmlContentPath: '/articles/how-to-lock-apps-iphone-upshift.html',
-    slug: 'how-to-lock-apps-iphone-upshift'
-  },
+  // {
+  //   id: '5',
+  //   title: 'How To Lock Apps on iPhone',
+  //   subtitle: 'Learn how to lock & hide apps on iPhone using iOS 18 features and Upshift',
+  //   mainImage: blockSocials,
+  //   htmlContentPath: '/articles/how-to-lock-apps-iphone-upshift.html',
+  //   slug: 'how-to-lock-apps-iphone-upshift'
+  // },
   {
     id: '6',
     title: 'How To Set Time Limits on iPhone [2025]',
