@@ -328,9 +328,57 @@ const faqItems = [
 
 const Features: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(0); // Reset
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(distance) < minSwipeDistance) {
+      setTouchStart(0);
+      setTouchEnd(0);
+      return;
+    }
+
+    if (distance > 0) {
+      // Swipe left - next slide (loop to start if at end)
+      setCurrentSlide(prev => prev === features.length - 1 ? 0 : prev + 1);
+    } else if (distance < 0) {
+      // Swipe right - previous slide (loop to end if at start)
+      setCurrentSlide(prev => prev === 0 ? features.length - 1 : prev - 1);
+    }
+
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide(prev => prev === features.length - 1 ? 0 : prev + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide(prev => prev === 0 ? features.length - 1 : prev - 1);
   };
 
   return (
@@ -373,7 +421,8 @@ const Features: React.FC = () => {
       {/* Features Grid */}
       <section className="features-grid-section">
         <div style={{maxWidth : '1200px', margin: '0 auto'}}>
-          <div className="features-grid2">
+          {/* Desktop Grid */}
+          <div className="features-grid2 desktop-grid">
             {features.map((feature, index) => (
               <div key={index} className="feature-card">
                 <div className="feature-image">
@@ -394,9 +443,67 @@ const Features: React.FC = () => {
               </div>
             ))}
           </div>
+
+          {/* Mobile Slider */}
+          <div className="features-slider mobile-slider">
+            <div className="slider-container">
+              {/* Navigation Arrows */}
+              <button
+                className="slider-arrow slider-arrow-left"
+                onClick={prevSlide}
+                aria-label="Previous slide"
+              >
+                ‹
+              </button>
+              <button
+                className="slider-arrow slider-arrow-right"
+                onClick={nextSlide}
+                aria-label="Next slide"
+              >
+                ›
+              </button>
+
+              <div
+                className="slider-track"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {features.map((feature, index) => (
+                  <div key={index} className="slider-card">
+                    <div className="feature-card">
+                      <div className="feature-image">
+                        <img
+                          src={feature.image}
+                          alt={feature.title}
+                          style={{ objectPosition: feature.imagePosition || 'center center' }}
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop';
+                          }}
+                        />
+                      </div>
+                      <div className="feature-content">
+                        <h3 className="feature-title">{feature.title}</h3>
+                        <p className="feature-subtitle">{feature.subtitle}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Slide Counter */}
+            <div className="slide-counter">
+              {currentSlide + 1} / {features.length}
+            </div>
+            
+          </div>
+
            <h1 className="features-more">...and much more!</h1>
         </div>
-       
+
       </section>
 
       {/* Reviews Section */}
