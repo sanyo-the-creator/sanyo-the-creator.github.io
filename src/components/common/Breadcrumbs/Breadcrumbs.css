@@ -80,22 +80,5 @@
   }
 }
 
-/* Dark theme support */
-@media (prefers-color-scheme: light) {
-  .breadcrumb-link {
-    color: #666;
-  }
-
-  .breadcrumb-link:hover {
-    color: #667EEA;
-  }
-
-  .breadcrumb-separator {
-    color: #999;
-  }
-
-  .breadcrumb-current {
-    color: #333;
-  }
-}
+/* Force dark theme only - removed light mode support */
 

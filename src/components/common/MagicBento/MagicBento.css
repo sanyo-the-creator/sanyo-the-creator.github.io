@@ -12,7 +12,7 @@
   /* dark navy blue border */
   --background-dark: #040b20;
   /* very dark navy/blue background */
-  color-scheme: light dark;
+  color-scheme: dark;
 }
 
 .card__emoji-bg {
