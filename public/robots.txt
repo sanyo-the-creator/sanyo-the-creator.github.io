@@ -3,6 +3,9 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
+# Disallow direct access to static HTML article files
+# Only allow React routes (e.g., /articles/slug-name)
+Disallow: /articles/*.html
 
 # Sitemap
 Sitemap: https://joinupshift.com/sitemap.xml
