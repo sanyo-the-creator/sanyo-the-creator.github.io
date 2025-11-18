@@ -393,7 +393,9 @@
   .features-grid-section{
     padding: 0 20px;
   }
-
+  .feature-card:hover{
+    transform: none;
+  }
   .features-slider {
     display: block;
   }
