@@ -14,13 +14,12 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   color-scheme: dark !important;
-  background-color: #0b0b0d !important;
 }
 
 body {
   font-family: var(--font-family-primary);
   background: var(--primary-bg) !important;
-  color: var(--text-primary) ;
+  color: var(--text-primary) !important;
   line-height: var(--leading-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
