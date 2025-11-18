@@ -200,8 +200,8 @@
   border-radius: 8px;
   margin-bottom: 1rem;
   overflow: hidden;
-  padding-left: 20px;
-  padding-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .faq-question {
