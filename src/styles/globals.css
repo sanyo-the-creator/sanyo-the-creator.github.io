@@ -26,14 +26,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Override any light mode attempts */
-@media (prefers-color-scheme: light) {
-  html, body {
-    background-color: #0b0b0d !important;
-    color: rgba(255, 255, 255, 0.95) !important;
-  }
-}
-
 /* Typography */
 h1,
 h2,
