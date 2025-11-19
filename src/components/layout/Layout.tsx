@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const items = [
      {
       label: "General Information",
-      bgColor: "#0d0716",
+      bgColor: "#140b20",
       textColor: "#fff",
       text: 'Explore our in-app features, faq and reviews',
       links: [
@@ -21,7 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     },
     {
       label: "Download",
-      bgColor: "#170d27",
+      bgColor: "#1e1133",
       textColor: "#fff",
       text: 'Get Upshift from your preferred store',
       links: [
@@ -38,15 +38,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         { label: "Read articles", ariaLabel: "Articles", href: '/articles' },
       ]
     },
-    {
-      label: "About",
-      bgColor: "#271E37",
-      textColor: "#fff",
-      text: 'About this project and our journey',
-      links: [
-        { label: "About", ariaLabel: "About us", href: '/about' },
-      ]
-    }
   ];
 
   return (
