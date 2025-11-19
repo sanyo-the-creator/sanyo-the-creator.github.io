@@ -134,6 +134,7 @@
   .article-image {
     width: 9;
     height: 90px;
+    width: 90px;
     margin: 0;
   }
 }
