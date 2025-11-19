@@ -120,6 +120,9 @@
 }
 
 @media (max-width: 480px) {
+  .article-content {
+    padding-top: 0;
+  }
   .articles-title {
     font-size: 2rem;
   }
@@ -129,7 +132,8 @@
   }
   
   .article-image {
-    width: 80px;
-    height: 80px;
+    width: 9;
+    height: 90px;
+    margin: 0;
   }
 }
