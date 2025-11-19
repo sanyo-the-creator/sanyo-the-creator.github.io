@@ -317,7 +317,7 @@ const faqItems = [
   },
   {
     question: 'Is there a free version of Upshift?',
-    answer: 'Upshift offers 7days of free trial. After that, you can subscribe to premium for $2.49/month to unlock all features.'
+    answer: 'Upshift offers 7 days of free trial, to show you why this is the app you were looking for :)'
   },
 
   {
