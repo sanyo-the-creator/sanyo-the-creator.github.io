@@ -1,3 +1,30 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+# Disallow direct access to static HTML article files
+# Only allow React routes (e.g., /articles/slug-name)
+Disallow: /articles/*.html
+
+# Sitemap
+Sitemap: https://joinupshift.com/sitemap.xml
+
+# Crawl-delay for polite crawlers
+Crawl-delay: 1
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
