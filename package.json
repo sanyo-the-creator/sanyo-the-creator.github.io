@@ -29,8 +29,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set NODE_OPTIONS=--max-old-space-size=8192 && react-scripts start",
-    "build": "set NODE_OPTIONS=--max-old-space-size=8192 && react-scripts build",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "start": "node scripts/generate-sitemap.js && set NODE_OPTIONS=--max-old-space-size=8192 && react-scripts start",
+    "build": "node scripts/generate-sitemap.js && set NODE_OPTIONS=--max-old-space-size=8192 && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

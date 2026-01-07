@@ -11,7 +11,7 @@ Disallow: /articles/*.html
 Sitemap: https://joinupshift.com/sitemap.xml
 
 # Crawl-delay for polite crawlers
-Crawl-delay: 1
+# Crawl-delay removed for better indexing
 
 # Allow all major search engines
 User-agent: Googlebot

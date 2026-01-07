@@ -5,6 +5,8 @@ export interface Article {
   mainImage: string;
   htmlContentPath: string;
   slug: string;
+  publishedDate?: string;
+  modifiedDate?: string;
 }
 
 export interface ArticleContent {

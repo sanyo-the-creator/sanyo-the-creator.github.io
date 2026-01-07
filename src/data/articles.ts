@@ -19,7 +19,8 @@ export const articles: Article[] = [
     subtitle: 'Learn the most effective ways to block distracting apps on your iPhone with Upshift',
     mainImage: blockSocials,
     htmlContentPath: '/articles/how-to-block-apps-iphone-upshift.html',
-    slug: 'how-to-block-apps-iphone-upshift'
+    slug: 'how-to-block-apps-iphone-upshift',
+    publishedDate: '2025-01-01T00:00:00Z'
   },
   {
     id: '2',
@@ -27,15 +28,17 @@ export const articles: Article[] = [
     subtitle: 'Complete guide to blocking websites on iPhone using built-in tools and Upshift',
     mainImage: blockSocials,
     htmlContentPath: '/articles/how-to-block-websites-iphone-upshift.html',
-    slug: 'how-to-block-websites-iphone-upshift'
+    slug: 'how-to-block-websites-iphone-upshift',
+    publishedDate: '2025-01-02T00:00:00Z'
   },
   {
     id: '3',
     title: 'How To Use App Blockers: A Scientific Approach To Reducing Screen Time',
     subtitle: 'Learn how to use app blockers like Upshift to limit screen time and regain control',
-    mainImage:blockSocials,
+    mainImage: blockSocials,
     htmlContentPath: '/articles/app-blockers-science-upshift.html',
-    slug: 'app-blockers-science-upshift'
+    slug: 'app-blockers-science-upshift',
+    publishedDate: '2025-01-03T00:00:00Z'
   },
   {
     id: '4',
@@ -43,7 +46,8 @@ export const articles: Article[] = [
     subtitle: '7 actionable steps for reducing time spent on your phone with Upshift and other methods',
     mainImage: lockin,
     htmlContentPath: '/articles/how-to-limit-screen-time-iphone-upshift.html',
-    slug: 'how-to-limit-screen-time-iphone-upshift'
+    slug: 'how-to-limit-screen-time-iphone-upshift',
+    publishedDate: '2025-01-04T00:00:00Z'
   },
   // {
   //   id: '5',
@@ -57,9 +61,10 @@ export const articles: Article[] = [
     id: '6',
     title: 'How To Set Time Limits on iPhone [2025]',
     subtitle: 'Learn how to set time limits on apps using Apple Screen Time and Upshift',
-    mainImage:  lockin,
+    mainImage: lockin,
     htmlContentPath: '/articles/how-to-time-limit-iphone-upshift.html',
-    slug: 'how-to-time-limit-iphone-upshift'
+    slug: 'how-to-time-limit-iphone-upshift',
+    publishedDate: '2025-01-05T00:00:00Z'
   },
   {
     id: '7',
@@ -67,15 +72,17 @@ export const articles: Article[] = [
     subtitle: 'Learn how to block YouTube on iPhone using built-in tools and Upshift',
     mainImage: youtube,
     htmlContentPath: '/articles/how-to-block-youtube-iphone-upshift.html',
-    slug: 'how-to-block-youtube-iphone-upshift'
+    slug: 'how-to-block-youtube-iphone-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
   {
     id: '8',
     title: 'How To Block Instagram on iPhone',
     subtitle: 'Learn how to block Instagram on iPhone using built-in tools and Upshift',
-    mainImage:  instagram,
+    mainImage: instagram,
     htmlContentPath: '/articles/how-to-block-instagram-iphone-upshift.html',
-    slug: 'how-to-block-instagram-iphone-upshift'
+    slug: 'how-to-block-instagram-iphone-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
   {
     id: '9',
@@ -83,7 +90,8 @@ export const articles: Article[] = [
     subtitle: 'Learn how to block Facebook on iPhone using built-in tools and Upshift',
     mainImage: facebook,
     htmlContentPath: '/articles/how-to-block-facebook-iphone-upshift.html',
-    slug: 'how-to-block-facebook-iphone-upshift'
+    slug: 'how-to-block-facebook-iphone-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
   {
     id: '10',
@@ -91,7 +99,8 @@ export const articles: Article[] = [
     subtitle: 'Learn how to block Tiktok on iPhone using built-in tools and Upshift',
     mainImage: tiktok,
     htmlContentPath: '/articles/how-to-block-tiktok-iphone-upshift.html',
-    slug: 'how-to-block-tiktok-iphone-upshift'
+    slug: 'how-to-block-tiktok-iphone-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
   {
     id: '11',
@@ -99,7 +108,8 @@ export const articles: Article[] = [
     subtitle: 'Learn how to block Snapchat on iPhone using built-in tools and Upshift',
     mainImage: snapchat,
     htmlContentPath: '/articles/how-to-block-snapchat-upshift.html',
-    slug: 'how-to-block-snapchat-upshift'
+    slug: 'how-to-block-snapchat-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
   {
     id: '12',
@@ -107,7 +117,8 @@ export const articles: Article[] = [
     subtitle: 'Learn how to block Twitter on iPhone using built-in tools and Upshift',
     mainImage: twitter,
     htmlContentPath: '/articles/how-to-block-twitter-iphone-upshift.html',
-    slug: 'how-to-block-twitter-iphone-upshift'
+    slug: 'how-to-block-twitter-iphone-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
   {
     id: '13',
@@ -115,15 +126,17 @@ export const articles: Article[] = [
     subtitle: 'Learn how to block Reddit on iPhone using built-in tools and Upshift',
     mainImage: reddit,
     htmlContentPath: '/articles/how-to-block-reddit-iphone-upshift.html',
-    slug: 'how-to-block-reddit-iphone-upshift'
+    slug: 'how-to-block-reddit-iphone-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
-   {
+  {
     id: '13',
     title: 'How To Block Clash Royale on iPhone',
     subtitle: 'Learn how to block Clash Royale on iPhone using built-in tools and Upshift',
     mainImage: clashRoyale,
     htmlContentPath: '/articles/how-to-block-clash-royale-upshift.html',
-    slug: 'how-to-block-clash-royale-iphone-upshift'
+    slug: 'how-to-block-clash-royale-iphone-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
   {
     id: '13',
@@ -131,7 +144,8 @@ export const articles: Article[] = [
     subtitle: 'Learn how to block Clash of Clans on iPhone using built-in tools and Upshift',
     mainImage: clashOfClans,
     htmlContentPath: '/articles/how-to-block-clash-of-clans-iphone-upshift.html',
-    slug: 'how-to-block-clash-of-clans-iphone-upshift'
+    slug: 'how-to-block-clash-of-clans-iphone-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
 
   {
@@ -140,7 +154,8 @@ export const articles: Article[] = [
     subtitle: 'Learn how to block porn on iPhone using built-in tools and Upshift',
     mainImage: noPorn,
     htmlContentPath: '/articles/how-to-block-porn-iphone-upshift.html',
-    slug: 'how-to-block-porn-iphone-upshift'
+    slug: 'how-to-block-porn-iphone-upshift',
+    publishedDate: '2025-01-06T00:00:00Z'
   },
   {
     id: '15',
@@ -148,7 +163,8 @@ export const articles: Article[] = [
     subtitle: 'Learn how to block porn on iPhone using built-in tools and Upshift',
     mainImage: blockSocials,
     htmlContentPath: '/articles/why-feel-unmotivated-upshift.html',
-    slug: 'why-feel-unmotivated-upshift'
+    slug: 'why-feel-unmotivated-upshift',
+    publishedDate: '2025-01-07T00:00:00Z'
   },
   {
     id: '16',
@@ -156,7 +172,8 @@ export const articles: Article[] = [
     subtitle: 'Learn how to stop procrastinating',
     mainImage: lockin,
     htmlContentPath: '/articles/how-to-limit-screen-time-iphone-upshift.html',
-    slug: 'how-to-stop-procrastinating-upshift'
+    slug: 'how-to-stop-procrastinating-upshift',
+    publishedDate: '2025-01-07T00:00:00Z'
   }
 
 ];

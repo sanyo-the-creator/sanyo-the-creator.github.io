@@ -22,7 +22,15 @@ interface WebPageSchemaProps {
   url: string;
 }
 
-type StructuredDataProps = OrganizationSchemaProps | ArticleSchemaProps | WebPageSchemaProps;
+interface FAQSchemaProps {
+  type: 'faq';
+  items: {
+    question: string;
+    answer: string;
+  }[];
+}
+
+type StructuredDataProps = OrganizationSchemaProps | ArticleSchemaProps | WebPageSchemaProps | FAQSchemaProps;
 
 const StructuredData: React.FC<StructuredDataProps> = (props) => {
   const getSchema = () => {
@@ -88,6 +96,21 @@ const StructuredData: React.FC<StructuredDataProps> = (props) => {
             url: 'https://joinupshift.com/icon.png',
           },
         },
+      };
+    }
+
+    if (props.type === 'faq') {
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: props.items.map(item => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
       };
     }
 

@@ -25,16 +25,16 @@ const ArticleDetail: React.FC = () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         // Load HTML content from the specified path
         const response = await fetch(article.htmlContentPath);
-        
+
         if (!response.ok) {
           throw new Error(`Failed to load article content: ${response.status}`);
         }
-        
+
         const htmlContent = await response.text();
-        
+
         setArticleContent({
           title: article.title,
           subtitle: article.subtitle,
@@ -86,7 +86,7 @@ const ArticleDetail: React.FC = () => {
         image={articleContent.mainImage}
         article={true}
         author="Upshift Team"
-        publishedTime={new Date().toISOString()}
+        publishedTime={article.publishedDate || new Date().toISOString()}
         type="article"
       />
       <StructuredData
@@ -94,11 +94,11 @@ const ArticleDetail: React.FC = () => {
         title={articleContent.title}
         description={articleContent.subtitle}
         image={articleContent.mainImage}
-        datePublished={new Date().toISOString()}
+        datePublished={article.publishedDate || new Date().toISOString()}
         author="Upshift Team"
         url={`https://joinupshift.com/articles/${slug}`}
       />
-       <LightRays
+      <LightRays
         raysOrigin="top-center"
         raysColor="#667EEA"
         raysSpeed={0.6}
