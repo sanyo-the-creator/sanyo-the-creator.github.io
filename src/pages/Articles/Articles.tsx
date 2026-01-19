@@ -4,7 +4,6 @@ import { articles } from '../../data/articles';
 import './Articles.css';
 import LightRays from '../../components/common/LightRays/LightRays';
 import { SEO, StructuredData } from '../../components/common/SEO';
-import Breadcrumbs from '../../components/common/Breadcrumbs/Breadcrumbs';
 
 const Articles: React.FC = () => {
   return (
@@ -44,17 +43,17 @@ const Articles: React.FC = () => {
           ]}
         /> */}
         <h1 className="articles-title gradient-text">Articles</h1>
-        
+
         <div className="articles-list">
           {articles.map((article) => (
-            <Link 
-              key={article.id} 
-              to={`/articles/${article.slug}`} 
+            <Link
+              key={article.id}
+              to={`/articles/${article.slug}`}
               className="article-item"
             >
               <div className="article-image">
-                <img 
-                  src={article.mainImage} 
+                <img
+                  src={article.mainImage}
                   alt={article.title}
                   onError={(e) => {
                     // Fallback image if main image fails to load

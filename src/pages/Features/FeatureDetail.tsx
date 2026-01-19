@@ -3,8 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import { featuresList } from '../../data/features';
 import SpotlightCard from '../../components/common/SpotlightCard/SpotlightCard';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
-import { SEO, StructuredData } from '../../components/common/SEO';
-import Breadcrumbs from '../../components/common/Breadcrumbs/Breadcrumbs';
 
 const FeatureDetail: React.FC = () => {
   const params = useParams();
