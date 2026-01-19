@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a14eadef.css",
-    "main.js": "/static/js/main.e4a8ee56.js",
+    "main.js": "/static/js/main.47272572.js",
     "static/js/453.43a19f67.chunk.js": "/static/js/453.43a19f67.chunk.js",
     "static/media/blockSocials3.png": "/static/media/blockSocials3.b137a1b75d8351344d2c.png",
     "static/media/clashOfClans.png": "/static/media/clashOfClans.02262c3ff62c94cbbb21.png",
@@ -48,11 +48,11 @@
     "index.html": "/index.html",
     "static/media/upshift_icon_mini.svg": "/static/media/upshift_icon_mini.204a16196503a1cd0025c5f55112e624.svg",
     "main.a14eadef.css.map": "/static/css/main.a14eadef.css.map",
-    "main.e4a8ee56.js.map": "/static/js/main.e4a8ee56.js.map",
+    "main.47272572.js.map": "/static/js/main.47272572.js.map",
     "453.43a19f67.chunk.js.map": "/static/js/453.43a19f67.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a14eadef.css",
-    "static/js/main.e4a8ee56.js"
+    "static/js/main.47272572.js"
   ]
 }
