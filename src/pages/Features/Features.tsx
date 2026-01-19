@@ -3,7 +3,6 @@ import { faqItems } from '../../data/faqs';
 import { SEO, StructuredData } from '../../components/common/SEO';
 import './Features.css';
 import LightRays from '../../components/common/LightRays/LightRays';
-import Breadcrumbs from '../../components/common/Breadcrumbs/Breadcrumbs';
 // Import all images
 import affiliateScreen from '../../assets/images/affiliateScreen2.jpeg';
 import appBlocker from '../../assets/images/appBlocker.jpeg';
@@ -14,14 +13,11 @@ import dailySidequest from '../../assets/images/dailySidequest.jpeg';
 import dayCelebration from '../../assets/images/dayCelebration.jpeg';
 import exploreQuests from '../../assets/images/exploreQuests.jpeg';
 import friendsScreen from '../../assets/images/friends-screen2.jpg';
-import friendsScreen2 from '../../assets/images/friends-screen2.jpg';
 import goalJournal from '../../assets/images/goalJournal.jpeg';
 import goalsScreen from '../../assets/images/goals-screen.jpg';
 import groupListScreen from '../../assets/images/group-list-screen.jpg';
 import homeScreen from '../../assets/images/home-screen.jpg';
 import leaderboardScreen from '../../assets/images/leaderboard-screen.jpg';
-import leaderboardGroups from '../../assets/images/leaderboardGroups.jpeg';
-import leaderboardUsers from '../../assets/images/leaderboardUsers.jpeg';
 import monthQuest from '../../assets/images/monthQuest.jpeg';
 import onedayQuest from '../../assets/images/onedayQuest.jpeg';
 import pornBlocker from '../../assets/images/pornBlocker.jpeg';
@@ -335,9 +331,6 @@ const Features: React.FC = () => {
     setTouchEnd(0);
   };
 
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
 
   const nextSlide = () => {
     setCurrentSlide(prev => prev === features.length - 1 ? 0 : prev + 1);

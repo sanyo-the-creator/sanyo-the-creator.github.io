@@ -2,19 +2,16 @@ import React from 'react';
 import Aurora from '../../components/common/Aurora/Aurora';
 import RotatingText from '../../components/common/RotatingText/index';
 import ScrollVelocity from '../../components/common/ScrollVelocity/ScrollVelocity';
-import StarBorder from '../../components/common/StarBorder/StarBorder';
 import TextType from '../../components/common/TextType/TextType';
 import SpotlightCard from '../../components/common/SpotlightCard/SpotlightCard';
-import ScrollReveal from '../../components/common/ScrollReveal/ScrollReveal';
 import ScrollingFeatures from '../../components/sections/ScrollingFeatures';
 import upshiftHomeImage from '../../assets/images/home-screen.jpg';
 import upshiftGoalsImage from '../../assets/images/goals-screen.jpg';
 import upshiftProfileImage from '../../assets/images/profile-screen.jpg';
-import timeTrackerImage  from '../../assets/images/time-tracker-screen.jpg';
-import friendsImage  from '../../assets/images/friends-screen.jpg';
-import groupImage  from '../../assets/images/group-list-screen.jpg';
+import timeTrackerImage from '../../assets/images/time-tracker-screen.jpg';
+import friendsImage from '../../assets/images/friends-screen.jpg';
+import groupImage from '../../assets/images/group-list-screen.jpg';
 import CountUp from '../../components/common/CountUp/CountUp'
-import ProfileCard from '../../components/common/ProfileCard/ProfileCard'
 import { SEO, StructuredData } from '../../components/common/SEO';
 
 import './Home.css';
@@ -34,7 +31,7 @@ const Home: React.FC = () => {
         'Meditation and mindfulness tools'
       ]
     },
-     {
+    {
       id: 'time2',
       title: '🚀 Groups and Challenges',
       description: 'Gain an in-depth look at your recovery journey. Explore detailed analytics, track your progress, identify key patterns, and use actionable insights to build stronger habits and maintain your momentum.',
@@ -56,7 +53,7 @@ const Home: React.FC = () => {
         'Streak monitoring and insights'
       ]
     },
-     {
+    {
       id: 'time',
       title: '⏳ Time Tracker',
       description: 'Gain an in-depth look at your recovery journey. Explore detailed analytics, track your progress, identify key patterns, and use actionable insights to build stronger habits and maintain your momentum.',
@@ -67,7 +64,7 @@ const Home: React.FC = () => {
         'Streak monitoring and insights'
       ]
     },
-    
+
     {
       id: 'community',
       title: '📈 Profile with level and stats',
@@ -96,14 +93,14 @@ const Home: React.FC = () => {
     {
       name: 'Sarah Chen',
       role: 'Product Manager',
-     
+
       avatar: '👩‍💼',
       quote: 'Upshift transformed how I approach personal development. The gamification makes building habits actually fun!'
     },
     {
       name: 'Marcus Johnson',
       role: 'Software Engineer',
-      
+
       avatar: '👨‍💻',
       quote: 'The social accountability features are game-changing. My productivity has increased by 40% since using Upshift.'
     }
@@ -144,7 +141,7 @@ const Home: React.FC = () => {
                 <h1 className="hero-title">
                   Transform Your Life <br /> Into a{" "}
                   <RotatingText
-                  interval={5000}
+                    interval={5000}
                     texts={["Quest   ", "Game   ", "Journey    ", "Mission   "]}
                     className="gradient-text"
                   />
@@ -273,7 +270,7 @@ const Home: React.FC = () => {
       {/* CTA Section */}
       <section className="cta-section">
 
-        <button className="btn btn-primary btn-lg btn-cta glow-effect mb-6"  onClick={() => window.location.href = '/download'}>
+        <button className="btn btn-primary btn-lg btn-cta glow-effect mb-6" onClick={() => window.location.href = '/download'}>
           <span className="btn-icon">🚀</span>
           Download Upshift Now
         </button>

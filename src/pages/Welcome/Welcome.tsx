@@ -1,47 +1,9 @@
 import React from 'react';
-import TextType from '../../components/common/TextType/TextType';
-import SpotlightCard from '../../components/common/SpotlightCard/SpotlightCard';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
-import ScrollReveal from '../../components/common/ScrollReveal/ScrollReveal';
-import RotatingText from '../../components/common/RotatingText/index';
 import './Welcome.css';
 import LightRays from '../../components/common/LightRays/LightRays';
 const Welcome: React.FC = () => {
-  const nextSteps = [
-    {
-      icon: '👤',
-      title: 'Complete Your Profile',
-      description: 'Fill in your personal information and preferences in the app',
-      action: 'Complete Profile',
-      primary: true,
-    },
-    {
-      icon: '⚔️',
-      title: 'Create Your First Quest',
-      description: 'Set up a daily habit and start earning XP immediately',
-      action: 'Start Questing',
-    },
-    {
-      icon: '🏰',
-      title: 'Join Groups',
-      description: 'Connect with communities and compete with friends',
-      action: 'Find Groups',
-    },
-    {
-      icon: '📊',
-      title: 'Track Progress',
-      description: 'View detailed analytics and achievement progress',
-      action: 'See Stats',
-    },
-  ];
 
-  const quickTips = [
-    'Start small - even 5 minutes a day can create lasting change',
-    'Join groups that align with your interests and goals',
-    // 'Use the app blocker to stay focused during quest time',
-    'Celebrate small wins - every XP point counts!',
-    'Be consistent - streaks are more important than perfection',
-  ];
 
   return (
     <div className="welcome-page">
