@@ -182,7 +182,7 @@ const Header: React.FC<CardNavProps> = ({
             type="button"
             className="card-nav-cta-button"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-            onClick={() => window.open('https://apps.apple.com/gb/app/upshift-level-up-your-life/id6749509316', '_blank')}
+            onClick={() => window.open('https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316', '_blank')}
           >
             Try for free
           </button>
