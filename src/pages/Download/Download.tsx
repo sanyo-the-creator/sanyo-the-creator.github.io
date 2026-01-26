@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
 import LightRays from '../../components/common/LightRays/LightRays';
 import { SEO, StructuredData } from '../../components/common/SEO';
 import './Download.css';
 
 const Download: React.FC = () => {
+  useEffect(() => {
+    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
+
+    // Detect iOS (iPhone/iPad)
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
+
+    // Detect Android
+    const isAndroid = /android/i.test(userAgent);
+
+    // Redirect based on device
+    if (isIOS) {
+      // Redirect to Apple App Store
+      window.location.href = 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316';
+    } else if (isAndroid) {
+      // Redirect to Google Form
+      window.location.href = 'https://forms.gle/iJa3K3p6LmWkmHxn6#';
+    }
+  }, []);
+
 
   const downloadLinks = [
     {
