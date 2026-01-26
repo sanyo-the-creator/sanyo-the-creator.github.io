@@ -23,21 +23,7 @@ const Instagram: React.FC = () => {
         }
     }, []);
 
-    return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100vh',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
-            color: '#333'
-        }}>
-            <div style={{ textAlign: 'center' }}>
-                <h2>Redirecting...</h2>
-                <p>Please wait while we redirect you to the right place.</p>
-            </div>
-        </div>
-    );
+    return null;
 };
 
 export default Instagram;
