@@ -10,6 +10,7 @@ import FeatureDetail from './pages/Features/FeatureDetail';
 import Articles from './pages/Articles/Articles';
 import ArticleDetail from './pages/Articles/ArticleDetail';
 import Download from './pages/Download/Download';
+import Instagram from './pages/Instagram/Instagram';
 import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
 import './styles/globals.css';
@@ -28,6 +29,7 @@ function App() {
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:slug" element={<ArticleDetail />} />
           <Route path="/download" element={<Download />} />
+          <Route path="/instagram" element={<Instagram />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>

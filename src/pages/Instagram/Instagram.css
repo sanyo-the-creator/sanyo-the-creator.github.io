@@ -1,0 +1,25 @@
+/* Instagram redirect page styles */
+.instagram-redirect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.redirect-content {
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+.redirect-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.redirect-content p {
+  font-size: 1.125rem;
+  opacity: 0.9;
+}
