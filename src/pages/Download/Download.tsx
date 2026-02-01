@@ -6,6 +6,11 @@ import './Download.css';
 
 const Download: React.FC = () => {
   useEffect(() => {
+    // Only auto-redirect if user is on /download route
+    if (window.location.pathname !== '/download') {
+      return;
+    }
+
     const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
 
     // Detect iOS (iPhone/iPad)
