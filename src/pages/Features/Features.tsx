@@ -4,35 +4,35 @@ import { SEO, StructuredData } from '../../components/common/SEO';
 import './Features.css';
 import LightRays from '../../components/common/LightRays/LightRays';
 // Import all images
-import affiliateScreen from '../../assets/images/affiliateScreen2.jpeg';
-import appBlocker from '../../assets/images/appBlocker.jpeg';
-import badges from '../../assets/images/badges.jpeg';
-import blockNow from '../../assets/images/blockNow.jpeg';
+import affiliateScreen from '../../assets/images2/affiliate.png';
+import appBlocker from '../../assets/images2/appBlocker.png';
+import badges from '../../assets/images2/badges.png';
+import blockNow from '../../assets/images2/blockNow.png';
 import customBlockOverlay from '../../assets/images/customBlockOverlay.jpeg';
-import dailySidequest from '../../assets/images/dailySidequest.jpeg';
-import dayCelebration from '../../assets/images/dayCelebration.jpeg';
-import exploreQuests from '../../assets/images/exploreQuests.jpeg';
-import friendsScreen from '../../assets/images/friends-screen2.jpg';
-import goalJournal from '../../assets/images/goalJournal.jpeg';
-import goalsScreen from '../../assets/images/goals-screen.jpg';
-import groupListScreen from '../../assets/images/group-list-screen.jpg';
-import homeScreen from '../../assets/images/home-screen.jpg';
-import leaderboardScreen from '../../assets/images/leaderboard-screen.jpg';
-import monthQuest from '../../assets/images/monthQuest.jpeg';
-import onedayQuest from '../../assets/images/onedayQuest.jpeg';
-import pornBlocker from '../../assets/images/pornBlocker.jpeg';
-import profileScreen from '../../assets/images/profile-screen.jpg';
-import questBlock from '../../assets/images/questBlock.jpeg';
-import quitQuests from '../../assets/images/quitQuests.jpeg';
-import reminders from '../../assets/images/reminders.jpeg';
-import rouletteQuest from '../../assets/images/rouletteQuest.jpeg';
-import stopwatch from '../../assets/images/stopwatch.jpeg';
+import dailySidequest from '../../assets/images2/sidequest.png';
+import dayCelebration from '../../assets/images2/celebration.png';
+import exploreQuests from '../../assets/images2/explore.png';
+import friendsScreen from '../../assets/images2/friends.png';
+import goalJournal from '../../assets/images2/journal.png';
+import microGoals from '../../assets/images2/microgoals.png';
+import goalsScreen from '../../assets/images2/goals.png';
+import homeScreen from '../../assets/images2/today.png';
+import monthQuest from '../../assets/images2/monthly.png';
+import onedayQuest from '../../assets/images2/oneday.png';
+import pornBlocker from '../../assets/images2/pornBlock.png';
+import profileScreen from '../../assets/images2/profile.png';
+import questBlock from '../../assets/images2/questBlock.png';
+import quitQuests from '../../assets/images2/quit.png';
+import reminders from '../../assets/images2/reminders.png';
+import rouletteQuest from '../../assets/images2/roulette.png';
+import stopwatch from '../../assets/images2/stopwatch.png';
 import streakCelebration from '../../assets/images/streakCelebration.jpeg';
-import timeTrackerScreen from '../../assets/images/time-tracker-screen.jpg';
-import timeLimit from '../../assets/images/timeLimit.jpeg';
-import weeklyQuest from '../../assets/images/weeklyQuest.jpeg';
-import workSchedule from '../../assets/images/workSchedule.jpeg';
-import customTheme from '../../assets/images/customTheme.jpeg';
+import timeTrackerScreen from '../../assets/images2/timeTracker.png';
+import timeLimit from '../../assets/images2/timeLimit.png';
+import weeklyQuest from '../../assets/images2/weekly.png';
+import workSchedule from '../../assets/images2/workSchedule.png';
+import customTheme from '../../assets/images2/themes.png';
+import widgets from '../../assets/images2/widgets.png';
 const features = [
   {
     image: homeScreen,
@@ -49,21 +49,16 @@ const features = [
   {
     image: goalsScreen,
     imagePosition: 'center -46px',
-    title: 'Goals & Journal',
+    title: 'Goals',
     subtitle: 'Set long-term goals, break them into milestones, and track your progress.'
   },
   {
     image: timeTrackerScreen,
-    imagePosition: 'center -174px',
+    imagePosition: 'center -160px',
     title: 'Time Tracker',
     subtitle: 'Track your time and remove distractions.'
   },
-  {
-    image: groupListScreen,
-    imagePosition: 'center -238px',
-    title: 'Groups & Challenges',
-    subtitle: 'Join groups, compete with friends, and stay accountable together.'
-  },
+
   {
     image: friendsScreen,
     imagePosition: 'center -305px',
@@ -115,7 +110,7 @@ const features = [
   },
   {
     image: pornBlocker,
-    imagePosition: 'center -287px',
+    imagePosition: 'center -457px',
     title: 'Strict mode',
     subtitle: 'Block cannot be bypassed until the app is unblocked (depending on the block type)'
   },
@@ -133,9 +128,15 @@ const features = [
   },
   {
     image: goalJournal,
-    imagePosition: 'center -68px',
+    imagePosition: 'center -38px',
     title: 'Goal Journal',
     subtitle: 'Write plan and reflection for your goals'
+  },
+   {
+    image: microGoals,
+    imagePosition: 'center -38px',
+    title: 'Micro-goals',
+    subtitle: 'Break your goal into milestones'
   },
   {
     image: onedayQuest,
@@ -188,12 +189,7 @@ const features = [
     title: 'Streak Celebrations',
     subtitle: 'Celebrate your consistency and achievements'
   },
-  {
-    image: leaderboardScreen,
-    imagePosition: 'center -52px',
-    title: 'Leaderboard',
-    subtitle: 'Compete with friends and climb the rankings'
-  },
+
   {
     image: badges,
     imagePosition: 'center -61px',
@@ -212,6 +208,12 @@ const features = [
     imagePosition: 'center -195px',
     title: 'Custom Theme',
     subtitle: 'Customize profile and to your liking (9themes)'
+  },
+   {
+    image: widgets,
+    imagePosition: 'center -71px',
+    title: 'Widgets',
+    subtitle: 'customize your home screen '
   },
   {
     image: affiliateScreen,
