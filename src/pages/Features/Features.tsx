@@ -61,7 +61,7 @@ const features = [
 
   {
     image: friendsScreen,
-    imagePosition: 'center -305px',
+    imagePosition: 'center -125px',
     title: 'Friends & Social',
     subtitle: 'Connect with friends and share your progress'
   },
@@ -104,7 +104,7 @@ const features = [
   },
   {
     image: workSchedule,
-    imagePosition: 'center -146px',
+    imagePosition: 'center -106px',
     title: 'Work Schedule',
     subtitle: 'Set work schedule and block distracting apps during work hours'
   },
@@ -122,7 +122,7 @@ const features = [
   },
   {
     image: exploreQuests,
-    imagePosition: 'center -138px',
+    imagePosition: 'center -108px',
     title: 'Explore Quests',
     subtitle: 'Discover new habits and challenges'
   },
@@ -161,7 +161,7 @@ const features = [
 
   {
     image: quitQuests,
-    imagePosition: 'center -268px',
+    imagePosition: 'center -290px',
     title: 'Quit Quests',
     subtitle: 'Break bad habits by daily tracking'
   },
@@ -192,7 +192,7 @@ const features = [
 
   {
     image: badges,
-    imagePosition: 'center -61px',
+    imagePosition: 'center -41px',
     title: 'Badges & Achievements',
     subtitle: 'Unlock badges and celebrate your milestones'
   },
@@ -217,7 +217,7 @@ const features = [
   },
   {
     image: affiliateScreen,
-    imagePosition: 'center -71px',
+    imagePosition: 'center -55px',
     title: 'Affiliate Program',
     subtitle: 'Earn rewards by sharing Upshift '
   }
