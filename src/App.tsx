@@ -13,12 +13,15 @@ import Download from './pages/Download/Download';
 import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
 import './styles/globals.css';
+import PortalRouter from './pages/Portal/PortalRouter';
 
 function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
+      <Routes>
+        <Route path="/portal/*" element={<PortalRouter />} />
+        
+        <Route element={<Layout />}>
           <Route path="/" element={<Download />} />
           <Route path="/home" element={<Home />} />
           <Route path="/welcome" element={<Welcome />} />
@@ -30,8 +33,8 @@ function App() {
           <Route path="/download" element={<Download />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
-        </Routes>
-      </Layout>
+        </Route>
+      </Routes>
     </Router>
   );
 }
