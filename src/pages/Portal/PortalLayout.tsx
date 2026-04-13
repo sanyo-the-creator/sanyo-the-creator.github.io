@@ -24,6 +24,13 @@ interface PortalLayoutProps {
 
 const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
   const navigate = useNavigate();
+  const [user, setUser] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+  }, []);
 
   const handleSignOut = async () => {
     try {
@@ -34,6 +41,9 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
       console.error('Error signing out:', error);
     }
   };
+
+  const userEmail = user?.email || 'Loading...';
+  const userAvatar = user?.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.id || 'Felix'}`;
 
   return (
     <div className="portal-layout">
@@ -47,7 +57,7 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
           </div>
           <span className="portal-brand">Creator Portal</span>
           <img 
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" 
+            src={userAvatar} 
             alt="User Avatar" 
             className="portal-avatar" 
           />
@@ -75,7 +85,7 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
         </nav>
 
         <div className="portal-sidebar-footer">
-          <div className="portal-user-email">sanyopoole13@gmail.com</div>
+          <div className="portal-user-email" title={userEmail}>{userEmail}</div>
           <button className="portal-signout-btn" onClick={handleSignOut}>
             <RiLogoutBoxRLine className="portal-nav-icon" /> Sign Out
           </button>

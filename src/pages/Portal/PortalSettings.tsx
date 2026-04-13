@@ -13,24 +13,37 @@ const SiStripe = _SiStripe as React.ElementType;
 
 const PortalSettings = () => {
   const [isTikTokConnected, setIsTikTokConnected] = useState(false);
+  const [isInstagramConnected, setIsInstagramConnected] = useState(false);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    // Check local storage for existing mock connection
+    // Fetch actual user data
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+
+    // Check local storage for existing mock connections
     if (localStorage.getItem('tiktok_connected') === 'true') {
       setIsTikTokConnected(true);
     }
+    if (localStorage.getItem('instagram_connected') === 'true') {
+      setIsInstagramConnected(true);
+    }
 
-    // Check URL parameters for TikTok redirect callback
+    // Check URL parameters for OAuth redirect callbacks
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     const state = urlParams.get('state');
 
     if (code && state === 'tiktok_flow') {
-      // Simulate successful auth exchange
       localStorage.setItem('tiktok_connected', 'true');
       setIsTikTokConnected(true);
-      
-      // Scrub the URL to make it clean
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    if (code && state === 'instagram_flow') {
+      localStorage.setItem('instagram_connected', 'true');
+      setIsInstagramConnected(true);
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
@@ -58,6 +71,30 @@ const PortalSettings = () => {
     setIsTikTokConnected(false);
   };
 
+  const handleInstagramConnect = () => {
+    const clientId = process.env.REACT_APP_INSTAGRAM_CLIENT_ID;
+    if (!clientId) {
+      console.error('Instagram Client ID missing in environment.');
+      return;
+    }
+    
+    // Redirect to Instagram Basic Display OAuth
+    const redirectUri = window.location.origin + '/portal/settings';
+    const authUrl = `https://api.instagram.com/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user_profile,user_media&response_type=code&state=instagram_flow`;
+    
+    window.location.href = authUrl;
+  };
+
+  const handleInstagramDisconnect = () => {
+    localStorage.removeItem('instagram_connected');
+    setIsInstagramConnected(false);
+  };
+
+  const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User';
+  const userHandle = `@${user?.user_metadata?.custom_claims?.global_name || user?.email?.split('@')[0] || 'user'}`;
+  const userEmail = user?.email || '...';
+  const userAvatar = user?.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.id || 'Pulandooo'}`;
+
   return (
     <div className="portal-dashboard">
       <header className="portal-header">
@@ -75,11 +112,11 @@ const PortalSettings = () => {
         </div>
         
         <div className="settings-block-content profile-block">
-          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Pulandooo" alt="avatar" className="settings-avatar" />
+          <img src={userAvatar} alt="avatar" className="settings-avatar" />
           <div className="profile-info">
-            <div className="profile-name">Pulandooo</div>
-            <div className="profile-handle text-accent">@pulandooo</div>
-            <div className="profile-email">sanyopoole13@gmail.com</div>
+            <div className="profile-name">{userName}</div>
+            <div className="profile-handle text-accent">{userHandle}</div>
+            <div className="profile-email">{userEmail}</div>
           </div>
           <div className="profile-discord-badge">
             <SiDiscord />
@@ -134,8 +171,34 @@ const PortalSettings = () => {
         </div>
         
         <div className="settings-block-content center-content">
-          <button className="settings-connect-btn">+ Connect Account</button>
-          <p className="settings-help-text">Connect your Instagram account to submit Reels and track your earnings.</p>
+          {isInstagramConnected ? (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+              <div style={{ 
+                background: 'rgba(34, 197, 94, 0.1)', 
+                color: '#4ade80', 
+                padding: '12px 24px', 
+                borderRadius: '8px',
+                border: '1px solid rgba(34, 197, 94, 0.2)',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                ✅ Connected as {userName}
+              </div>
+              <button 
+                onClick={handleInstagramDisconnect}
+                style={{ background: 'transparent', border: 'none', color: '#ff4b4b', cursor: 'pointer', fontSize: '14px', textDecoration: 'underline' }}
+              >
+                Disconnect
+              </button>
+            </div>
+          ) : (
+            <>
+              <button className="settings-connect-btn" onClick={handleInstagramConnect}>+ Connect Account</button>
+              <p className="settings-help-text">Connect your Instagram account to submit Reels and track your earnings.</p>
+            </>
+          )}
         </div>
       </div>
 
