@@ -17,7 +17,7 @@ const PortalAuth: React.FC<PortalAuthProps> = ({ onLogin }) => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'discord',
         options: {
-          redirectTo: `${window.location.origin}/portal`
+          redirectTo: `${window.location.origin}/portal/`
         }
       });
       
