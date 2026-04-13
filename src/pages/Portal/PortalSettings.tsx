@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiUser as _FiUser, FiCreditCard as _FiCreditCard, FiAlertCircle as _FiAlertCircle, FiBookOpen as _FiBookOpen } from 'react-icons/fi';
 import { SiTiktok as _SiTiktok, SiInstagram as _SiInstagram, SiDiscord as _SiDiscord, SiStripe as _SiStripe } from 'react-icons/si';
+import { supabase } from '../../lib/supabase';
 
 const FiUser = _FiUser as React.ElementType;
 const FiCreditCard = _FiCreditCard as React.ElementType;
@@ -18,7 +19,7 @@ const PortalSettings = () => {
 
   useEffect(() => {
     // Fetch actual user data
-    supabase.auth.getUser().then(({ data: { user } }) => {
+    supabase.auth.getUser().then(({ data: { user } }: any) => {
       setUser(user);
     });
 
