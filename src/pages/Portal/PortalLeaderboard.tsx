@@ -1,26 +1,43 @@
-import React, { useState } from 'react';
-import { BiCalendar as _BiCalendar } from 'react-icons/bi';
+import React, { useState, useEffect } from 'react';
 import { RiTrophyLine as _RiTrophyLine, RiVipCrownLine as _RiVipCrownLine, RiMedalLine as _RiMedalLine } from 'react-icons/ri';
 import { FiEye as _FiEye, FiInfo as _FiInfo } from 'react-icons/fi';
+import { supabase } from '../../lib/supabase';
 
-const BiCalendar = _BiCalendar as React.ElementType;
 const RiTrophyLine = _RiTrophyLine as React.ElementType;
 const RiVipCrownLine = _RiVipCrownLine as React.ElementType;
 const FiEye = _FiEye as React.ElementType;
 const FiInfo = _FiInfo as React.ElementType;
 const RiMedalLine = _RiMedalLine as React.ElementType;
 
-const leaderboardData = [
-  { rank: 1, name: 'carllop', views: '2.6M', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=carllop' },
-  { rank: 2, name: '1x.shaunn', views: '2.6M', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=shaunn' },
-  { rank: 3, name: 'Kuba', views: '2.1M', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kuba' },
-  { rank: 4, name: 'Lookmaxing 2585', views: '2.1M', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Lookmax' },
-  { rank: 5, name: 'Thor.xyz', views: '1.6M', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Thor' },
-  { rank: 6, name: '48', views: '1.6M', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=48' }
-];
-
 const PortalLeaderboard = () => {
-  const [filter, setFilter] = useState<'Unverified' | 'Verified'>('Unverified');
+  const [loading, setLoading] = useState(true);
+  const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('leaderboard_ranking')
+          .select('*')
+          .limit(20);
+
+        if (error) throw error;
+        setLeaderboardData(data || []);
+      } catch (err) {
+        console.error('Error fetching leaderboard:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLeaderboard();
+  }, []);
+
+  const formatViews = (num: number) => {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    return num.toString();
+  };
 
   return (
     <div className="portal-dashboard">
@@ -33,21 +50,6 @@ const PortalLeaderboard = () => {
           <div className="portal-date-selector">
             <span>April 2026</span>
             <svg className="portal-chevron-down" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </div>
-          
-          <div className="portal-toggle-group">
-            <button 
-              className={`portal-toggle-btn ${filter === 'Unverified' ? 'active' : ''}`}
-              onClick={() => setFilter('Unverified')}
-            >
-              Unverified <span className="portal-info-icon-inline">i</span>
-            </button>
-            <button 
-              className={`portal-toggle-btn ${filter === 'Verified' ? 'active' : ''}`}
-              onClick={() => setFilter('Verified')}
-            >
-              Verified <span className="portal-info-icon-inline">i</span>
-            </button>
           </div>
         </div>
       </header>
@@ -97,22 +99,35 @@ const PortalLeaderboard = () => {
         </div>
 
         <div className="leaderboard-table-body">
-          {leaderboardData.map((user, index) => (
-            <div key={index} className={`leaderboard-row ${user.rank === 1 ? 'rank-1' : ''}`}>
-              <div className="col-rank">
-                <span className="rank-number">{user.rank}</span>
-                {user.rank === 1 && <RiTrophyLine className="rank-icon trophy" />}
-                {user.rank > 1 && user.rank <= 3 && <RiMedalLine className="rank-icon medal" />}
-              </div>
-              <div className="col-creator">
-                <img src={user.avatar} alt="avatar" className="creator-avatar" />
-                <span className="creator-name">{user.name}</span>
-              </div>
-              <div className="col-views">
-                <FiEye className="view-icon" /> {user.views}
-              </div>
-            </div>
-          ))}
+          {loading ? (
+            <div style={{ padding: '40px', textAlign: 'center', color: '#666' }}>Loading real-world rankings...</div>
+          ) : leaderboardData.length === 0 ? (
+            <div style={{ padding: '40px', textAlign: 'center', color: '#666' }}>No creators have submitted videos yet. Be the first!</div>
+          ) : (
+            leaderboardData.map((user, index) => {
+              const rank = index + 1;
+              return (
+                <div key={user.user_id} className={`leaderboard-row ${rank === 1 ? 'rank-1' : ''}`}>
+                  <div className="col-rank">
+                    <span className="rank-number">{rank}</span>
+                    {rank === 1 && <RiTrophyLine className="rank-icon trophy" />}
+                    {rank > 1 && rank <= 3 && <RiMedalLine className="rank-icon medal" />}
+                  </div>
+                  <div className="col-creator">
+                    <img 
+                      src={user.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.user_id}`} 
+                      alt="avatar" 
+                      className="creator-avatar" 
+                    />
+                    <span className="creator-name">{user.display_name}</span>
+                  </div>
+                  <div className="col-views">
+                    <FiEye className="view-icon" /> {formatViews(parseInt(user.total_views || '0'))}
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
     </div>

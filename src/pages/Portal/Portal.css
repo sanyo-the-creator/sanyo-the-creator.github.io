@@ -988,3 +988,204 @@
   margin-left: 36px;
   cursor: pointer;
 }
+
+/* -----------------------------
+   Submit Video Styles 
+----------------------------- */
+.portal-submit-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.account-status-card {
+  background-color: #1a1a1a;
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.account-status-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+.account-info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.account-platform-icon {
+  font-size: 20px;
+  color: #fff;
+}
+
+.account-avatar-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #333;
+}
+
+.account-handle-text {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.submission-input-card {
+  background-color: #1a1a1a;
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.input-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.video-url-input-wrapper {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.video-url-input {
+  width: 100%;
+  background-color: #121212;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: #fff;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.video-url-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.input-help-text {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.submit-video-btn {
+  width: 100%;
+  background-color: #bbbbbb;
+  color: #121212;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-video-btn:hover:not(:disabled) {
+  background-color: #ffffff;
+}
+
+.submit-video-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.requirements-card {
+  background-color: #1a1a1a;
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.requirements-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.requirements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.requirement-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #aaa;
+  line-height: 1.4;
+}
+
+.requirement-bullet {
+  color: #666;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.tip-box {
+  background-color: rgba(34, 197, 94, 0.05);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.tip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #4ade80;
+  margin-bottom: 10px;
+}
+
+.tip-content {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.5;
+}
+
+.tip-content strong {
+  color: #aaa;
+}
