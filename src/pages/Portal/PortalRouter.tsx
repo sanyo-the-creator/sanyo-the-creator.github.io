@@ -7,6 +7,7 @@ import PortalLeaderboard from './PortalLeaderboard';
 import PortalReferrals from './PortalReferrals';
 import PortalSettings from './PortalSettings';
 import PortalSubmitVideo from './PortalSubmitVideo';
+import PortalMyVideos from './PortalMyVideos';
 import { supabase } from '../../lib/supabase';
 import './Portal.css';
 
@@ -44,7 +45,7 @@ const PortalRouter = () => {
         <Route element={<PortalLayout onLogout={() => setIsAuthenticated(false)} />}>
           <Route path="/" element={<PortalDashboard />} />
           <Route path="/submit" element={<PortalSubmitVideo />} />
-          <Route path="/videos" element={<div className="portal-page-placeholder">My Videos (Coming Soon)</div>} />
+          <Route path="/videos" element={<PortalMyVideos />} />
           <Route path="/leaderboard" element={<PortalLeaderboard />} />
           <Route path="/referrals" element={<PortalReferrals />} />
           <Route path="/settings" element={<PortalSettings />} />
