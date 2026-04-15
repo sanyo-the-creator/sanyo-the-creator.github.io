@@ -1330,3 +1330,186 @@
 .portal-secondary-btn:hover {
   opacity: 0.9;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .portal-layout {
+    flex-direction: column;
+    overflow: auto;
+  }
+
+  .portal-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background-color: #121212;
+    border-bottom: 1px solid #2d2d2d;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    width: 100%;
+  }
+
+  .portal-mobile-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .portal-mobile-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    z-index: 1100;
+  }
+
+  .portal-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    z-index: 1050;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    padding-top: 0; /* Header inside sidebar or covered by mobile header */
+  }
+
+  .portal-sidebar.open {
+    left: 0;
+  }
+
+  .portal-sidebar-header {
+    display: none; /* Hide internal sidebar header on mobile as we use the mobile header */
+  }
+
+  .portal-mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1040;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .portal-content {
+    padding: 24px 16px;
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .portal-nav {
+    padding-top: 80px; /* Space for the header overlay area */
+  }
+
+  .portal-nav-item.active {
+    background-color: #70ffd8;
+    color: #000;
+    font-weight: 700;
+  }
+
+  .portal-nav-item.active .portal-nav-icon {
+    color: #000;
+  }
+
+  .portal-sidebar-footer {
+    background-color: #1a1a1a;
+  }
+
+  /* Dashboard Adjustments */
+  .portal-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .portal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .portal-page-title {
+    font-size: 28px;
+  }
+
+  .portal-countdown-banner {
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .portal-countdown-timer {
+    margin-right: 0;
+    margin-bottom: 8px;
+    justify-content: center;
+  }
+
+  /* Metric cards */
+  .portal-metric-card {
+    padding: 24px;
+  }
+
+  .portal-metric-value {
+    font-size: 32px;
+  }
+
+  /* Payout Deal */
+  .portal-deal-base {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .portal-deal-amount, .portal-deal-target {
+    text-align: left;
+    width: 100%;
+  }
+
+  /* Leaderboard */
+  .leaderboard-table-header, .leaderboard-row {
+    grid-template-columns: 50px 1fr 80px;
+    padding: 12px 16px;
+  }
+
+  .col-views {
+    font-size: 13px;
+  }
+
+  .portal-rules-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .portal-prize-pool-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .prize-pool-right {
+    text-align: left;
+  }
+}
+
+/* Hide mobile header on desktop */
+@media (min-width: 769px) {
+  .portal-mobile-header {
+    display: none;
+  }
+}
+

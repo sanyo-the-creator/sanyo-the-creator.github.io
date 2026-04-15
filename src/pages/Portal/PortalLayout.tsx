@@ -1,22 +1,29 @@
-import React from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { 
-  RiDashboardFill as _RiDashboardFill, 
-  RiVideoUploadLine as _RiVideoUploadLine, 
+  RiDashboardLine as _RiDashboardLine, 
+  RiAddCircleLine as _RiAddCircleLine, 
   RiVideoLine as _RiVideoLine, 
   RiTrophyLine as _RiTrophyLine, 
-  RiUserShared2Line as _RiUserShared2Line, 
+  RiGroupLine as _RiGroupLine, 
   RiSettings4Line as _RiSettings4Line,
-  RiLogoutBoxRLine as _RiLogoutBoxRLine
+  RiLogoutBoxRLine as _RiLogoutBoxRLine,
+  RiMenu3Line as _RiMenu3Line,
+  RiCloseLine as _RiCloseLine,
+  RiFocus3Line as _RiFocus3Line
 } from 'react-icons/ri';
-const RiDashboardFill = _RiDashboardFill as React.ElementType;
-const RiVideoUploadLine = _RiVideoUploadLine as React.ElementType;
+
+const RiDashboardLine = _RiDashboardLine as React.ElementType;
+const RiAddCircleLine = _RiAddCircleLine as React.ElementType;
 const RiVideoLine = _RiVideoLine as React.ElementType;
 const RiTrophyLine = _RiTrophyLine as React.ElementType;
-const RiUserShared2Line = _RiUserShared2Line as React.ElementType;
+const RiGroupLine = _RiGroupLine as React.ElementType;
 const RiSettings4Line = _RiSettings4Line as React.ElementType;
 const RiLogoutBoxRLine = _RiLogoutBoxRLine as React.ElementType;
+const RiMenu3Line = _RiMenu3Line as React.ElementType;
+const RiCloseLine = _RiCloseLine as React.ElementType;
+const RiFocus3Line = _RiFocus3Line as React.ElementType;
 
 interface PortalLayoutProps {
   onLogout: () => void;
@@ -24,13 +31,20 @@ interface PortalLayoutProps {
 
 const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
   const navigate = useNavigate();
-  const [user, setUser] = React.useState<any>(null);
+  const location = useLocation();
+  const [user, setUser] = useState<any>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user);
     });
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const handleSignOut = async () => {
     try {
@@ -42,18 +56,40 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
     }
   };
 
+  const toggleMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   const userEmail = user?.email || 'Loading...';
   const userAvatar = user?.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.id || 'Felix'}`;
 
   return (
-    <div className="portal-layout">
-      <aside className="portal-sidebar">
+    <div className={`portal-layout ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
+      {/* Mobile Header */}
+      <header className="portal-mobile-header">
+        <div className="portal-mobile-left">
+          <div className="portal-logo-icon">
+            <RiFocus3Line />
+          </div>
+          <span className="portal-brand">Creator Portal</span>
+          <img 
+            src={userAvatar} 
+            alt="User Avatar" 
+            className="portal-avatar" 
+          />
+        </div>
+        <button className="portal-mobile-toggle" onClick={toggleMenu} aria-label="Toggle Menu">
+          {isMobileMenuOpen ? <RiCloseLine /> : <RiMenu3Line />}
+        </button>
+      </header>
+
+      {/* Backdrop */}
+      {isMobileMenuOpen && <div className="portal-mobile-backdrop" onClick={() => setIsMobileMenuOpen(false)} />}
+
+      <aside className={`portal-sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="portal-sidebar-header">
           <div className="portal-logo-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor"/>
-               <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <RiFocus3Line />
           </div>
           <span className="portal-brand">Creator Portal</span>
           <img 
@@ -65,10 +101,10 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
 
         <nav className="portal-nav">
           <NavLink to="/portal" end className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-            <RiDashboardFill className="portal-nav-icon" /> Dashboard
+            <RiDashboardLine className="portal-nav-icon" /> Dashboard
           </NavLink>
           <NavLink to="/portal/submit" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-            <RiVideoUploadLine className="portal-nav-icon" /> Submit Video
+            <RiAddCircleLine className="portal-nav-icon" /> Submit Video
           </NavLink>
           <NavLink to="/portal/videos" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
             <RiVideoLine className="portal-nav-icon" /> My Videos
@@ -77,7 +113,7 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
             <RiTrophyLine className="portal-nav-icon" /> Leaderboard
           </NavLink>
           <NavLink to="/portal/referrals" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-            <RiUserShared2Line className="portal-nav-icon" /> Referrals
+            <RiGroupLine className="portal-nav-icon" /> Referrals
           </NavLink>
           <NavLink to="/portal/settings" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
             <RiSettings4Line className="portal-nav-icon" /> Settings
@@ -100,3 +136,4 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
 };
 
 export default PortalLayout;
+
