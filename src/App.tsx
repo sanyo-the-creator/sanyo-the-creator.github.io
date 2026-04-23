@@ -12,6 +12,10 @@ import ArticleDetail from './pages/Articles/ArticleDetail';
 import Download from './pages/Download/Download';
 import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
+import CreatorLanding from './pages/Creator/CreatorLanding';
+import Quests from './pages/Creator/Quests';
+import ScreenTime from './pages/Creator/ScreenTime';
+import Mix from './pages/Creator/Mix';
 import './styles/globals.css';
 import PortalRouter from './pages/Portal/PortalRouter';
 
@@ -21,6 +25,10 @@ function App() {
       <Routes>
         <Route path="/portal/*" element={<PortalRouter />} />
         
+        <Route path="/creator" element={<CreatorLanding />} />
+        <Route path="/creator/quests" element={<Quests />} />
+        <Route path="/creator/screentime" element={<ScreenTime />} />
+        <Route path="/creator/mix" element={<Mix />} />
         <Route element={<Layout />}>
           <Route path="/" element={<Download />} />
           <Route path="/home" element={<Home />} />
