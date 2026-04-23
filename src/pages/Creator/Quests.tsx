@@ -111,7 +111,7 @@ const Quests: React.FC = () => {
   // Image Adjustment States
   const [imageX, setImageX] = useState(0);
   const [imageY, setImageY] = useState(0);
-  const [imageZoom, setImageZoom] = useState(100);
+  const [imageZoom, setImageZoom] = useState(50);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -140,7 +140,7 @@ const Quests: React.FC = () => {
   const resetImageAdjustments = () => {
     setImageX(0);
     setImageY(0);
-    setImageZoom(100);
+    setImageZoom(50);
   };
 
   const handleDownload = async () => {
@@ -148,18 +148,24 @@ const Quests: React.FC = () => {
 
     setIsDownloading(true);
     try {
-      const dataUrl = await toPng(mockupRef.current, {
+      // Multiple passes to ensure cross-origin images load on mobile
+      const options = {
         cacheBust: true,
         backgroundColor: '#000',
-        pixelRatio: 2, // High DPI capture
+        pixelRatio: 2,
+        skipFonts: true,
         style: {
-          transform: 'scale(1)', // Reset scaling for capture
+          transform: 'scale(1)',
           margin: '0',
         }
-      });
+      };
+      // Warm-up passes for mobile browsers
+      await toPng(mockupRef.current, options).catch(() => {});
+      await toPng(mockupRef.current, options).catch(() => {});
+      const dataUrl = await toPng(mockupRef.current, options);
 
       const link = document.createElement('a');
-      link.download = `upshift-upshift-card-${Date.now()}.png`;
+      link.download = `upshift-card-${Date.now()}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {
@@ -427,7 +433,7 @@ const Quests: React.FC = () => {
               <input
                 type="range"
                 className="upshift-slider"
-                min="10"
+                min="5"
                 max="300"
                 value={imageZoom}
                 onChange={(e) => setImageZoom(parseInt(e.target.value))}
