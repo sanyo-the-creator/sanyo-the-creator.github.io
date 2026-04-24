@@ -69,7 +69,7 @@
   background: radial-gradient(circle, rgb(38, 38, 38) 0%, rgb(0, 0, 0) 100%);
   position: relative;
   overflow: hidden;
-  border: 4px solid #1a1a1a;
+  border: none;
   box-shadow: 0 20px 100px rgba(0, 0, 0, 0.9);
 }
 
@@ -610,6 +610,44 @@
   padding: 60px 20px;
   background: #000;
   min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.creator-landing .light-rays-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.back-to-portal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  z-index: 10;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 16px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.back-to-portal:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(-4px);
 }
 
 .creator-landing-title {
@@ -619,6 +657,8 @@
   margin-bottom: 60px;
   text-align: center;
   letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
 }
 
 .tools-grid {
@@ -627,6 +667,8 @@
   gap: 24px;
   width: 100%;
   max-width: 900px;
+  position: relative;
+  z-index: 1;
 }
 
 .tool-card {

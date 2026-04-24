@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import {
   RiArrowLeftLine as _RiArrowLeftLine,
   RiDownloadLine as _RiDownloadLine,
@@ -156,6 +156,8 @@ const Mix: React.FC = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const mockupRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [searchParams] = useSearchParams();
+  const fromPortal = searchParams.get('from') === 'portal';
 
   const [cards, setCards] = useState<MixCard[]>([
     { id: '1', mode: 'quest', emoji: '🦷', name: 'BRUSH TEETH', achieved: 7, goal: 7, unit: '\u200B', appId: 'messenger', minutes: 30 },
@@ -310,7 +312,7 @@ const Mix: React.FC = () => {
   return (
     <div className={`creator-editor-container ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
       <header className="creator-header">
-        <Link to="/creator" className="back-link">
+        <Link to={`/creator${fromPortal ? '?from=portal' : ''}`} className="back-link">
           <RiArrowLeftLine /> Back
         </Link>
       </header>

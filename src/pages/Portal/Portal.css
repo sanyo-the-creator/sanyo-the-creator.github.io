@@ -696,63 +696,240 @@
 /* -----------------------------
    Referrals Styles 
 ----------------------------- */
-.portal-referrals-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 60vh;
-  text-align: center;
-}
-.referrals-hero-icon {
-  width: 80px;
-  height: 80px;
-  background-color: rgba(59, 130, 246, 0.1);
-  color: #3b82f6;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
+.referral-links-card {
+  background-color: #1a1a1a;
+  border: 1px solid #2d2d2d;
+  border-radius: 8px;
   margin-bottom: 24px;
+  overflow: hidden;
 }
-.referrals-title {
-  font-size: 32px;
-  font-weight: 700;
+.referral-links-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #2d2d2d;
+  background-color: #1c1c1c;
+}
+.referral-links-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
   color: #fff;
-  margin: 0 0 16px 0;
 }
-.referrals-badge {
+.referral-link-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #1e1e1e;
+  gap: 12px;
+}
+.referral-link-row:last-child {
+  border-bottom: none;
+}
+.referral-link-platform {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 110px;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ccc;
+}
+.referral-link-url {
+  flex: 1;
+  font-size: 12px;
+  color: #888;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.referral-copy-btn {
+  background: none;
+  border: 1px solid #333;
+  color: #888;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.referral-copy-btn:hover {
+  background-color: #222;
+  border-color: #555;
+  color: #fff;
+}
+
+/* Locked username badge */
+.referral-locked-badge {
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
-  background-color: rgba(59, 130, 246, 0.2);
-  color: #3b82f6;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 14px;
+  gap: 5px;
+  font-size: 11px;
   font-weight: 600;
-  margin-bottom: 24px;
+  color: #888;
+  background: rgba(255,255,255,.04);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
 }
-.referrals-badge-icon { margin-right: 6px; }
-.referrals-description {
-  font-size: 15px;
-  color: #aaa;
-  margin-bottom: 40px;
+
+/* ---- Referral Setup Flow ---- */
+.referral-setup-card {
+  max-width: 520px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  padding: 40px 32px;
+  text-align: center;
+}
+.referral-setup-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 20px;
+}
+.referral-setup-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+}
+.referral-setup-desc {
+  font-size: 14px;
+  color: #888;
+  margin: 0 0 24px;
   line-height: 1.5;
 }
-.referrals-stats {
-  display: flex;
-  gap: 40px;
+.referral-setup-desc strong {
+  color: #f59e0b;
 }
-.referrals-stat-block { text-align: center; }
-.stat-value {
-  font-size: 24px;
+.referral-setup-confirm-code {
+  color: #3b82f6 !important;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  background: rgba(59,130,246,0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.referral-setup-input-group {
+  text-align: left;
+}
+.referral-setup-preview {
+  font-size: 12px;
+  color: #666;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  background-color: #111;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  word-break: break-all;
+}
+.referral-setup-highlight {
+  color: #3b82f6;
+  font-weight: 600;
+}
+.referral-setup-field {
+  position: relative;
+  margin-bottom: 8px;
+}
+.referral-setup-input {
+  width: 100%;
+  background-color: #111;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.referral-setup-input:focus {
+  border-color: #3b82f6;
+}
+.referral-setup-status {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: 600;
+}
+.referral-check-loading { color: #888; }
+.referral-check-ok { color: #4ade80; display: flex; align-items: center; gap: 4px; }
+.referral-check-taken { color: #f87171; display: flex; align-items: center; gap: 4px; }
+.referral-setup-rules {
+  font-size: 11px;
+  color: #666;
+  margin: 0 0 16px;
+}
+.referral-setup-error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.referral-setup-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 15px;
   font-weight: 700;
-  margin-bottom: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
 }
-.stat-value.text-accent { color: #3b82f6; }
-.stat-value.text-light { color: #fff; }
-.stat-label { font-size: 13px; color: #888; }
+.referral-setup-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
+}
+.referral-setup-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+.referral-setup-actions {
+  display: flex;
+  gap: 12px;
+}
+.referral-setup-btn-secondary {
+  background: transparent;
+  border: 1px solid #333;
+  color: #ccc;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.referral-setup-btn-secondary:hover {
+  background: #222;
+  border-color: #555;
+}
 
 /* -----------------------------
    Settings Styles 
@@ -1513,3 +1690,148 @@
   }
 }
 
+/* -----------------------------
+   Settings Modal Styles 
+----------------------------- */
+.settings-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.settings-modal {
+  background-color: #121212;
+  border: 1px solid #2d2d2d;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  padding: 32px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.settings-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.settings-modal-close:hover {
+  color: #fff;
+}
+
+.settings-modal-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.settings-modal-title h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.settings-modal-text {
+  font-size: 15px;
+  color: #aaa;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.settings-modal-warning-box {
+  background-color: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 28px;
+}
+
+.warning-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.settings-modal-warning-box ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.settings-modal-warning-box li {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.settings-modal-warning-box li::before {
+  content: "•";
+  position: absolute;
+  left: -15px;
+  color: #555;
+}
+
+.settings-modal-warning-box strong {
+  color: #ddd;
+}
+
+.settings-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.settings-modal-btn-cancel {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.settings-modal-btn-continue {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.settings-modal-btn-continue:hover {
+  opacity: 0.9;
+}
+
+
+/* End of Content */

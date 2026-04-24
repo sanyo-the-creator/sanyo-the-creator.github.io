@@ -14,8 +14,11 @@ const SiStripe = _SiStripe as React.ElementType;
 
 const PortalSettings = () => {
   const [isTikTokConnected, setIsTikTokConnected] = useState(false);
+  const [tiktokUsername, setTiktokUsername] = useState('@sanyo_creator');
   const [isInstagramConnected, setIsInstagramConnected] = useState(false);
+  const [instagramUsername, setInstagramUsername] = useState('jergus.s');
   const [user, setUser] = useState<any>(null);
+  const [activeModal, setActiveModal] = useState<'tiktok' | 'instagram' | 'tiktok_sim' | 'instagram_sim' | 'instagram_auth_sim' | null>(null);
 
   useEffect(() => {
     // Fetch actual user data
@@ -26,9 +29,11 @@ const PortalSettings = () => {
     // Check local storage for existing mock connections
     if (localStorage.getItem('tiktok_connected') === 'true') {
       setIsTikTokConnected(true);
+      setTiktokUsername(localStorage.getItem('tiktok_username') || '@sanyo_creator');
     }
     if (localStorage.getItem('instagram_connected') === 'true') {
       setIsInstagramConnected(true);
+      setInstagramUsername(localStorage.getItem('instagram_username') || '');
     }
 
     // Check URL parameters for OAuth redirect callbacks
@@ -49,45 +54,54 @@ const PortalSettings = () => {
     }
   }, []);
 
-  const handleTikTokConnect = () => {
+  const handleTikTokConnect = () => setActiveModal('tiktok');
+  const handleInstagramConnect = () => setActiveModal('instagram');
+
+  const startTikTokOAuth = () => {
+    setActiveModal(null);
     const clientKey = process.env.REACT_APP_TIKTOK_CLIENT_KEY;
     if (!clientKey) {
-      console.error('TikTok Client Key missing in environment.');
+      alert('TikTok Client Key missing! Check your .env file.');
       return;
     }
     
     // Redirect to TikTok Login Kit v2
     // TikTok strictly requires PKCE (Proof Key for Code Exchange) in v2.
-    // For a mock flow, we just provide a validly formatted random base64url string.
     const dummyCodeChallenge = 'E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM';
     const redirectUri = window.location.origin + '/portal/settings';
     
-    const authUrl = `https://www.tiktok.com/v2/auth/authorize/?client_key=${clientKey}&response_type=code&scope=user.info.profile&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
+    // Using standard v2 authorize URL (no trailing slash before params sometimes helps)
+    const authUrl = `https://www.tiktok.com/v2/auth/authorize?client_key=${clientKey}&response_type=code&scope=user.info.profile&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
     
     window.location.href = authUrl;
   };
 
   const handleTikTokDisconnect = () => {
     localStorage.removeItem('tiktok_connected');
+    localStorage.removeItem('tiktok_username');
     setIsTikTokConnected(false);
   };
 
-  const handleInstagramConnect = () => {
+  const startInstagramOAuth = () => {
+    setActiveModal(null);
     const clientId = process.env.REACT_APP_INSTAGRAM_CLIENT_ID;
     if (!clientId) {
-      console.error('Instagram Client ID missing in environment.');
+      alert('Instagram Client ID missing! Check your .env file.');
       return;
     }
     
     // Redirect to Instagram Basic Display OAuth
+    // NOTE: If using a generic FB App ID, this might fail with "Invalid platform app" 
+    // unless the "Instagram Basic Display" product is added in FB Dashboard.
     const redirectUri = window.location.origin + '/portal/settings';
-    const authUrl = `https://api.instagram.com/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user_profile,user_media&response_type=code&state=instagram_flow`;
+    const authUrl = `https://www.instagram.com/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user_profile,user_media&response_type=code&state=instagram_flow`;
     
     window.location.href = authUrl;
   };
 
   const handleInstagramDisconnect = () => {
     localStorage.removeItem('instagram_connected');
+    localStorage.removeItem('instagram_username');
     setIsInstagramConnected(false);
   };
 
@@ -146,7 +160,7 @@ const PortalSettings = () => {
                 alignItems: 'center',
                 gap: '8px'
               }}>
-                ✅ Connected as @sanyo_creator
+                ✅ Connected as {tiktokUsername}
               </div>
               <button 
                 onClick={handleTikTokDisconnect}
@@ -185,7 +199,7 @@ const PortalSettings = () => {
                 alignItems: 'center',
                 gap: '8px'
               }}>
-                ✅ Connected as {userName}
+                ✅ Connected as {instagramUsername || userName}
               </div>
               <button 
                 onClick={handleInstagramDisconnect}
@@ -285,8 +299,63 @@ const PortalSettings = () => {
           </div>
           <button className="settings-save-btn">Save</button>
         </div>
-
       </div>
+
+      {/* MODALS */}
+      {activeModal === 'tiktok' && (
+        <div className="settings-modal-overlay">
+          <div className="settings-modal">
+            <button className="settings-modal-close" onClick={() => setActiveModal(null)}>×</button>
+            <div className="settings-modal-title">
+              <SiTiktok style={{ marginRight: '10px', fontSize: '24px' }} />
+              <h2>Connect TikTok Account</h2>
+            </div>
+            <p className="settings-modal-text">
+              Before connecting, make sure you're logged into the correct TikTok account on <strong>tiktok.com</strong> in your browser.
+            </p>
+            <div className="settings-modal-warning-box">
+              <div className="warning-title">💡 Important:</div>
+              <ul>
+                <li>Open <strong>tiktok.com</strong> and switch to the account you want to connect</li>
+                <li>Make sure you're logged into that account</li>
+                <li>Then click "Continue" below to authorize</li>
+              </ul>
+            </div>
+            <div className="settings-modal-actions">
+              <button className="settings-modal-btn-cancel" onClick={() => setActiveModal(null)}>Cancel</button>
+              <button className="settings-modal-btn-continue" onClick={startTikTokOAuth}>Continue to TikTok</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {activeModal === 'instagram' && (
+        <div className="settings-modal-overlay">
+          <div className="settings-modal">
+            <button className="settings-modal-close" onClick={() => setActiveModal(null)}>×</button>
+            <div className="settings-modal-title">
+              <SiInstagram style={{ marginRight: '10px', fontSize: '24px', color: '#e4405f' }} />
+              <h2>Connect Instagram Account</h2>
+            </div>
+            <p className="settings-modal-text">
+              Before connecting, make sure you're logged into the correct Instagram account on <strong>instagram.com</strong> in your browser.
+            </p>
+            <div className="settings-modal-warning-box">
+              <div className="warning-title">💡 Important:</div>
+              <ul>
+                <li>Your Instagram account must be a <strong>Professional account</strong> (Business or Creator)</li>
+                <li>Open <strong>instagram.com</strong> and make sure you're logged in</li>
+                <li>Then click "Continue" below to authorize</li>
+              </ul>
+            </div>
+            <div className="settings-modal-actions">
+              <button className="settings-modal-btn-cancel" onClick={() => setActiveModal(null)}>Cancel</button>
+              <button className="settings-modal-btn-continue" style={{ background: '#fff', color: '#111' }} onClick={startInstagramOAuth}>Continue to Instagram</button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

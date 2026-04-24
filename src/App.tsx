@@ -18,12 +18,22 @@ import ScreenTime from './pages/Creator/ScreenTime';
 import Mix from './pages/Creator/Mix';
 import './styles/globals.css';
 import PortalRouter from './pages/Portal/PortalRouter';
+import ReferralRedirect from './pages/Download/ReferralRedirect';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminUserDetail from './pages/Admin/AdminUserDetail';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/portal/*" element={<PortalRouter />} />
+        
+        {/* Referral redirect: /download/tiktok?ref=username */}
+        <Route path="/download/:platform" element={<ReferralRedirect />} />
+        
+        {/* Admin dashboard */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/user/:userId" element={<AdminUserDetail />} />
         
         <Route path="/creator" element={<CreatorLanding />} />
         <Route path="/creator/quests" element={<Quests />} />

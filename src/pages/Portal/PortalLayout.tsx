@@ -11,7 +11,8 @@ import {
   RiLogoutBoxRLine as _RiLogoutBoxRLine,
   RiMenu3Line as _RiMenu3Line,
   RiCloseLine as _RiCloseLine,
-  RiFocus3Line as _RiFocus3Line
+  RiFocus3Line as _RiFocus3Line,
+  RiMagicLine as _RiMagicLine
 } from 'react-icons/ri';
 
 const RiDashboardLine = _RiDashboardLine as React.ElementType;
@@ -24,6 +25,7 @@ const RiLogoutBoxRLine = _RiLogoutBoxRLine as React.ElementType;
 const RiMenu3Line = _RiMenu3Line as React.ElementType;
 const RiCloseLine = _RiCloseLine as React.ElementType;
 const RiFocus3Line = _RiFocus3Line as React.ElementType;
+const RiMagicLine = _RiMagicLine as React.ElementType;
 
 interface PortalLayoutProps {
   onLogout: () => void;
@@ -109,8 +111,8 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
           <NavLink to="/portal/videos" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
             <RiVideoLine className="portal-nav-icon" /> My Videos
           </NavLink>
-          <NavLink to="/portal/leaderboard" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-            <RiTrophyLine className="portal-nav-icon" /> Leaderboard
+          <NavLink to="/creator?from=portal" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+            <RiMagicLine className="portal-nav-icon" /> Creator Tools
           </NavLink>
           <NavLink to="/portal/referrals" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
             <RiGroupLine className="portal-nav-icon" /> Referrals
