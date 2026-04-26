@@ -58,52 +58,64 @@ const PortalDashboard = () => {
           <span className="portal-time-block">{String(timeLeft.s).padStart(2, '0')}</span><span className="portal-time-label">s</span>
         </div>
         <span className="portal-countdown-text">until monthly payouts finalize (PST)</span>
-        <div className="portal-info-icon-small">i</div>
+        {/* <div className="portal-info-icon-small">i</div> */}
       </div>
 
       <div className="portal-metrics-grid">
         <div className="portal-metric-card">
-          <div className="portal-metric-header">
-            <span className="portal-metric-title">Verified Earnings <span className="portal-info-icon-inline">i</span></span>
+          <div className="portal-metric-content-wrapper">
+            <div className="portal-metric-left">
+              <span className="portal-metric-title">Verified Earnings
+                {/* <span className="portal-info-icon-inline">i</span> */}
+              </span>
+              <div className="portal-metric-value">$0.00</div>
+              <div className="portal-metric-subtext">April 2026</div>
+            </div>
             <div className="portal-metric-icon-wrapper verified-icon">
               <FiDollarSign />
             </div>
           </div>
-          <div className="portal-metric-value">$0.00</div>
-          <div className="portal-metric-subtext">April 2026</div>
         </div>
 
         <div className="portal-metric-card">
-          <div className="portal-metric-header">
-            <span className="portal-metric-title">Unverified Earnings <span className="portal-info-icon-inline">i</span></span>
+          <div className="portal-metric-content-wrapper">
+            <div className="portal-metric-left">
+              <span className="portal-metric-title">Unverified Earnings
+                {/* <span className="portal-info-icon-inline">i</span> */}
+              </span>
+              <div className="portal-metric-value highlight">$0.00</div>
+              <div className="portal-metric-subtext">Awaiting review</div>
+            </div>
             <div className="portal-metric-icon-wrapper unverified-icon">
               <FiClock />
             </div>
           </div>
-          <div className="portal-metric-value highlight">$0.00</div>
-          <div className="portal-metric-subtext">Awaiting review</div>
         </div>
 
         <div className="portal-metric-card">
-           <div className="portal-metric-header">
-            <span className="portal-metric-title">Total Posts</span>
+          <div className="portal-metric-content-wrapper">
+            <div className="portal-metric-left">
+              <span className="portal-metric-title">Total Posts</span>
+              <div className="portal-metric-value">0</div>
+              <div className="portal-metric-subtext">Submitted videos</div>
+            </div>
             <div className="portal-metric-icon-wrapper posts-icon">
               <FiVideo />
             </div>
           </div>
-          <div className="portal-metric-value">0</div>
-          <div className="portal-metric-subtext">Submitted videos</div>
         </div>
 
         <div className="portal-metric-card">
-           <div className="portal-metric-header">
-            <span className="portal-metric-title">Total Views</span>
+          <div className="portal-metric-content-wrapper">
+            <div className="portal-metric-left">
+              <span className="portal-metric-title">Total Views</span>
+              <div className="portal-metric-value">0</div>
+              <div className="portal-metric-subtext">Across all videos</div>
+            </div>
             <div className="portal-metric-icon-wrapper views-icon">
               <FiEye />
             </div>
           </div>
-          <div className="portal-metric-value">0</div>
-          <div className="portal-metric-subtext">Across all videos</div>
         </div>
       </div>
 
@@ -124,21 +136,21 @@ const PortalDashboard = () => {
             <div className="portal-deal-amount">$20</div>
           </div>
           <div className="portal-deal-right">
-             <div className="portal-deal-label right-align">per video that reaches</div>
-             <div className="portal-deal-target">40K+ views</div>
+            <div className="portal-deal-label right-align">per video that reaches</div>
+            <div className="portal-deal-target">40K+ views</div>
           </div>
         </div>
 
         <div className="portal-deal-bonus-section">
           <h4 className="portal-deal-bonus-title">Bonus Tiers</h4>
-          
+
           <div className="portal-deal-bonus-row">
-            <div className="portal-deal-bonus-amt"><span className="bullet">•</span> +$30</div>
+            <div className="portal-deal-bonus-amt"><span className="bullet">•</span> <span className="portal-deal-bonus-amt-text">+$30</span></div>
             <div className="portal-deal-bonus-req">500K views</div>
           </div>
-          
+
           <div className="portal-deal-bonus-row">
-            <div className="portal-deal-bonus-amt"><span className="bullet">•</span> +$50</div>
+            <div className="portal-deal-bonus-amt"><span className="bullet">•</span> <span className="portal-deal-bonus-amt-text">+$50</span></div>
             <div className="portal-deal-bonus-req">1M views</div>
           </div>
         </div>
