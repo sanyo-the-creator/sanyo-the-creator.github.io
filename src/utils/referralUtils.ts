@@ -30,23 +30,38 @@ export function getDeviceInfo(): DeviceInfo {
  * Returns a hex hash string
  */
 export async function generateVisitorId(): Promise<string> {
-  const raw = [
-    window.screen.width,
-    window.screen.height,
-    window.screen.colorDepth,
-    navigator.language,
-    Intl.DateTimeFormat().resolvedOptions().timeZone,
-    navigator.hardwareConcurrency || 0,
-    navigator.userAgent,
-  ].join('|');
+  let raw = '';
+  try {
+    raw = [
+      window.screen?.width || 0,
+      window.screen?.height || 0,
+      window.screen?.colorDepth || 0,
+      navigator.language || 'en',
+      (() => {
+        try {
+          return Intl.DateTimeFormat().resolvedOptions().timeZone;
+        } catch {
+          return 'UTC';
+        }
+      })(),
+      navigator.hardwareConcurrency || 0,
+      navigator.userAgent || 'unknown',
+    ].join('|');
+  } catch (e) {
+    raw = 'fallback-' + Math.random().toString(36).substring(2);
+  }
 
-  // Use SubtleCrypto to hash if available, otherwise simple hash
-  if (window.crypto?.subtle) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(raw);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 16);
+  try {
+    // Use SubtleCrypto to hash if available, otherwise simple hash
+    if (window.crypto?.subtle) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(raw);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 16);
+    }
+  } catch (e) {
+    // Fall through to simple hash
   }
 
   // Fallback: simple hash
@@ -100,23 +115,11 @@ export async function trackReferralClick(rawCode: string, platform: string = 'di
   const normalizedPlatform = normalizePlatform(platform);
   
   try {
-    // 1. Verify the referral code exists (case-insensitive)
-    const { data: profile } = await supabase
-      .from('referral_profiles')
-      .select('referral_code')
-      .eq('referral_code', code)
-      .single();
-
-    if (!profile) {
-      console.warn(`Referral code not found: ${code}`);
-      return null;
-    }
-
-    // 2. Gather device & visitor info
+    // 1. Gather device & visitor info
     const deviceInfo = getDeviceInfo();
     const visitorId = await generateVisitorId();
 
-    // 3. Fetch country (non-blocking)
+    // 2. Fetch country (non-blocking)
     let country: string | null = null;
     try {
       const controller = new AbortController();
@@ -135,8 +138,26 @@ export async function trackReferralClick(rawCode: string, platform: string = 'di
       // Geo lookup failed — continue anyway
     }
 
-    // 4. Insert click
-    const { data: clickData, error } = await supabase
+    // 3. Check if already counted (manual check to be safe)
+    const { data: existingClick, error: checkError } = await supabase
+      .from('referral_clicks')
+      .select('id')
+      .eq('referral_code', code)
+      .eq('visitor_id', visitorId)
+      .maybeSingle();
+
+    if (checkError) {
+      console.warn('Check error:', checkError);
+      // Continue anyway, try to insert
+    }
+
+    if (existingClick) {
+      console.log('Already counted');
+      return 'already-counted';
+    }
+
+    // 5. Insert click
+    const { data: clickData, error: insertError } = await supabase
       .from('referral_clicks')
       .insert({
         referral_code: code,
@@ -145,27 +166,27 @@ export async function trackReferralClick(rawCode: string, platform: string = 'di
         device_type: deviceInfo.device_type,
         country: country,
       })
-      .select('id')
-      .single();
+      .select('id'); // Removed .single() to be safer
 
-    if (error) {
-      // If unique constraint error, it's already counted
-      if (error.code === '23505') {
-        return 'already-counted';
-      }
-      throw error;
+    if (insertError) {
+      localStorage.setItem('upshift_debug_error', JSON.stringify(insertError));
+      console.error('Insert error:', insertError);
+      throw insertError;
     }
 
-    if (clickData) {
+    const newId = clickData && clickData[0]?.id;
+    if (newId) {
       // Store for mobile app attribution
-      localStorage.setItem('upshift_click_id', clickData.id);
+      localStorage.setItem('upshift_click_id', newId);
       localStorage.setItem('upshift_referral_code', code);
-      return clickData.id;
+      localStorage.setItem('upshift_last_success', new Date().toISOString());
+      return newId;
     }
 
     return null;
-  } catch (err) {
+  } catch (err: any) {
     console.error('Referral tracking error:', err);
+    localStorage.setItem('upshift_debug_catch', err.message || String(err));
     return null;
   }
 }
