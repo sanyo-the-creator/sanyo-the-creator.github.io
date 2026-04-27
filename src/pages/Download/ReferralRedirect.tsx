@@ -21,7 +21,7 @@ const ReferralRedirect: React.FC = () => {
       if (refCode && !hasTracked.current) {
         hasTracked.current = true;
         await trackReferralClick(refCode, platform);
-        
+
         // On mobile, give it an extra tiny bit of time for the request to flush
         if (/iPhone|Android|iPad|iPod/.test(navigator.userAgent)) {
           await new Promise(r => setTimeout(r, 500));
@@ -29,7 +29,7 @@ const ReferralRedirect: React.FC = () => {
       }
 
       // Redirect to /download (which auto-redirects to the store)
-      navigate('/download', { replace: true });
+      // navigate('/download', { replace: true });
     };
 
     trackAndRedirect();
