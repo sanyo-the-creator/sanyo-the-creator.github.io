@@ -30,22 +30,27 @@ export function getDeviceInfo(): DeviceInfo {
  * Returns a hex hash string
  */
 export async function generateVisitorId(): Promise<string> {
-  // Extract OS version from User Agent for higher uniqueness
-  const osVersionMatch = navigator.userAgent.match(/OS (\d+_\d+)/);
-  const osVersion = osVersionMatch ? osVersionMatch[1].replace('_', '.') : 'unknown';
+  // Fetch IP for maximum uniqueness (non-blocking, short timeout)
+  let ip = 'no-ip';
+  try {
+    const res = await fetch('https://api.ipify.org?format=json', { signal: AbortSignal.timeout(1500) });
+    if (res.ok) {
+      const data = await res.json();
+      ip = data.ip;
+    }
+  } catch (e) {
+    console.warn('IP fetch failed, falling back to local fingerprint only');
+  }
 
   const raw = [
     window.screen.width,
     window.screen.height,
     window.devicePixelRatio,
-    window.screen.colorDepth,
-    navigator.language,
     Intl.DateTimeFormat().resolvedOptions().timeZone,
-    navigator.hardwareConcurrency || 0,
-    osVersion,
-    getDeviceInfo().device_type,
+    ip
   ].join('|');
-  console.log(raw);
+
+  console.log('🔍 WEB REFERRAL RAW STRING:', raw);
   try {
     // Use SubtleCrypto to hash if available, otherwise simple hash
     if (window.crypto?.subtle) {
