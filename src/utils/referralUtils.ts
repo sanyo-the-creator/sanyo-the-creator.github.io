@@ -1,3 +1,5 @@
+import { supabase } from '../lib/supabase';
+
 /**
  * Device detection and visitor fingerprinting utilities
  * Used by the public profile page to track referral clicks
@@ -86,3 +88,84 @@ export const PLATFORM_INFO: Record<ReferralPlatform, { label: string; color: str
   snapchat: { label: 'Snapchat', color: '#FFFC00', icon: '👻' },
   direct: { label: 'Direct', color: '#3b82f6', icon: '🔗' },
 };
+
+/**
+ * Robust tracking for referral clicks
+ * Returns the click ID if successful
+ */
+export async function trackReferralClick(rawCode: string, platform: string = 'direct'): Promise<string | null> {
+  if (!rawCode) return null;
+  
+  const code = rawCode.toLowerCase().trim();
+  const normalizedPlatform = normalizePlatform(platform);
+  
+  try {
+    // 1. Verify the referral code exists (case-insensitive)
+    const { data: profile } = await supabase
+      .from('referral_profiles')
+      .select('referral_code')
+      .eq('referral_code', code)
+      .single();
+
+    if (!profile) {
+      console.warn(`Referral code not found: ${code}`);
+      return null;
+    }
+
+    // 2. Gather device & visitor info
+    const deviceInfo = getDeviceInfo();
+    const visitorId = await generateVisitorId();
+
+    // 3. Fetch country (non-blocking)
+    let country: string | null = null;
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 1500);
+      
+      const geoRes = await fetch('https://ipapi.co/json/', { 
+        signal: controller.signal 
+      });
+      clearTimeout(timeoutId);
+      
+      if (geoRes.ok) {
+        const geoData = await geoRes.json();
+        country = geoData.country_name || null;
+      }
+    } catch {
+      // Geo lookup failed — continue anyway
+    }
+
+    // 4. Insert click
+    const { data: clickData, error } = await supabase
+      .from('referral_clicks')
+      .insert({
+        referral_code: code,
+        visitor_id: visitorId,
+        platform: normalizedPlatform,
+        device_type: deviceInfo.device_type,
+        country: country,
+      })
+      .select('id')
+      .single();
+
+    if (error) {
+      // If unique constraint error, it's already counted
+      if (error.code === '23505') {
+        return 'already-counted';
+      }
+      throw error;
+    }
+
+    if (clickData) {
+      // Store for mobile app attribution
+      localStorage.setItem('upshift_click_id', clickData.id);
+      localStorage.setItem('upshift_referral_code', code);
+      return clickData.id;
+    }
+
+    return null;
+  } catch (err) {
+    console.error('Referral tracking error:', err);
+    return null;
+  }
+}

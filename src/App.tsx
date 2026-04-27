@@ -21,6 +21,7 @@ import PortalRouter from './pages/Portal/PortalRouter';
 import ReferralRedirect from './pages/Download/ReferralRedirect';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import AdminUserDetail from './pages/Admin/AdminUserDetail';
+import ProfileLanding from './pages/Profile/ProfileLanding';
 
 function App() {
   return (
@@ -39,6 +40,11 @@ function App() {
         <Route path="/creator/quests" element={<Quests />} />
         <Route path="/creator/screentime" element={<ScreenTime />} />
         <Route path="/creator/mix" element={<Mix />} />
+
+        {/* Public profile page: /jergus or /jergus/tiktok */}
+        <Route path="/:referralCode" element={<ProfileLanding />} />
+        <Route path="/:referralCode/:platform" element={<ProfileLanding />} />
+
         <Route element={<Layout />}>
           <Route path="/" element={<Download />} />
           <Route path="/home" element={<Home />} />

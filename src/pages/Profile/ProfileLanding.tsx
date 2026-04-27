@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
-import { getDeviceInfo, generateVisitorId, normalizePlatform, PLATFORM_INFO } from '../../utils/referralUtils';
-import type { ReferralPlatform } from '../../utils/referralUtils';
+import { trackReferralClick, normalizePlatform, PLATFORM_INFO } from '../../utils/referralUtils';
 import './ProfileLanding.css';
 
 interface ProfileData {
@@ -22,7 +21,7 @@ const ProfileLanding: React.FC = () => {
   const [redirecting, setRedirecting] = useState(false);
   const hasTracked = useRef(false);
 
-  const platform: ReferralPlatform = normalizePlatform(rawPlatform);
+  const platform = normalizePlatform(rawPlatform);
   const platformInfo = PLATFORM_INFO[platform];
 
   useEffect(() => {
@@ -30,11 +29,12 @@ const ProfileLanding: React.FC = () => {
 
     const loadProfile = async () => {
       try {
-        // Fetch profile
+        // Fetch profile (case-insensitive handled by logic below)
+        const code = referralCode.toLowerCase().trim();
         const { data, error } = await supabase
           .from('referral_profiles')
           .select('referral_code, display_name, avatar_url, bio, total_clicks')
-          .eq('referral_code', referralCode)
+          .eq('referral_code', code)
           .single();
 
         if (error || !data) {
@@ -49,7 +49,8 @@ const ProfileLanding: React.FC = () => {
         // Track the click (only once)
         if (!hasTracked.current) {
           hasTracked.current = true;
-          trackClick(referralCode);
+          const id = await trackReferralClick(code, rawPlatform);
+          if (id) setClickId(id);
         }
       } catch {
         setNotFound(true);
@@ -60,34 +61,6 @@ const ProfileLanding: React.FC = () => {
     loadProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [referralCode]);
-
-  const trackClick = async (code: string) => {
-    try {
-      const deviceInfo = getDeviceInfo();
-      const visitorId = await generateVisitorId();
-
-      const { data, error } = await supabase
-        .from('referral_clicks')
-        .insert({
-          referral_code: code,
-          visitor_id: visitorId,
-          platform: platform,
-          device_type: deviceInfo.device_type,
-          country: null,
-        })
-        .select('id')
-        .single();
-
-      if (!error && data) {
-        setClickId(data.id);
-        // Store for fallback attribution
-        localStorage.setItem('upshift_click_id', data.id);
-        localStorage.setItem('upshift_referral_code', code);
-      }
-    } catch (err) {
-      console.error('Failed to track click:', err);
-    }
-  };
 
   const handleDownload = async () => {
     setRedirecting(true);

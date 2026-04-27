@@ -2,13 +2,21 @@ import React, { useEffect } from 'react';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
 import LightRays from '../../components/common/LightRays/LightRays';
 import { SEO, StructuredData } from '../../components/common/SEO';
+import { trackReferralClick } from '../../utils/referralUtils';
 import './Download.css';
 
 const Download: React.FC = () => {
   useEffect(() => {
     // Only auto-redirect if user is on /download route
-    if (window.location.pathname !== '/download') {
+    if (window.location.pathname !== '/download' && window.location.pathname !== '/') {
       return;
+    }
+
+    // Check for referral code in URL
+    const params = new URLSearchParams(window.location.search);
+    const refCode = params.get('ref');
+    if (refCode) {
+      trackReferralClick(refCode, 'direct');
     }
 
     const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
