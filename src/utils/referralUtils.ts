@@ -45,7 +45,7 @@ export async function generateVisitorId(): Promise<string> {
     osVersion,
     getDeviceInfo().device_type,
   ].join('|');
-
+  console.log(raw);
   try {
     // Use SubtleCrypto to hash if available, otherwise simple hash
     if (window.crypto?.subtle) {
