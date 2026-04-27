@@ -30,26 +30,21 @@ export function getDeviceInfo(): DeviceInfo {
  * Returns a hex hash string
  */
 export async function generateVisitorId(): Promise<string> {
-  let raw = '';
-  try {
-    raw = [
-      window.screen?.width || 0,
-      window.screen?.height || 0,
-      window.screen?.colorDepth || 0,
-      navigator.language || 'en',
-      (() => {
-        try {
-          return Intl.DateTimeFormat().resolvedOptions().timeZone;
-        } catch {
-          return 'UTC';
-        }
-      })(),
-      navigator.hardwareConcurrency || 0,
-      navigator.userAgent || 'unknown',
-    ].join('|');
-  } catch (e) {
-    raw = 'fallback-' + Math.random().toString(36).substring(2);
-  }
+  // Extract OS version from User Agent for higher uniqueness
+  const osVersionMatch = navigator.userAgent.match(/OS (\d+_\d+)/);
+  const osVersion = osVersionMatch ? osVersionMatch[1].replace('_', '.') : 'unknown';
+
+  const raw = [
+    window.screen.width,
+    window.screen.height,
+    window.devicePixelRatio,
+    window.screen.colorDepth,
+    navigator.language,
+    Intl.DateTimeFormat().resolvedOptions().timeZone,
+    navigator.hardwareConcurrency || 0,
+    osVersion,
+    getDeviceInfo().device_type,
+  ].join('|');
 
   try {
     // Use SubtleCrypto to hash if available, otherwise simple hash
@@ -110,10 +105,10 @@ export const PLATFORM_INFO: Record<ReferralPlatform, { label: string; color: str
  */
 export async function trackReferralClick(rawCode: string, platform: string = 'direct'): Promise<string | null> {
   if (!rawCode) return null;
-  
+
   const code = rawCode.toLowerCase().trim();
   const normalizedPlatform = normalizePlatform(platform);
-  
+
   try {
     // 1. Gather device & visitor info
     const deviceInfo = getDeviceInfo();
@@ -124,12 +119,12 @@ export async function trackReferralClick(rawCode: string, platform: string = 'di
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 1500);
-      
-      const geoRes = await fetch('https://ipapi.co/json/', { 
-        signal: controller.signal 
+
+      const geoRes = await fetch('https://ipapi.co/json/', {
+        signal: controller.signal
       });
       clearTimeout(timeoutId);
-      
+
       if (geoRes.ok) {
         const geoData = await geoRes.json();
         country = geoData.country_name || null;
