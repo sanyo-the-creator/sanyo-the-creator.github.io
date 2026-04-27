@@ -105,7 +105,7 @@ const AdminUserDetail: React.FC = () => {
   const [sales, setSales] = useState<any[]>([]);
   const [trials, setTrials] = useState<any[]>([]);
   const [videos, setVideos] = useState<any[]>([]);
-  const [dateRange, setDateRange] = useState<DateRange>('30d');
+  const [dateRange, setDateRange] = useState<DateRange>('all');
   const [copied, setCopied] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('overview');
 

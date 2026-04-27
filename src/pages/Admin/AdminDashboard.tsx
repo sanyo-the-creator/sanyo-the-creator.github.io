@@ -67,37 +67,69 @@ const AdminDashboard: React.FC = () => {
 
   const checkAdminAndLoad = async () => {
     try {
+      setLoading(true);
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { setIsAdmin(false); setLoading(false); return; }
+      if (!user) { setIsAdmin(false); return; }
 
       const { data: adminData } = await supabase
         .from('admin_users').select('id').eq('id', user.id).single();
-      if (!adminData) { setIsAdmin(false); setLoading(false); return; }
+      
+      if (!adminData) { 
+        setIsAdmin(false); 
+        return; 
+      }
+      
+      // If we reach here, user IS an admin
       setIsAdmin(true);
 
-      // Try loading from view first, fallback to profiles
-      const { data: usersData, error } = await supabase.from('admin_user_overview').select('*');
-      if (error) {
-        const { data: profiles } = await supabase.from('referral_profiles').select('*');
+      // Now load data (separately so it doesn't break access if it fails)
+      try {
+        const { data: profiles, error: pError } = await supabase
+          .from('referral_profiles')
+          .select('*');
+
+        if (pError) throw pError;
+
         if (profiles) {
-          const mapped: UserOverview[] = profiles.map((p: any) => ({
-            user_id: p.id, email: '', full_name: p.display_name, avatar_url: p.avatar_url,
-            joined_at: p.created_at, referral_code: p.referral_code,
-            total_clicks: p.total_clicks || 0, total_downloads: p.total_downloads || 0,
-            total_sales_cents: p.total_sales_cents || 0,
-            total_trials: p.total_trials || 0,
-            video_count: 0, total_views: 0,
-            approved_videos: 0, pending_videos: 0,
+          const mapped: UserOverview[] = await Promise.all(profiles.map(async (p: any) => {
+            const [
+              { count: clicks },
+              { count: installs },
+              { count: trials },
+              { data: sales }
+            ] = await Promise.all([
+              supabase.from('referral_clicks').select('*', { count: 'exact', head: true }).eq('referral_code', p.referral_code),
+              supabase.from('referral_installs').select('*', { count: 'exact', head: true }).eq('referral_code', p.referral_code),
+              supabase.from('referral_trials').select('*', { count: 'exact', head: true }).eq('referral_code', p.referral_code),
+              supabase.from('referral_sales').select('amount_cents').eq('referral_code', p.referral_code)
+            ]);
+
+            return {
+              user_id: p.id,
+              email: '',
+              full_name: p.display_name,
+              avatar_url: p.avatar_url,
+              joined_at: p.created_at,
+              referral_code: p.referral_code,
+              total_clicks: clicks || 0,
+              total_downloads: installs || 0,
+              total_sales_cents: (sales || []).reduce((sum, s) => sum + (s.amount_cents || 0), 0),
+              total_trials: trials || 0,
+              video_count: 0,
+              total_views: 0,
+              approved_videos: 0,
+              pending_videos: 0,
+            };
           }));
+
           setUsers(mapped);
           computeGlobalStats(mapped);
         }
-      } else {
-        setUsers(usersData || []);
-        computeGlobalStats(usersData || []);
+      } catch (dataErr) {
+        console.error('Data load error:', dataErr);
       }
     } catch (err) {
-      console.error('Admin load error:', err);
+      console.error('Admin check error:', err);
       setIsAdmin(false);
     } finally {
       setLoading(false);

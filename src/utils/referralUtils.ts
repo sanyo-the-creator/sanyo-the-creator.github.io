@@ -49,8 +49,6 @@ export async function generateVisitorId(): Promise<string> {
     Intl.DateTimeFormat().resolvedOptions().timeZone,
     ip
   ].join('|');
-
-  console.log('🔍 WEB REFERRAL RAW STRING:', raw);
   try {
     // Use SubtleCrypto to hash if available, otherwise simple hash
     if (window.crypto?.subtle) {
