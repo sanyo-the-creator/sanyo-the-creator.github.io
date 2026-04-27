@@ -29,7 +29,7 @@ const ReferralRedirect: React.FC = () => {
       }
 
       // Redirect to /download (which auto-redirects to the store)
-      // navigate('/download', { replace: true });
+      navigate('/download', { replace: true });
     };
 
     trackAndRedirect();
