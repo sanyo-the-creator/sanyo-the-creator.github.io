@@ -6,9 +6,12 @@ import {
   RiImageAddLine as _RiImageAddLine,
   RiInformationLine as _RiInformationLine,
   RiEqualizerLine as _RiEqualizerLine,
-  RiFileList3Line as _RiFileList3Line
+  RiFileList3Line as _RiFileList3Line,
+  RiVideoLine as _RiVideoLine
 } from 'react-icons/ri';
-import { toPng } from 'html-to-image';
+import { toPng, toCanvas } from 'html-to-image';
+import { Muxer, ArrayBufferTarget } from 'mp4-muxer';
+import RecordRTC from 'recordrtc';
 import { supabase } from '../../lib/supabase';
 import upshiftIcon from '../../assets/icons/icon.png';
 import appStoreImg from '../../assets/appStore.png';
@@ -22,6 +25,7 @@ const RiImageAddLine = _RiImageAddLine as any;
 const RiInformationLine = _RiInformationLine as any;
 const RiEqualizerLine = _RiEqualizerLine as any;
 const RiFileList3Line = _RiFileList3Line as any;
+const RiVideoLine = _RiVideoLine as any;
 
 type HabitStatus = {
   text: string;
@@ -154,6 +158,10 @@ const Mix: React.FC = () => {
   const [user, setUser] = useState<any>(null);
   const [isMobileMenuOpen] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(1);
+  const [recordingStep, setRecordingStep] = useState(0);
+  const [videoDuration, setVideoDuration] = useState(1.5);
   const mockupRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [searchParams] = useSearchParams();
@@ -214,11 +222,11 @@ const Mix: React.FC = () => {
         skipFonts: true,
         style: { transform: 'scale(1)', margin: '0' }
       };
-      await toPng(mockupRef.current, options).catch(() => {});
-      await toPng(mockupRef.current, options).catch(() => {});
+      await toPng(mockupRef.current, options).catch(() => { });
+      await toPng(mockupRef.current, options).catch(() => { });
       const dataUrl = await toPng(mockupRef.current, options);
       const link = document.createElement('a');
-      link.download = `upshift-mix-card-${Date.now()}.png`;
+      link.download = `upshift-mix-image.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {
@@ -228,13 +236,175 @@ const Mix: React.FC = () => {
     }
   };
 
+  const handleDownloadVideo = async () => {
+    if (!mockupRef.current || isDownloading || isRecording) return;
+
+    setIsRecording(true);
+    setRecordingStep(0);
+
+    // Stable colorSpace that mp4-muxer's videoSampleDescription always needs
+    const SAFE_COLOR_SPACE = {
+      fullRange: false,
+      matrix: 'bt709' as VideoMatrixCoefficients,
+      primaries: 'bt709' as VideoColorPrimaries,
+      transfer: 'bt709' as VideoTransferCharacteristics,
+    };
+
+    try {
+      const fps = 30;
+      const durationSeconds = videoDuration;
+      const numFrames = Math.floor(fps * durationSeconds);
+
+      // Use offsetWidth/offsetHeight — these are layout dimensions unaffected
+      // by scroll position or viewport clipping, matching what toPng captures.
+      const el = mockupRef.current!;
+      const devicePixelRatio = window.devicePixelRatio || 2;
+      const width = Math.round(el.offsetWidth * devicePixelRatio);
+      const height = Math.round(el.offsetHeight * devicePixelRatio);
+
+      // AVC requires dimensions divisible by 2
+      const safeWidth = width % 2 === 0 ? width : width - 1;
+      const safeHeight = height % 2 === 0 ? height : height - 1;
+
+      const muxer = new Muxer({
+        target: new ArrayBufferTarget(),
+        video: {
+          codec: 'avc',
+          width: safeWidth,
+          height: safeHeight,
+        },
+        fastStart: 'in-memory',
+      });
+
+      // Keep the last valid decoderConfig so chunks after the first keyframe
+      // still have a config to pass to addVideoChunk.
+      let lastDecoderConfig: any = null;
+
+      const videoEncoder = new VideoEncoder({
+        output: (chunk, metadata) => {
+          // Build a safe config: prefer what the browser reports, but always
+          // inject a concrete colorSpace so mp4-muxer never receives null.
+          const rawConfig = metadata?.decoderConfig ?? lastDecoderConfig;
+          if (!rawConfig) {
+            // No config yet – this chunk can't be muxed; skip it.
+            return;
+          }
+
+          const safeConfig = {
+            ...rawConfig,
+            colorSpace: rawConfig.colorSpace
+              ? { ...rawConfig.colorSpace, ...SAFE_COLOR_SPACE }
+              : SAFE_COLOR_SPACE,
+          };
+          lastDecoderConfig = safeConfig;
+
+          muxer.addVideoChunk(chunk, {
+            ...metadata,
+            decoderConfig: safeConfig,
+          });
+        },
+        error: (e) => console.error('VideoEncoder error:', e),
+      });
+
+      videoEncoder.configure({
+        codec: 'avc1.4D0029',
+        width: safeWidth,
+        height: safeHeight,
+        bitrate: 6_000_000,
+        framerate: fps,
+        // Software encoding avoids GPU colorSpace quirks that produce null configs
+        hardwareAcceleration: 'prefer-software',
+      });
+
+      // Off-screen canvas for compositing frames
+      const buffer = document.createElement('canvas');
+      buffer.width = safeWidth;
+      buffer.height = safeHeight;
+      const ctx = buffer.getContext('2d', { alpha: false });
+      if (!ctx) throw new Error('Failed to get 2D context');
+
+      // Capture at 10fps, repeat each frame 3x → 30fps output.
+      // 3x fewer toPng calls = 3x faster encoding.
+      const captureFps = 10;
+      const repeatCount = Math.round(fps / captureFps);
+      const captureFrames = Math.ceil(durationSeconds * captureFps);
+      let encodedCount = 0;
+
+      for (let ci = 0; ci < captureFrames; ci++) {
+        const progress = ci < Math.ceil(captureFrames / 3)
+          ? ci / Math.max(Math.ceil(captureFrames / 3) - 1, 1)
+          : 1;
+        setVideoProgress(progress);
+        setRecordingStep(Math.round((ci / captureFrames) * numFrames));
+
+        await new Promise(r => requestAnimationFrame(r));
+        await new Promise(r => setTimeout(r, 60));
+
+        const dataUrl = await toPng(mockupRef.current!, {
+          cacheBust: false,
+          pixelRatio: devicePixelRatio,
+          style: { transform: 'scale(1)', margin: '0' },
+        });
+
+        const img = new Image();
+        await new Promise<void>((resolve, reject) => {
+          img.onload = () => resolve();
+          img.onerror = () => reject(new Error('Frame image failed to load'));
+          img.src = dataUrl;
+        });
+
+        ctx.drawImage(img, 0, 0, safeWidth, safeHeight);
+
+        for (let rep = 0; rep < repeatCount; rep++) {
+          if (encodedCount >= numFrames) break;
+          const frame = new VideoFrame(buffer, {
+            timestamp: Math.round((encodedCount * 1_000_000) / fps),
+            duration: Math.round(1_000_000 / fps),
+          });
+          videoEncoder.encode(frame, { keyFrame: encodedCount % fps === 0 });
+          frame.close();
+          encodedCount++;
+        }
+
+        if (videoEncoder.encodeQueueSize > 10) {
+          await new Promise(r => setTimeout(r, 8));
+        }
+      }
+
+      await videoEncoder.flush();
+      muxer.finalize();
+
+      const { buffer: resultBuffer } = muxer.target as ArrayBufferTarget;
+      const blob = new Blob([resultBuffer], { type: 'video/mp4' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = `upshift-mix-video.mp4`;
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(url);
+
+    } catch (err: any) {
+      console.error('MP4 export failed:', err);
+      alert(`Export Failed!\nError: ${err.message}`);
+    } finally {
+      setIsRecording(false);
+      setVideoProgress(1);
+    }
+  };
+
   const renderCardVisual = (card: MixCard) => {
     if (card.mode === 'quest') {
       const status = getHabitStatus(card.achieved, card.goal, gender);
       return (
         <div key={card.id} className="upshift-card">
           <div className="card-label">
-            <img src={`https://emojicdn.elk.sh/${card.emoji}?style=apple`} alt={card.emoji} className="card-emoji" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
+            <img
+              src={`https://emojicdn.elk.sh/${card.emoji}?style=apple`}
+              alt={card.emoji}
+              className="card-emoji"
+              crossOrigin="anonymous"
+              style={{ width: '24px', height: '24px', objectFit: 'contain' }}
+            />
             <span>{card.name}</span>
           </div>
           <div className="card-value-line">
@@ -253,13 +423,12 @@ const Mix: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="card-progress-bg">
+          <div className="card-progress-bg" >
             <div
               className="card-progress-fill"
               style={{
-                width: `${Math.min(100, (card.achieved / card.goal) * 100)}%`,
-                background: status.gradient,
-                boxShadow: `0 0 10px ${status.color}`
+                width: `${Math.min(100, (card.achieved * videoProgress / card.goal) * 100)}%`,
+                background: status.gradient
               }}
             />
           </div>
@@ -272,11 +441,7 @@ const Mix: React.FC = () => {
       return (
         <div key={card.id} className="upshift-card">
           <div className="card-label">
-            <img 
-              src={appDef.imageUrl} 
-              alt={appDef.name}
-              style={{ width: '28px', height: '28px', borderRadius: '22.5%', objectFit: 'cover', flexShrink: 0, boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}
-            />
+            <img src={appDef.imageUrl} alt={appDef.name} className="card-emoji" crossOrigin="anonymous" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
             <span style={{ color: appDef.color }}>{appDef.name}</span>
           </div>
           <div className="card-value-line">
@@ -294,13 +459,12 @@ const Mix: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="card-progress-bg">
+          <div className="card-progress-bg" >
             <div
               className="card-progress-fill"
               style={{
-                width: `${Math.min(100, (card.minutes / 60) * 100)}%`,
-                background: status.gradient,
-                boxShadow: `0 0 10px ${status.color}`
+                width: `${Math.min(100, videoProgress * 100)}%`,
+                background: status.gradient
               }}
             />
           </div>
@@ -310,7 +474,7 @@ const Mix: React.FC = () => {
   };
 
   return (
-    <div className={`creator-editor-container ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
+    <div className={`creator-editor-container ${isMobileMenuOpen ? 'mobile-menu-open' : ''} ${isRecording ? 'is-recording' : ''}`}>
       <header className="creator-header">
         <Link to={`/creator${fromPortal ? '?from=portal' : ''}`} className="back-link">
           <RiArrowLeftLine /> Back
@@ -323,7 +487,7 @@ const Mix: React.FC = () => {
           <h1>Mix Preview</h1>
 
           <div className="phone-mockup-wrapper">
-            <div className="phone-mockup" ref={mockupRef}>
+            <div className={`phone-mockup ${isRecording ? "is-recording" : ""}`} ref={mockupRef}>
               <div className="mockup-content">
                 <div className="upshift-logo-container">
                   <img src={upshiftIcon} alt="upshift Logo" className="head-icon" />
@@ -336,6 +500,7 @@ const Mix: React.FC = () => {
                     <img
                       src={image}
                       alt="Profile"
+                      crossOrigin="anonymous"
                       style={{
                         transform: `translate(${imageX}px, ${imageY}px) scale(${imageZoom / 100})`,
                         transition: 'none'
@@ -443,13 +608,13 @@ const Mix: React.FC = () => {
                 <div className="habit-edit-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span className="habit-pill">Slot {index + 1}</span>
                   <div className="mode-toggle" style={{ display: 'flex', gap: '8px' }}>
-                    <button 
+                    <button
                       style={{ padding: '4px 12px', borderRadius: '12px', border: '1px solid #333', background: card.mode === 'quest' ? '#6366f1' : '#111', color: '#fff', fontSize: '11px', cursor: 'pointer' }}
                       onClick={() => updateCard(card.id, { mode: 'quest' })}
                     >
                       Quest
                     </button>
-                    <button 
+                    <button
                       style={{ padding: '4px 12px', borderRadius: '12px', border: '1px solid #333', background: card.mode === 'screentime' ? '#a855f7' : '#111', color: '#fff', fontSize: '11px', cursor: 'pointer' }}
                       onClick={() => updateCard(card.id, { mode: 'screentime' })}
                     >
@@ -457,7 +622,7 @@ const Mix: React.FC = () => {
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="habit-inputs-grid">
                   {card.mode === 'quest' ? (
                     <>
@@ -581,13 +746,47 @@ const Mix: React.FC = () => {
             ))}
           </div>
 
-          <button
-            className="download-pill-btn"
-            onClick={handleDownload}
-            disabled={isDownloading}
-          >
-            {isDownloading ? 'Generating...' : 'Download Template (.png)'} <RiDownloadLine />
-          </button>
+          <div className="download-group" style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '10px' }}>
+            <button
+              className="download-pill-btn"
+              onClick={handleDownload}
+              disabled={isDownloading || isRecording}
+            >
+              {isDownloading ? 'Generating Image...' : 'Download Template (.png)'} <RiDownloadLine />
+            </button>
+
+            <div className="adjust-box" style={{ marginBottom: '0' }}>
+              <div className="slider-item">
+                <div className="slider-meta">
+                  <span className="slider-label">Video Duration</span>
+                  <span className="slider-value-box">{videoDuration.toFixed(1)}s</span>
+                </div>
+                <input
+                  type="range"
+                  className="upshift-slider"
+                  min="1.5"
+                  max="10"
+                  step="0.5"
+                  value={videoDuration}
+                  onChange={(e) => setVideoDuration(parseFloat(e.target.value))}
+                  disabled={isRecording}
+                />
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: 'rgba(255,255,255,0.3)', marginTop: '2px' }}>
+                  <span>1.5s</span>
+                  <span>10s</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              className="download-pill-btn"
+              style={{ borderColor: 'rgb(117, 255, 241)', color: 'rgb(117, 255, 241)' }}
+              onClick={handleDownloadVideo}
+              disabled={isDownloading || isRecording}
+            >
+              {isRecording ? `Generating MP4 (${Math.round((recordingStep / Math.floor(30 * videoDuration)) * 100)}%)...` : 'Download Video (MP4)'} <RiVideoLine />
+            </button>
+          </div>
         </section>
 
         {/* RIGHT: IMAGE SETTINGS */}
@@ -607,6 +806,12 @@ const Mix: React.FC = () => {
           </div>
         </section>
       </main>
+      <canvas
+        id="record-canvas-mix"
+        width={1080}
+        height={1920}
+        style={{ position: 'absolute', left: '-9999px', top: '-9999px', visibility: 'hidden' }}
+      />
     </div>
   );
 };

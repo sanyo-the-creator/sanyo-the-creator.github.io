@@ -1792,6 +1792,12 @@
     overflow: auto;
   }
 
+  .portal-logo-icon {
+
+    display: none;
+  }
+
+
   .portal-mobile-header {
     display: flex;
     align-items: center;
