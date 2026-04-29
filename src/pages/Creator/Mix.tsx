@@ -242,7 +242,13 @@ const Mix: React.FC = () => {
     setIsRecording(true);
     setRecordingStep(0);
 
-    // Stable colorSpace that mp4-muxer's videoSampleDescription always needs
+    // iOS Safari does not support WebCodecs — fall back to MediaRecorder
+    const hasWebCodecs = typeof (window as any).VideoEncoder !== 'undefined';
+    if (!hasWebCodecs) {
+      await handleDownloadVideoMediaRecorder();
+      return;
+    }
+
     const SAFE_COLOR_SPACE = {
       fullRange: false,
       matrix: 'bt709' as VideoMatrixCoefficients,
@@ -255,41 +261,24 @@ const Mix: React.FC = () => {
       const durationSeconds = videoDuration;
       const numFrames = Math.floor(fps * durationSeconds);
 
-      // Use offsetWidth/offsetHeight — these are layout dimensions unaffected
-      // by scroll position or viewport clipping, matching what toPng captures.
       const el = mockupRef.current!;
       const devicePixelRatio = window.devicePixelRatio || 2;
       const width = Math.round(el.offsetWidth * devicePixelRatio);
       const height = Math.round(el.offsetHeight * devicePixelRatio);
-
-      // AVC requires dimensions divisible by 2
       const safeWidth = width % 2 === 0 ? width : width - 1;
       const safeHeight = height % 2 === 0 ? height : height - 1;
 
       const muxer = new Muxer({
         target: new ArrayBufferTarget(),
-        video: {
-          codec: 'avc',
-          width: safeWidth,
-          height: safeHeight,
-        },
+        video: { codec: 'avc', width: safeWidth, height: safeHeight },
         fastStart: 'in-memory',
       });
 
-      // Keep the last valid decoderConfig so chunks after the first keyframe
-      // still have a config to pass to addVideoChunk.
       let lastDecoderConfig: any = null;
-
       const videoEncoder = new VideoEncoder({
         output: (chunk, metadata) => {
-          // Build a safe config: prefer what the browser reports, but always
-          // inject a concrete colorSpace so mp4-muxer never receives null.
           const rawConfig = metadata?.decoderConfig ?? lastDecoderConfig;
-          if (!rawConfig) {
-            // No config yet – this chunk can't be muxed; skip it.
-            return;
-          }
-
+          if (!rawConfig) return;
           const safeConfig = {
             ...rawConfig,
             colorSpace: rawConfig.colorSpace
@@ -297,16 +286,11 @@ const Mix: React.FC = () => {
               : SAFE_COLOR_SPACE,
           };
           lastDecoderConfig = safeConfig;
-
-          muxer.addVideoChunk(chunk, {
-            ...metadata,
-            decoderConfig: safeConfig,
-          });
+          muxer.addVideoChunk(chunk, { ...metadata, decoderConfig: safeConfig });
         },
         error: (e) => console.error('VideoEncoder error:', e),
       });
 
-      // iOS Safari requires isConfigSupported check and doesn't support prefer-software
       const codecCandidates: VideoEncoderConfig[] = [
         { codec: 'avc1.4D0029', width: safeWidth, height: safeHeight, bitrate: 6_000_000, framerate: fps, hardwareAcceleration: 'prefer-software' },
         { codec: 'avc1.42E01F', width: safeWidth, height: safeHeight, bitrate: 6_000_000, framerate: fps, hardwareAcceleration: 'prefer-software' },
@@ -323,21 +307,16 @@ const Mix: React.FC = () => {
             configured = true;
             break;
           }
-        } catch {
-          // try next candidate
-        }
+        } catch { /* try next */ }
       }
       if (!configured) throw new Error('No supported video codec found on this device/browser.');
 
-      // Off-screen canvas for compositing frames
       const buffer = document.createElement('canvas');
       buffer.width = safeWidth;
       buffer.height = safeHeight;
       const ctx = buffer.getContext('2d', { alpha: false });
       if (!ctx) throw new Error('Failed to get 2D context');
 
-      // Capture at 10fps, repeat each frame 3x → 30fps output.
-      // 3x fewer toPng calls = 3x faster encoding.
       const captureFps = 10;
       const repeatCount = Math.round(fps / captureFps);
       const captureFrames = Math.ceil(durationSeconds * captureFps);
@@ -400,6 +379,80 @@ const Mix: React.FC = () => {
       console.error('MP4 export failed:', err);
       alert(`Export Failed!\nError: ${err.message}`);
     } finally {
+      setIsRecording(false);
+      setVideoProgress(1);
+    }
+  };
+
+  const handleDownloadVideoMediaRecorder = async () => {
+    if (!mockupRef.current) return;
+
+    const captureFps = 10;
+    const durationSeconds = videoDuration;
+    const captureFrames = Math.ceil(durationSeconds * captureFps);
+
+    const el = mockupRef.current!;
+    const devicePixelRatio = window.devicePixelRatio || 2;
+    const safeWidth = Math.round(el.offsetWidth * devicePixelRatio);
+    const safeHeight = Math.round(el.offsetHeight * devicePixelRatio);
+
+    const buffer = document.createElement('canvas');
+    buffer.width = safeWidth;
+    buffer.height = safeHeight;
+    const ctx = buffer.getContext('2d', { alpha: false })!;
+
+    const mimeTypes = ['video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'];
+    const mimeType = mimeTypes.find(m => MediaRecorder.isTypeSupported(m)) || 'video/webm';
+    const ext = mimeType.startsWith('video/mp4') ? 'mp4' : 'webm';
+
+    const stream = (buffer as any).captureStream(captureFps);
+    const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 6_000_000 });
+    const chunks: BlobPart[] = [];
+    recorder.ondataavailable = (e: BlobEvent) => { if (e.data.size > 0) chunks.push(e.data); };
+
+    recorder.start();
+
+    try {
+      for (let ci = 0; ci < captureFrames; ci++) {
+        const progress = ci < Math.ceil(captureFrames / 4)
+          ? ci / Math.max(Math.ceil(captureFrames / 4) - 1, 1)
+          : 1;
+        setVideoProgress(progress);
+        setRecordingStep(ci);
+
+        await new Promise(r => requestAnimationFrame(r));
+        await new Promise(r => setTimeout(r, 60));
+
+        const dataUrl = await toPng(mockupRef.current!, {
+          cacheBust: false,
+          pixelRatio: devicePixelRatio,
+          style: { transform: 'scale(1)', margin: '0' },
+        });
+
+        const img = new Image();
+        await new Promise<void>((resolve, reject) => {
+          img.onload = () => resolve();
+          img.onerror = () => reject(new Error('Frame load failed'));
+          img.src = dataUrl;
+        });
+        ctx.drawImage(img, 0, 0, safeWidth, safeHeight);
+
+        await new Promise(r => setTimeout(r, 1000 / captureFps));
+      }
+    } finally {
+      await new Promise<void>(resolve => {
+        recorder.onstop = () => resolve();
+        recorder.stop();
+      });
+
+      const blob = new Blob(chunks, { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = `upshift-mix-video.${ext}`;
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(url);
+
       setIsRecording(false);
       setVideoProgress(1);
     }
