@@ -254,15 +254,29 @@ const Quests: React.FC = () => {
         error: (e) => console.error('VideoEncoder error:', e),
       });
 
-      videoEncoder.configure({
-        codec: 'avc1.4D0029',
-        width: safeWidth,
-        height: safeHeight,
-        bitrate: 6_000_000,
-        framerate: fps,
-        // Software encoding avoids GPU colorSpace quirks that produce null configs
-        hardwareAcceleration: 'prefer-software',
-      });
+      // iOS Safari requires isConfigSupported check and doesn't support prefer-software
+      const codecCandidates: VideoEncoderConfig[] = [
+        { codec: 'avc1.4D0029', width: safeWidth, height: safeHeight, bitrate: 6_000_000, framerate: fps, hardwareAcceleration: 'prefer-software' },
+        { codec: 'avc1.42E01F', width: safeWidth, height: safeHeight, bitrate: 6_000_000, framerate: fps, hardwareAcceleration: 'prefer-software' },
+        { codec: 'avc1.4D0029', width: safeWidth, height: safeHeight, bitrate: 6_000_000, framerate: fps, hardwareAcceleration: 'no-preference' },
+        { codec: 'avc1.42E01F', width: safeWidth, height: safeHeight, bitrate: 6_000_000, framerate: fps, hardwareAcceleration: 'no-preference' },
+      ];
+
+      let configured = false;
+      for (const candidate of codecCandidates) {
+        try {
+          const support = await VideoEncoder.isConfigSupported(candidate);
+          if (support.supported) {
+            videoEncoder.configure(candidate);
+            configured = true;
+            break;
+          }
+        } catch {
+          // try next candidate
+        }
+      }
+      if (!configured) throw new Error('No supported video codec found on this device/browser.');
+
 
       // Off-screen canvas for compositing frames
       const buffer = document.createElement('canvas');
