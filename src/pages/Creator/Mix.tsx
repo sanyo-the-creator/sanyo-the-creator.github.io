@@ -847,7 +847,7 @@ const Mix: React.FC = () => {
 
             {!supportsVideoExport ? (
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textAlign: 'center', padding: '8px', border: '1px solid #222', borderRadius: '4px' }}>
-                🎬 MP4 export not available on iOS Safari — use desktop Chrome/Edge
+                🎬 MP4 export not available on iPhones — use desktop browser
               </div>
             ) : (
               <button
