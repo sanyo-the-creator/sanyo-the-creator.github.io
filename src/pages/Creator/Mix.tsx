@@ -162,6 +162,9 @@ const Mix: React.FC = () => {
   const [videoProgress, setVideoProgress] = useState(1);
   const [recordingStep, setRecordingStep] = useState(0);
   const [videoDuration, setVideoDuration] = useState(1.5);
+  // iPhone has no WebCodecs support. Mac/iPad do. Detect by UA + touch (not pointer).
+  const isIphone = /iPhone|iPod/.test(navigator.userAgent);
+  const supportsVideoExport = !isIphone && typeof (window as any).VideoEncoder !== 'undefined';
   const mockupRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [searchParams] = useSearchParams();
@@ -242,10 +245,8 @@ const Mix: React.FC = () => {
     setIsRecording(true);
     setRecordingStep(0);
 
-    // iOS Safari does not support WebCodecs — fall back to MediaRecorder
-    const hasWebCodecs = typeof (window as any).VideoEncoder !== 'undefined';
-    if (!hasWebCodecs) {
-      await handleDownloadVideoMediaRecorder();
+    if (!supportsVideoExport) {
+      setIsRecording(false);
       return;
     }
 
@@ -323,8 +324,8 @@ const Mix: React.FC = () => {
       let encodedCount = 0;
 
       for (let ci = 0; ci < captureFrames; ci++) {
-        const progress = ci < Math.ceil(captureFrames / 4)
-          ? ci / Math.max(Math.ceil(captureFrames / 4) - 1, 1)
+        const progress = ci < Math.max(2, Math.floor(0.375 * captureFps))
+          ? ci / Math.max(Math.max(2, Math.floor(0.375 * captureFps)) - 1, 1)
           : 1;
         setVideoProgress(progress);
         setRecordingStep(Math.round((ci / captureFrames) * numFrames));
@@ -414,8 +415,8 @@ const Mix: React.FC = () => {
 
     try {
       for (let ci = 0; ci < captureFrames; ci++) {
-        const progress = ci < Math.ceil(captureFrames / 4)
-          ? ci / Math.max(Math.ceil(captureFrames / 4) - 1, 1)
+        const progress = ci < Math.max(2, Math.floor(0.375 * captureFps))
+          ? ci / Math.max(Math.max(2, Math.floor(0.375 * captureFps)) - 1, 1)
           : 1;
         setVideoProgress(progress);
         setRecordingStep(ci);
@@ -844,14 +845,20 @@ const Mix: React.FC = () => {
               </div>
             </div>
 
-            <button
-              className="download-pill-btn"
-              style={{ borderColor: 'rgb(117, 255, 241)', color: 'rgb(117, 255, 241)' }}
-              onClick={handleDownloadVideo}
-              disabled={isDownloading || isRecording}
-            >
-              {isRecording ? `Generating MP4 (${Math.round((recordingStep / Math.floor(30 * videoDuration)) * 100)}%)...` : 'Download Video (MP4)'} <RiVideoLine />
-            </button>
+            {!supportsVideoExport ? (
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', textAlign: 'center', padding: '8px', border: '1px solid #222', borderRadius: '4px' }}>
+                🎬 MP4 export not available on iOS Safari — use desktop Chrome/Edge
+              </div>
+            ) : (
+              <button
+                className="download-pill-btn"
+                style={{ borderColor: 'rgb(117, 255, 241)', color: 'rgb(117, 255, 241)' }}
+                onClick={handleDownloadVideo}
+                disabled={isDownloading || isRecording}
+              >
+                {isRecording ? `Generating MP4 (${Math.round((recordingStep / Math.floor(30 * videoDuration)) * 100)}%)...` : 'Download Video (MP4)'} <RiVideoLine />
+              </button>
+            )}
           </div>
         </section>
 
