@@ -18,9 +18,9 @@ import ScreenTime from './pages/Creator/ScreenTime';
 import Mix from './pages/Creator/Mix';
 import './styles/globals.css';
 import PortalRouter from './pages/Portal/PortalRouter';
-import ReferralRedirect from './pages/Download/ReferralRedirect';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import AdminUserDetail from './pages/Admin/AdminUserDetail';
+import AdminVideoReview from './pages/Admin/AdminVideoReview';
 import ProfileLanding from './pages/Profile/ProfileLanding';
 
 function App() {
@@ -29,12 +29,10 @@ function App() {
       <Routes>
         <Route path="/portal/*" element={<PortalRouter />} />
         
-        {/* Referral redirect: /download/tiktok?ref=username */}
-        <Route path="/download/:platform" element={<ReferralRedirect />} />
-        
         {/* Admin dashboard */}
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/user/:userId" element={<AdminUserDetail />} />
+        <Route path="/admin/videos" element={<AdminVideoReview />} />
         
         <Route path="/creator" element={<CreatorLanding />} />
         <Route path="/creator/quests" element={<Quests />} />
@@ -55,6 +53,7 @@ function App() {
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:slug" element={<ArticleDetail />} />
           <Route path="/download" element={<Download />} />
+          <Route path="/download/:platform" element={<Download />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
         </Route>

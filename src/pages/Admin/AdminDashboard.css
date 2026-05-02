@@ -359,3 +359,42 @@
     display: none;
   }
 }
+
+/* Moderation Utilities */
+.admin-action-btn.approve:hover {
+  background-color: #047857 !important;
+  transform: translateY(-1px);
+}
+
+.admin-action-btn.reject:hover {
+  background-color: #b91c1c !important;
+  transform: translateY(-1px);
+}
+
+.admin-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.05);
+  color: #888;
+}
+
+.admin-modal-overlay {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.admin-modal {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

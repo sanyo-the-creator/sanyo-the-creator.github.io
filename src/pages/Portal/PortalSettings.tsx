@@ -300,6 +300,45 @@ const PortalSettings = () => {
           <button className="settings-save-btn">Save</button>
         </div>
       </div>
+      
+      {/* Integration Guide Section */}
+      <div className="settings-section-card" style={{ marginTop: '20px', border: '1px dashed rgba(59, 130, 246, 0.3)', background: 'rgba(59, 130, 246, 0.02)' }}>
+        <div className="settings-section-header">
+          <div className="settings-section-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}><FiBookOpen /></div>
+          <h3>Integration Guide</h3>
+        </div>
+        <div className="settings-block-content" style={{ padding: '0 20px 20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+            <div>
+              <h4 style={{ color: '#fff', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <SiTiktok /> TikTok Connection
+              </h4>
+              <ul style={{ fontSize: '13px', color: '#aaa', paddingLeft: '18px', lineHeight: '1.6' }}>
+                <li>Log in to TikTok on this browser first.</li>
+                <li>Ensure you authorize "User Info" and "Video List" scopes.</li>
+                <li>Your TikTok must be public to track views.</li>
+                <li>Tag <strong>@joinupshift.com</strong> in your description (first line).</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style={{ color: '#fff', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <SiInstagram /> Instagram Connection
+              </h4>
+              <ul style={{ fontSize: '13px', color: '#aaa', paddingLeft: '18px', lineHeight: '1.6' }}>
+                <li>Your account <strong>MUST</strong> be a <strong>Professional/Creator/Business</strong> account.</li>
+                <li>Must be linked to a Facebook Page (Meta requirement).</li>
+                <li>Enable <strong>"Allow Access to Messages"</strong> in IG settings.</li>
+                <li>Tag <strong>@byupshift</strong> in your Reels (first line).</li>
+              </ul>
+            </div>
+          </div>
+          <div className="tip-box" style={{ marginTop: '20px', padding: '15px', borderRadius: '8px', background: 'rgba(245, 158, 11, 0.05)', border: '1px solid rgba(245, 158, 11, 0.1)' }}>
+            <p style={{ fontSize: '12px', color: '#f59e0b', margin: 0 }}>
+              <strong>💡 Pro Tip:</strong> If your connection fails, try clearing your browser cookies for the respective platform and try again.
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* MODALS */}
       {activeModal === 'tiktok' && (

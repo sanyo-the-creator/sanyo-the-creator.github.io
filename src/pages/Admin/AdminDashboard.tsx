@@ -96,13 +96,22 @@ const AdminDashboard: React.FC = () => {
               { count: clicks },
               { count: installs },
               { count: trials },
-              { data: sales }
+              { data: sales },
+              { data: videoStats }
             ] = await Promise.all([
               supabase.from('referral_clicks').select('*', { count: 'exact', head: true }).eq('referral_code', p.referral_code),
               supabase.from('referral_installs').select('*', { count: 'exact', head: true }).eq('referral_code', p.referral_code),
               supabase.from('referral_trials').select('*', { count: 'exact', head: true }).eq('referral_code', p.referral_code),
-              supabase.from('referral_sales').select('amount_cents').eq('referral_code', p.referral_code)
+              supabase.from('referral_sales').select('amount_cents').eq('referral_code', p.referral_code),
+              supabase.from('videos').select('status, views').eq('user_id', p.id)
             ]);
+
+            const vStats = {
+              count: (videoStats || []).length,
+              views: (videoStats || []).reduce((s, v) => s + (v.views || 0), 0),
+              approved: (videoStats || []).filter(v => v.status === 'approved').length,
+              pending: (videoStats || []).filter(v => v.status === 'pending').length,
+            };
 
             return {
               user_id: p.id,
@@ -115,10 +124,10 @@ const AdminDashboard: React.FC = () => {
               total_downloads: installs || 0,
               total_sales_cents: (sales || []).reduce((sum, s) => sum + (s.amount_cents || 0), 0),
               total_trials: trials || 0,
-              video_count: 0,
-              total_views: 0,
-              approved_videos: 0,
-              pending_videos: 0,
+              video_count: vStats.count,
+              total_views: vStats.views,
+              approved_videos: vStats.approved,
+              pending_videos: vStats.pending,
             };
           }));
 
@@ -193,12 +202,42 @@ const AdminDashboard: React.FC = () => {
   return (
     <div className="admin-dashboard">
       <header className="admin-header">
-        <div>
-          <h1 className="admin-title">
-            <FiShield style={{ marginRight: '12px', color: '#f59e0b' }} />
-            Admin Dashboard
-          </h1>
-          <p className="admin-subtitle">Overview of all creators, referrals, videos, and earnings</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+          <div>
+            <h1 className="admin-title">
+              <FiShield style={{ marginRight: '12px', color: '#f59e0b' }} />
+              Admin Dashboard
+            </h1>
+            <p className="admin-subtitle">Overview of all creators, referrals, videos, and earnings</p>
+          </div>
+          <button 
+            className="admin-action-btn" 
+            onClick={() => navigate('/admin/videos')}
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '10px', 
+              background: '#3b82f6', 
+              color: '#fff', 
+              padding: '12px 20px', 
+              borderRadius: '8px',
+              border: 'none',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              position: 'relative'
+            }}
+          >
+            <FiVideo /> Review Videos
+            {globalStats.totalVideos > 0 && (
+              <span style={{ 
+                position: 'absolute', top: '-5px', right: '-5px', 
+                background: '#ef4444', color: '#fff', fontSize: '10px', 
+                padding: '2px 6px', borderRadius: '10px', border: '2px solid #1a1a2e'
+              }}>
+                {users.reduce((sum, u) => sum + (u.pending_videos || 0), 0)}
+              </span>
+            )}
+          </button>
         </div>
       </header>
 

@@ -114,41 +114,72 @@ const PortalMyVideos = () => {
         </div>
       ) : (
         <div className="portal-leaderboard-table">
-          <div className="leaderboard-table-header" style={{ gridTemplateColumns: '1fr 100px 100px' }}>
+          <div className="leaderboard-table-header" style={{ gridTemplateColumns: '70px 1fr 100px 100px 120px' }}>
+            <span className="col-rank">PREVIEW</span>
             <span className="col-rank">VIDEO URL</span>
             <span className="col-views text-center">VIEWS</span>
+            <span className="col-views text-center">EARNINGS</span>
             <span className="col-views text-center">STATUS</span>
           </div>
           <div className="leaderboard-table-body">
             {filteredVideos.map((video) => (
-              <div key={video.id} className="leaderboard-row" style={{ gridTemplateColumns: '1fr 100px 100px' }}>
-                <div className="col-creator" style={{ overflow: 'hidden' }}>
-                  <span className="creator-name" style={{ 
-                    whiteSpace: 'nowrap', 
-                    overflow: 'hidden', 
-                    textOverflow: 'ellipsis',
-                    fontSize: '13px',
-                    color: '#888'
-                  }}>
-                    {video.video_url}
-                  </span>
+              <div key={video.id} className="leaderboard-row-container" style={{ display: 'flex', flexDirection: 'column', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                <div className="leaderboard-row" style={{ gridTemplateColumns: '70px 1fr 100px 100px 120px', borderBottom: 'none', padding: '12px 20px' }}>
+                  <div className="col-rank" style={{ display: 'flex', alignItems: 'center' }}>
+                    {video.thumbnail_url ? (
+                      <img 
+                        src={video.thumbnail_url} 
+                        alt="thumbnail" 
+                        style={{ width: '50px', height: '50px', borderRadius: '6px', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.1)' }} 
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://via.placeholder.com/50x50?text=Video';
+                        }}
+                      />
+                    ) : (
+                      <div style={{ width: '50px', height: '50px', borderRadius: '6px', backgroundColor: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <FiVideo style={{ color: '#666' }} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="col-creator" style={{ overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
+                    <a href={video.video_url} target="_blank" rel="noreferrer" className="creator-name" style={{ 
+                      whiteSpace: 'nowrap', 
+                      overflow: 'hidden', 
+                      textOverflow: 'ellipsis',
+                      fontSize: '13px',
+                      color: '#3b82f6',
+                      textDecoration: 'none'
+                    }}>
+                      {video.video_url}
+                    </a>
+                  </div>
+                  <div className="col-views" style={{ justifyContent: 'center' }}>
+                    <FiEye className="view-icon" /> {video.views || 0}
+                  </div>
+                  <div className="col-views" style={{ justifyContent: 'center', fontWeight: 'bold', color: video.earnings_cents > 0 ? '#4ade80' : 'inherit' }}>
+                    {video.earnings_cents > 0 ? `$${(video.earnings_cents / 100).toFixed(2)}` : '—'}
+                  </div>
+                  <div className="col-views" style={{ justifyContent: 'center' }}>
+                    <span style={{ 
+                      fontSize: '11px', 
+                      fontWeight: 600, 
+                      padding: '2px 8px', 
+                      borderRadius: '4px',
+                      backgroundColor: video.status === 'approved' ? 'rgba(34, 197, 94, 0.1)' : 
+                                       video.status === 'rejected' ? 'rgba(239, 68, 68, 0.1)' : 'rgba(245, 158, 11, 0.1)',
+                      color: video.status === 'approved' ? '#4ade80' : 
+                             video.status === 'rejected' ? '#f87171' : '#f59e0b',
+                      textTransform: 'uppercase'
+                    }}>
+                      {video.status}
+                    </span>
+                  </div>
                 </div>
-                <div className="col-views" style={{ justifyContent: 'center' }}>
-                  <FiEye className="view-icon" /> {video.views || 0}
-                </div>
-                <div className="col-views" style={{ justifyContent: 'center' }}>
-                  <span style={{ 
-                    fontSize: '11px', 
-                    fontWeight: 600, 
-                    padding: '2px 8px', 
-                    borderRadius: '4px',
-                    backgroundColor: video.status === 'approved' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(245, 158, 11, 0.1)',
-                    color: video.status === 'approved' ? '#4ade80' : '#f59e0b',
-                    textTransform: 'uppercase'
-                  }}>
-                    {video.status}
-                  </span>
-                </div>
+                {video.status === 'rejected' && video.rejection_reason && (
+                  <div style={{ padding: '0 20px 15px 90px', fontSize: '12px', color: '#f87171', marginTop: '-5px' }}>
+                    <strong>Rejection reason:</strong> {video.rejection_reason}
+                  </div>
+                )}
               </div>
             ))}
           </div>

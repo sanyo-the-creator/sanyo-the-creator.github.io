@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
 import LightRays from '../../components/common/LightRays/LightRays';
 import { SEO, StructuredData } from '../../components/common/SEO';
@@ -6,36 +7,53 @@ import { trackReferralClick } from '../../utils/referralUtils';
 import './Download.css';
 
 const Download: React.FC = () => {
+  const { platform } = useParams<{ platform: string }>();
+
   useEffect(() => {
-    // Only auto-redirect if user is on /download route
-    if (window.location.pathname !== '/download' && window.location.pathname !== '/') {
+    // Only auto-redirect if user is on /download, /download/:platform, or /
+    if (!window.location.pathname.startsWith('/download') && window.location.pathname !== '/') {
       return;
     }
 
-    // Check for referral code in URL
-    const params = new URLSearchParams(window.location.search);
-    const refCode = params.get('ref');
-    if (refCode) {
-      trackReferralClick(refCode, 'direct');
-    }
+    const runRedirectLogic = async () => {
+      // Check for referral code in URL
+      const params = new URLSearchParams(window.location.search);
+      const refCode = params.get('ref');
+      
+      // Clean up the URL to just /download without reloading the page
+      if (window.location.pathname !== '/download' || window.location.search) {
+        window.history.replaceState({}, '', '/download');
+      }
 
-    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
+      if (refCode) {
+        await trackReferralClick(refCode, platform || 'direct');
+        
+        // On mobile, give it an extra tiny bit of time for the request to flush
+        if (/iPhone|Android|iPad|iPod/.test(navigator.userAgent)) {
+          await new Promise(r => setTimeout(r, 500));
+        }
+      }
 
-    // Detect iOS (iPhone/iPad)
-    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
+      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
 
-    // Detect Android
-    const isAndroid = /android/i.test(userAgent);
+      // Detect iOS (iPhone/iPad)
+      const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
 
-    // Redirect based on device
-    if (isIOS) {
-      // Redirect to Apple App Store
-      window.location.href = 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316';
-    } else if (isAndroid) {
-      // Redirect to Google Form
-      window.location.href = 'https://forms.gle/iJa3K3p6LmWkmHxn6#';
-    }
-  }, []);
+      // Detect Android
+      const isAndroid = /android/i.test(userAgent);
+
+      // Redirect based on device
+      if (isIOS) {
+        // Redirect to Apple App Store
+        window.location.href = 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316';
+      } else if (isAndroid) {
+        // Redirect to Google Form
+        window.location.href = 'https://forms.gle/iJa3K3p6LmWkmHxn6#';
+      }
+    };
+
+    runRedirectLogic();
+  }, [platform]);
 
 
   const downloadLinks = [

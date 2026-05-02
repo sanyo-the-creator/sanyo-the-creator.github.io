@@ -721,12 +721,12 @@ const AdminUserDetail: React.FC = () => {
               <div className="aud-empty-mini">No videos submitted</div>
             ) : (
               <div className="aud-detail-tbl">
-                <div className="aud-detail-tbl-head">
-                  <span>URL</span><span>Platform</span><span>Views</span><span>Status</span><span>Submitted</span>
+                <div className="aud-detail-tbl-head" style={{ gridTemplateColumns: '2fr 100px 100px 100px 120px 100px' }}>
+                  <span>URL</span><span>Platform</span><span>Views</span><span>Status</span><span>Submitted</span><span>Actions</span>
                 </div>
                 {videos.map((v: any) => (
-                  <div key={v.id} className="aud-detail-tbl-row">
-                    <span>
+                  <div key={v.id} className="aud-detail-tbl-row" style={{ gridTemplateColumns: '2fr 100px 100px 100px 120px 100px' }}>
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       <a href={v.video_url} target="_blank" rel="noopener noreferrer" className="aud-link">
                         {v.video_url.substring(0, 50)}... <FiExternalLink />
                       </a>
@@ -735,6 +735,49 @@ const AdminUserDetail: React.FC = () => {
                     <span style={{ fontWeight: 700, color: '#fff' }}>{formatNum(v.views || 0)}</span>
                     <span className={`aud-status ${v.status}`}>{v.status}</span>
                     <span>{new Date(v.submitted_at).toLocaleDateString()}</span>
+                    <span style={{ display: 'flex', gap: '5px' }}>
+                      {v.status === 'pending' ? (
+                        <>
+                          <button 
+                            onClick={async () => {
+                              const earnings = prompt('Enter earnings in USD (e.g. 5.50):', (v.views / 1000).toFixed(2));
+                              if (earnings === null) return;
+                              const cents = Math.round(parseFloat(earnings) * 100);
+                              const { error } = await supabase.from('videos').update({ 
+                                status: 'approved', 
+                                earnings_cents: cents,
+                                moderated_at: new Date().toISOString()
+                              }).eq('id', v.id);
+                              if (error) alert('Error: ' + error.message);
+                              else loadData();
+                            }}
+                            style={{ background: '#059669', color: '#fff', border: 'none', padding: '4px 8px', borderRadius: '4px', fontSize: '10px', cursor: 'pointer' }}
+                          >
+                            Approve
+                          </button>
+                          <button 
+                            onClick={async () => {
+                              const reason = prompt('Enter rejection reason:');
+                              if (reason === null) return;
+                              const { error } = await supabase.from('videos').update({ 
+                                status: 'rejected', 
+                                rejection_reason: reason,
+                                moderated_at: new Date().toISOString()
+                              }).eq('id', v.id);
+                              if (error) alert('Error: ' + error.message);
+                              else loadData();
+                            }}
+                            style={{ background: '#dc2626', color: '#fff', border: 'none', padding: '4px 8px', borderRadius: '4px', fontSize: '10px', cursor: 'pointer' }}
+                          >
+                            Reject
+                          </button>
+                        </>
+                      ) : (
+                        <span style={{ fontSize: '10px', opacity: 0.5 }}>
+                          {v.status === 'approved' ? `$${(v.earnings_cents / 100).toFixed(2)}` : 'Rejected'}
+                        </span>
+                      )}
+                    </span>
                   </div>
                 ))}
               </div>

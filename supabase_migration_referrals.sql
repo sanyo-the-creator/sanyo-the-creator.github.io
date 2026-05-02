@@ -101,27 +101,33 @@ $$ LANGUAGE sql SECURITY DEFINER STABLE;
 
 -- REFERRAL PROFILES policies
 -- Anyone can read (public profile pages)
+DROP POLICY IF EXISTS "referral_profiles_public_read" ON referral_profiles;
 CREATE POLICY "referral_profiles_public_read" ON referral_profiles
   FOR SELECT USING (true);
 
 -- Owner can update their own profile
+DROP POLICY IF EXISTS "referral_profiles_owner_update" ON referral_profiles;
 CREATE POLICY "referral_profiles_owner_update" ON referral_profiles
   FOR UPDATE USING (id = auth.uid());
 
 -- Owner can insert their own profile
+DROP POLICY IF EXISTS "referral_profiles_owner_insert" ON referral_profiles;
 CREATE POLICY "referral_profiles_owner_insert" ON referral_profiles
   FOR INSERT WITH CHECK (id = auth.uid());
 
 -- Admin can do anything
+DROP POLICY IF EXISTS "referral_profiles_admin_all" ON referral_profiles;
 CREATE POLICY "referral_profiles_admin_all" ON referral_profiles
   FOR ALL USING (is_admin());
 
 -- REFERRAL CLICKS policies
 -- Anyone (including anon) can insert clicks (public profile visits)
+DROP POLICY IF EXISTS "referral_clicks_anon_insert" ON referral_clicks;
 CREATE POLICY "referral_clicks_anon_insert" ON referral_clicks
   FOR INSERT WITH CHECK (true);
 
 -- Owner can read their own clicks (via referral_code match)
+DROP POLICY IF EXISTS "referral_clicks_owner_read" ON referral_clicks;
 CREATE POLICY "referral_clicks_owner_read" ON referral_clicks
   FOR SELECT USING (
     referral_code IN (
@@ -130,11 +136,13 @@ CREATE POLICY "referral_clicks_owner_read" ON referral_clicks
   );
 
 -- Admin can read all clicks
+DROP POLICY IF EXISTS "referral_clicks_admin_read" ON referral_clicks;
 CREATE POLICY "referral_clicks_admin_read" ON referral_clicks
   FOR SELECT USING (is_admin());
 
 -- REFERRAL INSTALLS policies
 -- Service role inserts (from app), owner reads their own
+DROP POLICY IF EXISTS "referral_installs_owner_read" ON referral_installs;
 CREATE POLICY "referral_installs_owner_read" ON referral_installs
   FOR SELECT USING (
     referral_code IN (
@@ -143,14 +151,17 @@ CREATE POLICY "referral_installs_owner_read" ON referral_installs
   );
 
 -- Admin can read all
+DROP POLICY IF EXISTS "referral_installs_admin_read" ON referral_installs;
 CREATE POLICY "referral_installs_admin_read" ON referral_installs
   FOR SELECT USING (is_admin());
 
 -- Allow insert from anon (app will call this via RPC function, but just in case)
+DROP POLICY IF EXISTS "referral_installs_insert" ON referral_installs;
 CREATE POLICY "referral_installs_insert" ON referral_installs
   FOR INSERT WITH CHECK (true);
 
 -- REFERRAL SALES policies
+DROP POLICY IF EXISTS "referral_sales_owner_read" ON referral_sales;
 CREATE POLICY "referral_sales_owner_read" ON referral_sales
   FOR SELECT USING (
     referral_code IN (
@@ -159,14 +170,17 @@ CREATE POLICY "referral_sales_owner_read" ON referral_sales
   );
 
 -- Admin can read all
+DROP POLICY IF EXISTS "referral_sales_admin_read" ON referral_sales;
 CREATE POLICY "referral_sales_admin_read" ON referral_sales
   FOR SELECT USING (is_admin());
 
 -- Allow insert
+DROP POLICY IF EXISTS "referral_sales_insert" ON referral_sales;
 CREATE POLICY "referral_sales_insert" ON referral_sales
   FOR INSERT WITH CHECK (true);
 
 -- REFERRAL TRIALS policies
+DROP POLICY IF EXISTS "referral_trials_owner_read" ON referral_trials;
 CREATE POLICY "referral_trials_owner_read" ON referral_trials
   FOR SELECT USING (
     referral_code IN (
@@ -175,15 +189,18 @@ CREATE POLICY "referral_trials_owner_read" ON referral_trials
   );
 
 -- Admin can read all
+DROP POLICY IF EXISTS "referral_trials_admin_read" ON referral_trials;
 CREATE POLICY "referral_trials_admin_read" ON referral_trials
   FOR SELECT USING (is_admin());
 
 -- Allow insert
+DROP POLICY IF EXISTS "referral_trials_insert" ON referral_trials;
 CREATE POLICY "referral_trials_insert" ON referral_trials
   FOR INSERT WITH CHECK (true);
 
 -- ADMIN USERS policies
 -- Only admins can read admin_users
+DROP POLICY IF EXISTS "admin_users_admin_read" ON admin_users;
 CREATE POLICY "admin_users_admin_read" ON admin_users
   FOR SELECT USING (is_admin());
 
@@ -391,3 +408,104 @@ LEFT JOIN (
 -- Replace YOUR_USER_ID with your actual auth.users id
 -- ============================================
 -- INSERT INTO admin_users (id) VALUES ('YOUR_USER_ID_HERE');
+
+-- Ensure videos table exists and has correct foreign key to auth.users
+CREATE TABLE IF NOT EXISTS videos (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  platform TEXT NOT NULL,
+  video_url TEXT NOT NULL,
+  views INTEGER DEFAULT 0,
+  earnings_cents INTEGER DEFAULT 0,
+  status TEXT DEFAULT 'pending',
+  submitted_at TIMESTAMPTZ DEFAULT NOW(),
+  rejection_reason TEXT,
+  moderated_at TIMESTAMPTZ,
+  moderated_by UUID REFERENCES admin_users(id),
+  thumbnail_url TEXT
+);
+
+-- Ensure the columns exist (in case the table was created differently before)
+ALTER TABLE videos ADD COLUMN IF NOT EXISTS rejection_reason TEXT;
+ALTER TABLE videos ADD COLUMN IF NOT EXISTS earnings_cents INTEGER DEFAULT 0;
+ALTER TABLE videos ADD COLUMN IF NOT EXISTS moderated_at TIMESTAMPTZ;
+ALTER TABLE videos ADD COLUMN IF NOT EXISTS moderated_by UUID REFERENCES admin_users(id);
+ALTER TABLE videos ADD COLUMN IF NOT EXISTS thumbnail_url TEXT;
+ALTER TABLE videos ADD COLUMN IF NOT EXISTS views INTEGER DEFAULT 0;
+
+-- Prevent duplicate video submissions
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'unique_video_url') THEN
+        ALTER TABLE videos ADD CONSTRAINT unique_video_url UNIQUE (video_url);
+    END IF;
+END;
+$$;
+
+-- Enable RLS on videos
+ALTER TABLE videos ENABLE ROW LEVEL SECURITY;
+
+-- VIDEOS policies
+-- Anyone can read (for the portal list)
+DROP POLICY IF EXISTS "videos_public_read" ON videos;
+CREATE POLICY "videos_public_read" ON videos
+  FOR SELECT USING (true);
+
+-- Owner can insert their own videos
+DROP POLICY IF EXISTS "videos_owner_insert" ON videos;
+CREATE POLICY "videos_owner_insert" ON videos
+  FOR INSERT WITH CHECK (user_id = auth.uid());
+
+-- Owner can update their own videos (before they are moderated)
+DROP POLICY IF EXISTS "videos_owner_update" ON videos;
+CREATE POLICY "videos_owner_update" ON videos
+  FOR UPDATE USING (user_id = auth.uid() AND status = 'pending');
+
+-- Admin can do everything
+DROP POLICY IF EXISTS "videos_admin_all" ON videos;
+CREATE POLICY "videos_admin_all" ON videos
+  FOR ALL USING (is_admin());
+
+
+-- Update the admin view to include these new fields
+CREATE OR REPLACE VIEW admin_user_overview AS
+SELECT
+  u.id AS user_id,
+  u.email,
+  u.raw_user_meta_data->>'full_name' AS full_name,
+  u.raw_user_meta_data->>'avatar_url' AS avatar_url,
+  u.created_at AS joined_at,
+  rp.referral_code,
+  COALESCE(rp.total_clicks, 0) AS total_clicks,
+  COALESCE(rp.total_downloads, 0) AS total_downloads,
+  COALESCE(rp.total_sales_cents, 0) AS total_sales_cents,
+  COALESCE(rp.total_trials, 0) AS total_trials,
+  COALESCE(v.video_count, 0) AS video_count,
+  COALESCE(v.total_views, 0) AS total_views,
+  COALESCE(v.approved_count, 0) AS approved_videos,
+  COALESCE(v.pending_count, 0) AS pending_videos,
+  COALESCE(v.total_earnings_cents, 0) AS total_video_earnings_cents
+FROM auth.users u
+LEFT JOIN referral_profiles rp ON rp.id = u.id
+LEFT JOIN (
+  SELECT
+    user_id,
+    COUNT(*) AS video_count,
+    COALESCE(SUM(views), 0) AS total_views,
+    COUNT(*) FILTER (WHERE status = 'approved') AS approved_count,
+    COUNT(*) FILTER (WHERE status = 'pending') AS pending_count,
+    COALESCE(SUM(earnings_cents), 0) AS total_earnings_cents
+FROM videos
+  GROUP BY user_id
+) v ON v.user_id = u.id;
+
+-- Add unique constraint to prevent duplicate video submissions
+-- Note: This might fail if there are already duplicates in the table.
+-- If it fails, the admin should manually clean up the table first.
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'unique_video_url') THEN
+        ALTER TABLE videos ADD CONSTRAINT unique_video_url UNIQUE (video_url);
+    END IF;
+END;
+$$;
