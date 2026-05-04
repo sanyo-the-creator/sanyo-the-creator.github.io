@@ -192,6 +192,23 @@ const PortalSubmitVideo = () => {
         console.error('Error fetching thumbnail:', err);
       }
 
+      // ENSURE USER PROFILE EXISTS (Fixes 23503 error)
+      const { data: profileExists } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('id', user.id)
+        .maybeSingle();
+
+      if (!profileExists) {
+        console.log('Creating missing profile for user...');
+        await supabase.from('profiles').insert({
+          id: user.id,
+          full_name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'Creator',
+          avatar_url: user.user_metadata?.avatar_url || null,
+          updated_at: new Date().toISOString()
+        });
+      }
+
       const { error } = await supabase.from('videos').insert({
         user_id: user.id,
         platform: isTiktok ? 'tiktok' : 'instagram',
