@@ -20,9 +20,11 @@ const PortalSubmitVideo = () => {
   useEffect(() => {
     // Check if user has a referral profile
     supabase.auth.getUser().then(({ data: { user } }) => {
+      console.log('Current User ID:', user?.id);
       setUser(user);
       if (user) {
-        supabase.from('referral_profiles').select('id').eq('id', user.id).maybeSingle().then(({ data }) => {
+        supabase.from('referral_profiles').select('id').eq('id', user.id).maybeSingle().then(({ data, error }) => {
+          console.log('Profile Check Result:', data, 'Error:', error);
           setHasProfile(!!data);
         });
       }
