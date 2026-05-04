@@ -59,11 +59,8 @@ const PortalSettings = () => {
 
   const startTikTokOAuth = () => {
     setActiveModal(null);
-    const clientKey = process.env.REACT_APP_TIKTOK_CLIENT_KEY;
-    if (!clientKey) {
-      alert('TikTok Client Key missing! Check your .env file.');
-      return;
-    }
+    // Hardcoding the Sandbox key to ensure the build picks it up
+    const clientKey = 'sbawy70ee96x8fwy4q';
     
     // Redirect to TikTok Login Kit v2
     // TikTok strictly requires PKCE (Proof Key for Code Exchange) in v2.
