@@ -74,8 +74,8 @@ const PortalSettings = () => {
     const scopes = 'user.info.profile';
     const redirectUri = 'https://www.joinupshift.com/';
     
-    // Sending both client_key and client_id to be safe
-    const authUrl = `https://www.tiktok.com/v2/auth/authorize?client_key=${clientKey}&client_id=${clientKey}&scope=${encodeURIComponent(scopes)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
+    // Sending only client_key with a trailing slash after authorize/ as per Claude's suggestion
+    const authUrl = `https://www.tiktok.com/v2/auth/authorize/?client_key=${clientKey}&scope=${encodeURIComponent(scopes)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
     
     console.log('TikTok Auth URL:', authUrl);
     window.location.href = authUrl;
