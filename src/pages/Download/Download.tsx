@@ -4,7 +4,11 @@ import StarBorder from '../../components/common/StarBorder/StarBorder';
 import LightRays from '../../components/common/LightRays/LightRays';
 import { SEO, StructuredData } from '../../components/common/SEO';
 import { trackReferralClick } from '../../utils/referralUtils';
+import { FaChevronDown as _FaChevronDown } from 'react-icons/fa';
+import CreatorProgramSection from '../Creator/CreatorProgramSection';
 import './Download.css';
+
+const FaChevronDown = _FaChevronDown as any;
 
 const Download: React.FC = () => {
   const { platform } = useParams<{ platform: string }>();
@@ -19,7 +23,7 @@ const Download: React.FC = () => {
       // Check for referral code in URL
       const params = new URLSearchParams(window.location.search);
       const refCode = params.get('ref');
-      
+
       // Clean up the URL to just /download without reloading the page
       if (window.location.pathname !== '/download' || window.location.search) {
         window.history.replaceState({}, '', '/download');
@@ -27,7 +31,7 @@ const Download: React.FC = () => {
 
       if (refCode) {
         await trackReferralClick(refCode, platform || 'direct');
-        
+
         // On mobile, give it an extra tiny bit of time for the request to flush
         if (/iPhone|Android|iPad|iPod/.test(navigator.userAgent)) {
           await new Promise(r => setTimeout(r, 500));
@@ -163,6 +167,12 @@ const Download: React.FC = () => {
         </div>
       </section>
 
+      {/* <div className="join-creator-divider">
+        <span className="join-creator-text">JOIN AS CREATOR</span>
+        <FaChevronDown className="join-creator-icon" />
+      </div>
+
+      <CreatorProgramSection /> */}
 
     </div>
   );

@@ -87,6 +87,12 @@ a:hover {
 }
 
 
+.section {
+  display: block !important;
+  width: 100%;
+  height: auto !important;
+}
+
 .section-sm {
   padding: var(--spacing-3xl) 0;
 }
@@ -170,6 +176,8 @@ a:hover {
   box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
+
+
 .btn-secondary {
   background: var(--card-bg);
   color: var(--text-primary);
@@ -240,6 +248,22 @@ a:hover {
   text-align: center;
 }
 
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+.w-full {
+  width: 100%;
+}
+
 /* Spacing Utilities */
 .mb-0 {
   margin-bottom: 0;
@@ -302,6 +326,8 @@ a:hover {
   .container {
     padding: 0 var(--spacing-md);
   }
+
+
 
   .section {
     padding: var(--spacing-3xl) 20px;

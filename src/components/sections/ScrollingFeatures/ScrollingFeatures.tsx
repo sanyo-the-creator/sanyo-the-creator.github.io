@@ -118,7 +118,7 @@ const ScrollingFeatures: React.FC<ScrollingFeaturesProps> = ({
   return (
     <section
       ref={sectionRef}
-      className={` relative min-h-screen section ${className}`}
+      className={`scrolling-features-section relative min-h-screen section ${className}`}
       data-upshift-name="Product section"
       id="product"
       style={{

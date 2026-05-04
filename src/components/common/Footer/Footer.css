@@ -1,9 +1,10 @@
 .footer {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    background: #0b0b0d;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: auto;
-    padding: 30px;
-
+    padding: 80px 30px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
 }
 
 .footer-container {

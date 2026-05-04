@@ -13,6 +13,7 @@ import Download from './pages/Download/Download';
 import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
 import CreatorLanding from './pages/Creator/CreatorLanding';
+import CreatorProgram from './pages/Creator/CreatorProgram';
 import Quests from './pages/Creator/Quests';
 import ScreenTime from './pages/Creator/ScreenTime';
 import Mix from './pages/Creator/Mix';
@@ -34,10 +35,7 @@ function App() {
         <Route path="/admin/user/:userId" element={<AdminUserDetail />} />
         <Route path="/admin/videos" element={<AdminVideoReview />} />
         
-        <Route path="/creator" element={<CreatorLanding />} />
-        <Route path="/creator/quests" element={<Quests />} />
-        <Route path="/creator/screentime" element={<ScreenTime />} />
-        <Route path="/creator/mix" element={<Mix />} />
+
 
         {/* Public profile page: /jergus or /jergus/tiktok */}
         <Route path="/:referralCode" element={<ProfileLanding />} />
@@ -56,6 +54,12 @@ function App() {
           <Route path="/download/:platform" element={<Download />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          
+          <Route path="/creator" element={<CreatorLanding />} />
+          <Route path="/creator-program" element={<CreatorProgram />} />
+          <Route path="/creator/quests" element={<Quests />} />
+          <Route path="/creator/screentime" element={<ScreenTime />} />
+          <Route path="/creator/mix" element={<Mix />} />
         </Route>
       </Routes>
     </Router>
