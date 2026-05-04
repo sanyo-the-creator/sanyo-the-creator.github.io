@@ -215,6 +215,7 @@ const PortalSubmitVideo = () => {
       setStatus({ type: 'success', message: 'Video submitted successfully! It is now awaiting review.' });
       setVideoUrl('');
     } catch (err: any) {
+      console.error('Full Submission Error:', err);
       setStatus({ type: 'error', message: err.message || 'Something went wrong.' });
     } finally {
       setIsSubmitting(false);
