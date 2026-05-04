@@ -69,15 +69,12 @@ const PortalSettings = () => {
     // TikTok strictly requires PKCE (Proof Key for Code Exchange) in v2.
     // Scopes: user.info.profile is for identity, video.list is for tracking video views.
     const dummyCodeChallenge = 'E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM';
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const domain = isLocal ? window.location.origin : 'https://www.joinupshift.com';
-    const redirectUri = domain + '/portal/settings';
     
-    // Updated scopes to include video.list as required for the creator program
-    // NOTE: TikTok v2 requires scopes to be SPACE-separated
-    const scopes = 'user.info.profile video.list';
+    // Simplifying to the bare minimum to test the connection
+    const scopes = 'user.info.profile';
+    const redirectUri = 'https://www.joinupshift.com/portal/settings';
     
-    const authUrl = `https://www.tiktok.com/v2/auth/authorize?client_key=${clientKey}&response_type=code&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
+    const authUrl = `https://www.tiktok.com/v2/auth/authorize?client_key=${clientKey}&scope=${encodeURIComponent(scopes)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
     
     console.log('TikTok Auth URL:', authUrl);
     console.log('Redirecting in 3 seconds...');
