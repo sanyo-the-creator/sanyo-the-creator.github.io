@@ -70,18 +70,15 @@ const PortalSettings = () => {
     // Scopes: user.info.profile is for identity, video.list is for tracking video views.
     const dummyCodeChallenge = 'E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM';
     
-    // Simplifying to the bare minimum to test the connection
+    // Using root domain to avoid path issues
     const scopes = 'user.info.profile';
-    const redirectUri = 'https://www.joinupshift.com/portal/settings';
+    const redirectUri = 'https://www.joinupshift.com/';
     
-    const authUrl = `https://www.tiktok.com/v2/auth/authorize?client_key=${clientKey}&scope=${encodeURIComponent(scopes)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
+    // Sending both client_key and client_id to be safe
+    const authUrl = `https://www.tiktok.com/v2/auth/authorize?client_key=${clientKey}&client_id=${clientKey}&scope=${encodeURIComponent(scopes)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
     
     console.log('TikTok Auth URL:', authUrl);
-    console.log('Redirecting in 3 seconds...');
-    
-    setTimeout(() => {
-      window.location.href = authUrl;
-    }, 3000);
+    window.location.href = authUrl;
   };
 
   const handleTikTokDisconnect = () => {
