@@ -30,7 +30,7 @@ const PortalMyVideos = () => {
           .from('videos')
           .select('*')
           .eq('user_id', user.id)
-          .order('submitted_at', { ascending: false });
+          .order('created_at', { ascending: false });
 
         if (error) throw error;
         setVideos(data || []);
