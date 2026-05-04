@@ -70,11 +70,10 @@ const PortalSettings = () => {
     // Scopes: user.info.profile is for identity, video.list is for tracking video views.
     const dummyCodeChallenge = 'E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM';
     
-    // Using root domain to avoid path issues
-    const scopes = 'user.info.profile';
-    const redirectUri = 'https://www.joinupshift.com/';
+    // Sandbox mode requirements: user.info.basic first, and COMMA separated
+    const scopes = 'user.info.basic,user.info.profile';
+    const redirectUri = 'https://www.joinupshift.com/portal/settings';
     
-    // Sending only client_key with a trailing slash after authorize/ as per Claude's suggestion
     const authUrl = `https://www.tiktok.com/v2/auth/authorize/?client_key=${clientKey}&scope=${encodeURIComponent(scopes)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
     
     console.log('TikTok Auth URL:', authUrl);
