@@ -74,12 +74,17 @@ const PortalSettings = () => {
     const redirectUri = domain + '/portal/settings';
     
     // Updated scopes to include video.list as required for the creator program
-    const scopes = 'user.info.profile,video.list';
+    // NOTE: TikTok v2 requires scopes to be SPACE-separated
+    const scopes = 'user.info.profile video.list';
     
     const authUrl = `https://www.tiktok.com/v2/auth/authorize?client_key=${clientKey}&response_type=code&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
     
     console.log('TikTok Auth URL:', authUrl);
-    window.location.href = authUrl;
+    console.log('Redirecting in 3 seconds...');
+    
+    setTimeout(() => {
+      window.location.href = authUrl;
+    }, 3000);
   };
 
   const handleTikTokDisconnect = () => {
