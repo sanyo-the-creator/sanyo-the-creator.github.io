@@ -18,7 +18,7 @@ const PortalSettings = () => {
   const [isInstagramConnected, setIsInstagramConnected] = useState(false);
   const [instagramUsername, setInstagramUsername] = useState('jergus.s');
   const [user, setUser] = useState<any>(null);
-  const [activeModal, setActiveModal] = useState<'tiktok' | 'instagram' | 'tiktok_sim' | 'instagram_sim' | 'instagram_auth_sim' | 'tiktok_sandbox_demo' | null>(null);
+  const [activeModal, setActiveModal] = useState<'tiktok' | 'instagram' | 'tiktok_sim' | 'instagram_sim' | 'instagram_auth_sim' | null>(null);
 
   useEffect(() => {
     // Fetch actual user data
@@ -178,26 +178,6 @@ const PortalSettings = () => {
             <>
               <button className="settings-connect-btn" onClick={handleTikTokConnect}>+ Connect Account</button>
               <p className="settings-help-text">Connect your account to submit videos and track your earnings.</p>
-              
-              <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px dashed rgba(255,255,255,0.1)', width: '100%', textAlign: 'center' }}>
-                <button 
-                  onClick={() => setActiveModal('tiktok_sandbox_demo')}
-                  style={{ 
-                    background: 'rgba(59, 130, 246, 0.1)', 
-                    color: '#3b82f6', 
-                    border: '1px solid rgba(59, 130, 246, 0.3)', 
-                    padding: '8px 16px', 
-                    borderRadius: '6px',
-                    fontSize: '12px',
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  🛠️ Sandbox Demo Mode (For Review)
-                </button>
-              </div>
             </>
           )}
         </div>
@@ -388,81 +368,6 @@ const PortalSettings = () => {
             <div className="settings-modal-actions">
               <button className="settings-modal-btn-cancel" onClick={() => setActiveModal(null)}>Cancel</button>
               <button className="settings-modal-btn-continue" onClick={startTikTokOAuth}>Continue to TikTok</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {activeModal === 'tiktok_sandbox_demo' && (
-        <div className="settings-modal-overlay">
-          <div className="settings-modal" style={{ maxWidth: '500px', background: '#1a1a1a' }}>
-            <button className="settings-modal-close" onClick={() => setActiveModal(null)}>×</button>
-            <div className="settings-modal-title">
-              <SiTiktok style={{ marginRight: '10px', fontSize: '24px' }} />
-              <h2>TikTok Sandbox Demo</h2>
-            </div>
-            <p className="settings-modal-text">
-              This mode simulates the end-to-end TikTok integration for app review purposes. 
-              Clicking "Start Demo" will show the mock authorization flow.
-            </p>
-            
-            <div style={{ 
-              background: 'rgba(59, 130, 246, 0.05)', 
-              border: '1px solid rgba(59, 130, 246, 0.2)', 
-              padding: '15px', 
-              borderRadius: '8px',
-              marginBottom: '20px'
-            }}>
-              <h4 style={{ color: '#3b82f6', marginTop: 0, marginBottom: '8px', fontSize: '14px' }}>Requested Scopes:</h4>
-              <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '13px', color: '#ccc' }}>
-                <li><strong>user.info.profile:</strong> Read your TikTok profile</li>
-                <li><strong>video.list:</strong> Access your public video list (to track views)</li>
-              </ul>
-            </div>
-
-            <div className="settings-modal-actions">
-              <button className="settings-modal-btn-cancel" onClick={() => setActiveModal(null)}>Cancel</button>
-              <button 
-                className="settings-modal-btn-continue" 
-                onClick={() => {
-                  setActiveModal(null);
-                  // Simulate redirect to TikTok
-                  const overlay = document.createElement('div');
-                  overlay.style.position = 'fixed';
-                  overlay.style.top = '0';
-                  overlay.style.left = '0';
-                  overlay.style.width = '100%';
-                  overlay.style.height = '100%';
-                  overlay.style.background = '#000';
-                  overlay.style.zIndex = '9999';
-                  overlay.style.display = 'flex';
-                  overlay.style.flexDirection = 'column';
-                  overlay.style.alignItems = 'center';
-                  overlay.style.justifyContent = 'center';
-                  overlay.innerHTML = `
-                    <div style="background: #fff; padding: 40px; border-radius: 20px; width: 400px; text-align: center; color: #000;">
-                      <img src="https://www.tiktok.com/favicon.ico" style="width: 48px; margin-bottom: 20px;">
-                      <h2 style="margin-bottom: 10px;">Authorize Upshift</h2>
-                      <p style="color: #666; margin-bottom: 30px;">Upshift would like to access your TikTok profile and video list.</p>
-                      <button id="auth-btn" style="background: #fe2c55; color: #fff; border: none; padding: 12px 40px; border-radius: 4px; font-weight: bold; width: 100%; cursor: pointer;">Authorize</button>
-                      <p style="margin-top: 20px; font-size: 12px; color: #999;">Logged in as @sandbox_creator</p>
-                    </div>
-                  `;
-                  document.body.appendChild(overlay);
-                  document.getElementById('auth-btn')?.addEventListener('click', () => {
-                    overlay.innerHTML = '<div style="color: #fff; text-align: center;">Redirecting back to <strong>www.joinupshift.com</strong>...</div>';
-                    setTimeout(() => {
-                      document.body.removeChild(overlay);
-                      localStorage.setItem('tiktok_connected', 'true');
-                      localStorage.setItem('tiktok_username', '@sandbox_creator');
-                      setIsTikTokConnected(true);
-                      setTiktokUsername('@sandbox_creator');
-                    }, 1500);
-                  });
-                }}
-              >
-                Start Demo Flow
-              </button>
             </div>
           </div>
         </div>

@@ -17,8 +17,6 @@ const PortalMyVideos = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
-  const [syncing, setSyncing] = useState(false);
-  const [showSyncSuccess, setShowSyncSuccess] = useState(false);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -43,16 +41,6 @@ const PortalMyVideos = () => {
 
     fetchVideos();
   }, []);
-
-  const handleSyncTikTok = () => {
-    setSyncing(true);
-    // Simulate API delay
-    setTimeout(() => {
-      setSyncing(false);
-      setShowSyncSuccess(true);
-      setTimeout(() => setShowSyncSuccess(false), 3000);
-    }, 2000);
-  };
 
   const filteredVideos = videos.filter(video => 
     video.video_url.toLowerCase().includes(searchQuery.toLowerCase())
@@ -110,46 +98,6 @@ const PortalMyVideos = () => {
             <FiList />
           </button>
         </div>
-
-        <button 
-          onClick={handleSyncTikTok}
-          disabled={syncing}
-          className="portal-sync-btn"
-          style={{
-            background: 'rgba(254, 44, 85, 0.1)',
-            color: '#fe2c55',
-            border: '1px solid rgba(254, 44, 85, 0.3)',
-            padding: '8px 16px',
-            borderRadius: '8px',
-            fontSize: '13px',
-            fontWeight: '600',
-            cursor: syncing ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            marginLeft: '10px',
-            transition: 'all 0.2s ease'
-          }}
-        >
-          {syncing ? 'Syncing...' : 'Sync from TikTok'}
-        </button>
-
-        {showSyncSuccess && (
-          <div style={{
-            position: 'fixed',
-            bottom: '30px',
-            right: '30px',
-            background: '#22c55e',
-            color: '#fff',
-            padding: '12px 24px',
-            borderRadius: '8px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-            zIndex: 1000,
-            animation: 'slideUp 0.3s ease-out'
-          }}>
-            ✅ Videos synced successfully!
-          </div>
-        )}
       </div>
 
       {/* Main Content Area */}
