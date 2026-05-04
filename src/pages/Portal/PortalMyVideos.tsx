@@ -29,8 +29,7 @@ const PortalMyVideos = () => {
         const { data, error } = await supabase
           .from('videos')
           .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false });
+          .eq('user_id', user.id);
 
         console.log('Videos Data:', data, 'Error:', error);
         if (error) throw error;
