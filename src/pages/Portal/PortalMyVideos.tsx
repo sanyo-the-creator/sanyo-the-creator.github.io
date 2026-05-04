@@ -32,6 +32,7 @@ const PortalMyVideos = () => {
           .eq('user_id', user.id)
           .order('created_at', { ascending: false });
 
+        console.log('Videos Data:', data, 'Error:', error);
         if (error) throw error;
         setVideos(data || []);
       } catch (err) {
