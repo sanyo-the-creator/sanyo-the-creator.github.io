@@ -78,6 +78,7 @@ const PortalSettings = () => {
     
     const authUrl = `https://www.tiktok.com/v2/auth/authorize?client_key=${clientKey}&response_type=code&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
     
+    console.log('TikTok Auth URL:', authUrl);
     window.location.href = authUrl;
   };
 
