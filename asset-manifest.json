@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.14e8a775.css",
-    "main.js": "/static/js/main.6cda5088.js",
+    "main.css": "/static/css/main.dcdb0196.css",
+    "main.js": "/static/js/main.bbb0dc22.js",
     "static/js/453.43a19f67.chunk.js": "/static/js/453.43a19f67.chunk.js",
     "static/media/widgets.png": "/static/media/widgets.77441e43c58399e9fc38.png",
     "static/media/profile.png": "/static/media/profile.4e2249b37e60210d335f.png",
@@ -35,6 +35,7 @@
     "static/media/oneday.png": "/static/media/oneday.d1e47feb275d146a4c7a.png",
     "static/media/sidequest.png": "/static/media/sidequest.8e97531cd8c6982729d7.png",
     "static/media/pornBlock.png": "/static/media/pornBlock.c72713704c366339b1fb.png",
+    "static/media/icon.png": "/static/media/icon.6c5eef566be4a89ed762.png",
     "static/media/workSchedule.png": "/static/media/workSchedule.e830096af07735289cd2.png",
     "static/media/questBlock.png": "/static/media/questBlock.76268fa3edd5924a7627.png",
     "static/media/timeLimit.png": "/static/media/timeLimit.f65768b769eb7673a16c.png",
@@ -52,12 +53,12 @@
     "static/media/customBlockOverlay.jpeg": "/static/media/customBlockOverlay.2d1ffa74223b6a2e2977.jpeg",
     "index.html": "/index.html",
     "static/media/upshift_icon_mini.svg": "/static/media/upshift_icon_mini.1fb87e10c322be9c3ff07b58586ac47f.svg",
-    "main.14e8a775.css.map": "/static/css/main.14e8a775.css.map",
-    "main.6cda5088.js.map": "/static/js/main.6cda5088.js.map",
+    "main.dcdb0196.css.map": "/static/css/main.dcdb0196.css.map",
+    "main.bbb0dc22.js.map": "/static/js/main.bbb0dc22.js.map",
     "453.43a19f67.chunk.js.map": "/static/js/453.43a19f67.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.14e8a775.css",
-    "static/js/main.6cda5088.js"
+    "static/css/main.dcdb0196.css",
+    "static/js/main.bbb0dc22.js"
   ]
 }
