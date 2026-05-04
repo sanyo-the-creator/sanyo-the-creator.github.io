@@ -50,6 +50,29 @@ const PortalMyVideos = () => {
     setTimeout(() => {
       setSyncing(false);
       setShowSyncSuccess(true);
+      
+      // Add mock videos for the demo
+      setVideos([
+        {
+          id: 'mock-1',
+          video_url: 'https://www.tiktok.com/@upshift/video/123456789',
+          thumbnail_url: 'https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/o4f5e7f8a9b0c1d2e3f4g5h6i7j8k9l0~tplv-tiktok-play.jpeg?x-expires=1630000000&x-signature=abcd',
+          views: 45200,
+          earnings_cents: 2000,
+          status: 'approved',
+          created_at: new Date().toISOString()
+        },
+        {
+          id: 'mock-2',
+          video_url: 'https://www.tiktok.com/@upshift/video/987654321',
+          thumbnail_url: 'https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6~tplv-tiktok-play.jpeg?x-expires=1630000000&x-signature=efgh',
+          views: 1200,
+          earnings_cents: 0,
+          status: 'pending',
+          created_at: new Date().toISOString()
+        }
+      ]);
+
       setTimeout(() => setShowSyncSuccess(false), 3000);
     }, 2000);
   };

@@ -15,10 +15,17 @@ const PortalSubmitVideo = () => {
   const [user, setUser] = useState<any>(null);
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null, message: string }>({ type: null, message: '' });
   const [connections, setConnections] = useState({ tiktok: false, instagram: false });
+  const [hasProfile, setHasProfile] = useState<boolean | null>(null);
 
   useEffect(() => {
+    // Check if user has a referral profile
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user);
+      if (user) {
+        supabase.from('referral_profiles').select('id').eq('id', user.id).maybeSingle().then(({ data }) => {
+          setHasProfile(!!data);
+        });
+      }
     });
 
     // Check mock connections from localStorage
@@ -194,6 +201,9 @@ const PortalSubmitVideo = () => {
       });
 
       if (error) {
+        if (error.code === '23503') { // Foreign key violation
+          throw new Error('Please set up your Referral Username first in the Referrals tab.');
+        }
         if (error.code === '23505') { // Postgres unique_violation code
           throw new Error('This video has already been submitted.');
         }
