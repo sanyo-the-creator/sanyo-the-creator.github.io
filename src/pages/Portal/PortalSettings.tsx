@@ -144,8 +144,20 @@ const PortalSettings = () => {
       alert('Instagram Client ID missing! Check your .env file.');
       return;
     }
-    const redirectUri = window.location.origin + '/portal/settings';
-    const authUrl = `https://www.instagram.com/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user_profile,user_media&response_type=code&state=instagram_flow`;
+
+    // Redirect to Facebook Login (which now handles Instagram Graph API)
+    const redirectUri = 'https://www.joinupshift.com/portal/settings';
+
+    // Scopes needed for Instagram Business/Creator accounts
+    const scopes = [
+      'instagram_basic',
+      'pages_show_list',
+      'pages_read_engagement'
+    ].join(',');
+
+    const authUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&response_type=code&state=instagram_flow`;
+
+    console.log('Instagram (via Facebook) Auth URL:', authUrl);
     window.location.href = authUrl;
   };
 
