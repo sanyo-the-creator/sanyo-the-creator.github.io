@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FiClock as _FiClock, FiDollarSign as _FiDollarSign, FiVideo as _FiVideo, FiEye as _FiEye, FiGift as _FiGift } from 'react-icons/fi';
 import { BiCalendar as _BiCalendar } from 'react-icons/bi';
+import { supabase } from '../../lib/supabase';
+
 const FiClock = _FiClock as React.ElementType;
 const FiDollarSign = _FiDollarSign as React.ElementType;
 const FiVideo = _FiVideo as React.ElementType;
@@ -10,8 +12,48 @@ const BiCalendar = _BiCalendar as React.ElementType;
 
 const PortalDashboard = () => {
   const [timeLeft, setTimeLeft] = useState({ d: 17, h: 18, m: 53, s: 8 });
+  const [stats, setStats] = useState({
+    verified: 0,
+    unverified: 0,
+    totalPosts: 0,
+    totalViews: 0
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return;
+
+        const { data: videos, error } = await supabase
+          .from('videos')
+          .select('*')
+          .eq('user_id', user.id);
+
+        if (error) throw error;
+
+        const aggregated = (videos || []).reduce((acc, v) => {
+          if (v.status === 'approved') {
+            acc.verified += (v.earnings_cents || 0);
+          } else if (v.status === 'pending') {
+            acc.unverified += (v.earnings_cents || 0);
+          }
+          acc.totalPosts += 1;
+          acc.totalViews += (v.views || 0);
+          return acc;
+        }, { verified: 0, unverified: 0, totalPosts: 0, totalViews: 0 });
+
+        setStats(aggregated);
+      } catch (err) {
+        console.error('Error fetching dashboard stats:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         let { d, h, m, s } = prev;
@@ -68,7 +110,7 @@ const PortalDashboard = () => {
               <span className="portal-metric-title">Verified Earnings
                 {/* <span className="portal-info-icon-inline">i</span> */}
               </span>
-              <div className="portal-metric-value">$0.00</div>
+              <div className="portal-metric-value">${(stats.verified / 100).toFixed(2)}</div>
               <div className="portal-metric-subtext">April 2026</div>
             </div>
             <div className="portal-metric-icon-wrapper verified-icon">
@@ -83,7 +125,7 @@ const PortalDashboard = () => {
               <span className="portal-metric-title">Unverified Earnings
                 {/* <span className="portal-info-icon-inline">i</span> */}
               </span>
-              <div className="portal-metric-value highlight">$0.00</div>
+              <div className="portal-metric-value highlight">${(stats.unverified / 100).toFixed(2)}</div>
               <div className="portal-metric-subtext">Awaiting review</div>
             </div>
             <div className="portal-metric-icon-wrapper unverified-icon">
@@ -96,7 +138,7 @@ const PortalDashboard = () => {
           <div className="portal-metric-content-wrapper">
             <div className="portal-metric-left">
               <span className="portal-metric-title">Total Posts</span>
-              <div className="portal-metric-value">0</div>
+              <div className="portal-metric-value">{stats.totalPosts}</div>
               <div className="portal-metric-subtext">Submitted videos</div>
             </div>
             <div className="portal-metric-icon-wrapper posts-icon">
@@ -109,7 +151,7 @@ const PortalDashboard = () => {
           <div className="portal-metric-content-wrapper">
             <div className="portal-metric-left">
               <span className="portal-metric-title">Total Views</span>
-              <div className="portal-metric-value">0</div>
+              <div className="portal-metric-value">{stats.totalViews.toLocaleString()}</div>
               <div className="portal-metric-subtext">Across all videos</div>
             </div>
             <div className="portal-metric-icon-wrapper views-icon">

@@ -105,9 +105,10 @@ const AdminUserDetail: React.FC = () => {
   const [sales, setSales] = useState<any[]>([]);
   const [trials, setTrials] = useState<any[]>([]);
   const [videos, setVideos] = useState<any[]>([]);
-  const [dateRange, setDateRange] = useState<DateRange>('all');
+  const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d' | 'all'>('30d');
+  const [deviceFilter, setDeviceFilter] = useState<'all' | 'android' | 'ios' | 'desktop'>('all');
+  const [activeSection, setActiveSection] = useState<'overview' | 'videos' | 'clicks' | 'devices' | 'sales' | 'settings' | 'traffic' | 'log'>('overview');
   const [copied, setCopied] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>('overview');
 
   useEffect(() => {
     loadData();
@@ -172,7 +173,7 @@ const AdminUserDetail: React.FC = () => {
 
   // Filter data by date range
   const filterByDate = (items: any[], dateField: string) => {
-    if (dateRange === 'all') return items;
+    if ((dateRange as any) === 'all') return items;
     const now = new Date();
     const days = dateRange === '7d' ? 7 : dateRange === '30d' ? 30 : 90;
     const cutoff = new Date(now.getTime() - days * 86400000);
@@ -283,16 +284,20 @@ const AdminUserDetail: React.FC = () => {
   // Country breakdown
   const countryData = useMemo(() => {
     const map: Record<string, number> = {};
-    filteredClicks.forEach(c => {
+    const filteredForDevice = deviceFilter === 'all' 
+      ? filteredClicks 
+      : filteredClicks.filter(c => c.device_type?.toLowerCase().includes(deviceFilter));
+    
+    filteredForDevice.forEach(c => {
       const countryRaw = c.country || 'Unknown';
       const country = countryRaw !== 'Unknown' ? countryName(countryRaw) : countryRaw;
       map[country] = (map[country] || 0) + 1;
     });
     return Object.entries(map)
-      .map(([country, count]) => ({ country, count, pct: filteredClicks.length > 0 ? ((count / filteredClicks.length) * 100).toFixed(1) : '0' }))
+      .map(([country, count]) => ({ country, count, pct: filteredForDevice.length > 0 ? ((count / filteredForDevice.length) * 100).toFixed(1) : '0' }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 15);
-  }, [filteredClicks]);
+  }, [filteredClicks, deviceFilter]);
 
 
 
@@ -314,6 +319,15 @@ const AdminUserDetail: React.FC = () => {
 
   // Summary stats
   const totalRevenue = filteredSales.reduce((sum: number, s: any) => sum + (s.amount_cents || 0), 0);
+  const totalCost = videos.reduce((sum: number, v: any) => 
+    (v.status === 'approved' || v.status === 'paid') ? sum + (v.earnings_cents || 0) : sum, 0);
+  const totalPaid = videos.reduce((sum: number, v: any) => 
+    v.status === 'paid' ? sum + (v.earnings_cents || 0) : sum, 0);
+  const totalPendingPayout = videos.reduce((sum: number, v: any) => 
+    v.status === 'approved' ? sum + (v.earnings_cents || 0) : sum, 0);
+  const netProfit = totalRevenue - totalCost;
+  const isProfitable = netProfit > 0;
+
   const uniqueVisitors = new Set(filteredClicks.map((c: any) => c.visitor_id).filter(Boolean)).size;
 
   const formatMoney = (cents: number) => `$${(cents / 100).toFixed(2)}`;
@@ -357,7 +371,7 @@ const AdminUserDetail: React.FC = () => {
     );
   }
 
-  const SECTIONS = [
+  const SECTIONS: { key: typeof activeSection; label: string }[] = [
     { key: 'overview', label: 'Overview' },
     { key: 'traffic', label: 'Traffic Sources' },
     { key: 'devices', label: 'Devices & Geo' },
@@ -391,7 +405,7 @@ const AdminUserDetail: React.FC = () => {
         <div className="aud-datefilter">
           <FiCalendar />
           {(['7d', '30d', '90d', 'all'] as DateRange[]).map(r => (
-            <button key={r} className={`aud-range-btn ${dateRange === r ? 'active' : ''}`} onClick={() => setDateRange(r)}>
+            <button key={r} className={`aud-range-btn ${dateRange === r ? 'active' : ''}`} onClick={() => setDateRange(r as any)}>
               {r === 'all' ? 'All Time' : r === '7d' ? '7 Days' : r === '30d' ? '30 Days' : '90 Days'}
             </button>
           ))}
@@ -418,13 +432,100 @@ const AdminUserDetail: React.FC = () => {
         </div>
       </div>
 
+      {/* ===== PAYOUT DASHBOARD ===== */}
+      {activeSection === 'overview' && totalPendingPayout > 0 && (
+        <div className="aud-payout-banner" style={{ 
+          background: 'rgba(59, 130, 246, 0.1)', 
+          border: '1px solid rgba(59, 130, 246, 0.2)', 
+          borderRadius: '12px', 
+          padding: '20px', 
+          marginBottom: '24px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <div>
+            <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', color: '#fff' }}>Pending Payout: {formatMoney(totalPendingPayout)}</h3>
+            <p style={{ margin: 0, fontSize: '13px', color: '#888' }}>
+              User has {videos.filter(v => v.status === 'approved').length} approved videos waiting for payment.
+            </p>
+            <div style={{ marginTop: '10px', fontSize: '12px', display: 'flex', gap: '15px' }}>
+              {profile.paypal_email && <span title="PayPal">📧 {profile.paypal_email}</span>}
+              {profile.cashapp_tag && <span title="Cash App">💸 {profile.cashapp_tag}</span>}
+              {profile.crypto_address && <span title="Crypto">🔗 {profile.crypto_address.substring(0, 10)}...</span>}
+              {!profile.paypal_email && !profile.cashapp_tag && !profile.crypto_address && (
+                <span style={{ color: '#f87171' }}>⚠️ No payment method set!</span>
+              )}
+            </div>
+          </div>
+          <button 
+            onClick={async () => {
+              const approvedVids = videos.filter(v => v.status === 'approved');
+              if (approvedVids.length === 0) return;
+              
+              const summary = `Invoice Summary for ${profile.display_name}:\n` +
+                `- Videos: ${approvedVids.length}\n` +
+                `- Total Amount: ${formatMoney(totalPendingPayout)}\n` +
+                `- Payment Method: ${profile.paypal_email || profile.cashapp_tag || profile.crypto_address || 'NOT SET'}\n\n` +
+                `Mark all as PAID?`;
+
+              if (!window.confirm(summary)) return;
+
+              // 1. Create Invoice Record
+              const { data: invoiceData, error: invoiceError } = await supabase
+                .from('invoices')
+                .insert({
+                  user_id: userId,
+                  amount_cents: totalPendingPayout,
+                  video_ids: approvedVids.map(v => v.id),
+                  payment_method: profile.paypal_email ? 'PayPal' : profile.cashapp_tag ? 'Cash App' : profile.crypto_address ? 'Crypto' : 'Manual',
+                  payment_details: profile.paypal_email || profile.cashapp_tag || profile.crypto_address || 'Manual Payout',
+                  status: 'paid'
+                })
+                .select()
+                .single();
+
+              if (invoiceError) {
+                alert('Error creating invoice: ' + invoiceError.message);
+                return;
+              }
+
+              // 2. Update Videos
+              const { error: videoError } = await supabase
+                .from('videos')
+                .update({ status: 'paid', moderated_at: new Date().toISOString() })
+                .eq('user_id', userId)
+                .eq('status', 'approved');
+
+              if (videoError) alert('Error updating videos: ' + videoError.message);
+              else {
+                alert('Payout processed and invoice created successfully!');
+                loadData();
+              }
+            }}
+            style={{ 
+              background: '#3b82f6', 
+              color: '#fff', 
+              border: 'none', 
+              padding: '12px 24px', 
+              borderRadius: '8px', 
+              fontWeight: 'bold', 
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+          >
+            Pay All Approved
+          </button>
+        </div>
+      )}
+
       {/* Section nav */}
       <div className="aud-section-nav">
         {SECTIONS.map(s => (
           <button
             key={s.key}
             className={`aud-section-btn ${activeSection === s.key ? 'active' : ''}`}
-            onClick={() => setActiveSection(s.key)}
+            onClick={() => setActiveSection(s.key as any)}
           >
             {s.label}
           </button>
@@ -471,6 +572,19 @@ const AdminUserDetail: React.FC = () => {
               <div className="aud-stat-num">{formatNum(videos.reduce((s: number, v: any) => s + (v.views || 0), 0))}</div>
               <div className="aud-stat-lbl">Total Views</div>
               <div className="aud-stat-sub">Across all videos</div>
+            </div>
+            <div className="aud-stat">
+              <div className="aud-stat-icon" style={{ 
+                color: isProfitable ? '#4ade80' : '#f87171', 
+                background: isProfitable ? 'rgba(74,222,128,.1)' : 'rgba(248,113,113,.1)' 
+              }}>
+                <FiTrendingUp />
+              </div>
+              <div className="aud-stat-num" style={{ color: isProfitable ? '#4ade80' : '#f87171' }}>
+                {formatMoney(netProfit)}
+              </div>
+              <div className="aud-stat-lbl">Net Profit</div>
+              <div className="aud-stat-sub">{isProfitable ? 'Profitable' : 'Loss-making'}</div>
             </div>
           </div>
 
@@ -616,10 +730,33 @@ const AdminUserDetail: React.FC = () => {
 
             {/* Country */}
             <div className="aud-chart-card">
-              <div className="aud-chart-header"><h3><FiGlobe /> Top Countries</h3></div>
+              <div className="aud-chart-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3><FiGlobe /> Top Countries</h3>
+                <div style={{ display: 'flex', gap: '4px', background: '#222', padding: '2px', borderRadius: '6px' }}>
+                  {(['all', 'android', 'ios', 'desktop'] as const).map(d => (
+                    <button
+                      key={d}
+                      onClick={() => setDeviceFilter(d)}
+                      style={{
+                        padding: '4px 8px',
+                        fontSize: '10px',
+                        fontWeight: 'bold',
+                        border: 'none',
+                        borderRadius: '4px',
+                        background: deviceFilter === d ? '#3b82f6' : 'transparent',
+                        color: deviceFilter === d ? '#fff' : '#666',
+                        cursor: 'pointer',
+                        textTransform: 'capitalize'
+                      }}
+                    >
+                      {d === 'ios' ? 'iPhone' : d}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <div className="aud-chart-body aud-country-list">
                 {countryData.length === 0 ? (
-                  <div className="aud-empty-mini">No country data yet</div>
+                  <div className="aud-empty-mini">No country data for this filter</div>
                 ) : countryData.map((c, i) => (
                   <div key={c.country} className="aud-country-row">
                     <span className="aud-country-rank">#{i + 1}</span>
@@ -772,9 +909,33 @@ const AdminUserDetail: React.FC = () => {
                             Reject
                           </button>
                         </>
+                      ) : v.status === 'approved' ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                          <span style={{ fontSize: '10px', opacity: 0.8, color: '#4ade80' }}>
+                            Approved: ${(v.earnings_cents / 100).toFixed(2)}
+                          </span>
+                          <button 
+                            onClick={async () => {
+                              if (!window.confirm('Mark this video as PAID? This means you have sent the money.')) return;
+                              const { error } = await supabase.from('videos').update({ 
+                                status: 'paid',
+                                moderated_at: new Date().toISOString()
+                              }).eq('id', v.id);
+                              if (error) alert('Error: ' + error.message);
+                              else loadData();
+                            }}
+                            style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '3px 6px', borderRadius: '4px', fontSize: '9px', cursor: 'pointer' }}
+                          >
+                            Mark Paid
+                          </button>
+                        </div>
+                      ) : v.status === 'paid' ? (
+                        <span style={{ fontSize: '10px', color: '#4ade80', fontWeight: 'bold' }}>
+                          PAID: ${(v.earnings_cents / 100).toFixed(2)}
+                        </span>
                       ) : (
                         <span style={{ fontSize: '10px', opacity: 0.5 }}>
-                          {v.status === 'approved' ? `$${(v.earnings_cents / 100).toFixed(2)}` : 'Rejected'}
+                          Rejected
                         </span>
                       )}
                     </span>

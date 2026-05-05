@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiUser as _FiUser, FiCreditCard as _FiCreditCard, FiAlertCircle as _FiAlertCircle, FiBookOpen as _FiBookOpen } from 'react-icons/fi';
+import { FiUser as _FiUser, FiCreditCard as _FiCreditCard, FiAlertCircle as _FiAlertCircle, FiBookOpen as _FiBookOpen, FiClock as _FiClock } from 'react-icons/fi';
 import { SiTiktok as _SiTiktok, SiInstagram as _SiInstagram, SiDiscord as _SiDiscord, SiStripe as _SiStripe } from 'react-icons/si';
 import { supabase } from '../../lib/supabase';
 
@@ -7,6 +7,7 @@ const FiUser = _FiUser as React.ElementType;
 const FiCreditCard = _FiCreditCard as React.ElementType;
 const FiAlertCircle = _FiAlertCircle as React.ElementType;
 const FiBookOpen = _FiBookOpen as React.ElementType;
+const FiClock = _FiClock as React.ElementType;
 const SiTiktok = _SiTiktok as React.ElementType;
 const SiInstagram = _SiInstagram as React.ElementType;
 const SiDiscord = _SiDiscord as React.ElementType;
@@ -19,11 +20,51 @@ const PortalSettings = () => {
   const [instagramUsername, setInstagramUsername] = useState('jergus.s');
   const [user, setUser] = useState<any>(null);
   const [activeModal, setActiveModal] = useState<'tiktok' | 'instagram' | 'tiktok_sim' | 'instagram_sim' | 'instagram_auth_sim' | null>(null);
+  const [stats, setStats] = useState({ paid: 0, pending: 0 });
+  const [invoices, setInvoices] = useState<any[]>([]);
+  const [paypalEmail, setPaypalEmail] = useState('');
+  const [cashTag, setCashTag] = useState('');
+  const [cryptoAddr, setCryptoAddr] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     // Fetch actual user data
     supabase.auth.getUser().then(({ data: { user } }: any) => {
       setUser(user);
+      if (user) {
+        // Fetch payout stats & payment info
+        supabase.from('referral_profiles')
+          .select('paypal_email, cashapp_tag, crypto_address')
+          .eq('id', user.id)
+          .single()
+          .then(({ data }) => {
+            if (data) {
+              setPaypalEmail(data.paypal_email || '');
+              setCashTag(data.cashapp_tag || '');
+              setCryptoAddr(data.crypto_address || '');
+            }
+          });
+
+        supabase.from('videos')
+          .select('status, earnings_cents')
+          .eq('user_id', user.id)
+          .then(({ data }) => {
+            if (data) {
+              const paid = data.filter(v => v.status === 'paid').reduce((s, v) => s + (v.earnings_cents || 0), 0);
+              const pending = data.filter(v => v.status === 'approved').reduce((s, v) => s + (v.earnings_cents || 0), 0);
+              setStats({ paid, pending });
+            }
+          });
+
+        // Fetch invoices
+        supabase.from('invoices')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false })
+          .then(({ data }) => {
+            if (data) setInvoices(data);
+          });
+      }
     });
 
     // Check local storage for existing mock connections
@@ -54,26 +95,39 @@ const PortalSettings = () => {
     }
   }, []);
 
+  const handleSavePayment = async (type: 'paypal' | 'cashapp' | 'crypto') => {
+    if (!user) return;
+    setIsSaving(true);
+    try {
+      const updates: any = {};
+      if (type === 'paypal') updates.paypal_email = paypalEmail;
+      if (type === 'cashapp') updates.cashapp_tag = cashTag;
+      if (type === 'crypto') updates.crypto_address = cryptoAddr;
+
+      const { error } = await supabase
+        .from('referral_profiles')
+        .update(updates)
+        .eq('id', user.id);
+
+      if (error) throw error;
+      alert('Payment information saved successfully!');
+    } catch (err: any) {
+      alert('Error saving payment info: ' + err.message);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   const handleTikTokConnect = () => setActiveModal('tiktok');
   const handleInstagramConnect = () => setActiveModal('instagram');
 
   const startTikTokOAuth = () => {
     setActiveModal(null);
-    // Hardcoding the Sandbox key to ensure the build picks it up
     const clientKey = 'sbawy70ee96x8fwy4q';
-    
-    // Redirect to TikTok Login Kit v2
-    // TikTok strictly requires PKCE (Proof Key for Code Exchange) in v2.
-    // Scopes: user.info.profile is for identity, video.list is for tracking video views.
     const dummyCodeChallenge = 'E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM';
-    
-    // Sandbox mode requirements: user.info.basic first, and COMMA separated
     const scopes = 'user.info.basic,user.info.profile';
     const redirectUri = 'https://www.joinupshift.com/portal/settings';
-    
     const authUrl = `https://www.tiktok.com/v2/auth/authorize/?client_key=${clientKey}&scope=${encodeURIComponent(scopes)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&state=tiktok_flow&code_challenge=${dummyCodeChallenge}&code_challenge_method=S256`;
-    
-    console.log('TikTok Auth URL:', authUrl);
     window.location.href = authUrl;
   };
 
@@ -90,13 +144,8 @@ const PortalSettings = () => {
       alert('Instagram Client ID missing! Check your .env file.');
       return;
     }
-    
-    // Redirect to Instagram Basic Display OAuth
-    // NOTE: If using a generic FB App ID, this might fail with "Invalid platform app" 
-    // unless the "Instagram Basic Display" product is added in FB Dashboard.
     const redirectUri = window.location.origin + '/portal/settings';
     const authUrl = `https://www.instagram.com/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user_profile,user_media&response_type=code&state=instagram_flow`;
-    
     window.location.href = authUrl;
   };
 
@@ -126,7 +175,6 @@ const PortalSettings = () => {
           <div className="settings-section-icon"><FiUser /></div>
           <h3>Profile</h3>
         </div>
-        
         <div className="settings-block-content profile-block">
           <img src={userAvatar} alt="avatar" className="settings-avatar" />
           <div className="profile-info">
@@ -146,29 +194,13 @@ const PortalSettings = () => {
           <div className="settings-section-icon"><SiTiktok /></div>
           <h3>TikTok Accounts</h3>
         </div>
-        
         <div className="settings-block-content center-content">
           {isTikTokConnected ? (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-              <div style={{ 
-                background: 'rgba(34, 197, 94, 0.1)', 
-                color: '#4ade80', 
-                padding: '12px 24px', 
-                borderRadius: '8px',
-                border: '1px solid rgba(34, 197, 94, 0.2)',
-                fontWeight: 'bold',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
+              <div style={{ background: 'rgba(34, 197, 94, 0.1)', color: '#4ade80', padding: '12px 24px', borderRadius: '8px', border: '1px solid rgba(34, 197, 94, 0.2)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 ✅ Connected as {tiktokUsername}
               </div>
-              <button 
-                onClick={handleTikTokDisconnect}
-                style={{ background: 'transparent', border: 'none', color: '#ff4b4b', cursor: 'pointer', fontSize: '14px', textDecoration: 'underline' }}
-              >
-                Disconnect
-              </button>
+              <button onClick={handleTikTokDisconnect} style={{ background: 'transparent', border: 'none', color: '#ff4b4b', cursor: 'pointer', fontSize: '14px', textDecoration: 'underline' }}>Disconnect</button>
             </div>
           ) : (
             <>
@@ -185,29 +217,13 @@ const PortalSettings = () => {
           <div className="settings-section-icon"><SiInstagram /></div>
           <h3>Instagram Accounts</h3>
         </div>
-        
         <div className="settings-block-content center-content">
           {isInstagramConnected ? (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-              <div style={{ 
-                background: 'rgba(34, 197, 94, 0.1)', 
-                color: '#4ade80', 
-                padding: '12px 24px', 
-                borderRadius: '8px',
-                border: '1px solid rgba(34, 197, 94, 0.2)',
-                fontWeight: 'bold',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
+              <div style={{ background: 'rgba(34, 197, 94, 0.1)', color: '#4ade80', padding: '12px 24px', borderRadius: '8px', border: '1px solid rgba(34, 197, 94, 0.2)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 ✅ Connected as {instagramUsername || userName}
               </div>
-              <button 
-                onClick={handleInstagramDisconnect}
-                style={{ background: 'transparent', border: 'none', color: '#ff4b4b', cursor: 'pointer', fontSize: '14px', textDecoration: 'underline' }}
-              >
-                Disconnect
-              </button>
+              <button onClick={handleInstagramDisconnect} style={{ background: 'transparent', border: 'none', color: '#ff4b4b', cursor: 'pointer', fontSize: '14px', textDecoration: 'underline' }}>Disconnect</button>
             </div>
           ) : (
             <>
@@ -218,153 +234,90 @@ const PortalSettings = () => {
         </div>
       </div>
 
-      {/* Payment Methods Section */}
+      {/* Payout Stats Section */}
       <div className="settings-section-card">
         <div className="settings-section-header">
           <div className="settings-section-icon"><FiCreditCard /></div>
-          <h3>Payment Methods</h3>
+          <h3>Payment Methods & Payouts</h3>
         </div>
-        <p className="settings-section-description">
-          Add your payment info below. You only need one to get paid, but adding multiple gives us backup options if there's an issue.
-        </p>
-
-        {/* Stripe */}
-        <div className="settings-payment-subblock">
-          <div className="payment-subblock-title">
-            <span className="payment-icon stripe-icon">🏛️</span> <strong>Bank</strong> (Stripe) <span className="badge-main text-accent">Main</span>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '20px', padding: '0 20px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '15px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', marginBottom: '4px' }}>Already Paid Out</div>
+            <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#4ade80' }}>${(stats.paid / 100).toFixed(2)}</div>
           </div>
-          <p className="payment-help">Connect your bank account to receive payouts directly.</p>
-          <button className="settings-btn-stripe">
-            <SiStripe style={{ marginRight: '6px' }} /> Connect with Stripe
-          </button>
-        </div>
-
-        {/* Crypto */}
-        <div className="settings-payment-subblock">
-          <div className="payment-subblock-title">
-            <span className="payment-icon crypto-icon">🟣</span> <strong>Crypto</strong> (USDC on the Solana Network) <span className="badge-main text-accent">Main</span>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '15px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', marginBottom: '4px' }}>Pending Payout</div>
+            <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#3b82f6' }}>${(stats.pending / 100).toFixed(2)}</div>
           </div>
-          <p className="payment-help">Connect your Phantom wallet or enter your address manually to receive USDC payouts.</p>
-          
-          <div className="payment-actions-row">
-            <button className="settings-btn-wallet">
-              <span className="phantom-logo">👻</span> Connect Wallet
-            </button>
-            <button className="settings-btn-manual">
-              <span className="edit-icon">✏️</span> Enter Manually
-            </button>
-          </div>
-          
-          <div className="warning-box">
-             <FiAlertCircle className="warning-icon" />
-             <div className="warning-text">
-               <strong>Connect Wallet</strong> will request your public wallet address from Phantom — no transactions will be made, and we never access your funds.<br />
-               <span className="text-warning-orange">Phantom not detected. <a href="#">Install Phantom</a> or use "Enter Manually" below.</span>
-             </div>
-          </div>
-          <div className="wallet-help-link">
-             <FiBookOpen /> How to get a wallet
-          </div>
-        </div>
-
-        {/* PayPal */}
-        <div className="settings-payment-subblock">
-          <div className="payment-subblock-title">
-            <span className="payment-icon paypal-icon">P</span> <strong>PayPal</strong> <span className="info-circle-tiny">i</span>
-          </div>
-          
-          <div className="form-group">
-            <label>PAYPAL EMAIL OR USERNAME</label>
-            <input type="text" placeholder="yourname@example.com or @username" className="settings-input" />
-          </div>
-          <div className="form-group">
-            <label>CONFIRM</label>
-            <input type="text" placeholder="Enter again to confirm" className="settings-input" />
-          </div>
-          <button className="settings-save-btn">Save</button>
-        </div>
-
-        {/* Cash App */}
-        <div className="settings-payment-subblock">
-          <div className="payment-subblock-title">
-            <span className="payment-icon cashapp-icon">$</span> <strong>Cash App</strong> <span className="info-circle-tiny">i</span>
-          </div>
-          
-          <div className="form-group">
-            <label>$CASHTAG</label>
-            <input type="text" placeholder="$YourCashTag" className="settings-input" />
-          </div>
-          <div className="form-group">
-            <label>CONFIRM $CASHTAG</label>
-            <input type="text" placeholder="Enter again to confirm" className="settings-input" />
-          </div>
-          <button className="settings-save-btn">Save</button>
         </div>
       </div>
-      
-      {/* Integration Guide Section */}
-      <div className="settings-section-card" style={{ marginTop: '20px', border: '1px dashed rgba(59, 130, 246, 0.3)', background: 'rgba(59, 130, 246, 0.02)' }}>
+
+      {/* Payout History Section */}
+      <div className="settings-section-card">
         <div className="settings-section-header">
-          <div className="settings-section-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}><FiBookOpen /></div>
-          <h3>Integration Guide</h3>
+          <div className="settings-section-icon"><FiClock /></div>
+          <h3>Payout History</h3>
         </div>
-        <div className="settings-block-content" style={{ padding: '0 20px 20px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
-            <div>
-              <h4 style={{ color: '#fff', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <SiTiktok /> TikTok Connection
-              </h4>
-              <ul style={{ fontSize: '13px', color: '#aaa', paddingLeft: '18px', lineHeight: '1.6' }}>
-                <li>Log in to TikTok on this browser first.</li>
-                <li>Ensure you authorize "User Info" and "Video List" scopes.</li>
-                <li>Your TikTok must be public to track views.</li>
-                <li>Tag <strong>@joinupshift.com</strong> in your description (first line).</li>
-              </ul>
-            </div>
-            <div>
-              <h4 style={{ color: '#fff', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <SiInstagram /> Instagram Connection
-              </h4>
-              <ul style={{ fontSize: '13px', color: '#aaa', paddingLeft: '18px', lineHeight: '1.6' }}>
-                <li>Your account <strong>MUST</strong> be a <strong>Professional/Creator/Business</strong> account.</li>
-                <li>Must be linked to a Facebook Page (Meta requirement).</li>
-                <li>Enable <strong>"Allow Access to Messages"</strong> in IG settings.</li>
-                <li>Tag <strong>@byupshift</strong> in your Reels (first line).</li>
-              </ul>
-            </div>
+        <p className="settings-section-description">A history of all payments sent to you. You can use these records for your taxes.</p>
+        {invoices.length === 0 ? (
+          <div style={{ padding: '40px', textAlign: 'center', color: '#666', fontSize: '14px' }}>No payouts yet.</div>
+        ) : (
+          <div className="invoices-list" style={{ padding: '0 20px 20px' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+              <thead>
+                <tr style={{ color: '#666', borderBottom: '1px solid rgba(255,255,255,0.05)', textAlign: 'left' }}>
+                  <th style={{ padding: '10px 5px' }}>Date</th>
+                  <th style={{ padding: '10px 5px' }}>Amount</th>
+                  <th style={{ padding: '10px 5px' }}>Method</th>
+                  <th style={{ padding: '10px 5px' }}>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {invoices.map(inv => (
+                  <tr key={inv.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                    <td style={{ padding: '12px 5px', color: '#888' }}>{new Date(inv.created_at).toLocaleDateString()}</td>
+                    <td style={{ padding: '12px 5px', fontWeight: 'bold', color: '#fff' }}>${(inv.amount_cents / 100).toFixed(2)}</td>
+                    <td style={{ padding: '12px 5px', color: '#888' }}>{inv.payment_method}</td>
+                    <td style={{ padding: '12px 5px' }}><span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', background: 'rgba(74,222,128,0.1)', color: '#4ade80', fontWeight: 'bold' }}>{inv.status.toUpperCase()}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <div className="tip-box" style={{ marginTop: '20px', padding: '15px', borderRadius: '8px', background: 'rgba(245, 158, 11, 0.05)', border: '1px solid rgba(245, 158, 11, 0.1)' }}>
-            <p style={{ fontSize: '12px', color: '#f59e0b', margin: 0 }}>
-              <strong>💡 Pro Tip:</strong> If your connection fails, try clearing your browser cookies for the respective platform and try again.
-            </p>
-          </div>
+        )}
+      </div>
+
+      {/* Payment Details Section */}
+      <div className="settings-section-card">
+        <p className="settings-section-description">Add your payment info below.</p>
+        <div className="settings-payment-subblock">
+          <div className="payment-subblock-title"><strong>Bank</strong> (Stripe)</div>
+          <button className="settings-btn-stripe"><SiStripe /> Connect with Stripe</button>
+        </div>
+        <div className="settings-payment-subblock">
+          <div className="payment-subblock-title"><strong>Crypto</strong> (USDC Solana)</div>
+          <input type="text" placeholder="Address" className="settings-input" value={cryptoAddr} onChange={(e) => setCryptoAddr(e.target.value)} />
+          <button className="settings-save-btn" onClick={() => handleSavePayment('crypto')}>Save</button>
+        </div>
+        <div className="settings-payment-subblock">
+          <div className="payment-subblock-title"><strong>PayPal</strong></div>
+          <input type="text" placeholder="Email" className="settings-input" value={paypalEmail} onChange={(e) => setPaypalEmail(e.target.value)} />
+          <button className="settings-save-btn" onClick={() => handleSavePayment('paypal')}>Save</button>
+        </div>
+        <div className="settings-payment-subblock">
+          <div className="payment-subblock-title"><strong>Cash App</strong></div>
+          <input type="text" placeholder="$Tag" className="settings-input" value={cashTag} onChange={(e) => setCashTag(e.target.value)} />
+          <button className="settings-save-btn" onClick={() => handleSavePayment('cashapp')}>Save</button>
         </div>
       </div>
 
-      {/* MODALS */}
+      {/* Modals */}
       {activeModal === 'tiktok' && (
         <div className="settings-modal-overlay">
           <div className="settings-modal">
             <button className="settings-modal-close" onClick={() => setActiveModal(null)}>×</button>
-            <div className="settings-modal-title">
-              <SiTiktok style={{ marginRight: '10px', fontSize: '24px' }} />
-              <h2>Connect TikTok Account</h2>
-            </div>
-            <p className="settings-modal-text">
-              Before connecting, make sure you're logged into the correct TikTok account on <strong>tiktok.com</strong> in your browser.
-            </p>
-            <div className="settings-modal-warning-box">
-              <div className="warning-title">💡 Important:</div>
-              <ul>
-                <li>Open <strong>tiktok.com</strong> and switch to the account you want to connect</li>
-                <li>Make sure you're logged into that account</li>
-                <li>Then click "Continue" below to authorize</li>
-              </ul>
-            </div>
-            <div className="settings-modal-actions">
-              <button className="settings-modal-btn-cancel" onClick={() => setActiveModal(null)}>Cancel</button>
-              <button className="settings-modal-btn-continue" onClick={startTikTokOAuth}>Continue to TikTok</button>
-            </div>
+            <h2>Connect TikTok</h2>
+            <button onClick={startTikTokOAuth}>Continue</button>
           </div>
         </div>
       )}
@@ -373,29 +326,11 @@ const PortalSettings = () => {
         <div className="settings-modal-overlay">
           <div className="settings-modal">
             <button className="settings-modal-close" onClick={() => setActiveModal(null)}>×</button>
-            <div className="settings-modal-title">
-              <SiInstagram style={{ marginRight: '10px', fontSize: '24px', color: '#e4405f' }} />
-              <h2>Connect Instagram Account</h2>
-            </div>
-            <p className="settings-modal-text">
-              Before connecting, make sure you're logged into the correct Instagram account on <strong>instagram.com</strong> in your browser.
-            </p>
-            <div className="settings-modal-warning-box">
-              <div className="warning-title">💡 Important:</div>
-              <ul>
-                <li>Your Instagram account must be a <strong>Professional account</strong> (Business or Creator)</li>
-                <li>Open <strong>instagram.com</strong> and make sure you're logged in</li>
-                <li>Then click "Continue" below to authorize</li>
-              </ul>
-            </div>
-            <div className="settings-modal-actions">
-              <button className="settings-modal-btn-cancel" onClick={() => setActiveModal(null)}>Cancel</button>
-              <button className="settings-modal-btn-continue" style={{ background: '#fff', color: '#111' }} onClick={startInstagramOAuth}>Continue to Instagram</button>
-            </div>
+            <h2>Connect Instagram</h2>
+            <button onClick={startInstagramOAuth}>Continue</button>
           </div>
         </div>
       )}
-
     </div>
   );
 };

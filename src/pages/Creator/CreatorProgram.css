@@ -160,17 +160,6 @@
     flex-direction: column !important;
     gap: var(--spacing-xl);
     max-width: 500px;
-    height: auto !important;
-    min-height: min-content !important;
-  }
-  
-  .creator-hero {
-    height: auto !important;
-    min-height: min-content !important;
-  }
-  
-  .creator-hero-content {
-    height: auto !important;
   }
 }
 

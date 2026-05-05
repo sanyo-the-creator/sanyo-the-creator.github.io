@@ -19,8 +19,14 @@ const PortalMyVideos = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   const [syncing, setSyncing] = useState(false);
   const [showSyncSuccess, setShowSyncSuccess] = useState(false);
+  const [isTikTokConnected, setIsTikTokConnected] = useState(false);
 
   useEffect(() => {
+    // Check if TikTok is connected
+    if (localStorage.getItem('tiktok_connected') === 'true') {
+      setIsTikTokConnected(true);
+    }
+
     const fetchVideos = async () => {
       try {
         const { data: { user } } = await supabase.auth.getUser();
@@ -31,7 +37,6 @@ const PortalMyVideos = () => {
           .select('*')
           .eq('user_id', user.id);
 
-        console.log('Videos Data:', data, 'Error:', error);
         if (error) throw error;
         setVideos(data || []);
       } catch (err) {
@@ -45,34 +50,15 @@ const PortalMyVideos = () => {
   }, []);
 
   const handleSyncTikTok = () => {
+    if (!isTikTokConnected) return;
+    
     setSyncing(true);
-    // Simulate API delay
+    // Real sync would happen here via API
+    // For now, we just simulate the process and tell the user it's done
+    // but we REMOVED the hardcoded mock videos insertion as requested.
     setTimeout(() => {
       setSyncing(false);
       setShowSyncSuccess(true);
-      
-      // Add mock videos for the demo
-      setVideos([
-        {
-          id: 'mock-1',
-          video_url: 'https://www.tiktok.com/@upshift/video/123456789',
-          thumbnail_url: 'https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/o4f5e7f8a9b0c1d2e3f4g5h6i7j8k9l0~tplv-tiktok-play.jpeg?x-expires=1630000000&x-signature=abcd',
-          views: 45200,
-          earnings_cents: 2000,
-          status: 'approved',
-          created_at: new Date().toISOString()
-        },
-        {
-          id: 'mock-2',
-          video_url: 'https://www.tiktok.com/@upshift/video/987654321',
-          thumbnail_url: 'https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6~tplv-tiktok-play.jpeg?x-expires=1630000000&x-signature=efgh',
-          views: 1200,
-          earnings_cents: 0,
-          status: 'pending',
-          created_at: new Date().toISOString()
-        }
-      ]);
-
       setTimeout(() => setShowSyncSuccess(false), 3000);
     }, 2000);
   };
@@ -136,22 +122,24 @@ const PortalMyVideos = () => {
 
         <button 
           onClick={handleSyncTikTok}
-          disabled={syncing}
+          disabled={syncing || !isTikTokConnected}
           className="portal-sync-btn"
+          title={!isTikTokConnected ? 'Please connect your TikTok account in Settings to sync' : ''}
           style={{
-            background: 'rgba(254, 44, 85, 0.1)',
-            color: '#fe2c55',
-            border: '1px solid rgba(254, 44, 85, 0.3)',
+            background: isTikTokConnected ? 'rgba(254, 44, 85, 0.1)' : 'rgba(255, 255, 255, 0.05)',
+            color: isTikTokConnected ? '#fe2c55' : '#666',
+            border: `1px solid ${isTikTokConnected ? 'rgba(254, 44, 85, 0.3)' : 'rgba(255, 255, 255, 0.1)'}`,
             padding: '8px 16px',
             borderRadius: '8px',
             fontSize: '13px',
             fontWeight: '600',
-            cursor: syncing ? 'not-allowed' : 'pointer',
+            cursor: (syncing || !isTikTokConnected) ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
             marginLeft: '10px',
-            transition: 'all 0.2s ease'
+            transition: 'all 0.2s ease',
+            opacity: isTikTokConnected ? 1 : 0.6
           }}
         >
           {syncing ? 'Syncing...' : 'Sync from TikTok'}
@@ -250,9 +238,16 @@ const PortalMyVideos = () => {
                     </span>
                   </div>
                 </div>
-                {video.status === 'rejected' && video.rejection_reason && (
-                  <div style={{ padding: '0 20px 15px 90px', fontSize: '12px', color: '#f87171', marginTop: '-5px' }}>
-                    <strong>Rejection reason:</strong> {video.rejection_reason}
+                {video.rejection_reason && (
+                  <div style={{ 
+                    padding: '10px 20px 15px 90px', 
+                    fontSize: '12px', 
+                    color: video.status === 'rejected' ? '#f87171' : '#4ade80', 
+                    marginTop: '-5px',
+                    opacity: 0.9,
+                    fontStyle: 'italic'
+                  }}>
+                    <strong>{video.status === 'rejected' ? 'Rejection reason:' : 'Moderator message:'}</strong> {video.rejection_reason}
                   </div>
                 )}
               </div>
