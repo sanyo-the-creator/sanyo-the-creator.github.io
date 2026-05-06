@@ -181,7 +181,7 @@ const PortalSettings = () => {
 
   const handleInstagramVerify = () => {
     const cleanUsername = extractInstagramUsername(instagramUrl);
-    const expectedLink = getInstagramReferralLink();
+    const expectedCode = referralCode || user?.email?.split('@')[0] || 'upshift';
     setVerificationStep('loading');
     setProgressText('Initiating secure scan...');
     
@@ -194,7 +194,7 @@ const PortalSettings = () => {
     }, 2400);
 
     setTimeout(() => {
-      setProgressText(`Scanning bio description for referral link: ${expectedLink}...`);
+      setProgressText(`Scanning bio description for referral code: ${expectedCode}...`);
     }, 3600);
 
     setTimeout(() => {
@@ -475,7 +475,7 @@ const PortalSettings = () => {
               <div style={{ textAlign: 'left' }}>
                 <h2 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '6px' }}>Verify account</h2>
                 <p style={{ fontSize: '12px', color: '#888', lineHeight: '1.4', marginBottom: '20px' }}>
-                  To link your account, you must temporarily add your unique Upshift referral link to your Instagram bio.
+                  A verified Instagram account is required when performing actions such as claiming Content Rewards on Upshift.
                 </p>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
@@ -483,17 +483,18 @@ const PortalSettings = () => {
                   <div className="step-card">
                     <div className="step-number active">1</div>
                     <div style={{ flexGrow: 1 }}>
-                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '6px' }}>Copy your referral link</div>
+                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '6px' }}>Copy this verification code</div>
                       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        <div style={{ background: '#0a0a0a', border: '1px solid #2d2d2d', padding: '6px 12px', borderRadius: '4px', fontFamily: 'sans-serif', fontSize: '12px', fontWeight: 'bold', color: '#fff', wordBreak: 'break-all' }}>
-                          {getInstagramReferralLink()}
+                        <div style={{ background: '#0a0a0a', border: '1px solid #2d2d2d', padding: '6px 12px', borderRadius: '4px', fontFamily: 'monospace', fontSize: '14px', fontWeight: 'bold', color: '#fff' }}>
+                          {referralCode || user?.email?.split('@')[0] || 'upshift'}
                         </div>
                         <button onClick={() => {
-                          navigator.clipboard.writeText(getInstagramReferralLink());
+                          const code = referralCode || user?.email?.split('@')[0] || 'upshift';
+                          navigator.clipboard.writeText(code);
                           setIsCopied(true);
                           setTimeout(() => setIsCopied(false), 2000);
-                        }} style={{ background: 'none', border: 'none', color: isCopied ? '#4ade80' : '#888', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', padding: '4px', flexShrink: 0 }}>
-                          <FiCopy size={12} /> {isCopied ? 'Copied!' : 'Copy'}
+                        }} style={{ background: 'none', border: 'none', color: isCopied ? '#4ade80' : '#888', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', padding: '4px' }}>
+                          <FiCopy size={12} /> {isCopied ? 'Copied!' : 'Copy code'}
                         </button>
                       </div>
                     </div>
@@ -514,9 +515,9 @@ const PortalSettings = () => {
                   <div className="step-card">
                     <div className="step-number">3</div>
                     <div>
-                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '4px' }}>Add the link to your bio</div>
+                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '4px' }}>Add the verification code</div>
                       <div style={{ color: '#888', fontSize: '12px', lineHeight: '1.4' }}>
-                        Paste the copied link in your Instagram profile's bio or website section.
+                        Include your unique referral code within your profile's bio or description temporarily.
                       </div>
                     </div>
                   </div>
@@ -525,9 +526,9 @@ const PortalSettings = () => {
                   <div className="step-card">
                     <div className="step-number">4</div>
                     <div>
-                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '4px' }}>Verify connection</div>
+                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '4px' }}>Verify account</div>
                       <div style={{ color: '#888', fontSize: '12px', lineHeight: '1.4' }}>
-                        Click verify once you've saved your profile bio with the link.
+                        Click verify once you've added the code to your profile.
                       </div>
                     </div>
                   </div>
