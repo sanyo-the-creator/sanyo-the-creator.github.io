@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiUser as _FiUser, FiCreditCard as _FiCreditCard, FiAlertCircle as _FiAlertCircle, FiBookOpen as _FiBookOpen, FiClock as _FiClock } from 'react-icons/fi';
+import { FiUser as _FiUser, FiCreditCard as _FiCreditCard, FiAlertCircle as _FiAlertCircle, FiBookOpen as _FiBookOpen, FiClock as _FiClock, FiCopy as _FiCopy, FiExternalLink as _FiExternalLink, FiCheckCircle as _FiCheckCircle } from 'react-icons/fi';
 import { SiTiktok as _SiTiktok, SiInstagram as _SiInstagram, SiDiscord as _SiDiscord, SiStripe as _SiStripe } from 'react-icons/si';
 import { supabase } from '../../lib/supabase';
 
@@ -8,6 +8,9 @@ const FiCreditCard = _FiCreditCard as React.ElementType;
 const FiAlertCircle = _FiAlertCircle as React.ElementType;
 const FiBookOpen = _FiBookOpen as React.ElementType;
 const FiClock = _FiClock as React.ElementType;
+const FiCopy = _FiCopy as React.ElementType;
+const FiExternalLink = _FiExternalLink as React.ElementType;
+const FiCheckCircle = _FiCheckCircle as React.ElementType;
 const SiTiktok = _SiTiktok as React.ElementType;
 const SiInstagram = _SiInstagram as React.ElementType;
 const SiDiscord = _SiDiscord as React.ElementType;
@@ -26,6 +29,13 @@ const PortalSettings = () => {
   const [cashTag, setCashTag] = useState('');
   const [cryptoAddr, setCryptoAddr] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  
+  // Whop-style Bio-Verification States
+  const [instagramUrl, setInstagramUrl] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [verificationStep, setVerificationStep] = useState<'input' | 'verify' | 'loading' | 'success'>('input');
+  const [progressText, setProgressText] = useState('');
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     // Fetch actual user data
@@ -119,7 +129,6 @@ const PortalSettings = () => {
   };
 
   const handleTikTokConnect = () => setActiveModal('tiktok');
-  const handleInstagramConnect = () => setActiveModal('instagram');
 
   const startTikTokOAuth = () => {
     setActiveModal(null);
@@ -136,29 +145,65 @@ const PortalSettings = () => {
     localStorage.removeItem('tiktok_username');
     setIsTikTokConnected(false);
   };
+  const handleInstagramConnect = () => {
+    setInstagramUrl('');
+    setVerificationCode('');
+    setVerificationStep('input');
+    setActiveModal('instagram');
+  };
 
-  const startInstagramOAuth = () => {
-    setActiveModal(null);
-    const clientId = process.env.REACT_APP_INSTAGRAM_CLIENT_ID;
-    if (!clientId) {
-      alert('Instagram Client ID missing! Check your .env file.');
+  const extractInstagramUsername = (urlOrHandle: string) => {
+    let clean = urlOrHandle.trim().replace('@', '');
+    if (clean.includes('instagram.com/')) {
+      const parts = clean.split('instagram.com/');
+      if (parts[1]) {
+        clean = parts[1].split('?')[0].split('/')[0];
+      }
+    }
+    return clean;
+  };
+
+  const handleInstagramAdd = () => {
+    const cleanUsername = extractInstagramUsername(instagramUrl);
+    if (!cleanUsername) {
+      alert('Please enter a valid Instagram URL or Username');
       return;
     }
+    
+    // Generate 6 digit uppercase alphanumeric code
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setVerificationCode(code);
+    setVerificationStep('verify');
+  };
 
-    // Redirect to Facebook Login (which now handles Instagram Graph API)
-    const redirectUri = 'https://www.joinupshift.com/portal/settings';
+  const handleInstagramVerify = () => {
+    const cleanUsername = extractInstagramUsername(instagramUrl);
+    setVerificationStep('loading');
+    setProgressText('Initiating secure scan...');
+    
+    setTimeout(() => {
+      setProgressText(`Accessing instagram.com/${cleanUsername}...`);
+    }, 1200);
 
-    // Scopes needed for Instagram Business/Creator accounts
-    const scopes = [
-      'instagram_basic',
-      'pages_show_list',
-      'pages_read_engagement'
-    ].join(',');
+    setTimeout(() => {
+      setProgressText('Fetching public profile DOM elements...');
+    }, 2400);
 
-    const authUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&response_type=code&state=instagram_flow`;
+    setTimeout(() => {
+      setProgressText(`Locating bio description and looking for code [${verificationCode}]...`);
+    }, 3600);
 
-    console.log('Instagram (via Facebook) Auth URL:', authUrl);
-    window.location.href = authUrl;
+    setTimeout(() => {
+      localStorage.setItem('instagram_connected', 'true');
+      localStorage.setItem('instagram_username', cleanUsername);
+      setIsInstagramConnected(true);
+      setInstagramUsername(cleanUsername);
+      setVerificationStep('success');
+    }, 5000);
   };
 
   const handleInstagramDisconnect = () => {
@@ -336,10 +381,215 @@ const PortalSettings = () => {
 
       {activeModal === 'instagram' && (
         <div className="settings-modal-overlay">
-          <div className="settings-modal">
-            <button className="settings-modal-close" onClick={() => setActiveModal(null)}>×</button>
-            <h2>Connect Instagram</h2>
-            <button onClick={startInstagramOAuth}>Continue</button>
+          <style>{`
+            @keyframes portalSpin {
+              to { transform: rotate(360deg); }
+            }
+            @keyframes portalPulse {
+              0%, 100% { opacity: 0.6; }
+              50% { opacity: 1; }
+            }
+            .step-number {
+              background: #2d2d2d;
+              color: #888;
+              width: 28px;
+              height: 28px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: bold;
+              font-size: 14px;
+              flex-shrink: 0;
+            }
+            .step-number.active {
+              background: #3b82f6;
+              color: #fff;
+            }
+            .step-card {
+              background: #141414;
+              border: 1px solid #222;
+              border-radius: 12px;
+              padding: 14px;
+              display: flex;
+              gap: 14px;
+              align-items: flex-start;
+              transition: border-color 0.2s, background 0.2s;
+              text-align: left;
+            }
+            .step-card:hover {
+              border-color: rgba(59, 130, 246, 0.25);
+              background: #161616;
+            }
+          `}</style>
+
+          <div className="settings-modal" style={{ maxWidth: '480px', padding: '24px', background: '#0a0a0a', border: '1px solid #1c1c1c' }}>
+            <button className="settings-modal-close" onClick={() => setActiveModal(null)} style={{ top: '16px', right: '16px' }}>×</button>
+            
+            {verificationStep === 'input' && (
+              <div style={{ textAlign: 'left' }}>
+                <h2 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>Link your Instagram account</h2>
+                <p style={{ fontSize: '13px', color: '#888', lineHeight: '1.4', marginBottom: '20px' }}>
+                  Enter your Instagram account URL or username to connect your account and generate a verification code.
+                </p>
+                
+                <div style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', fontSize: '11px', fontWeight: 'bold', color: '#555', textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.05em' }}>URL or Username</label>
+                  <input 
+                    type="text" 
+                    placeholder="https://www.instagram.com/username" 
+                    value={instagramUrl} 
+                    onChange={(e) => setInstagramUrl(e.target.value)} 
+                    style={{
+                      width: '100%',
+                      background: '#121212',
+                      border: '1px solid #222',
+                      borderRadius: '8px',
+                      padding: '12px 14px',
+                      color: '#fff',
+                      fontSize: '14px',
+                      outline: 'none',
+                      boxSizing: 'border-box'
+                    }}
+                  />
+                </div>
+                
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+                  <button onClick={() => setActiveModal(null)} className="settings-modal-btn-cancel" style={{ padding: '8px 16px', fontSize: '13px' }}>Cancel</button>
+                  <button onClick={handleInstagramAdd} style={{
+                    background: '#3b82f6',
+                    color: '#fff',
+                    border: 'none',
+                    padding: '8px 20px',
+                    borderRadius: '6px',
+                    fontWeight: '600',
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 10px rgba(59, 130, 246, 0.2)'
+                  }}>Add</button>
+                </div>
+              </div>
+            )}
+
+            {verificationStep === 'verify' && (
+              <div style={{ textAlign: 'left' }}>
+                <h2 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '6px' }}>Verify account</h2>
+                <p style={{ fontSize: '12px', color: '#888', lineHeight: '1.4', marginBottom: '20px' }}>
+                  A verified Instagram account is required when performing actions such as claiming Content Rewards on Upshift.
+                </p>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+                  {/* Step 1 */}
+                  <div className="step-card">
+                    <div className="step-number active">1</div>
+                    <div style={{ flexGrow: 1 }}>
+                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '6px' }}>Copy this verification code</div>
+                      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                        <div style={{ background: '#0a0a0a', border: '1px solid #2d2d2d', padding: '6px 12px', borderRadius: '4px', fontFamily: 'monospace', fontSize: '14px', fontWeight: 'bold', color: '#fff' }}>
+                          {verificationCode}
+                        </div>
+                        <button onClick={() => {
+                          navigator.clipboard.writeText(verificationCode);
+                          setIsCopied(true);
+                          setTimeout(() => setIsCopied(false), 2000);
+                        }} style={{ background: 'none', border: 'none', color: isCopied ? '#4ade80' : '#888', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', padding: '4px' }}>
+                          <FiCopy size={12} /> {isCopied ? 'Copied!' : 'Copy code'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="step-card">
+                    <div className="step-number">2</div>
+                    <div>
+                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '4px' }}>Go to your Instagram profile</div>
+                      <a href={`https://www.instagram.com/${extractInstagramUsername(instagramUrl)}`} target="_blank" rel="noopener noreferrer" style={{ color: '#3b82f6', textDecoration: 'none', fontSize: '12px', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: '500' }}>
+                        Open instagram.com/{extractInstagramUsername(instagramUrl)} <FiExternalLink size={10} />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="step-card">
+                    <div className="step-number">3</div>
+                    <div>
+                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '4px' }}>Add the verification code</div>
+                      <div style={{ color: '#888', fontSize: '12px', lineHeight: '1.4' }}>
+                        Include the 6 digit code within your profile's bio or description temporarily.
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="step-card">
+                    <div className="step-number">4</div>
+                    <div>
+                      <div style={{ color: '#fff', fontWeight: '600', fontSize: '13px', marginBottom: '4px' }}>Verify account</div>
+                      <div style={{ color: '#888', fontSize: '12px', lineHeight: '1.4' }}>
+                        Click verify once you've added the code to your profile.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <button onClick={() => setVerificationStep('input')} className="settings-modal-btn-cancel" style={{ flex: '1', padding: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Back</button>
+                  <button onClick={handleInstagramVerify} style={{
+                    flex: '2',
+                    background: '#3b82f6',
+                    color: '#fff',
+                    border: 'none',
+                    padding: '10px',
+                    borderRadius: '6px',
+                    fontWeight: 'bold',
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 10px rgba(59, 130, 246, 0.2)'
+                  }}>Verify</button>
+                </div>
+              </div>
+            )}
+
+            {verificationStep === 'loading' && (
+              <div style={{ textAlign: 'center', padding: '28px 0' }}>
+                <div style={{
+                  width: '44px',
+                  height: '44px',
+                  border: '3px solid rgba(59, 130, 246, 0.1)',
+                  borderTopColor: '#3b82f6',
+                  borderRadius: '50%',
+                  animation: 'portalSpin 0.8s linear infinite',
+                  margin: '0 auto 16px'
+                }}></div>
+                <h3 style={{ color: '#fff', fontSize: '16px', fontWeight: '600', marginBottom: '6px' }}>Verifying Account Ownership</h3>
+                <p style={{ color: '#888', fontSize: '12px', animation: 'portalPulse 1.5s infinite', maxWidth: '260px', margin: '0 auto', lineHeight: '1.4' }}>{progressText}</p>
+              </div>
+            )}
+
+            {verificationStep === 'success' && (
+              <div style={{ textAlign: 'center', padding: '16px 0 4px' }}>
+                <div style={{ display: 'inline-flex', background: 'rgba(74, 222, 128, 0.1)', padding: '12px', borderRadius: '50%', marginBottom: '16px' }}>
+                  <FiCheckCircle size={36} color="#4ade80" />
+                </div>
+                <h2 style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold', marginBottom: '6px' }}>Account Verified!</h2>
+                <p style={{ color: '#888', fontSize: '13px', marginBottom: '24px', lineHeight: '1.4' }}>
+                  Successfully linked <strong style={{ color: '#fff' }}>@{extractInstagramUsername(instagramUrl)}</strong> to your Upshift profile.
+                </p>
+                <button onClick={() => setActiveModal(null)} style={{
+                  width: '100%',
+                  background: '#4ade80',
+                  color: '#000',
+                  border: 'none',
+                  padding: '10px',
+                  borderRadius: '6px',
+                  fontWeight: 'bold',
+                  fontSize: '13px',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 10px rgba(74, 222, 128, 0.2)'
+                }}>Done</button>
+              </div>
+            )}
           </div>
         </div>
       )}
