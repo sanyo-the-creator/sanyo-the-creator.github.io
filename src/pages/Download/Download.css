@@ -16,9 +16,13 @@
 /* Hero Section */
 .download-hero {
   text-align: center;
-  padding: var(--spacing-6xl) 0;
+  padding: 160px 0 100px 0;
   position: relative;
   z-index: 1;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .download-title {
@@ -336,7 +340,7 @@
 
 @media (max-width: 480px) {
   .download-hero {
-    padding: var(--spacing-4xl) 0 100px 0;
+    padding: 140px 0 180px 0;
   }
   
   .download-title {
@@ -348,7 +352,8 @@
   }
 }
 @media (max-width: 768px) {
-    .download-page > .section {
-        padding-top: 70px;
+    .download-page > .download-hero {
+        padding-top: 150px;
+        padding-bottom: 120px;
     }
 }

@@ -43,16 +43,21 @@ const Download: React.FC = () => {
       // Detect iOS (iPhone/iPad)
       const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
 
-      // Detect Android
       const isAndroid = /android/i.test(userAgent);
+      const isMobile = isIOS || isAndroid;
 
-      // Redirect based on device
-      if (isIOS) {
-        // Redirect to Apple App Store
-        window.location.href = 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316';
-      } else if (isAndroid) {
-        // Redirect to Google Form
-        window.location.href = 'https://forms.gle/iJa3K3p6LmWkmHxn6#';
+      // ONLY auto-redirect to stores if they came explicitly to /download...
+      // but NOT if they just landed on the root "/" (even though it shows the same page)
+      const isExplicitDownloadPath = window.location.pathname.startsWith('/download');
+
+      if (isExplicitDownloadPath && isMobile) {
+        if (isIOS) {
+          // Redirect to Apple App Store
+          window.location.href = 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316';
+        } else if (isAndroid) {
+          // Redirect to Google Form
+          window.location.href = 'https://forms.gle/iJa3K3p6LmWkmHxn6#';
+        }
       }
     };
 
