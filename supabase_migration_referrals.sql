@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS referral_profiles (
   total_downloads INT DEFAULT 0,
   total_sales_cents INT DEFAULT 0,
   total_trials INT DEFAULT 0,
+  is_sales_affiliate BOOLEAN DEFAULT FALSE,
+  commission_rate NUMERIC DEFAULT 0.15,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -48,6 +50,7 @@ CREATE TABLE IF NOT EXISTS referral_sales (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   install_id UUID NOT NULL REFERENCES referral_installs(id) ON DELETE CASCADE,
   referral_code TEXT NOT NULL REFERENCES referral_profiles(referral_code) ON DELETE CASCADE,
+  profile_id UUID REFERENCES referral_profiles(id) ON DELETE CASCADE,
   amount_cents INT DEFAULT 0,
   currency TEXT DEFAULT 'USD',
   created_at TIMESTAMPTZ DEFAULT NOW()
@@ -60,6 +63,17 @@ CREATE TABLE IF NOT EXISTS referral_trials (
   install_id UUID NOT NULL REFERENCES referral_installs(id) ON DELETE CASCADE,
   referral_code TEXT NOT NULL REFERENCES referral_profiles(referral_code) ON DELETE CASCADE,
   created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 5b. REFERRAL REFUNDS
+-- Track refunds to subtract from affiliate earnings
+CREATE TABLE IF NOT EXISTS referral_refunds (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  sale_id UUID REFERENCES referral_sales(id) ON DELETE CASCADE,
+  referral_code TEXT NOT NULL REFERENCES referral_profiles(referral_code) ON DELETE CASCADE,
+  profile_id UUID REFERENCES referral_profiles(id) ON DELETE CASCADE,
+  amount_cents INT DEFAULT 0,
+  refunded_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- 6. ADMIN USERS
@@ -89,6 +103,7 @@ ALTER TABLE referral_clicks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE referral_installs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE referral_sales ENABLE ROW LEVEL SECURITY;
 ALTER TABLE referral_trials ENABLE ROW LEVEL SECURITY;
+ALTER TABLE referral_refunds ENABLE ROW LEVEL SECURITY;
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
 
 -- Helper: check if current user is admin
@@ -198,6 +213,19 @@ DROP POLICY IF EXISTS "referral_trials_insert" ON referral_trials;
 CREATE POLICY "referral_trials_insert" ON referral_trials
   FOR INSERT WITH CHECK (true);
 
+-- REFERRAL REFUNDS policies
+DROP POLICY IF EXISTS "referral_refunds_owner_read" ON referral_refunds;
+CREATE POLICY "referral_refunds_owner_read" ON referral_refunds
+  FOR SELECT USING (
+    referral_code IN (
+      SELECT referral_code FROM referral_profiles WHERE id = auth.uid()
+    )
+  );
+
+DROP POLICY IF EXISTS "referral_refunds_admin_all" ON referral_refunds;
+CREATE POLICY "referral_refunds_admin_all" ON referral_refunds
+  FOR ALL USING (is_admin());
+
 -- ADMIN USERS policies
 -- Only admins can read admin_users
 DROP POLICY IF EXISTS "admin_users_admin_read" ON admin_users;
@@ -272,6 +300,22 @@ CREATE TRIGGER trigger_increment_trials
   FOR EACH ROW
   EXECUTE FUNCTION increment_total_trials();
 
+-- Decrement total_sales_cents on referral_profiles when a refund is created
+CREATE OR REPLACE FUNCTION decrement_total_sales()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE referral_profiles
+  SET total_sales_cents = total_sales_cents - NEW.amount_cents
+  WHERE referral_code = NEW.referral_code;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE TRIGGER trigger_decrement_sales
+  AFTER INSERT ON referral_refunds
+  FOR EACH ROW
+  EXECUTE FUNCTION decrement_total_sales();
+
 -- ============================================
 -- RPC FUNCTIONS (called from the mobile app)
 -- ============================================
@@ -328,8 +372,9 @@ BEGIN
     RETURN json_build_object('success', false, 'error', 'Install not found');
   END IF;
 
-  INSERT INTO referral_sales (install_id, referral_code, amount_cents, currency)
-  VALUES (p_install_id, v_referral_code, p_amount_cents, p_currency)
+  INSERT INTO referral_sales (install_id, referral_code, profile_id, amount_cents, currency)
+  SELECT p_install_id, v_referral_code, id, p_amount_cents, p_currency
+  FROM referral_profiles WHERE referral_code = v_referral_code
   RETURNING id INTO v_sale_id;
 
   RETURN json_build_object('success', true, 'sale_id', v_sale_id);
@@ -484,9 +529,19 @@ SELECT
   COALESCE(v.total_views, 0) AS total_views,
   COALESCE(v.approved_count, 0) AS approved_videos,
   COALESCE(v.pending_count, 0) AS pending_videos,
-  COALESCE(v.total_earnings_cents, 0) AS total_video_earnings_cents
+  COALESCE(v.total_earnings_cents, 0) AS total_video_earnings_cents,
+  COALESCE(ref.total_refunded_cents, 0) AS total_refunded_cents,
+  rp.is_sales_affiliate,
+  rp.commission_rate
 FROM auth.users u
 LEFT JOIN referral_profiles rp ON rp.id = u.id
+LEFT JOIN (
+  SELECT
+    referral_code,
+    COALESCE(SUM(amount_cents), 0) AS total_refunded_cents
+  FROM referral_refunds
+  GROUP BY referral_code
+) ref ON ref.referral_code = rp.referral_code
 LEFT JOIN (
   SELECT
     user_id,
@@ -509,3 +564,33 @@ BEGIN
     END IF;
 END;
 $$;
+
+-- 7. INVOICES
+-- Created when admin pays a user
+CREATE TABLE IF NOT EXISTS invoices (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  amount_cents INT NOT NULL,
+  video_ids UUID[] DEFAULT '{}',
+  payment_method TEXT,
+  payment_details TEXT,
+  status TEXT DEFAULT 'paid',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Ensure videos table has invoice_id link
+ALTER TABLE videos ADD COLUMN IF NOT EXISTS invoice_id UUID REFERENCES invoices(id) ON DELETE SET NULL;
+
+-- Enable RLS on invoices
+ALTER TABLE invoices ENABLE ROW LEVEL SECURITY;
+
+-- Owner can read their own invoices
+DROP POLICY IF EXISTS "invoices_owner_read" ON invoices;
+CREATE POLICY "invoices_owner_read" ON invoices
+  FOR SELECT USING (user_id = auth.uid());
+
+-- Admin can do anything
+DROP POLICY IF EXISTS "invoices_admin_all" ON invoices;
+CREATE POLICY "invoices_admin_all" ON invoices
+  FOR ALL USING (is_admin());
+

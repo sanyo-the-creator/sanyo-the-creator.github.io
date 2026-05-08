@@ -1,4 +1,43 @@
+/* Invoice Detail Modal */
+.invoice-detail-modal {
+  background: #1a1a2e !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+.invoice-meta-grid label {
+  color: #888 !important;
+  font-weight: 600;
+}
+
+.invoice-items-list table th {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.invoice-items-list table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.invoice-items-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.invoice-items-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.invoice-items-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
 
 /* Portal Layout */
 .portal-layout {

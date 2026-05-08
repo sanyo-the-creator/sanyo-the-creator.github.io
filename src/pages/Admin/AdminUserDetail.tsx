@@ -5,6 +5,7 @@ import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts';
+import { sendPayoutNotification } from '../../utils/emailUtils';
 import {
   FiArrowLeft as _FiArrowLeft,
   FiMousePointer as _FiMousePointer,
@@ -15,7 +16,10 @@ import {
   FiEye as _FiEye,
   FiExternalLink as _FiExternalLink,
   FiCalendar as _FiCalendar,
+  FiSettings as _FiSettings,
   FiTrendingUp as _FiTrendingUp,
+  FiShoppingBag as _FiShoppingBag,
+  FiArrowLeftCircle as _FiArrowLeftCircle,
   FiGlobe as _FiGlobe,
   FiSmartphone as _FiSmartphone,
   FiMonitor as _FiMonitor,
@@ -40,7 +44,10 @@ const FiVideo = _FiVideo as React.ElementType;
 const FiEye = _FiEye as React.ElementType;
 const FiExternalLink = _FiExternalLink as React.ElementType;
 const FiCalendar = _FiCalendar as React.ElementType;
+const FiSettings = _FiSettings as React.ElementType;
 const FiTrendingUp = _FiTrendingUp as React.ElementType;
+const FiShoppingBag = _FiShoppingBag as React.ElementType;
+const FiArrowLeftCircle = _FiArrowLeftCircle as React.ElementType;
 const FiGlobe = _FiGlobe as React.ElementType;
 const FiSmartphone = _FiSmartphone as React.ElementType;
 const FiMonitor = _FiMonitor as React.ElementType;
@@ -127,7 +134,7 @@ const AdminUserDetail: React.FC = () => {
 
       // Load profile
       const { data: profileData } = await supabase
-        .from('referral_profiles').select('*').eq('id', userId).single();
+        .from('admin_user_overview').select('*').eq('user_id', userId).single();
       setProfile(profileData);
 
       if (profileData?.referral_code) {
@@ -169,6 +176,28 @@ const AdminUserDetail: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleToggleAffiliate = async () => {
+    if (!profile) return;
+    const newVal = !profile.is_sales_affiliate;
+    const { error } = await supabase
+      .from('referral_profiles')
+      .update({ is_sales_affiliate: newVal })
+      .eq('id', userId);
+    if (error) alert(error.message);
+    else loadData();
+  };
+
+  const handleUpdateCommission = async (rate: string) => {
+    const numRate = parseFloat(rate) / 100;
+    if (isNaN(numRate)) return;
+    const { error } = await supabase
+      .from('referral_profiles')
+      .update({ commission_rate: numRate })
+      .eq('id', userId);
+    if (error) alert(error.message);
+    else loadData();
   };
 
   // Filter data by date range
@@ -286,7 +315,11 @@ const AdminUserDetail: React.FC = () => {
     const map: Record<string, number> = {};
     const filteredForDevice = deviceFilter === 'all' 
       ? filteredClicks 
-      : filteredClicks.filter(c => c.device_type?.toLowerCase().includes(deviceFilter));
+      : filteredClicks.filter(c => {
+          const device = c.device_type?.toLowerCase() || '';
+          if (deviceFilter === 'ios') return device.includes('ios') || device.includes('iphone');
+          return device.includes(deviceFilter);
+        });
     
     filteredForDevice.forEach(c => {
       const countryRaw = c.country || 'Unknown';
@@ -377,6 +410,7 @@ const AdminUserDetail: React.FC = () => {
     { key: 'devices', label: 'Devices & Geo' },
     { key: 'sales', label: 'Sales' },
     { key: 'videos', label: 'Videos' },
+    { key: 'settings', label: 'Settings' },
     { key: 'log', label: 'Activity Log' },
   ];
 
@@ -419,7 +453,21 @@ const AdminUserDetail: React.FC = () => {
           alt="" className="aud-avatar"
         />
         <div className="aud-user-info">
-          <h1 className="aud-user-name">{profile.display_name || 'Unknown'}</h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <h1 className="aud-title">{profile?.display_name || 'User Detail'}</h1>
+          <span style={{ 
+            fontSize: '11px', 
+            padding: '4px 10px', 
+            borderRadius: '100px', 
+            background: profile?.is_sales_affiliate ? 'rgba(59, 130, 246, 0.15)' : 'rgba(74, 222, 128, 0.15)',
+            color: profile?.is_sales_affiliate ? '#3b82f6' : '#4ade80',
+            fontWeight: 'bold',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em'
+          }}>
+            {profile?.is_sales_affiliate ? 'Sales Affiliate' : 'Video Creator'} ({((profile?.commission_rate > 1 ? profile.commission_rate : (profile?.commission_rate || 0.15) * 100)).toFixed(0)}%)
+          </span>
+        </div>
           <div className="aud-user-meta">
             <span className="aud-refcode">
               /u/{profile.referral_code}
@@ -493,13 +541,28 @@ const AdminUserDetail: React.FC = () => {
               // 2. Update Videos
               const { error: videoError } = await supabase
                 .from('videos')
-                .update({ status: 'paid', moderated_at: new Date().toISOString() })
+                .update({ 
+                  status: 'paid', 
+                  moderated_at: new Date().toISOString(),
+                  invoice_id: invoiceData.id
+                })
                 .eq('user_id', userId)
                 .eq('status', 'approved');
 
               if (videoError) alert('Error updating videos: ' + videoError.message);
               else {
-                alert('Payout processed and invoice created successfully!');
+                // 3. Send Notification Email
+                if (profile?.email) {
+                  await sendPayoutNotification({
+                    recipientName: profile.display_name || 'Creator',
+                    recipientEmail: profile.email,
+                    amount: formatMoney(totalPendingPayout),
+                    invoiceId: invoiceData.id,
+                    payoutMethod: profile.paypal_email ? 'PayPal' : profile.cashapp_tag ? 'Cash App' : profile.crypto_address ? 'Crypto' : 'Manual'
+                  });
+                }
+                
+                alert('Payout processed, invoice created, and videos linked successfully!');
                 loadData();
               }
             }}
@@ -535,7 +598,6 @@ const AdminUserDetail: React.FC = () => {
       {/* ===== OVERVIEW ===== */}
       {activeSection === 'overview' && (
         <>
-          {/* Stat cards */}
           <div className="aud-stats-row">
             <div className="aud-stat">
               <div className="aud-stat-icon" style={{ color: '#3b82f6', background: 'rgba(59,130,246,.1)' }}><FiMousePointer /></div>
@@ -561,32 +623,59 @@ const AdminUserDetail: React.FC = () => {
               <div className="aud-stat-lbl">Trials</div>
               <div className="aud-stat-sub">{filteredInstalls.length > 0 ? ((filteredTrials.length / filteredInstalls.length) * 100).toFixed(1) : 0}% of installs</div>
             </div>
-            <div className="aud-stat">
-              <div className="aud-stat-icon" style={{ color: '#f59e0b', background: 'rgba(245,158,11,.1)' }}><FiVideo /></div>
-              <div className="aud-stat-num">{videos.length}</div>
-              <div className="aud-stat-lbl">Videos</div>
-              <div className="aud-stat-sub">{videos.filter(v => v.status === 'approved').length} approved</div>
-            </div>
-            <div className="aud-stat">
-              <div className="aud-stat-icon" style={{ color: '#06b6d4', background: 'rgba(6,182,212,.1)' }}><FiEye /></div>
-              <div className="aud-stat-num">{formatNum(videos.reduce((s: number, v: any) => s + (v.views || 0), 0))}</div>
-              <div className="aud-stat-lbl">Total Views</div>
-              <div className="aud-stat-sub">Across all videos</div>
-            </div>
-            <div className="aud-stat">
-              <div className="aud-stat-icon" style={{ 
-                color: isProfitable ? '#4ade80' : '#f87171', 
-                background: isProfitable ? 'rgba(74,222,128,.1)' : 'rgba(248,113,113,.1)' 
-              }}>
-                <FiTrendingUp />
-              </div>
-              <div className="aud-stat-num" style={{ color: isProfitable ? '#4ade80' : '#f87171' }}>
-                {formatMoney(netProfit)}
-              </div>
-              <div className="aud-stat-lbl">Net Profit</div>
-              <div className="aud-stat-sub">{isProfitable ? 'Profitable' : 'Loss-making'}</div>
-            </div>
           </div>
+
+          <div className="aud-stats-grid" style={{ marginBottom: '30px' }}>
+        {profile?.is_sales_affiliate ? (
+          <>
+            <div className="aud-stat-card">
+              <div className="aud-stat-label">Total Revenue Generated</div>
+              <div className="aud-stat-value">${(profile.total_sales_cents / 100).toFixed(2)}</div>
+              <div className="aud-stat-icon"><FiShoppingBag /></div>
+            </div>
+            <div className="aud-stat-card">
+              <div className="aud-stat-label">Net Commission ({((profile.commission_rate || 0.15) * 100).toFixed(0)}%)</div>
+              <div className="aud-stat-value" style={{ color: '#4ade80' }}>
+                ${((profile.total_sales_cents * (profile.commission_rate > 1 ? profile.commission_rate / 100 : (profile.commission_rate || 0.15))) / 100).toFixed(2)}
+              </div>
+              <div className="aud-stat-icon" style={{ color: '#4ade80' }}><FiTrendingUp /></div>
+            </div>
+            <div className="aud-stat-card">
+              <div className="aud-stat-label">Total Refunds</div>
+              <div className="aud-stat-value" style={{ color: '#ef4444' }}>-${(profile.total_refunded_cents / 100).toFixed(2)}</div>
+              <div className="aud-stat-icon" style={{ color: '#ef4444' }}><FiArrowLeftCircle /></div>
+            </div>
+            <div className="aud-stat-card">
+              <div className="aud-stat-label">Affiliate Since</div>
+              <div className="aud-stat-value" style={{ fontSize: '18px' }}>{new Date(profile.joined_at).toLocaleDateString()}</div>
+              <div className="aud-stat-icon"><FiCalendar /></div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="aud-stat-card">
+              <div className="aud-stat-label">Total Video Earnings</div>
+              <div className="aud-stat-value">${(profile?.total_video_earnings_cents / 100).toFixed(2)}</div>
+              <div className="aud-stat-icon"><FiDollarSign /></div>
+            </div>
+            <div className="aud-stat-card">
+              <div className="aud-stat-label">Approved Videos</div>
+              <div className="aud-stat-value">{profile?.approved_videos}</div>
+              <div className="aud-stat-icon"><FiCheck /></div>
+            </div>
+            <div className="aud-stat-card">
+              <div className="aud-stat-label">Pending Videos</div>
+              <div className="aud-stat-value">{profile?.pending_videos}</div>
+              <div className="aud-stat-icon"><FiCalendar /></div>
+            </div>
+            <div className="aud-stat-card">
+              <div className="aud-stat-label">Total Views</div>
+              <div className="aud-stat-value">{profile?.total_views?.toLocaleString()}</div>
+              <div className="aud-stat-icon"><FiEye /></div>
+            </div>
+          </>
+        )}
+      </div>
 
           {/* Clicks / Downloads / Installs timeline */}
           <div className="aud-chart-card">
@@ -943,6 +1032,84 @@ const AdminUserDetail: React.FC = () => {
                 ))}
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* ===== SETTINGS ===== */}
+      {activeSection === 'settings' && (
+        <div style={{ maxWidth: '600px' }}>
+          <div className="aud-chart-card">
+            <div className="aud-chart-header"><h3><FiSettings /> Account Configuration</h3></div>
+            <div className="aud-chart-body" style={{ padding: '0 20px' }}>
+              <div className="aud-config-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                <div>
+                  <div style={{ fontWeight: 'bold', fontSize: '15px', color: '#fff' }}>Affiliate Mode</div>
+                  <div style={{ fontSize: '13px', color: '#888', marginTop: '4px' }}>Earn commission on sales instead of views</div>
+                </div>
+                <button 
+                  onClick={handleToggleAffiliate}
+                  style={{ 
+                    padding: '10px 20px', 
+                    borderRadius: '8px', 
+                    border: 'none',
+                    background: profile?.is_sales_affiliate ? '#dc2626' : '#3b82f6',
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    transition: 'opacity 0.2s'
+                  }}
+                >
+                  {profile?.is_sales_affiliate ? 'Disable Affiliate' : 'Enable Affiliate'}
+                </button>
+              </div>
+
+              {profile?.is_sales_affiliate && (
+                <div className="aud-config-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 0' }}>
+                  <div>
+                    <div style={{ fontWeight: 'bold', fontSize: '15px', color: '#fff' }}>Commission Rate</div>
+                    <div style={{ fontSize: '13px', color: '#888', marginTop: '4px' }}>Custom percentage for this affiliate</div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <input 
+                      type="number" 
+                      defaultValue={(profile.commission_rate > 1 ? profile.commission_rate : profile.commission_rate * 100).toFixed(0)} 
+                      onBlur={(e) => handleUpdateCommission(e.target.value)}
+                      style={{ 
+                        width: '70px', 
+                        padding: '10px', 
+                        borderRadius: '8px', 
+                        background: '#0f172a', 
+                        border: '1px solid #1e293b', 
+                        color: '#fff',
+                        textAlign: 'center',
+                        fontSize: '15px',
+                        fontWeight: 'bold'
+                      }}
+                    />
+                    <span style={{ fontWeight: 'bold', color: '#888', fontSize: '18px' }}>%</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="aud-chart-card" style={{ marginTop: '24px' }}>
+            <div className="aud-chart-header"><h3>Payment Methods</h3></div>
+            <div className="aud-chart-body" style={{ padding: '0 20px' }}>
+              <div style={{ padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>PayPal</span>
+                <span style={{ color: '#fff', fontWeight: 'bold' }}>{profile.paypal_email || '—'}</span>
+              </div>
+              <div style={{ padding: '15px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>Cash App</span>
+                <span style={{ color: '#fff', fontWeight: 'bold' }}>{profile.cashapp_tag || '—'}</span>
+              </div>
+              <div style={{ padding: '15px 0', display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>Crypto</span>
+                <span style={{ color: '#fff', fontWeight: 'bold', fontSize: '12px' }}>{profile.crypto_address || '—'}</span>
+              </div>
+            </div>
           </div>
         </div>
       )}

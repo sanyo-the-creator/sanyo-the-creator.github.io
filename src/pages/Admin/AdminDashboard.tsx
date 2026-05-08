@@ -41,10 +41,10 @@ interface UserOverview {
   total_views: number;
   approved_videos: number;
   pending_videos: number;
-  total_paid_cents: number;
-  pending_payout_cents: number;
-  total_cost_cents: number;
-  is_profitable: boolean;
+  total_video_earnings_cents: number;
+  total_refunded_cents: number;
+  is_sales_affiliate: boolean;
+  commission_rate: number;
 }
 
 const AdminDashboard: React.FC = () => {
@@ -88,66 +88,15 @@ const AdminDashboard: React.FC = () => {
       // If we reach here, user IS an admin
       setIsAdmin(true);
 
-      // Now load data (separately so it doesn't break access if it fails)
       try {
-        const { data: profiles, error: pError } = await supabase
-          .from('referral_profiles')
+        const { data, error } = await supabase
+          .from('admin_user_overview')
           .select('*');
 
-        if (pError) throw pError;
-
-        if (profiles) {
-          const mapped: UserOverview[] = await Promise.all(profiles.map(async (p: any) => {
-            const [
-              { count: clicks },
-              { count: installs },
-              { count: trials },
-              { data: sales },
-              { data: videoStats }
-            ] = await Promise.all([
-              supabase.from('referral_clicks').select('*', { count: 'exact', head: true }).eq('referral_code', p.referral_code),
-              supabase.from('referral_installs').select('*', { count: 'exact', head: true }).eq('referral_code', p.referral_code),
-              supabase.from('referral_trials').select('*', { count: 'exact', head: true }).eq('referral_code', p.referral_code),
-              supabase.from('referral_sales').select('amount_cents').eq('referral_code', p.referral_code),
-              supabase.from('videos').select('status, views, earnings_cents').eq('user_id', p.id)
-            ]);
-
-            const vStats = {
-              count: (videoStats || []).length,
-              views: (videoStats || []).reduce((s, v) => s + (v.views || 0), 0),
-              approved: (videoStats || []).filter(v => v.status === 'approved').length,
-              pending: (videoStats || []).filter(v => v.status === 'pending').length,
-              paid_cents: (videoStats || []).filter(v => v.status === 'paid').reduce((s, v) => s + (v.earnings_cents || 0), 0),
-              approved_cents: (videoStats || []).filter(v => v.status === 'approved').reduce((s, v) => s + (v.earnings_cents || 0), 0),
-            };
-
-            const totalCostCents = vStats.paid_cents + vStats.approved_cents;
-            const totalRevenueCents = (sales || []).reduce((sum, s) => sum + (s.amount_cents || 0), 0);
-
-            return {
-              user_id: p.id,
-              email: '',
-              full_name: p.display_name,
-              avatar_url: p.avatar_url,
-              joined_at: p.created_at,
-              referral_code: p.referral_code,
-              total_clicks: clicks || 0,
-              total_downloads: installs || 0,
-              total_sales_cents: totalRevenueCents,
-              total_trials: trials || 0,
-              video_count: vStats.count,
-              total_views: vStats.views,
-              approved_videos: vStats.approved,
-              pending_videos: vStats.pending,
-              total_paid_cents: vStats.paid_cents,
-              pending_payout_cents: vStats.approved_cents,
-              total_cost_cents: vStats.paid_cents, // ONLY count already paid
-              is_profitable: totalRevenueCents > vStats.paid_cents
-            };
-          }));
-
-          setUsers(mapped);
-          computeGlobalStats(mapped);
+        if (error) throw error;
+        if (data) {
+          setUsers(data);
+          computeGlobalStats(data);
         }
       } catch (dataErr) {
         console.error('Data load error:', dataErr);
@@ -169,8 +118,8 @@ const AdminDashboard: React.FC = () => {
       totalTrials: userData.reduce((sum, u) => sum + (u.total_trials || 0), 0),
       totalVideos: userData.reduce((sum, u) => sum + (u.video_count || 0), 0),
       totalViews: userData.reduce((sum, u) => sum + (u.total_views || 0), 0),
-      totalPaid: userData.reduce((sum, u) => sum + (u.total_paid_cents || 0), 0),
-      totalCost: userData.reduce((sum, u) => sum + (u.total_paid_cents || 0), 0), // Global cost is also only paid
+      totalPaid: userData.reduce((sum, u) => sum + (u.total_video_earnings_cents || 0), 0),
+      totalCost: userData.reduce((sum, u) => sum + (u.total_video_earnings_cents || 0), 0), 
     });
   };
 
@@ -357,13 +306,11 @@ const AdminDashboard: React.FC = () => {
         <div className="admin-table-header">
           <span className="admin-col-user">USER</span>
           <span className="admin-col-code">REF CODE</span>
+          <span className="admin-col-stat">TYPE</span>
           <span className="admin-col-stat">CLICKS</span>
           <span className="admin-col-stat">INSTALLS</span>
-          <span className="admin-col-stat">TRIALS</span>
           <span className="admin-col-stat">REVENUE</span>
-          <span className="admin-col-stat">PAID</span>
-          <span className="admin-col-stat">PENDING</span>
-          <span className="admin-col-stat">PROFIT</span>
+          <span className="admin-col-stat">REFUNDS</span>
           <span className="admin-col-stat">VIDEOS</span>
           <span className="admin-col-stat">VIEWS</span>
           <span className="admin-col-expand"></span>
@@ -397,39 +344,26 @@ const AdminDashboard: React.FC = () => {
                 )}
               </div>
               <div className="admin-col-stat">
+                <span style={{ 
+                  fontSize: '10px', 
+                  padding: '2px 6px', 
+                  borderRadius: '4px', 
+                  background: user.is_sales_affiliate ? 'rgba(59,130,246,0.1)' : 'rgba(74,222,128,0.1)',
+                  color: user.is_sales_affiliate ? '#3b82f6' : '#4ade80',
+                  fontWeight: 'bold'
+                }}>
+                  {user.is_sales_affiliate ? 'AFFILIATE' : 'CREATOR'}
+                </span>
+              </div>
+              <div className="admin-col-stat">
                 <span className={user.total_clicks > 0 ? 'admin-stat-highlight' : ''}>{user.total_clicks}</span>
               </div>
               <div className="admin-col-stat">{user.total_downloads}</div>
               <div className="admin-col-stat">
-                <span className={user.total_trials > 0 ? 'admin-stat-highlight' : ''} style={{ color: user.total_trials > 0 ? '#0ea5e9' : 'inherit' }}>
-                  {user.total_trials}
-                </span>
-              </div>
-              <div className="admin-col-stat">
                 <span className={user.total_sales_cents > 0 ? 'admin-stat-money' : ''}>{fmt(user.total_sales_cents)}</span>
               </div>
               <div className="admin-col-stat">
-                <span style={{ color: user.total_paid_cents > 0 ? '#4ade80' : '#555' }}>{fmt(user.total_paid_cents)}</span>
-              </div>
-              <div className="admin-col-stat">
-                <span style={{ color: user.pending_payout_cents > 0 ? '#3b82f6' : '#555', fontWeight: user.pending_payout_cents > 0 ? 'bold' : 'normal' }}>
-                  {fmt(user.pending_payout_cents)}
-                </span>
-              </div>
-              <div className="admin-col-stat">
-                <span style={{ 
-                  color: user.total_sales_cents > user.total_cost_cents ? '#4ade80' : 
-                         user.total_sales_cents < user.total_cost_cents ? '#f87171' : '#666',
-                  backgroundColor: user.total_sales_cents > user.total_cost_cents ? 'rgba(74,222,128,0.1)' : 
-                                   user.total_sales_cents < user.total_cost_cents ? 'rgba(248,113,113,0.1)' : 'rgba(255,255,255,0.05)',
-                  padding: '2px 6px',
-                  borderRadius: '4px',
-                  fontSize: '11px',
-                  fontWeight: 'bold'
-                }}>
-                  {user.total_sales_cents > user.total_cost_cents ? 'YES' : 
-                   user.total_sales_cents < user.total_cost_cents ? 'NO' : '—'}
-                </span>
+                <span style={{ color: user.total_refunded_cents > 0 ? '#ef4444' : '#555' }}>-{fmt(user.total_refunded_cents)}</span>
               </div>
               <div className="admin-col-stat">{user.video_count}</div>
               <div className="admin-col-stat">{fmtNum(user.total_views)}</div>

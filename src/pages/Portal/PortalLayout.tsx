@@ -35,11 +35,20 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user);
+      if (user) {
+        supabase
+          .from('referral_profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single()
+          .then(({ data }) => setProfile(data));
+      }
     });
   }, []);
 
@@ -105,12 +114,16 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
           <NavLink to="/portal" end className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
             <RiDashboardLine className="portal-nav-icon" /> Dashboard
           </NavLink>
-          <NavLink to="/portal/submit" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-            <RiAddCircleLine className="portal-nav-icon" /> Submit Video
-          </NavLink>
-          <NavLink to="/portal/videos" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-            <RiVideoLine className="portal-nav-icon" /> My Videos
-          </NavLink>
+          {!profile?.is_sales_affiliate && (
+            <>
+              <NavLink to="/portal/submit" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+                <RiAddCircleLine className="portal-nav-icon" /> Submit Video
+              </NavLink>
+              <NavLink to="/portal/videos" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+                <RiVideoLine className="portal-nav-icon" /> My Videos
+              </NavLink>
+            </>
+          )}
           <NavLink to="/creator?from=portal" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
             <RiMagicLine className="portal-nav-icon" /> Creator Tools
           </NavLink>

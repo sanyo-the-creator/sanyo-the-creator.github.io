@@ -106,67 +106,56 @@ const PortalSubmitVideo = () => {
             }
           }
         } else {
-          // Instagram API Integration (using RocketAPI or RapidAPI pattern)
-          // Note: You will need an API Key from a provider like RocketAPI or RapidAPI (Instagram Loapi)
-          const IG_API_KEY = 'YOUR_IG_API_KEY_HERE'; // User can fill this
-          
-          const igMatch = videoUrl.match(/\/(?:p|reels|reel)\/([A-Za-z0-9_-]+)/);
-          if (igMatch && igMatch[1]) {
-            const shortcode = igMatch[1];
-            
-            // 1. Fetch Media Info (Views & Thumb)
-            const igRes = await fetch(`https://instagram-data1.p.rapidapi.com/post/info?shortcode=${shortcode}`, {
-              headers: { 'X-RapidAPI-Key': IG_API_KEY, 'X-RapidAPI-Host': 'instagram-data1.p.rapidapi.com' }
-            });
+          // Instagram Scraper Integration (Self-hosted/Open-source based)
+          // Calls the Vercel serverless function at /api/instagram
+          try {
+            const igApiUrl = window.location.hostname === 'localhost' 
+              ? `http://localhost:3001/api/instagram?url=${encodeURIComponent(videoUrl)}`
+              : `/api/instagram?url=${encodeURIComponent(videoUrl)}`;
 
+            
+            const igRes = await fetch(igApiUrl);
+            
             if (igRes.ok) {
               const igData = await igRes.json();
-              viewsValue = igData.video_view_count || igData.view_count || 0;
-              thumb = igData.display_url || '';
-              const igUsername = igData.owner?.username;
+              viewsValue = igData.views || 0;
+              thumb = igData.thumbnail || '';
+              const biography = (igData.biography || '').toLowerCase();
+              const igUsername = igData.username;
+              const externalUrl = (igData.external_url || '').toLowerCase();
 
-              if (igUsername) {
-                // 2. Fetch User Info for Bio Verification
-                const userIgRes = await fetch(`https://instagram-data1.p.rapidapi.com/user/info?username=${igUsername}`, {
-                  headers: { 'X-RapidAPI-Key': IG_API_KEY, 'X-RapidAPI-Host': 'instagram-data1.p.rapidapi.com' }
-                });
-
-                if (userIgRes.ok) {
-                  const userIgData = await userIgRes.json();
-                  const biography = (userIgData.biography || '').toLowerCase();
-                  
-                  // Fetch current user's referral code
-                  const { data: { user } } = await supabase.auth.getUser();
-                  if (user) {
-                    const { data: profile } = await supabase
-                      .from('referral_profiles')
-                      .select('referral_code')
-                      .eq('id', user.id)
-                      .single();
-                    
-                    const refCode = profile?.referral_code || '';
-                    const domain = window.location.hostname === 'localhost' ? 'joinupshift.com' : window.location.hostname;
-                    const exactLink = `${domain}/download/instagram?ref=${refCode}`.toLowerCase();
-                    
-                    if (!biography.includes(exactLink)) {
-                      bioVerified = false;
-                      bioError = `Exact referral link not found in @${igUsername}'s bio. You must have "${exactLink}" in your profile to submit.`;
-                    }
-                  }
+              // Fetch current user's referral code for bio verification
+              const { data: { user } } = await supabase.auth.getUser();
+              if (user) {
+                const { data: profile } = await supabase
+                  .from('referral_profiles')
+                  .select('referral_code')
+                  .eq('id', user.id)
+                  .single();
+                
+                const refCode = profile?.referral_code || '';
+                const domain = window.location.hostname === 'localhost' ? 'joinupshift.com' : window.location.hostname;
+                const exactLink = `${domain}/download/instagram?ref=${refCode}`.toLowerCase();
+                
+                // Check both biography and external_url (link in bio field)
+                const hasLink = biography.includes(exactLink) || externalUrl.includes(exactLink);
+                
+                if (!hasLink) {
+                  bioVerified = false;
+                  bioError = `Exact referral link not found in @${igUsername}'s bio. You must have "${exactLink}" in your profile to submit.`;
                 }
               }
             } else {
-              // Fallback to deterministic mock if API fails or key is missing
-              let hash = 0;
-              for (let i = 0; i < videoUrl.length; i++) {
-                hash = ((hash << 5) - hash) + videoUrl.charCodeAt(i);
-                hash |= 0; 
-              }
-              viewsValue = Math.abs(hash % 1500000);
-              thumb = `https://www.instagram.com/p/${shortcode}/media/?size=l`;
+              throw new Error("Failed to fetch Instagram data");
             }
+          } catch (err) {
+            console.error("Instagram Scraping Error:", err);
+            // If the API fails, we don't fall back to mocks anymore to prevent fraud
+            bioVerified = false;
+            bioError = "Could not verify Instagram video stats. Please try again later or ensure the link is public.";
           }
         }
+
 
         // Payout Logic
         let earningsValue = 0;
