@@ -448,8 +448,8 @@ const PortalSubmitVideo = () => {
         <div style={{ fontSize: '13px', color: '#aaa', lineHeight: '1.6' }}>
           <ol style={{ paddingLeft: '20px' }}>
             <li style={{ marginBottom: '10px' }}>Tie your viral content style into <strong>productivity</strong>. The goal is to go viral.</li>
-            <li style={{ marginBottom: '10px' }}>You MUST use our customizable <strong>Upshift template</strong> or clips at least once. Found at <a href="https://joinupshift.com/creator" target="_blank" rel="noreferrer" style={{ color: '#3b82f6' }}>joinupshift.com/creator</a>.</li>
-            <li style={{ marginBottom: '10px' }}>Show template within first <strong>15s MAX</strong>, full-screen by itself for <strong>min 2 seconds</strong>.</li>
+            <li style={{ marginBottom: '10px' }}>You MUST use our customizable <strong>Upshift template</strong> or <strong>video clips</strong> at least once. Found in the <a href="/creator/content?from=portal" target="_blank" rel="noreferrer" style={{ color: '#3b82f6' }}>Content Library</a>.</li>
+            <li style={{ marginBottom: '10px' }}>Show template/clips within first <strong>15s MAX</strong>, full-screen by itself for <strong>min 2 seconds</strong>.</li>
             <li style={{ marginBottom: '10px' }}>
               <strong>Tag us in the first line of description:</strong><br />
               Instagram: <strong>@byupshift</strong> | TikTok: <strong>@joinupshift.com</strong><br />

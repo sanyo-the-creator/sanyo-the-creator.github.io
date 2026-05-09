@@ -4,7 +4,8 @@ import {
   RiMagicLine as _RiMagicLine,
   RiTimeLine as _RiTimeLine,
   RiLayoutMasonryLine as _RiLayoutMasonryLine,
-  RiArrowLeftLine as _RiArrowLeftLine
+  RiArrowLeftLine as _RiArrowLeftLine,
+  RiVideoLine as _RiVideoLine
 } from 'react-icons/ri';
 import './Creator.css';
 import LightRays from '../../components/common/LightRays/LightRays';
@@ -13,6 +14,7 @@ const RiMagicLine = _RiMagicLine as any;
 const RiTimeLine = _RiTimeLine as any;
 const RiLayoutMasonryLine = _RiLayoutMasonryLine as any;
 const RiArrowLeftLine = _RiArrowLeftLine as any;
+const RiVideoLine = _RiVideoLine as any;
 
 const CreatorLanding: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -74,6 +76,18 @@ const CreatorLanding: React.FC = () => {
             <h2 className="tool-title">Mix & Match</h2>
             <p className="tool-description">
               Combine Quests and Screen Time apps seamlessly in a single layout
+            </p>
+          </div>
+        </Link>
+
+        <Link to={`/creator/content${fromPortal ? '?from=portal' : ''}`} className="tool-card">
+          <div className="tool-icon-wrapper">
+            <RiVideoLine />
+          </div>
+          <div className="tool-info">
+            <h2 className="tool-title">Video Assets</h2>
+            <p className="tool-description">
+              Download approved video clips and assets to use in your social media content
             </p>
           </div>
         </Link>

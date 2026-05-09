@@ -17,6 +17,7 @@ import CreatorProgram from './pages/Creator/CreatorProgram';
 import Quests from './pages/Creator/Quests';
 import ScreenTime from './pages/Creator/ScreenTime';
 import Mix from './pages/Creator/Mix';
+import ContentLibrary from './pages/Creator/ContentLibrary';
 import './styles/globals.css';
 import PortalRouter from './pages/Portal/PortalRouter';
 import AdminDashboard from './pages/Admin/AdminDashboard';
@@ -60,6 +61,7 @@ function App() {
           <Route path="/creator/quests" element={<Quests />} />
           <Route path="/creator/screentime" element={<ScreenTime />} />
           <Route path="/creator/mix" element={<Mix />} />
+          <Route path="/creator/content" element={<ContentLibrary />} />
         </Route>
       </Routes>
     </Router>
