@@ -171,6 +171,27 @@
   color: #fff;
 }
 
+.portal-sidebar-legal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  font-size: 11px;
+  color: #666;
+  padding: 0 16px;
+}
+
+.portal-sidebar-legal a {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.portal-sidebar-legal a:hover {
+  color: var(--portal-accent);
+  text-decoration: underline;
+}
+
 /* Page Content */
 .portal-content {
   flex: 1;
@@ -608,6 +629,24 @@
 
 .portal-btn-discord:hover {
   background-color: #4752C4;
+}
+
+.portal-auth-legal {
+  margin-top: 24px;
+  font-size: 11px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.portal-auth-link {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.portal-auth-link:hover {
+  text-decoration: underline;
+  color: #2563eb;
 }
 
 .portal-loading {

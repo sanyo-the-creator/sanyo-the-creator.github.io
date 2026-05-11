@@ -38,6 +38,13 @@ const PortalAuth: React.FC<PortalAuthProps> = ({ onLogin }) => {
           <FaDiscord size={24} style={{ marginRight: '10px' }} />
           Connect with Discord
         </button>
+
+        <div className="portal-auth-legal">
+          By continuing, you agree to our{' '}
+          <a href="/terms" className="portal-auth-link" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
+          {' '}and{' '}
+          <a href="/privacy" className="portal-auth-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+        </div>
       </div>
     </div>
   );
