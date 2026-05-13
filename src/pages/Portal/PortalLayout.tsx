@@ -140,6 +140,11 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
           <button className="portal-signout-btn" onClick={handleSignOut}>
             <RiLogoutBoxRLine className="portal-nav-icon" /> Sign Out
           </button>
+          <div className="portal-sidebar-legal">
+            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
+            <span style={{ margin: '0 8px', color: '#666' }}>•</span>
+            <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+          </div>
         </div>
       </aside>
 
