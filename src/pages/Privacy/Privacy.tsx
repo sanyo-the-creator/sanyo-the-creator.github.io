@@ -10,7 +10,7 @@ const Privacy: React.FC = () => {
                 title="Privacy Policy - Upshift | Your Data Protection & Privacy"
                 description="Read Upshift's Privacy Policy to understand how we collect, use, and protect your personal information. Your privacy is our priority."
                 keywords="upshift privacy policy, data protection, privacy, personal information, user data, GDPR"
-                image="https://upshift-web.vercel.app/icon.png"
+                image="https://www.joinupshift.com/icon.png"
                 type="website"
                 noindex={false}
             />
@@ -18,7 +18,7 @@ const Privacy: React.FC = () => {
                 type="webpage"
                 title="Privacy Policy - Upshift"
                 description="Upshift Privacy Policy and data protection information"
-                url="https://upshift-web.vercel.app/privacy"
+                url="https://www.joinupshift.com/privacy"
             />
              <LightRays
         raysOrigin="top-center"
@@ -39,7 +39,7 @@ const Privacy: React.FC = () => {
                     <h2>Privacy Policy</h2>
 
                     <div className="privacy-text">
-                        <p>At Upshift, your privacy is our priority. This Privacy Policy outlines how we collect, use, and protect your personal information when you use our productivity and app blocking app. By accessing or using Upshift, you consent to the practices described below.</p>
+                        <p>At Upshift (joinupshift.com), your privacy is our priority. This Privacy Policy outlines how we collect, use, and protect your personal information when you use our productivity and app blocking app. By accessing or using Upshift, you consent to the practices described below.</p>
 
                         <h3>1. Information We Collect</h3>
                         <p>We collect the following types of information to provide and improve our services:</p>
@@ -111,7 +111,10 @@ const Privacy: React.FC = () => {
                         <h3>9. Third-Party Links</h3>
                         <p>Our app may include links to third-party websites or services. We are not responsible for the privacy practices or content of these third parties. We encourage you to review their privacy policies before providing any information.</p>
 
-                        <h3>10. Updates to this Privacy Policy</h3>
+                        <h3>10. TikTok Login Kit</h3>
+                        <p>Upshift (joinupshift.com) uses TikTok Login Kit to allow users to sign in with their TikTok account. When you choose to log in via TikTok, we may receive your TikTok username and profile picture. This information is used solely to create and identify your Upshift account. We do not post to TikTok on your behalf, access your TikTok content, or share your TikTok data with third parties.</p>
+
+                        <h3>11. Updates to this Privacy Policy</h3>
                         <p>We may update this Privacy Policy periodically to reflect changes in our practices or for legal reasons. We will notify you of significant updates and encourage you to review this document regularly.</p>
                     </div>
                 </div>
@@ -119,7 +122,7 @@ const Privacy: React.FC = () => {
 
             {/* Last Updated */}
             <div className="last-updated">
-                <p>Last updated: July 2025</p>
+                <p>Last updated: May 2026</p>
             </div>
         </div>
     );
