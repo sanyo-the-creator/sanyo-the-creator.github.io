@@ -54,7 +54,7 @@ const RedditProgramSection: React.FC = () => {
               </div>
               <h3 className="step-title">2. Create</h3>
               <p className="step-description">
-                Make Reddit posts promoting Upshift. Earn money for successful posts + bonuses
+                Create posts easily based on our guide. We provide everything you need to go viral.
               </p>
 
             </div>
