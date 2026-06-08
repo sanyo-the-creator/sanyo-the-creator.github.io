@@ -12,7 +12,9 @@ import {
   RiMenu3Line as _RiMenu3Line,
   RiCloseLine as _RiCloseLine,
   RiFocus3Line as _RiFocus3Line,
-  RiMagicLine as _RiMagicLine
+  RiMagicLine as _RiMagicLine,
+  RiRedditLine as _RiRedditLine,
+  RiFileList3Line as _RiFileList3Line
 } from 'react-icons/ri';
 
 const RiDashboardLine = _RiDashboardLine as React.ElementType;
@@ -26,6 +28,8 @@ const RiMenu3Line = _RiMenu3Line as React.ElementType;
 const RiCloseLine = _RiCloseLine as React.ElementType;
 const RiFocus3Line = _RiFocus3Line as React.ElementType;
 const RiMagicLine = _RiMagicLine as React.ElementType;
+const RiRedditLine = _RiRedditLine as React.ElementType;
+const RiFileList3Line = _RiFileList3Line as React.ElementType;
 
 interface PortalLayoutProps {
   onLogout: () => void;
@@ -121,6 +125,12 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
               </NavLink>
               <NavLink to="/portal/videos" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
                 <RiVideoLine className="portal-nav-icon" /> My Videos
+              </NavLink>
+              <NavLink to="/portal/submit-reddit" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+                <RiRedditLine className="portal-nav-icon" /> Submit Reddit Post
+              </NavLink>
+              <NavLink to="/portal/reddit-posts" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+                <RiFileList3Line className="portal-nav-icon" /> My Reddit Posts
               </NavLink>
             </>
           )}

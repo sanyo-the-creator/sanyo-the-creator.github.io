@@ -11,7 +11,8 @@ import {
   FiSearch as _FiSearch,
   FiArrowRight as _FiArrowRight,
   FiShield as _FiShield,
-  FiTrendingUp as _FiTrendingUp
+  FiTrendingUp as _FiTrendingUp,
+  FiFileText as _FiFileText
 } from 'react-icons/fi';
 import './AdminDashboard.css';
 
@@ -25,6 +26,7 @@ const FiSearch = _FiSearch as React.ElementType;
 const FiArrowRight = _FiArrowRight as React.ElementType;
 const FiShield = _FiShield as React.ElementType;
 const FiTrendingUp = _FiTrendingUp as React.ElementType;
+const FiFileText = _FiFileText as React.ElementType;
 
 interface UserOverview {
   user_id: string;
@@ -219,6 +221,26 @@ const AdminDashboard: React.FC = () => {
                 {users.reduce((sum, u) => sum + (u.pending_videos || 0), 0)}
               </span>
             )}
+          </button>
+          <button
+            className="admin-action-btn"
+            onClick={() => navigate('/admin/reddit')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              background: '#ff4500',
+              color: '#fff',
+              padding: '12px 20px',
+              borderRadius: '8px',
+              border: 'none',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              position: 'relative',
+              marginLeft: '10px'
+            }}
+          >
+            <FiFileText /> Review Reddit
           </button>
         </div>
       </header>

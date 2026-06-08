@@ -14,6 +14,7 @@ import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
 import CreatorLanding from './pages/Creator/CreatorLanding';
 import CreatorProgram from './pages/Creator/CreatorProgram';
+import RedditProgram from './pages/Creator/RedditProgram';
 import Quests from './pages/Creator/Quests';
 import ScreenTime from './pages/Creator/ScreenTime';
 import Mix from './pages/Creator/Mix';
@@ -23,6 +24,7 @@ import PortalRouter from './pages/Portal/PortalRouter';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import AdminUserDetail from './pages/Admin/AdminUserDetail';
 import AdminVideoReview from './pages/Admin/AdminVideoReview';
+import AdminRedditReview from './pages/Admin/AdminRedditReview';
 import ProfileLanding from './pages/Profile/ProfileLanding';
 
 function App() {
@@ -35,12 +37,17 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/user/:userId" element={<AdminUserDetail />} />
         <Route path="/admin/videos" element={<AdminVideoReview />} />
+        <Route path="/admin/reddit" element={<AdminRedditReview />} />
         
 
 
         {/* Public profile page: /jergus or /jergus/tiktok */}
         <Route path="/:referralCode" element={<ProfileLanding />} />
         <Route path="/:referralCode/:platform" element={<ProfileLanding />} />
+
+        {/* Creator programs without Layout (no black header) */}
+        <Route path="/creator-program" element={<CreatorProgram />} />
+        <Route path="/creator-program/reddit" element={<RedditProgram />} />
 
         <Route element={<Layout />}>
           <Route path="/" element={<Download />} />
@@ -57,7 +64,6 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           
           <Route path="/creator" element={<CreatorLanding />} />
-          <Route path="/creator-program" element={<CreatorProgram />} />
           <Route path="/creator/quests" element={<Quests />} />
           <Route path="/creator/screentime" element={<ScreenTime />} />
           <Route path="/creator/mix" element={<Mix />} />

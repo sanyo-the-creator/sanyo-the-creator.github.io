@@ -8,6 +8,8 @@ import PortalReferrals from './PortalReferrals';
 import PortalSettings from './PortalSettings';
 import PortalSubmitVideo from './PortalSubmitVideo';
 import PortalMyVideos from './PortalMyVideos';
+import PortalSubmitReddit from './PortalSubmitReddit';
+import PortalMyRedditPosts from './PortalMyRedditPosts';
 import { supabase } from '../../lib/supabase';
 import './Portal.css';
 
@@ -46,6 +48,8 @@ const PortalRouter = () => {
           <Route path="/" element={<PortalDashboard />} />
           <Route path="/submit" element={<PortalSubmitVideo />} />
           <Route path="/videos" element={<PortalMyVideos />} />
+          <Route path="/submit-reddit" element={<PortalSubmitReddit />} />
+          <Route path="/reddit-posts" element={<PortalMyRedditPosts />} />
           <Route path="/leaderboard" element={<PortalLeaderboard />} />
           <Route path="/referrals" element={<PortalReferrals />} />
           <Route path="/settings" element={<PortalSettings />} />
