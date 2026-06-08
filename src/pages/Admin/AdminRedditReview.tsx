@@ -72,7 +72,7 @@ const AdminRedditReview: React.FC = () => {
       }
 
       // Fetch profiles separately because there's no direct foreign key
-      const userIds = [...new Set(postsData.map(p => p.user_id))];
+      const userIds = postsData.map(p => p.user_id).filter((v, i, a) => a.indexOf(v) === i);
       const { data: profiles, error: profilesError } = await supabase
         .from('referral_profiles')
         .select('id, display_name, avatar_url, paypal_email, cashapp_tag, crypto_address')
