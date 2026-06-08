@@ -13,11 +13,8 @@ const FiCheckCircle = _FiCheckCircle as React.ElementType;
 // The real App Store link creators must reply with:
 const APP_STORE_LINK = 'https://apps.apple.com/us/app/upshift-1-productivity-app/id6749509316';
 // The mock Upshift TestFlight build used to fake streaks/habits + app blocker.
-// TODO: replace '#' with the real TestFlight invite link.
-const TESTFLIGHT_LINK = '#';
-// Notion doc with caption/body inspiration (don't copy 1:1 — Reddit filters!).
-// TODO: replace '#' with the real Notion link.
-const NOTION_LINK = '#';
+const TESTFLIGHT_LINK = 'https://testflight.apple.com/join/5CNnTm8Y';
+const NOTION_LINK = 'https://app.notion.com/p/Reddit-Marketing-Tutorial-for-Upshift-App-283e593666a98072b125d6599ff9df73?source=copy_link';
 
 // --- Reddit payout tiers (cumulative) ---------------------------------------
 const PAYOUT_TIERS = [

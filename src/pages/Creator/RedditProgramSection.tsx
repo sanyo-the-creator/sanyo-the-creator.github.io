@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  FaDiscord as _FaDiscord, 
-  FaReddit as _FaReddit, 
-  FaChartLine as _FaChartLine, 
-  FaDollarSign as _FaDollarSign 
+import {
+  FaDiscord as _FaDiscord,
+  FaReddit as _FaReddit,
+  FaChartLine as _FaChartLine,
+  FaDollarSign as _FaDollarSign
 } from 'react-icons/fa';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
 import './CreatorProgram.css';
@@ -56,10 +56,7 @@ const RedditProgramSection: React.FC = () => {
               <p className="step-description">
                 Make Reddit posts promoting Upshift. Earn money for successful posts that drive engagement + bonuses
               </p>
-              <Link to="/creator/content" className="step-link" style={{ marginTop: '12px', display: 'flex' }}>
-                Download Assets
-                <span className="link-arrow">→</span>
-              </Link>
+
             </div>
 
             {/* Step 3 */}

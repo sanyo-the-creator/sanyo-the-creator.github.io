@@ -7,20 +7,22 @@ const FiChevronRight = _FiChevronRight as React.ElementType;
 // Drop the real screenshots into /public/images/reddit-examples/
 // (see the README.txt in that folder). Add/remove entries here freely.
 const RESULT_IMAGES: { src: string; caption: string }[] = [
-  { src: '/images/reddit-examples/result-1.png', caption: '750K+ views · r/Habits · 1.3K upvotes' },
-  { src: '/images/reddit-examples/result-9.jpg', caption: '~160K views · r/Adulting · 402 upvotes' },
-  { src: '/images/reddit-examples/result-2.jpg', caption: '144K views · r/DarkPsychology101 · 496 upvotes' },
-  { src: '/images/reddit-examples/result-3.jpg', caption: '141K views · r/Mindfulness · 463 upvotes' },
-  { src: '/images/reddit-examples/result-4.jpg', caption: '136K views · r/Habits · 306 upvotes' },
-  { src: '/images/reddit-examples/result-11.png', caption: '~130K views · r/davidgoggins · 359 upvotes' },
-  { src: '/images/reddit-examples/result-10.jpg', caption: '~120K views · r/happy · 359 upvotes' },
-  { src: '/images/reddit-examples/result-14.png', caption: '~105K views · r/happy · 277 upvotes' },
-  { src: '/images/reddit-examples/result-5.jpg', caption: '94K views · r/Habits · 158 upvotes' },
-  { src: '/images/reddit-examples/result-12.png', caption: '~90K views · r/NABEER · 248 upvotes' },
-  { src: '/images/reddit-examples/result-13.png', caption: '~72K views · r/stopdrinkingfitness · 216 upvotes' },
-  { src: '/images/reddit-examples/result-6.jpg', caption: '69K views · r/Buildingmyfutureself · 138 upvotes' },
-  { src: '/images/reddit-examples/result-7.jpg', caption: '56K views · r/Productivitycafe · 129 upvotes' },
-  { src: '/images/reddit-examples/result-8.jpg', caption: '47K views · r/motivation · 195 upvotes' },
+  { src: '/images/reddit-examples/IMG_0604.PNG', caption: '750K+ views · r/Habits · 1.3K upvotes' },
+  { src: '/images/reddit-examples/IMG_5325.jpg', caption: '~160K views · r/Adulting · 402 upvotes' },
+  { src: '/images/reddit-examples/IMG_5323.jpg', caption: '144K views · r/DarkPsychology101 · 496 upvotes' },
+  { src: '/images/reddit-examples/IMG_5324.jpg', caption: '141K views · r/Mindfulness · 463 upvotes' },
+  { src: '/images/reddit-examples/IMG_5328.jpg', caption: '136K views · r/Habits · 306 upvotes' },
+  { src: '/images/reddit-examples/IMG_5327.PNG', caption: '~130K views · r/davidgoggins · 359 upvotes' },
+  { src: '/images/reddit-examples/IMG_5326.jpg', caption: '~120K views · r/happy · 359 upvotes' },
+  { src: '/images/reddit-examples/Screenshot%202026-06-03%20180119.jpg', caption: '~105K views · r/happy · 277 upvotes' },
+  { src: '/images/reddit-examples/Screenshot%202026-06-03%20180154.jpg', caption: '~90K views · r/NABEER · 248 upvotes' },
+  { src: '/images/reddit-examples/Screenshot%202026-06-03%20180249.jpg', caption: '~72K views · r/stopdrinkingfitness · 216 upvotes' },
+  { src: '/images/reddit-examples/IMG_5330.jpg', caption: '94K views · r/Habits · 158 upvotes' },
+  { src: '/images/reddit-examples/IMG_5331.jpg', caption: '69K views · r/Buildingmyfutureself · 138 upvotes' },
+  { src: '/images/reddit-examples/IMG_5332.jpg', caption: '56K views · r/Productivitycafe · 129 upvotes' },
+  { src: '/images/reddit-examples/IMG_5329.jpg', caption: '47K views · r/motivation · 195 upvotes' },
+  { src: '/images/reddit-examples/IMG_5325%20(1).jpg', caption: '~100K views · r/Productivity · 300 upvotes' },
+  { src: '/images/reddit-examples/IMG_5327.jpg', caption: '~85K views · r/SelfImprovement · 250 upvotes' },
 ];
 
 interface RedditResultsSliderProps {
