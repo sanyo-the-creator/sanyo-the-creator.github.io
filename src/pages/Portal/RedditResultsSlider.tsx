@@ -8,11 +8,11 @@ const FiChevronRight = _FiChevronRight as React.ElementType;
 // (see the README.txt in that folder). Add/remove entries here freely.
 const RESULT_IMAGES: { src: string; caption: string }[] = [
   { src: '/images/reddit-examples/IMG_0604.PNG', caption: '750K+ views · r/Habits · 1.3K upvotes' },
-  { src: '/images/reddit-examples/IMG_5325.jpg', caption: '~160K views · r/Adulting · 402 upvotes' },
+  { src: '/images/reddit-examples/IMG_5325 (1).jpg', caption: '~160K views · r/Adulting · 402 upvotes' },
   { src: '/images/reddit-examples/IMG_5323.jpg', caption: '144K views · r/DarkPsychology101 · 496 upvotes' },
   { src: '/images/reddit-examples/IMG_5324.jpg', caption: '141K views · r/Mindfulness · 463 upvotes' },
   { src: '/images/reddit-examples/IMG_5328.jpg', caption: '136K views · r/Habits · 306 upvotes' },
-  { src: '/images/reddit-examples/IMG_5327.PNG', caption: '~130K views · r/davidgoggins · 359 upvotes' },
+  { src: '/images/reddit-examples/IMG_5327.jpg', caption: '~130K views · r/davidgoggins · 359 upvotes' },
   { src: '/images/reddit-examples/IMG_5326.jpg', caption: '~120K views · r/happy · 359 upvotes' },
   { src: '/images/reddit-examples/Screenshot 2026-06-03 180119.jpg', caption: '~105K views · r/happy · 277 upvotes' },
   { src: '/images/reddit-examples/Screenshot 2026-06-03 180154.jpg', caption: '~90K views · r/NABEER · 248 upvotes' },
@@ -21,8 +21,6 @@ const RESULT_IMAGES: { src: string; caption: string }[] = [
   { src: '/images/reddit-examples/IMG_5331.jpg', caption: '69K views · r/Buildingmyfutureself · 138 upvotes' },
   { src: '/images/reddit-examples/IMG_5332.jpg', caption: '56K views · r/Productivitycafe · 129 upvotes' },
   { src: '/images/reddit-examples/IMG_5329.jpg', caption: '47K views · r/motivation · 195 upvotes' },
-  { src: '/images/reddit-examples/IMG_5325 (1).jpg', caption: '~100K views · r/Productivity · 300 upvotes' },
-  { src: '/images/reddit-examples/IMG_5327.jpg', caption: '~85K views · r/SelfImprovement · 250 upvotes' },
 ];
 
 interface RedditResultsSliderProps {
