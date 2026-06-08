@@ -53,14 +53,39 @@ const AdminVideoReview: React.FC = () => {
       if (!adminData) { setIsAdmin(false); return; }
       setIsAdmin(true);
 
-      const { data, error: fetchError } = await supabase
+      const { data: videosData, error: fetchError } = await supabase
         .from('videos')
-        .select('*, referral_profiles(id, display_name, avatar_url, paypal_email, cashapp_tag, crypto_address)')
+        .select('*')
         .ilike('status', filter === 'payouts' ? 'approved' : filter)
         .order('submitted_at', { ascending: false });
 
       if (fetchError) throw fetchError;
-      setVideos(data || []);
+      
+      if (!videosData || videosData.length === 0) {
+        setVideos([]);
+        return;
+      }
+
+      // Fetch profiles separately because there's no direct foreign key
+      const userIds = [...new Set(videosData.map(v => v.user_id))];
+      const { data: profiles, error: profilesError } = await supabase
+        .from('referral_profiles')
+        .select('id, display_name, avatar_url, paypal_email, cashapp_tag, crypto_address')
+        .in('id', userIds);
+
+      if (profilesError) throw profilesError;
+
+      const profilesMap = (profiles || []).reduce((acc: any, p) => {
+        acc[p.id] = p;
+        return acc;
+      }, {});
+
+      const videosWithProfiles = videosData.map(v => ({
+        ...v,
+        referral_profiles: profilesMap[v.user_id] || null
+      }));
+
+      setVideos(videosWithProfiles);
     } catch (err: any) {
       console.error('Error loading videos:', err);
       setError(err.message || 'Failed to load videos');
