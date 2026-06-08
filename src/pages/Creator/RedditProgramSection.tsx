@@ -56,7 +56,16 @@ const RedditProgramSection: React.FC = () => {
               <p className="step-description">
                 Create posts easily based on our guide. We provide everything you need to go viral.
               </p>
-
+              <a
+                href="https://app.notion.com/p/Reddit-Marketing-Tutorial-for-Upshift-App-283e593666a98072b125d6599ff9df73?source=copy_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="step-link"
+                style={{ marginTop: '12px', display: 'flex' }}
+              >
+                Read Virality Guide
+                <span className="link-arrow">→</span>
+              </a>
             </div>
 
             {/* Step 3 */}
