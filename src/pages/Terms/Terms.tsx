@@ -10,7 +10,7 @@ const Terms: React.FC = () => {
                 title="Terms & Conditions - Upshift | User Agreement"
                 description="Read Upshift's Terms and Conditions to understand the rules and guidelines for using our productivity and personal development app."
                 keywords="upshift terms and conditions, user agreement, terms of service, legal, app usage"
-                image="https://upshift-web.vercel.app/icon.png"
+                image="https://www.joinupshift.com/icon.png"
                 type="website"
                 noindex={false}
             />
@@ -18,7 +18,7 @@ const Terms: React.FC = () => {
                 type="webpage"
                 title="Terms & Conditions - Upshift"
                 description="Upshift Terms and Conditions and user agreement"
-                url="https://upshift-web.vercel.app/terms"
+                url="https://www.joinupshift.com/terms"
             />
              <LightRays
         raysOrigin="top-center"
@@ -39,7 +39,7 @@ const Terms: React.FC = () => {
                     <h2>Terms & Conditions</h2>
 
                     <div className="terms-text">
-                    <p>Welcome to Upshift, a productivity and habit tracking app with app blocking capabilities designed to help users build better habits, achieve their goals, eliminate distractions, and develop a more productive lifestyle. By downloading or using our app, you agree to comply with and be bound by the following Terms and Conditions. Please read them carefully.</p>
+                    <p>Welcome to Upshift (joinupshift.com), a productivity and habit tracking app with app blocking capabilities designed to help users build better habits, achieve their goals, eliminate distractions, and develop a more productive lifestyle. By downloading or using our app, you agree to comply with and be bound by the following Terms and Conditions. Please read them carefully.</p>
 
                     <h3>1. Acceptance of Terms</h3>
                     <p>By accessing or using Upshift, you agree to these Terms and Conditions and any additional terms applicable to certain features or services. If you do not agree, please discontinue use of the app immediately.</p>
@@ -126,7 +126,7 @@ const Terms: React.FC = () => {
 
             {/* Last Updated */}
             <div className="last-updated">
-                <p>Last updated: July 2025</p>
+                <p>Last updated: May 2026</p>
             </div>
         </div>
     );
