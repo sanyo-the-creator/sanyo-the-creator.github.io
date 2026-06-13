@@ -85,7 +85,7 @@ const CreatorProgramSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="program-action" style={{ marginBottom: '24px' }}>
+          <div className="program-action" style={{ paddingBottom: '48px' }}>
             <Link to="/portal" style={{ textDecoration: 'none' }}>
               <StarBorder color="#3A29FF" className="portal-btn">
                 Go To Creator Portal
