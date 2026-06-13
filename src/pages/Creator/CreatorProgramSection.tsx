@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  FaDiscord as _FaDiscord, 
-  FaTiktok as _FaTiktok, 
-  FaChartLine as _FaChartLine, 
-  FaDollarSign as _FaDollarSign 
+import {
+  FaDiscord as _FaDiscord,
+  FaTiktok as _FaTiktok,
+  FaChartLine as _FaChartLine,
+  FaDollarSign as _FaDollarSign
 } from 'react-icons/fa';
 import StarBorder from '../../components/common/StarBorder/StarBorder';
 import './CreatorProgram.css';
@@ -85,7 +85,7 @@ const CreatorProgramSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="program-action">
+          <div className="program-action" style={{ marginBottom: '24px' }}>
             <Link to="/portal" style={{ textDecoration: 'none' }}>
               <StarBorder color="#3A29FF" className="portal-btn">
                 Go To Creator Portal

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiClock as _FiClock, FiDollarSign as _FiDollarSign, FiVideo as _FiVideo, FiEye as _FiEye, FiGift as _FiGift, FiTrendingUp as _FiTrendingUp, FiShoppingBag as _FiShoppingBag, FiArrowLeftCircle as _FiArrowLeftCircle } from 'react-icons/fi';
 import { BiCalendar as _BiCalendar } from 'react-icons/bi';
+import { FaReddit as _FaReddit } from 'react-icons/fa';
 import { supabase } from '../../lib/supabase';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -13,6 +14,7 @@ const FiTrendingUp = _FiTrendingUp as React.ElementType;
 const FiShoppingBag = _FiShoppingBag as React.ElementType;
 const FiArrowLeftCircle = _FiArrowLeftCircle as React.ElementType;
 const BiCalendar = _BiCalendar as React.ElementType;
+const FaReddit = _FaReddit as React.ElementType;
 
 const PortalDashboard = () => {
   const [timeLeft, setTimeLeft] = useState({ d: 17, h: 18, m: 53, s: 8 });
@@ -76,21 +78,29 @@ const PortalDashboard = () => {
 
         } else {
           // Fetch Videos for Creator
-          const { data: videos, error } = await supabase
+          const { data: videos, error: videosError } = await supabase
             .from('videos')
             .select('*')
             .eq('user_id', user.id);
 
-          if (error) throw error;
+          if (videosError) throw videosError;
 
-          const aggregated = (videos || []).reduce((acc, v) => {
-            if (v.status === 'approved') {
-              acc.verified += (v.earnings_cents || 0);
-            } else if (v.status === 'pending') {
-              acc.unverified += (v.earnings_cents || 0);
+          // Fetch Reddit Posts for Creator
+          const { data: redditPosts, error: redditError } = await supabase
+            .from('reddit_posts')
+            .select('*')
+            .eq('user_id', user.id);
+
+          if (redditError) throw redditError;
+
+          const aggregated = [...(videos || []), ...(redditPosts || [])].reduce((acc, item) => {
+            if (item.status === 'approved') {
+              acc.verified += (item.earnings_cents || 0);
+            } else if (item.status === 'pending') {
+              acc.unverified += (item.earnings_cents || 0);
             }
             acc.totalPosts += 1;
-            acc.totalViews += (v.views || 0);
+            acc.totalViews += (item.views || 0);
             return acc;
           }, { verified: 0, unverified: 0, totalPosts: 0, totalViews: 0 });
 
@@ -242,7 +252,7 @@ const PortalDashboard = () => {
                 <div className="portal-metric-left">
                   <span className="portal-metric-title">Total Posts</span>
                   <div className="portal-metric-value">{stats.totalPosts}</div>
-                  <div className="portal-metric-subtext">Submitted videos</div>
+                  <div className="portal-metric-subtext">Videos & Reddit</div>
                 </div>
                 <div className="portal-metric-icon-wrapper posts-icon">
                   <FiVideo />
@@ -255,7 +265,7 @@ const PortalDashboard = () => {
                 <div className="portal-metric-left">
                   <span className="portal-metric-title">Total Views</span>
                   <div className="portal-metric-value">{stats.totalViews.toLocaleString()}</div>
-                  <div className="portal-metric-subtext">Across all videos</div>
+                  <div className="portal-metric-subtext">Across all posts</div>
                 </div>
                 <div className="portal-metric-icon-wrapper views-icon">
                   <FiEye />
@@ -300,43 +310,82 @@ const PortalDashboard = () => {
         </div>
       ) : (
         <div className="portal-payout-deal-card">
-          <div className="portal-deal-header">
+          <div className="portal-deal-header" style={{ marginBottom: '24px' }}>
             <div className="portal-deal-icon">
               <FiGift />
             </div>
             <div>
-              <h3 className="portal-deal-title">Your Payout Deal</h3>
-              <p className="portal-deal-subtitle">$20 per video that reaches 40k+ views</p>
+              <h3 className="portal-deal-title">Your Payout Deals</h3>
+              <p className="portal-deal-subtitle">Earn money for engaging videos and Reddit posts</p>
             </div>
           </div>
 
-          <div className="portal-deal-base">
-            <div>
-              <div className="portal-deal-label">Base Rate</div>
-              <div className="portal-deal-amount">$20</div>
-            </div>
-            <div className="portal-deal-right">
-              <div className="portal-deal-label right-align">per video that reaches</div>
-              <div className="portal-deal-target">40K+ views</div>
-            </div>
-          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+            {/* Video Deal */}
+            <div style={{ background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <h4 style={{ color: '#fff', marginBottom: '16px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
+                <FiVideo color="#3b82f6" /> TikTok & Reels
+              </h4>
+              <div className="portal-deal-base" style={{ background: 'transparent', padding: 0, marginBottom: '16px' }}>
+                <div>
+                  <div className="portal-deal-label">Base Rate</div>
+                  <div className="portal-deal-amount" style={{ fontSize: '24px' }}>$20</div>
+                </div>
+                <div className="portal-deal-right" style={{ textAlign: 'right' }}>
+                  <div className="portal-deal-label">per video reaching</div>
+                  <div className="portal-deal-target">40K+ views</div>
+                </div>
+              </div>
 
-          <div className="portal-deal-bonus-section">
-            <h4 className="portal-deal-bonus-title">Bonus Tiers</h4>
+              <div className="portal-deal-bonus-section" style={{ background: 'transparent', padding: 0 }}>
+                <div className="portal-deal-bonus-row" style={{ padding: '10px 12px', background: '#0f0f1a', borderRadius: '8px', marginBottom: '8px', display: 'flex', justifyContent: 'space-between', border: '1px solid #1a1a2e' }}>
+                  <div className="portal-deal-bonus-amt"><span className="portal-deal-bonus-amt-text" style={{ fontWeight: 600, color: '#4ade80' }}>+$30</span></div>
+                  <div className="portal-deal-bonus-req" style={{ color: '#aaa', fontSize: '13px' }}>500K views</div>
+                </div>
 
-            <div className="portal-deal-bonus-row">
-              <div className="portal-deal-bonus-amt"><span className="bullet">•</span> <span className="portal-deal-bonus-amt-text">+$30</span></div>
-              <div className="portal-deal-bonus-req">500K views</div>
+                <div className="portal-deal-bonus-row" style={{ padding: '10px 12px', background: '#0f0f1a', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', border: '1px solid #1a1a2e' }}>
+                  <div className="portal-deal-bonus-amt"><span className="portal-deal-bonus-amt-text" style={{ fontWeight: 600, color: '#4ade80' }}>+$50</span></div>
+                  <div className="portal-deal-bonus-req" style={{ color: '#aaa', fontSize: '13px' }}>1M views</div>
+                </div>
+              </div>
+
+              <div className="portal-deal-footer" style={{ borderTop: 'none', padding: '16px 0 0 0', fontSize: '12px', color: '#666', textAlign: 'center' }}>
+                Maximum earnings per video: $100
+              </div>
             </div>
 
-            <div className="portal-deal-bonus-row">
-              <div className="portal-deal-bonus-amt"><span className="bullet">•</span> <span className="portal-deal-bonus-amt-text">+$50</span></div>
-              <div className="portal-deal-bonus-req">1M views</div>
-            </div>
-          </div>
+            {/* Reddit Deal */}
+            <div style={{ background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <h4 style={{ color: '#fff', marginBottom: '16px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
+                <FaReddit color="#ff4500" /> Reddit Posts
+              </h4>
+              <div className="portal-deal-base" style={{ background: 'transparent', padding: 0, marginBottom: '16px' }}>
+                <div>
+                  <div className="portal-deal-label">Base Rate</div>
+                  <div className="portal-deal-amount" style={{ fontSize: '24px' }}>$10</div>
+                </div>
+                <div className="portal-deal-right" style={{ textAlign: 'right' }}>
+                  <div className="portal-deal-label">per post reaching</div>
+                  <div className="portal-deal-target">40K+ views</div>
+                </div>
+              </div>
 
-          <div className="portal-deal-footer">
-            Maximum earnings per video: $100
+              <div className="portal-deal-bonus-section" style={{ background: 'transparent', padding: 0 }}>
+                <div className="portal-deal-bonus-row" style={{ padding: '10px 12px', background: '#0f0f1a', borderRadius: '8px', marginBottom: '8px', display: 'flex', justifyContent: 'space-between', border: '1px solid #1a1a2e' }}>
+                  <div className="portal-deal-bonus-amt"><span className="portal-deal-bonus-amt-text" style={{ fontWeight: 600, color: '#4ade80' }}>+$10</span></div>
+                  <div className="portal-deal-bonus-req" style={{ color: '#aaa', fontSize: '13px' }}>200K views</div>
+                </div>
+
+                <div className="portal-deal-bonus-row" style={{ padding: '10px 12px', background: '#0f0f1a', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', border: '1px solid #1a1a2e' }}>
+                  <div className="portal-deal-bonus-amt"><span className="portal-deal-bonus-amt-text" style={{ fontWeight: 600, color: '#4ade80' }}>+$30</span></div>
+                  <div className="portal-deal-bonus-req" style={{ color: '#aaa', fontSize: '13px' }}>500K views</div>
+                </div>
+              </div>
+
+              <div className="portal-deal-footer" style={{ borderTop: 'none', padding: '16px 0 0 0', fontSize: '12px', color: '#666', textAlign: 'center' }}>
+                Maximum earnings per post: $50
+              </div>
+            </div>
           </div>
         </div>
       )}
