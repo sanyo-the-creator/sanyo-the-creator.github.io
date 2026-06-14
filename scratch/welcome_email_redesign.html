@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Confirm Your Upshift Account</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <style>
+        html,
+        body {
+            margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+            background-color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                margin: auto !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+            .content-padding {
+                padding: 32px 24px !important;
+            }
+            .btn-cta {
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+        }
+
+        /* Dark mode overrides */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #0b0f19 !important;
+            }
+            .email-container {
+                background-color: #111827 !important;
+                border-color: #1f2937 !important;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
+            }
+            .text-primary {
+                color: #f3f4f6 !important;
+            }
+            .text-secondary {
+                color: #9ca3af !important;
+            }
+            .feature-title {
+                color: #f3f4f6 !important;
+            }
+            .feature-description {
+                color: #9ca3af !important;
+            }
+            .feature-icon-wrapper {
+                background-color: #1e1b4b !important;
+                border-color: #312e81 !important;
+            }
+            .enjoy-heading {
+                color: #818cf8 !important;
+            }
+            .footer-text {
+                color: #6b7280 !important;
+            }
+            .divider {
+                border-top-color: #1f2937 !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f8fafc;">
+    <center style="width: 100%; background-color: #f8fafc;">
+        <div style="max-width: 600px; margin: 0 auto;" class="email-container-wrapper">
+            <!--[if mso]>
+            <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="width:600px;">
+            <tr>
+            <td>
+            <![endif]-->
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width: 600px; margin: 40px auto; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); border-collapse: separate;">
+                <!-- Header Image Banner -->
+                <tr>
+                    <td style="padding: 0; text-align: center;">
+                        <img src="https://jergus48.github.io/upshift2.png" alt="Upshift Galaxy" width="600" height="180" style="display: block; width: 100%; max-width: 600px; height: 180px; object-fit: cover; border: 0; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    </td>
+                </tr>
+
+                <!-- Content Area -->
+                <tr>
+                    <td class="content-padding" style="padding: 48px 48px 32px 48px;">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <!-- Greeting -->
+                            <tr>
+                                <td style="padding-bottom: 16px;">
+                                    <h2 class="text-primary" style="margin: 0; font-size: 22px; color: #0f172a; font-weight: 800; letter-spacing: -0.02em;">
+                                        Hi there,
+                                    </h2>
+                                </td>
+                            </tr>
+                            
+                            <!-- Introduction -->
+                            <tr>
+                                <td style="padding-bottom: 24px;">
+                                    <p class="text-secondary" style="margin: 0; font-size: 15px; color: #475569; line-height: 1.6;">
+                                        We're excited to see you join Upshift! You're just one step away from starting your transformation through gamified habit building and personal growth.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding-bottom: 32px;">
+                                    <p class="text-secondary" style="margin: 0; font-size: 15px; color: #475569; line-height: 1.6;">
+                                        Click the button below to confirm your account and start your journey:
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <!-- First CTA Button -->
+                            <tr>
+                                <td style="padding-bottom: 40px; text-align: center;">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
+                                        <tr>
+                                            <td align="center" style="background: linear-gradient(135deg, #4f46e5, #7c3aed); border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.15), 0 4px 6px -2px rgba(79, 70, 229, 0.05);">
+                                                <a href="{{ .ConfirmationURL }}" target="_blank" class="btn-cta" style="display: inline-block; padding: 16px 36px; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.08em; line-height: 1;">
+                                                    Confirm Account
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Features Heading -->
+                            <tr>
+                                <td style="padding-bottom: 20px;">
+                                    <h3 class="enjoy-heading" style="margin: 0; font-size: 14px; color: #4f46e5; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+                                        Here's what awaits you:
+                                    </h3>
+                                </td>
+                            </tr>
+
+                            <!-- Feature Items -->
+                            <tr>
+                                <td style="padding-bottom: 40px;">
+                                    <!-- Feature 1: Daily Quests -->
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 20px;">
+                                        <tr>
+                                            <td style="width: 56px; vertical-align: top; padding-right: 16px;">
+                                                <div class="feature-icon-wrapper" style="width: 48px; height: 48px; background-color: #eef2ff; border: 1px solid #e0e7ff; border-radius: 12px; display: table-cell; vertical-align: middle; text-align: center;">
+                                                    <span style="font-size: 22px; line-height: 48px; color: #ffffff;">⚔️</span>
+                                                </div>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <h4 class="feature-title" style="margin: 0 0 4px 0; font-size: 16px; color: #0f172a; font-weight: 700;">
+                                                    Daily Quests
+                                                </h4>
+                                                <p class="feature-description" style="margin: 0; font-size: 14px; color: #475569; line-height: 1.5;">
+                                                    Complete engaging challenges that build lasting habits.
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <!-- Feature 2: Level System -->
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 20px;">
+                                        <tr>
+                                            <td style="width: 56px; vertical-align: top; padding-right: 16px;">
+                                                <div class="feature-icon-wrapper" style="width: 48px; height: 48px; background-color: #eef2ff; border: 1px solid #e0e7ff; border-radius: 12px; display: table-cell; vertical-align: middle; text-align: center;">
+                                                    <span style="font-size: 20px; line-height: 48px;">🏆</span>
+                                                </div>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <h4 class="feature-title" style="margin: 0 0 4px 0; font-size: 16px; color: #0f172a; font-weight: 700;">
+                                                    Level System
+                                                </h4>
+                                                <p class="feature-description" style="margin: 0; font-size: 14px; color: #475569; line-height: 1.5;">
+                                                    Track your progress and unlock achievements as you grow.
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <!-- Feature 3: Block Distractions -->
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                        <tr>
+                                            <td style="width: 56px; vertical-align: top; padding-right: 16px;">
+                                                <div class="feature-icon-wrapper" style="width: 48px; height: 48px; background-color: #eef2ff; border: 1px solid #e0e7ff; border-radius: 12px; display: table-cell; vertical-align: middle; text-align: center;">
+                                                    <span style="font-size: 20px; line-height: 48px;">🔒</span>
+                                                </div>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <h4 class="feature-title" style="margin: 0 0 4px 0; font-size: 16px; color: #0f172a; font-weight: 700;">
+                                                    Block Distractions
+                                                </h4>
+                                                <p class="feature-description" style="margin: 0; font-size: 14px; color: #475569; line-height: 1.5;">
+                                                    Block apps that distract you in day-to-day life to keep your focus.
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Second CTA Button -->
+                            <tr>
+                                <td style="text-align: center; padding-bottom: 16px;">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
+                                        <tr>
+                                            <td align="center" style="background: linear-gradient(135deg, #4f46e5, #7c3aed); border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.15), 0 4px 6px -2px rgba(79, 70, 229, 0.05);">
+                                                <a href="{{ .ConfirmationURL }}" target="_blank" class="btn-cta" style="display: inline-block; padding: 16px 36px; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.08em; line-height: 1;">
+                                                    Start My Journey
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- Footer Section -->
+                <tr>
+                    <td class="content-padding" style="padding: 0 48px 48px 48px; text-align: center;">
+                        <div class="divider" style="border-top: 1px solid #e2e8f0; margin-bottom: 24px; width: 100%;"></div>
+                        <p class="footer-text" style="margin: 0 0 10px 0; font-size: 13px; color: #64748b; font-weight: 600;">
+                            Ready to level up? Let's go! 💫
+                        </p>
+                        <p class="footer-text" style="margin: 0; font-size: 12px; color: #94a3b8; line-height: 1.6; max-width: 440px; margin: 0 auto;">
+                            If you did not request this sign-up, you can safely ignore this email.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <!--[if mso]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </div>
+    </center>
+</body>
+</html>

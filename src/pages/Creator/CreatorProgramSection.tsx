@@ -56,10 +56,10 @@ const CreatorProgramSection: React.FC = () => {
               <p className="step-description">
                 Make TikTok or Instagram videos promoting Upshift. Earn $20 per video that hits 40K views + bonuses
               </p>
-              <Link to="/creator/content" className="step-link" style={{ marginTop: '12px', display: 'flex' }}>
+              {/* <Link to="/creator/content" className="step-link" style={{ marginTop: '12px', display: 'flex' }}>
                 Download Video Assets
                 <span className="link-arrow">→</span>
-              </Link>
+              </Link> */}
             </div>
 
             {/* Step 3 */}
