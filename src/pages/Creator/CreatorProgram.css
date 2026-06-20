@@ -5,7 +5,7 @@
 }
 
 .creator-program-page .light-rays-container {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -140,7 +140,7 @@
     grid-template-columns: repeat(2, 1fr);
     max-width: 800px;
   }
-  
+
   .creator-step-card {
     padding: var(--spacing-xl);
   }
