@@ -1,16 +1,21 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   FiLink as _FiLink,
   FiCopy as _FiCopy,
   FiCheck as _FiCheck,
   FiGlobe as _FiGlobe,
   FiAlertCircle as _FiAlertCircle,
-  FiLock as _FiLock
+  FiLock as _FiLock,
+  FiTrendingUp as _FiTrendingUp,
+  FiRepeat as _FiRepeat,
+  FiShoppingBag as _FiShoppingBag,
+  FiDollarSign as _FiDollarSign
 } from 'react-icons/fi';
 import {
   SiTiktok as _SiTiktok,
   SiInstagram as _SiInstagram,
 } from 'react-icons/si';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { supabase } from '../../lib/supabase';
 
 const FiLink = _FiLink as React.ElementType;
@@ -19,6 +24,10 @@ const FiCheck = _FiCheck as React.ElementType;
 const FiGlobe = _FiGlobe as React.ElementType;
 const FiAlertCircle = _FiAlertCircle as React.ElementType;
 const FiLock = _FiLock as React.ElementType;
+const FiTrendingUp = _FiTrendingUp as React.ElementType;
+const FiRepeat = _FiRepeat as React.ElementType;
+const FiShoppingBag = _FiShoppingBag as React.ElementType;
+const FiDollarSign = _FiDollarSign as React.ElementType;
 const SiTiktok = _SiTiktok as React.ElementType;
 const SiInstagram = _SiInstagram as React.ElementType;
 
@@ -44,6 +53,10 @@ const PortalReferrals = () => {
   const [hasProfile, setHasProfile] = useState(false);
   const [loading, setLoading] = useState(true);
   const [clicks, setClicks] = useState<ClickData[]>([]);
+  const [installs, setInstalls] = useState<any[]>([]);
+  const [trials, setTrials] = useState<any[]>([]);
+  const [sales, setSales] = useState<any[]>([]);
+  const [refunds, setRefunds] = useState<any[]>([]);
   const [profile, setProfile] = useState<any>(null);
   const [copiedLink, setCopiedLink] = useState<string | null>(null);
 
@@ -86,7 +99,20 @@ const PortalReferrals = () => {
           .limit(100);
         setClicks(clicksData || []);
 
-        // Note: installs and sales data loaded in admin panel only
+        // Affiliates also get the full funnel (installs / trials / sales)
+        if (profileData.is_sales_affiliate) {
+          const code = profileData.referral_code;
+          const [{ data: installsData }, { data: trialsData }, { data: salesData }, { data: refundsData }] = await Promise.all([
+            supabase.from('referral_installs').select('*').eq('referral_code', code),
+            supabase.from('referral_trials').select('*').eq('referral_code', code),
+            supabase.from('referral_sales').select('*').eq('referral_code', code),
+            supabase.from('referral_refunds').select('*').eq('referral_code', code),
+          ]);
+          setInstalls(installsData || []);
+          setTrials(trialsData || []);
+          setSales(salesData || []);
+          setRefunds(refundsData || []);
+        }
       }
     } catch (err) {
       console.error('Error loading referral data:', err);
@@ -236,6 +262,75 @@ const PortalReferrals = () => {
     ...p,
     count: clicks.filter(c => c.platform === p.key).length,
   })).sort((a, b) => b.count - a.count);
+
+  // ===== Affiliate funnel analytics =====
+  const isAffiliate = !!profile?.is_sales_affiliate;
+
+  // Normalize commission rate (stored as 0.15 or 15)
+  const commissionRate = profile?.commission_rate
+    ? (profile.commission_rate > 1 ? profile.commission_rate / 100 : profile.commission_rate)
+    : 0.15;
+
+  const aff = useMemo(() => {
+    const directSales = sales.filter(s => !s.trial);
+    const convertedTrials = sales.filter(s => s.trial);
+    const directCents = directSales.reduce((a, s) => a + (s.amount_cents || 0), 0);
+    const convertedCents = convertedTrials.reduce((a, s) => a + (s.amount_cents || 0), 0);
+    const totalCents = directCents + convertedCents;
+    const refundsCents = refunds.reduce((a, r) => a + (r.amount_cents || 0), 0);
+    const netCents = Math.max(totalCents - refundsCents, 0);
+    return {
+      directCount: directSales.length,
+      directCents,
+      convertedCount: convertedTrials.length,
+      convertedCents,
+      startedTrials: trials.length,
+      totalCents,
+      refundsCount: refunds.length,
+      refundsCents,
+      commissionCents: Math.round(netCents * commissionRate),
+      convertedCommissionCents: Math.round(convertedCents * commissionRate),
+    };
+  }, [sales, trials, refunds, commissionRate]);
+
+  const funnel = useMemo(() => {
+    const c = clicks.length;
+    return [
+      { step: 'Link Clicks', value: clicks.length, color: '#3b82f6' },
+      { step: 'App Installs', value: installs.length, color: '#4ade80' },
+      { step: 'Started Trials', value: aff.startedTrials, color: '#0ea5e9' },
+      { step: 'Converted Trials', value: aff.convertedCount, color: '#a855f7' },
+      { step: 'Sales', value: aff.directCount, color: '#ec4899' },
+    ].map(s => ({ ...s, pct: c > 0 ? (s.value / c) * 100 : 0 }));
+  }, [clicks, installs, aff]);
+
+  const timeline = useMemo(() => {
+    const days = 30;
+    const map: Record<string, any> = {};
+    const now = new Date();
+    for (let i = days - 1; i >= 0; i--) {
+      const key = new Date(now.getTime() - i * 86400000).toISOString().substring(0, 10);
+      map[key] = { clicks: 0, installs: 0, trials: 0, converted: 0, sales: 0, refunds: 0 };
+    }
+    const bump = (arr: any[], field: string, dateField: string) => {
+      arr.forEach(x => {
+        const key = new Date(x[dateField]).toISOString().substring(0, 10);
+        if (map[key]) map[key][field]++;
+      });
+    };
+    bump(clicks, 'clicks', 'created_at');
+    bump(installs, 'installs', 'installed_at');
+    bump(trials, 'trials', 'created_at');
+    bump(sales.filter(s => s.trial), 'converted', 'created_at');
+    bump(sales.filter(s => !s.trial), 'sales', 'created_at');
+    bump(refunds, 'refunds', 'refunded_at');
+    return Object.entries(map).map(([date, d]) => ({
+      date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+      ...d,
+    }));
+  }, [clicks, installs, trials, sales, refunds]);
+
+  const money = (cents: number) => `$${(cents / 100).toFixed(2)}`;
 
   if (loading) {
     return (
@@ -401,6 +496,132 @@ const PortalReferrals = () => {
           );
         })}
       </div>
+
+      {/* ===== AFFILIATE FUNNEL ANALYTICS ===== */}
+      {isAffiliate && (
+        <>
+          {/* Summary cards */}
+          <div className="portal-metrics-grid" style={{ marginBottom: '24px' }}>
+            <div className="portal-metric-card">
+              <div className="portal-metric-content-wrapper">
+                <div className="portal-metric-left">
+                  <span className="portal-metric-title">Started Trials</span>
+                  <div className="portal-metric-value">{aff.startedTrials}</div>
+                  <div className="portal-metric-subtext">People who started a free trial</div>
+                </div>
+                <div className="portal-metric-icon-wrapper" style={{ background: 'rgba(14,165,233,0.1)', color: '#0ea5e9' }}>
+                  <FiTrendingUp />
+                </div>
+              </div>
+            </div>
+
+            <div className="portal-metric-card">
+              <div className="portal-metric-content-wrapper">
+                <div className="portal-metric-left">
+                  <span className="portal-metric-title">Converted Trials</span>
+                  <div className="portal-metric-value" style={{ color: '#a855f7' }}>{aff.convertedCount}</div>
+                  <div className="portal-metric-subtext">
+                    {money(aff.convertedCents)} in sales · you earn {money(aff.convertedCommissionCents)}
+                  </div>
+                </div>
+                <div className="portal-metric-icon-wrapper" style={{ background: 'rgba(168,85,247,0.1)', color: '#a855f7' }}>
+                  <FiRepeat />
+                </div>
+              </div>
+            </div>
+
+            <div className="portal-metric-card">
+              <div className="portal-metric-content-wrapper">
+                <div className="portal-metric-left">
+                  <span className="portal-metric-title">Direct Sales</span>
+                  <div className="portal-metric-value">{aff.directCount}</div>
+                  <div className="portal-metric-subtext">{money(aff.directCents)} in sales</div>
+                </div>
+                <div className="portal-metric-icon-wrapper" style={{ background: 'rgba(236,72,153,0.1)', color: '#ec4899' }}>
+                  <FiShoppingBag />
+                </div>
+              </div>
+            </div>
+
+            <div className="portal-metric-card">
+              <div className="portal-metric-content-wrapper">
+                <div className="portal-metric-left">
+                  <span className="portal-metric-title">Your Commission ({(commissionRate * 100).toFixed(0)}%)</span>
+                  <div className="portal-metric-value highlight">{money(aff.commissionCents)}</div>
+                  <div className="portal-metric-subtext">From sales + converted trials</div>
+                </div>
+                <div className="portal-metric-icon-wrapper" style={{ background: 'rgba(74,222,128,0.1)', color: '#4ade80' }}>
+                  <FiDollarSign />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Note so affiliates know trials earn */}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '10px',
+            background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.2)',
+            borderRadius: '10px', padding: '12px 16px', marginBottom: '24px', fontSize: '13px', color: '#cbd5e1'
+          }}>
+            <FiRepeat style={{ color: '#a855f7', flexShrink: 0 }} />
+            <span>
+              <strong style={{ color: '#fff' }}>Trials earn too.</strong> When a free trial you referred converts to a paid plan,
+              it counts as a <strong style={{ color: '#a855f7' }}>Converted Trial</strong> and you get your full commission on it.
+            </span>
+          </div>
+
+          {/* Clicks & conversions over time */}
+          <div className="portal-metric-card" style={{ padding: '24px', marginBottom: '24px' }}>
+            <h3 style={{ fontSize: '15px', fontWeight: 600, color: '#fff', margin: '0 0 20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <FiTrendingUp style={{ color: '#3b82f6' }} /> Clicks & Conversions Over Time
+            </h3>
+            <ResponsiveContainer width="100%" height={260}>
+              <AreaChart data={timeline}>
+                <defs>
+                  <linearGradient id="refClicks" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                  </linearGradient>
+                  <linearGradient id="refInstalls" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#4ade80" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#4ade80" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#1e1e2e" />
+                <XAxis dataKey="date" stroke="#555" fontSize={11} tickLine={false} axisLine={false} interval={4} />
+                <YAxis stroke="#555" fontSize={11} tickLine={false} axisLine={false} allowDecimals={false} />
+                <Tooltip contentStyle={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '8px' }} itemStyle={{ color: '#fff' }} />
+                <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '8px' }} />
+                <Area type="monotone" dataKey="clicks" stroke="#3b82f6" fill="url(#refClicks)" strokeWidth={2} name="Clicks" />
+                <Area type="monotone" dataKey="installs" stroke="#4ade80" fill="url(#refInstalls)" strokeWidth={2} name="Installs" />
+                <Area type="monotone" dataKey="trials" stroke="#0ea5e9" fillOpacity={0} strokeWidth={2} name="Started Trials" />
+                <Area type="monotone" dataKey="converted" stroke="#a855f7" fillOpacity={0} strokeWidth={2} name="Converted Trials" />
+                <Area type="monotone" dataKey="sales" stroke="#ec4899" fillOpacity={0} strokeWidth={2} name="Sales" />
+                <Area type="monotone" dataKey="refunds" stroke="#ef4444" fillOpacity={0} strokeWidth={2} strokeDasharray="4 3" name="Refunds" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Conversion funnel */}
+          <div className="portal-metric-card" style={{ padding: '24px', marginBottom: '24px' }}>
+            <h3 style={{ fontSize: '15px', fontWeight: 600, color: '#fff', margin: '0 0 20px' }}>Conversion Funnel</h3>
+            {funnel.map(step => (
+              <div key={step.step} style={{ marginBottom: '14px' }}>
+                <div style={{ height: '10px', background: '#1a1a22', borderRadius: '5px', overflow: 'hidden', marginBottom: '6px' }}>
+                  <div style={{ width: `${Math.max(step.pct, 1.5)}%`, height: '100%', background: step.color, borderRadius: '5px', transition: 'width 0.6s ease' }} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
+                  <span style={{ color: '#ccc', fontWeight: 500 }}>{step.step}</span>
+                  <span>
+                    <strong style={{ color: '#fff' }}>{step.value}</strong>
+                    <span style={{ color: '#666', marginLeft: '8px' }}>{step.pct.toFixed(1)}%</span>
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Platform Breakdown — percentages only */}
       {clicks.length > 0 && (

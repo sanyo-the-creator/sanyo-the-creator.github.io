@@ -111,6 +111,7 @@ const AdminUserDetail: React.FC = () => {
   const [installs, setInstalls] = useState<any[]>([]);
   const [sales, setSales] = useState<any[]>([]);
   const [trials, setTrials] = useState<any[]>([]);
+  const [refunds, setRefunds] = useState<any[]>([]);
   const [videos, setVideos] = useState<any[]>([]);
   const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d' | 'all'>('30d');
   const [deviceFilter, setDeviceFilter] = useState<'all' | 'android' | 'ios' | 'desktop'>('all');
@@ -163,6 +164,12 @@ const AdminUserDetail: React.FC = () => {
           .from('referral_trials').select('*').eq('referral_code', code)
           .order('created_at', { ascending: true });
         setTrials(trialsData || []);
+
+        // Load refunds
+        const { data: refundsData } = await supabase
+          .from('referral_refunds').select('*').eq('referral_code', code)
+          .order('refunded_at', { ascending: true });
+        setRefunds(refundsData || []);
       }
 
       // Load videos
@@ -213,19 +220,20 @@ const AdminUserDetail: React.FC = () => {
   const filteredInstalls = useMemo(() => filterByDate(installs, 'installed_at'), [installs, dateRange]);
   const filteredSales = useMemo(() => filterByDate(sales, 'created_at'), [sales, dateRange]);
   const filteredTrials = useMemo(() => filterByDate(trials, 'created_at'), [trials, dateRange]);
+  const filteredRefunds = useMemo(() => filterByDate(refunds, 'refunded_at'), [refunds, dateRange]);
 
   // ===== CHART DATA COMPUTATION =====
 
   // Clicks per day timeline
   const clicksTimeline = useMemo(() => {
-    const map: Record<string, { clicks: number; installs: number; sales: number }> = {};
-    
+    const map: Record<string, { clicks: number; installs: number; sales: number; converted: number; refunds: number }> = {};
+
     const days = dateRange === '7d' ? 7 : dateRange === '30d' ? 30 : dateRange === '90d' ? 90 : 60;
     const now = new Date();
     for (let i = days - 1; i >= 0; i--) {
       const d = new Date(now.getTime() - i * 86400000);
       const key = d.toISOString().substring(0, 10);
-      map[key] = { clicks: 0, installs: 0, sales: 0 };
+      map[key] = { clicks: 0, installs: 0, sales: 0, converted: 0, refunds: 0 };
     }
 
     filteredClicks.forEach(c => {
@@ -238,9 +246,15 @@ const AdminUserDetail: React.FC = () => {
       if (map[key]) map[key].installs++;
     });
 
+    // Split sales: trial=true => converted trial, otherwise direct sale
     filteredSales.forEach(s => {
       const key = new Date(s.created_at).toISOString().substring(0, 10);
-      if (map[key]) map[key].sales++;
+      if (map[key]) { if (s.trial) map[key].converted++; else map[key].sales++; }
+    });
+
+    filteredRefunds.forEach(r => {
+      const key = new Date(r.refunded_at).toISOString().substring(0, 10);
+      if (map[key]) map[key].refunds++;
     });
 
     return Object.entries(map).map(([date, data]) => ({
@@ -249,7 +263,7 @@ const AdminUserDetail: React.FC = () => {
       ...data,
       trials: filteredTrials.filter(tr => new Date(tr.created_at).toISOString().substring(0, 10) === date).length,
     }));
-  }, [filteredClicks, filteredInstalls, filteredTrials, filteredSales, dateRange]);
+  }, [filteredClicks, filteredInstalls, filteredTrials, filteredSales, filteredRefunds, dateRange]);
 
   // Sales per day
   const salesTimeline = useMemo(() => {
@@ -335,20 +349,26 @@ const AdminUserDetail: React.FC = () => {
 
 
 
-  // Conversion funnel: Click → Install → Purchase
+  // Split sales into direct purchases vs converted trials (trial = true)
+  const directSales = useMemo(() => filteredSales.filter((s: any) => !s.trial), [filteredSales]);
+  const convertedTrials = useMemo(() => filteredSales.filter((s: any) => s.trial), [filteredSales]);
+  const directSalesCents = directSales.reduce((sum: number, s: any) => sum + (s.amount_cents || 0), 0);
+  const convertedTrialsCents = convertedTrials.reduce((sum: number, s: any) => sum + (s.amount_cents || 0), 0);
+
+  // Conversion funnel: Click → Install → Started Trial → Converted Trial → Sale
   const funnel = useMemo(() => {
     const totalClicks = filteredClicks.length;
     const totalInstalls = filteredInstalls.length;
     const totalTrialsCount = filteredTrials.length;
-    const totalSalesCount = filteredSales.length;
 
     return [
       { step: 'Link Clicks', value: totalClicks, pct: 100 },
       { step: 'App Installs', value: totalInstalls, pct: totalClicks > 0 ? (totalInstalls / totalClicks) * 100 : 0 },
-      { step: 'Trials', value: totalTrialsCount, pct: totalClicks > 0 ? (totalTrialsCount / totalClicks) * 100 : 0 },
-      { step: 'Purchases', value: totalSalesCount, pct: totalClicks > 0 ? (totalSalesCount / totalClicks) * 100 : 0 },
+      { step: 'Started Trials', value: totalTrialsCount, pct: totalClicks > 0 ? (totalTrialsCount / totalClicks) * 100 : 0 },
+      { step: 'Converted Trials', value: convertedTrials.length, pct: totalClicks > 0 ? (convertedTrials.length / totalClicks) * 100 : 0 },
+      { step: 'Sales', value: directSales.length, pct: totalClicks > 0 ? (directSales.length / totalClicks) * 100 : 0 },
     ];
-  }, [filteredClicks, filteredInstalls, filteredTrials, filteredSales]);
+  }, [filteredClicks, filteredInstalls, filteredTrials, directSales, convertedTrials]);
 
   // Summary stats
   const totalRevenue = filteredSales.reduce((sum: number, s: any) => sum + (s.amount_cents || 0), 0);
@@ -615,13 +635,13 @@ const AdminUserDetail: React.FC = () => {
               <div className="aud-stat-icon" style={{ color: '#ec4899', background: 'rgba(236,72,153,.1)' }}><FiDollarSign /></div>
               <div className="aud-stat-num">{formatMoney(totalRevenue)}</div>
               <div className="aud-stat-lbl">Revenue</div>
-              <div className="aud-stat-sub">{filteredSales.length} transactions</div>
+              <div className="aud-stat-sub">{directSales.length} sales · {convertedTrials.length} converted trials</div>
             </div>
             <div className="aud-stat">
               <div className="aud-stat-icon" style={{ color: '#0ea5e9', background: 'rgba(14,165,233,.1)' }}><FiTrendingUp /></div>
               <div className="aud-stat-num">{filteredTrials.length}</div>
-              <div className="aud-stat-lbl">Trials</div>
-              <div className="aud-stat-sub">{filteredInstalls.length > 0 ? ((filteredTrials.length / filteredInstalls.length) * 100).toFixed(1) : 0}% of installs</div>
+              <div className="aud-stat-lbl">Started Trials</div>
+              <div className="aud-stat-sub">{convertedTrials.length} converted ({filteredTrials.length > 0 ? ((convertedTrials.length / filteredTrials.length) * 100).toFixed(0) : 0}%)</div>
             </div>
           </div>
 
@@ -703,8 +723,10 @@ const AdminUserDetail: React.FC = () => {
                   <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '8px' }} />
                   <Area type="monotone" dataKey="clicks" stroke="#3b82f6" fill="url(#gradClicks)" strokeWidth={2} name="Clicks" />
                   <Area type="monotone" dataKey="installs" stroke="#4ade80" fill="url(#gradInstalls)" strokeWidth={2} name="Installs" />
-                  <Area type="monotone" dataKey="trials" stroke="#0ea5e9" fillOpacity={0} strokeWidth={2} name="Trials" />
+                  <Area type="monotone" dataKey="trials" stroke="#0ea5e9" fillOpacity={0} strokeWidth={2} name="Started Trials" />
+                  <Area type="monotone" dataKey="converted" stroke="#a855f7" fillOpacity={0} strokeWidth={2} name="Converted Trials" />
                   <Area type="monotone" dataKey="sales" stroke="#ec4899" fillOpacity={0} strokeWidth={2} name="Sales" />
+                  <Area type="monotone" dataKey="refunds" stroke="#ef4444" fillOpacity={0} strokeWidth={2} strokeDasharray="4 3" name="Refunds" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -721,7 +743,7 @@ const AdminUserDetail: React.FC = () => {
                       className="aud-funnel-bar-fill"
                       style={{
                         width: `${Math.max(step.pct, 2)}%`,
-                        background: ['#3b82f6', '#4ade80', '#0ea5e9', '#ec4899'][i],
+                        background: ['#3b82f6', '#4ade80', '#0ea5e9', '#a855f7', '#ec4899'][i],
                       }}
                     />
                   </div>
@@ -893,7 +915,7 @@ const AdminUserDetail: React.FC = () => {
 
           {/* Trials list */}
           <div className="aud-chart-card">
-            <div className="aud-chart-header"><h3>All Trials ({filteredTrials.length})</h3></div>
+            <div className="aud-chart-header"><h3>Started Trials ({filteredTrials.length}) · {convertedTrials.length} converted</h3></div>
             <div className="aud-chart-body">
               {filteredTrials.length === 0 ? (
                 <div className="aud-empty-mini">No trials recorded yet</div>
@@ -915,18 +937,32 @@ const AdminUserDetail: React.FC = () => {
 
           {/* Sales list */}
           <div className="aud-chart-card">
-            <div className="aud-chart-header"><h3>All Sales ({filteredSales.length})</h3></div>
+            <div className="aud-chart-header">
+              <h3>All Sales ({filteredSales.length})</h3>
+              <span style={{ fontSize: '12px', color: '#888' }}>
+                Direct {formatMoney(directSalesCents)} · Converted trials {formatMoney(convertedTrialsCents)}
+              </span>
+            </div>
             <div className="aud-chart-body">
               {filteredSales.length === 0 ? (
                 <div className="aud-empty-mini">No sales recorded yet</div>
               ) : (
                 <div className="aud-detail-tbl">
-                  <div className="aud-detail-tbl-head">
-                    <span>Date</span><span>Amount</span><span>Currency</span>
+                  <div className="aud-detail-tbl-head" style={{ gridTemplateColumns: '1fr 120px 100px 80px' }}>
+                    <span>Date</span><span>Type</span><span>Amount</span><span>Currency</span>
                   </div>
                   {filteredSales.map((s: any) => (
-                    <div key={s.id} className="aud-detail-tbl-row">
+                    <div key={s.id} className="aud-detail-tbl-row" style={{ gridTemplateColumns: '1fr 120px 100px 80px' }}>
                       <span>{new Date(s.created_at).toLocaleDateString()}</span>
+                      <span>
+                        <span style={{
+                          fontSize: '11px', fontWeight: 600, padding: '2px 8px', borderRadius: '4px',
+                          background: s.trial ? 'rgba(168,85,247,0.15)' : 'rgba(236,72,153,0.15)',
+                          color: s.trial ? '#a855f7' : '#ec4899',
+                        }}>
+                          {s.trial ? 'Converted Trial' : 'Direct Sale'}
+                        </span>
+                      </span>
                       <span style={{ color: '#4ade80', fontWeight: 700 }}>{formatMoney(s.amount_cents)}</span>
                       <span>{s.currency}</span>
                     </div>

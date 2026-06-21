@@ -3,10 +3,11 @@
 .welcome-page {
   width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .welcome-page .light-rays-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

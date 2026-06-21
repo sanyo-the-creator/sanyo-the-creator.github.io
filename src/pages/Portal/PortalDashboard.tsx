@@ -56,16 +56,26 @@ const PortalDashboard = () => {
             .select('*')
             .eq('referral_code', profileData.referral_code);
 
+          const directSales = (sales || []).filter((s: any) => !s.trial);
+          const convertedTrials = (sales || []).filter((s: any) => s.trial);
           const totalSalesCents = (sales || []).reduce((acc, s) => acc + (s.amount_cents || 0), 0);
+          const convertedTrialsCents = convertedTrials.reduce((acc: number, s: any) => acc + (s.amount_cents || 0), 0);
           const totalRefundsCents = (refunds || []).reduce((acc, r) => acc + (r.amount_cents || 0), 0);
           const netSalesCents = totalSalesCents - totalRefundsCents;
-          const commission = netSalesCents * (profileData.commission_rate || 0.15);
+          const rate = profileData.commission_rate
+            ? (profileData.commission_rate > 1 ? profileData.commission_rate / 100 : profileData.commission_rate)
+            : 0.15;
+          const commission = netSalesCents * rate;
 
           setStats({
             totalSales: totalSalesCents,
             totalRefunds: totalRefundsCents,
             commissionEarned: commission,
             salesCount: (sales || []).length,
+            directCount: directSales.length,
+            convertedCount: convertedTrials.length,
+            convertedTrialsCents,
+            convertedCommission: convertedTrialsCents * rate,
             refundsCount: (refunds || []).length
           });
 
@@ -172,7 +182,7 @@ const PortalDashboard = () => {
                 <div className="portal-metric-left">
                   <span className="portal-metric-title">Total Sales</span>
                   <div className="portal-metric-value">${(stats.totalSales / 100).toFixed(2)}</div>
-                  <div className="portal-metric-subtext">{stats.salesCount} conversions</div>
+                  <div className="portal-metric-subtext">{stats.directCount || 0} direct · {stats.convertedCount || 0} from trials</div>
                 </div>
                 <div className="portal-metric-icon-wrapper verified-icon">
                   <FiShoppingBag />
@@ -209,11 +219,11 @@ const PortalDashboard = () => {
             <div className="portal-metric-card">
               <div className="portal-metric-content-wrapper">
                 <div className="portal-metric-left">
-                  <span className="portal-metric-title">Conversion Rate</span>
-                  <div className="portal-metric-value">{(stats.totalSales > 0 ? (stats.salesCount / 100).toFixed(1) : 0)}%</div>
-                  <div className="portal-metric-subtext">Average performance</div>
+                  <span className="portal-metric-title">Converted Trials</span>
+                  <div className="portal-metric-value" style={{ color: '#a855f7' }}>{stats.convertedCount || 0}</div>
+                  <div className="portal-metric-subtext">+${((stats.convertedCommission || 0) / 100).toFixed(2)} commission earned</div>
                 </div>
-                <div className="portal-metric-icon-wrapper views-icon">
+                <div className="portal-metric-icon-wrapper" style={{ background: 'rgba(168,85,247,0.1)', color: '#a855f7' }}>
                   <FiTrendingUp />
                 </div>
               </div>
