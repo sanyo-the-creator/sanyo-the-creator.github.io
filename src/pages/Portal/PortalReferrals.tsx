@@ -9,7 +9,8 @@ import {
   FiTrendingUp as _FiTrendingUp,
   FiRepeat as _FiRepeat,
   FiShoppingBag as _FiShoppingBag,
-  FiDollarSign as _FiDollarSign
+  FiDollarSign as _FiDollarSign,
+  FiSmartphone as _FiSmartphone
 } from 'react-icons/fi';
 import {
   SiTiktok as _SiTiktok,
@@ -28,6 +29,7 @@ const FiTrendingUp = _FiTrendingUp as React.ElementType;
 const FiRepeat = _FiRepeat as React.ElementType;
 const FiShoppingBag = _FiShoppingBag as React.ElementType;
 const FiDollarSign = _FiDollarSign as React.ElementType;
+const FiSmartphone = _FiSmartphone as React.ElementType;
 const SiTiktok = _SiTiktok as React.ElementType;
 const SiInstagram = _SiInstagram as React.ElementType;
 
@@ -331,6 +333,29 @@ const PortalReferrals = () => {
   }, [clicks, installs, trials, sales, refunds]);
 
   const money = (cents: number) => `$${(cents / 100).toFixed(2)}`;
+
+  // Device breakdown (helps creators understand conversion — e.g. mostly Android = no App Store)
+  const deviceStats = useMemo(() => {
+    const buckets = [
+      { key: 'ios', label: 'iOS', color: '#3b82f6', count: 0 },
+      { key: 'android', label: 'Android', color: '#4ade80', count: 0 },
+      { key: 'desktop', label: 'Desktop', color: '#f59e0b', count: 0 },
+      { key: 'other', label: 'Other', color: '#888', count: 0 },
+    ];
+    const idx: Record<string, number> = { ios: 0, android: 1, desktop: 2, other: 3 };
+    clicks.forEach(c => {
+      const d = (c.device_type || '').toLowerCase();
+      let k = 'other';
+      if (d.includes('iphone') || d.includes('ios') || d.includes('ipad')) k = 'ios';
+      else if (d.includes('android')) k = 'android';
+      else if (d.includes('desktop') || d.includes('windows') || d.includes('mac') || d.includes('linux')) k = 'desktop';
+      buckets[idx[k]].count++;
+    });
+    const total = clicks.length || 1;
+    return buckets.filter(b => b.count > 0).map(b => ({ ...b, pct: (b.count / total) * 100 }));
+  }, [clicks]);
+
+  const androidShare = deviceStats.find(d => d.key === 'android')?.pct || 0;
 
   if (loading) {
     return (
@@ -659,6 +684,41 @@ const PortalReferrals = () => {
               </div>
             );
           })()}
+        </div>
+      )}
+
+      {/* Device Breakdown */}
+      {clicks.length > 0 && (
+        <div className="portal-metric-card" style={{ padding: '24px', marginBottom: '24px' }}>
+          <h3 style={{ fontSize: '15px', fontWeight: 600, color: '#fff', margin: '0 0 6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <FiSmartphone style={{ color: '#3b82f6' }} /> Device Breakdown
+          </h3>
+          <p style={{ fontSize: '12px', color: '#888', margin: '0 0 20px' }}>
+            What people use when they tap your link. Upshift is iOS-only — Android &amp; desktop visitors can't install yet.
+          </p>
+          {deviceStats.map(d => (
+            <div key={d.key} style={{ display: 'flex', alignItems: 'center', marginBottom: '14px', gap: '10px' }}>
+              <span style={{ fontSize: '14px', color: '#ccc', width: '90px', fontWeight: 500 }}>{d.label}</span>
+              <div style={{ flex: 1, height: '8px', backgroundColor: '#1a1a22', borderRadius: '4px', overflow: 'hidden' }}>
+                <div style={{ width: `${d.pct}%`, height: '100%', backgroundColor: d.color, borderRadius: '4px', transition: 'width 0.6s ease' }} />
+              </div>
+              <span style={{ fontSize: '13px', color: '#888', width: '48px', textAlign: 'right' }}>{d.count}</span>
+              <span style={{ fontSize: '14px', color: '#fff', width: '50px', textAlign: 'right', fontWeight: 600 }}>{d.pct.toFixed(0)}%</span>
+            </div>
+          ))}
+          {androidShare >= 50 && (
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '10px', marginTop: '8px',
+              background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.25)',
+              borderRadius: '10px', padding: '12px 16px', fontSize: '13px', color: '#cbd5e1'
+            }}>
+              <FiAlertCircle style={{ color: '#f59e0b', flexShrink: 0 }} />
+              <span>
+                <strong style={{ color: '#fff' }}>{androidShare.toFixed(0)}% of your traffic is on Android.</strong> Upshift is iOS-only right now,
+                so those visitors can't convert. Target more iOS users to lift your install &amp; sale rate.
+              </span>
+            </div>
+          )}
         </div>
       )}
 
