@@ -75,7 +75,7 @@ export async function generateVisitorId(): Promise<string> {
 /**
  * Valid platform values for referral tracking URLs
  */
-export const VALID_PLATFORMS = ['tiktok', 'instagram', 'youtube', 'x', 'snapchat', 'direct'] as const;
+export const VALID_PLATFORMS = ['tiktok', 'instagram', 'youtube', 'x', 'snapchat', 'other', 'direct'] as const;
 export type ReferralPlatform = typeof VALID_PLATFORMS[number];
 
 /**
@@ -84,6 +84,7 @@ export type ReferralPlatform = typeof VALID_PLATFORMS[number];
 export function normalizePlatform(platform?: string): ReferralPlatform {
   if (!platform) return 'direct';
   const lower = platform.toLowerCase();
+  if (lower === 'twitter') return 'x'; // accept /download/twitter as an alias for X
   if (VALID_PLATFORMS.includes(lower as ReferralPlatform)) {
     return lower as ReferralPlatform;
   }
@@ -99,6 +100,7 @@ export const PLATFORM_INFO: Record<ReferralPlatform, { label: string; color: str
   youtube: { label: 'YouTube', color: '#FF0000', icon: '▶' },
   x: { label: 'X / Twitter', color: '#1DA1F2', icon: '𝕏' },
   snapchat: { label: 'Snapchat', color: '#FFFC00', icon: '👻' },
+  other: { label: 'Other', color: '#888888', icon: '🌐' },
   direct: { label: 'Direct', color: '#3b82f6', icon: '🔗' },
 };
 

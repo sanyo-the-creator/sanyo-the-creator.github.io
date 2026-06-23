@@ -15,6 +15,8 @@ import {
 import {
   SiTiktok as _SiTiktok,
   SiInstagram as _SiInstagram,
+  SiYoutube as _SiYoutube,
+  SiX as _SiX,
 } from 'react-icons/si';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { supabase } from '../../lib/supabase';
@@ -32,10 +34,15 @@ const FiDollarSign = _FiDollarSign as React.ElementType;
 const FiSmartphone = _FiSmartphone as React.ElementType;
 const SiTiktok = _SiTiktok as React.ElementType;
 const SiInstagram = _SiInstagram as React.ElementType;
+const SiYoutube = _SiYoutube as React.ElementType;
+const SiX = _SiX as React.ElementType;
 
 const PLATFORMS = [
   { key: 'tiktok', label: 'TikTok', icon: SiTiktok, color: '#ff0050' },
   { key: 'instagram', label: 'Instagram', icon: SiInstagram, color: '#E1306C' },
+  { key: 'youtube', label: 'YouTube', icon: SiYoutube, color: '#FF0000' },
+  { key: 'x', label: 'X / Twitter', icon: SiX, color: '#1DA1F2' },
+  { key: 'other', label: 'Other', icon: FiGlobe, color: '#888888' },
 ];
 
 interface ClickData {
@@ -676,7 +683,7 @@ const PortalReferrals = () => {
             return (
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '14px', gap: '10px' }}>
                 <FiGlobe style={{ color: '#3b82f6', fontSize: '18px', flexShrink: 0 }} />
-                <span style={{ fontSize: '14px', color: '#ccc', width: '90px', fontWeight: 500 }}>Other</span>
+                <span style={{ fontSize: '14px', color: '#ccc', width: '90px', fontWeight: 500 }}>Direct</span>
                 <div style={{ flex: 1, height: '8px', backgroundColor: '#1a1a22', borderRadius: '4px', overflow: 'hidden' }}>
                   <div style={{ width: `${directPct}%`, height: '100%', backgroundColor: '#3b82f6', borderRadius: '4px', transition: 'width 0.6s ease' }} />
                 </div>

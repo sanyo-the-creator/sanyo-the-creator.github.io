@@ -31,7 +31,8 @@ import {
   SiTiktok as _SiTiktok,
   SiInstagram as _SiInstagram,
   SiYoutube as _SiYoutube,
-  SiSnapchat as _SiSnapchat
+  SiSnapchat as _SiSnapchat,
+  SiX as _SiX
 } from 'react-icons/si';
 import './AdminUserDetail.css';
 
@@ -58,6 +59,7 @@ const SiTiktok = _SiTiktok as React.ElementType;
 const SiInstagram = _SiInstagram as React.ElementType;
 const SiYoutube = _SiYoutube as React.ElementType;
 const SiSnapchat = _SiSnapchat as React.ElementType;
+const SiX = _SiX as React.ElementType;
 
 const PLATFORM_COLORS: Record<string, string> = {
   tiktok: '#ff0050',
@@ -65,6 +67,7 @@ const PLATFORM_COLORS: Record<string, string> = {
   youtube: '#FF0000',
   x: '#1DA1F2',
   snapchat: '#FFFC00',
+  other: '#888888',
   direct: '#3b82f6',
 };
 
@@ -94,7 +97,8 @@ const PLATFORM_ICONS: Record<string, React.ElementType> = {
   instagram: SiInstagram,
   youtube: SiYoutube,
   snapchat: SiSnapchat,
-  x: FiGlobe,
+  x: SiX,
+  other: FiGlobe,
   direct: FiGlobe,
 };
 
