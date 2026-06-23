@@ -20,6 +20,12 @@ const Download: React.FC = () => {
     }
 
     const runRedirectLogic = async () => {
+      // IMPORTANT: capture whether the visitor actually arrived on a /download path
+      // BEFORE we rewrite the URL below. Landing on the bare root "/" must NOT
+      // auto-redirect to the store — only an explicit /download (or a referral
+      // redirect into /download/...) should.
+      const isExplicitDownloadPath = window.location.pathname.startsWith('/download');
+
       // Check for referral code in URL
       const params = new URLSearchParams(window.location.search);
       const refCode = params.get('ref');
@@ -45,10 +51,6 @@ const Download: React.FC = () => {
 
       const isAndroid = /android/i.test(userAgent);
       const isMobile = isIOS || isAndroid;
-
-      // ONLY auto-redirect to stores if they came explicitly to /download...
-      // but NOT if they just landed on the root "/" (even though it shows the same page)
-      const isExplicitDownloadPath = window.location.pathname.startsWith('/download');
 
       if (isExplicitDownloadPath && isMobile) {
         if (isIOS) {
