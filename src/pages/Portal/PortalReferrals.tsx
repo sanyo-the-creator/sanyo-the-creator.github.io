@@ -259,9 +259,14 @@ const PortalReferrals = () => {
 
   const baseUrl = window.location.origin;
 
+  // "Other" uses the short vanity link joinupshift.com/<code>; the rest use /download/<platform>?ref=
+  const linkFor = (platformKey: string) =>
+    platformKey === 'other'
+      ? `${baseUrl}/${referralCode}`
+      : `${baseUrl}/download/${platformKey}?ref=${referralCode}`;
+
   const copyLink = (platformKey: string) => {
-    const url = `${baseUrl}/download/${platformKey}?ref=${referralCode}`;
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(linkFor(platformKey));
     setCopiedLink(platformKey);
     setTimeout(() => setCopiedLink(null), 2000);
   };
@@ -513,7 +518,7 @@ const PortalReferrals = () => {
 
         {PLATFORMS.map(p => {
           const Icon = p.icon;
-          const url = `${baseUrl}/download/${p.key}?ref=${referralCode}`;
+          const url = linkFor(p.key);
           return (
             <div key={p.key} className="referral-link-row">
               <div className="referral-link-platform">
