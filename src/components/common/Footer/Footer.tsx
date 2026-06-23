@@ -28,19 +28,19 @@ const Footer: React.FC = () => {
                                         Terms & Conditions
                                     </Link>
 
-                                   
+
                                 </li>
-                                  <li>
-                                   <a
-                                    href="https://support.apple.com/en-gb/118223"
-                                    className="footer-link"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <li>
+                                    <a
+                                        href="https://support.apple.com/en-gb/118223"
+                                        className="footer-link"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
-                                    Request a refund
+                                        Request a refund
                                     </a>
 
-                                   
+
                                 </li>
                             </ul>
                         </div>
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
 
                 <div className="footer-bottom">
                     <div className="footer-copyright">
-                        <p>&copy; 2025 Upshift. All rights reserved.</p>
+                        <p>&copy; 2026 Upshift. All rights reserved.</p>
                     </div>
                     <div className="footer-social">
                         <p className="footer-version">Version 1.1</p>
