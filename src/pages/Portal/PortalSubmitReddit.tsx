@@ -149,7 +149,7 @@ const PortalSubmitReddit = () => {
 
       if (error) {
         if (error.code === '23505') throw new Error('This Reddit post has already been submitted.');
-        if (error.code === '23503') throw new Error('Please set up your Referral Username first in the Referrals tab.');
+        if (error.code === '23503') throw new Error('Could not link this submission to your account. Please reload and try again.');
         throw error;
       }
 

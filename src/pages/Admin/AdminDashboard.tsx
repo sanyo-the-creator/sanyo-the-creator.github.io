@@ -56,6 +56,7 @@ const AdminDashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'clicks' | 'downloads' | 'trials' | 'revenue' | 'videos' | 'views'>('clicks');
+  const [userType, setUserType] = useState<'all' | 'creators' | 'users'>('all');
 
   const [globalStats, setGlobalStats] = useState({
     totalUsers: 0,
@@ -126,6 +127,11 @@ const AdminDashboard: React.FC = () => {
   };
 
   const filteredUsers = users
+    .filter(u => {
+      if (userType === 'creators') return !!u.referral_code;
+      if (userType === 'users') return !u.referral_code;
+      return true;
+    })
     .filter(u =>
       (u.full_name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
       (u.email || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -302,6 +308,22 @@ const AdminDashboard: React.FC = () => {
           />
         </div>
         <div className="admin-sort-bar">
+          <span className="admin-sort-label"><FiUsers /> Show</span>
+          {[
+            { key: 'all', label: 'All' },
+            { key: 'creators', label: 'Creators' },
+            { key: 'users', label: 'Users' },
+          ].map(t => (
+            <button
+              key={t.key}
+              className={`admin-sort-btn ${userType === t.key ? 'active' : ''}`}
+              onClick={() => setUserType(t.key as any)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+        <div className="admin-sort-bar">
           <span className="admin-sort-label"><FiTrendingUp /> Sort by</span>
           {[
             { key: 'clicks', label: 'Clicks' },
@@ -366,16 +388,33 @@ const AdminDashboard: React.FC = () => {
                 )}
               </div>
               <div className="admin-col-stat">
-                <span style={{ 
-                  fontSize: '10px', 
-                  padding: '2px 6px', 
-                  borderRadius: '4px', 
-                  background: user.is_sales_affiliate ? 'rgba(59,130,246,0.1)' : 'rgba(74,222,128,0.1)',
-                  color: user.is_sales_affiliate ? '#3b82f6' : '#4ade80',
-                  fontWeight: 'bold'
-                }}>
-                  {user.is_sales_affiliate ? 'AFFILIATE' : 'CREATOR'}
-                </span>
+                {(() => {
+                  // Default role is AFFILIATE (incl. Discord users with no code yet —
+                  // they don't need a referral code for Reddit). Only users that set
+                  // up a creator referral code without the affiliate flag show CREATOR.
+                  const isCreator = !!user.referral_code && !user.is_sales_affiliate;
+                  const type = isCreator
+                    ? { label: 'CREATOR', bg: 'rgba(74,222,128,0.1)', color: '#4ade80' }
+                    : { label: 'AFFILIATE', bg: 'rgba(59,130,246,0.1)', color: '#3b82f6' };
+                  return (
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      fontSize: '10px',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      background: type.bg,
+                      color: type.color,
+                      fontWeight: 'bold'
+                    }}>
+                      {type.label}
+                      {!user.referral_code && (
+                        <span style={{ color: '#64748b', fontWeight: 'normal' }}>· no code</span>
+                      )}
+                    </span>
+                  );
+                })()}
               </div>
               <div className="admin-col-stat">
                 <span className={user.total_clicks > 0 ? 'admin-stat-highlight' : ''}>{user.total_clicks}</span>
