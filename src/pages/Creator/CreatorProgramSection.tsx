@@ -37,12 +37,12 @@ const CreatorProgramSection: React.FC = () => {
                 Join the Upshift Creator Discord to learn everything you need to get started
               </p>
               <a
-                href="https://discord.gg/HGsWPTRmp"
+                href="https://discord.gg/7dzTbzbNPY"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="step-link"
               >
-                discord.gg/HGsWPTRmp
+                discord.gg/7dzTbzbNPY
                 <span className="link-arrow">→</span>
               </a>
             </div>
