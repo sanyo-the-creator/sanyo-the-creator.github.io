@@ -163,9 +163,18 @@
   }
 }
 
+@media (max-width: 768px) {
+  /* Clear the floating nav (top: 2em + 60px tall ≈ 92px) so the title doesn't
+     overlap the menu on phones/tablets. Parent selector raises specificity above
+     the generic `.section` padding. */
+  .creator-program-page .creator-hero {
+    padding-top: 120px;
+  }
+}
+
 @media (max-width: 480px) {
-  .creator-hero {
-    padding: var(--spacing-4xl) 0 100px 0;
+  .creator-program-page .creator-hero {
+    padding: 120px 0 100px 0;
   }
 
   .creator-title {

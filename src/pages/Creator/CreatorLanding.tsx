@@ -6,7 +6,8 @@ import {
   RiLayoutMasonryLine as _RiLayoutMasonryLine,
   RiArrowLeftLine as _RiArrowLeftLine,
   RiVideoLine as _RiVideoLine,
-  RiShieldLine as _RiShieldLine
+  RiShieldLine as _RiShieldLine,
+  RiQuillPenLine as _RiQuillPenLine
 } from 'react-icons/ri';
 import './Creator.css';
 import LightRays from '../../components/common/LightRays/LightRays';
@@ -17,6 +18,7 @@ const RiLayoutMasonryLine = _RiLayoutMasonryLine as any;
 const RiArrowLeftLine = _RiArrowLeftLine as any;
 const RiVideoLine = _RiVideoLine as any;
 const RiShieldLine = _RiShieldLine as any;
+const RiQuillPenLine = _RiQuillPenLine as any;
 
 const CreatorLanding: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -90,6 +92,18 @@ const CreatorLanding: React.FC = () => {
             <h2 className="tool-title">Video Assets</h2>
             <p className="tool-description">
               Download approved video clips and assets to use in your social media content
+            </p>
+          </div>
+        </Link>
+
+        <Link to={`/creator/rewrite${fromPortal ? '?from=portal' : ''}`} className="tool-card">
+          <div className="tool-icon-wrapper">
+            <RiQuillPenLine />
+          </div>
+          <div className="tool-info">
+            <h2 className="tool-title">Post Rewriter</h2>
+            <p className="tool-description">
+              Turn an existing Reddit post into a fresh, human-sounding rewrite — same idea, different words
             </p>
           </div>
         </Link>
