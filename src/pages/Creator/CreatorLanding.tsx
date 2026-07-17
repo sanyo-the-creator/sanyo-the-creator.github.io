@@ -96,7 +96,7 @@ const CreatorLanding: React.FC = () => {
           </div>
         </Link>
 
-        <Link to={`/creator/rewrite${fromPortal ? '?from=portal' : ''}`} className="tool-card">
+        {/* <Link to={`/creator/rewrite${fromPortal ? '?from=portal' : ''}`} className="tool-card">
           <div className="tool-icon-wrapper">
             <RiQuillPenLine />
           </div>
@@ -106,7 +106,7 @@ const CreatorLanding: React.FC = () => {
               Turn an existing Reddit post into a fresh, human-sounding rewrite — same idea, different words
             </p>
           </div>
-        </Link>
+        </Link> */}
 
         <Link to="/cleaner" className="tool-card">
           <div className="tool-icon-wrapper">

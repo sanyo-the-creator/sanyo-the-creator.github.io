@@ -1,6 +1,15 @@
 const http = require('http');
 const https = require('https');
 const url = require('url');
+const path = require('path');
+
+// Load env from .env.local (then .env) so serverless handlers that read
+// process.env (e.g. OPENROUTER_API_KEY) work when run through this dev server.
+require('dotenv').config({ path: path.resolve(__dirname, '..', '.env.local') });
+require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
+
+// Reuse the actual Vercel serverless handler so local and prod share one code path.
+const redditRewriteHandler = require('../api/reddit-rewrite.js');
 
 function fetchText(targetUrl, options = {}) {
     return new Promise((resolve, reject) => {
@@ -30,6 +39,10 @@ const server = http.createServer(async (req, res) => {
 
     try {
         const parsedUrl = url.parse(req.url, true);
+        if (parsedUrl.pathname.includes('/api/reddit-rewrite')) {
+            await redditRewriteHandler(req, res);
+            return;
+        }
         if (parsedUrl.pathname.includes('/api/instagram')) {
             const videoUrl = parsedUrl.query.url;
             if (!videoUrl) {
