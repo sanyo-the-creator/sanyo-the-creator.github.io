@@ -5,7 +5,8 @@ import {
   RiTimeLine as _RiTimeLine,
   RiLayoutMasonryLine as _RiLayoutMasonryLine,
   RiArrowLeftLine as _RiArrowLeftLine,
-  RiVideoLine as _RiVideoLine
+  RiVideoLine as _RiVideoLine,
+  RiShieldLine as _RiShieldLine
 } from 'react-icons/ri';
 import './Creator.css';
 import LightRays from '../../components/common/LightRays/LightRays';
@@ -15,6 +16,7 @@ const RiTimeLine = _RiTimeLine as any;
 const RiLayoutMasonryLine = _RiLayoutMasonryLine as any;
 const RiArrowLeftLine = _RiArrowLeftLine as any;
 const RiVideoLine = _RiVideoLine as any;
+const RiShieldLine = _RiShieldLine as any;
 
 const CreatorLanding: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -88,6 +90,18 @@ const CreatorLanding: React.FC = () => {
             <h2 className="tool-title">Video Assets</h2>
             <p className="tool-description">
               Download approved video clips and assets to use in your social media content
+            </p>
+          </div>
+        </Link>
+
+        <Link to="/cleaner" className="tool-card">
+          <div className="tool-icon-wrapper">
+            <RiShieldLine />
+          </div>
+          <div className="tool-info">
+            <h2 className="tool-title">Image Metadata Cleaner</h2>
+            <p className="tool-description">
+              Strip metadata and apply imperceptible transforms to your Reddit screenshots so they aren't flagged
             </p>
           </div>
         </Link>

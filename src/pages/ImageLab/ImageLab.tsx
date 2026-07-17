@@ -128,11 +128,11 @@ const ImageLab: React.FC = () => {
     <div className="imagelab">
       <UpshiftMenu />
       <header className="il-header">
-        <h1>Image Cleaner</h1>
+        <h1>Reddit Image Metadata Cleaner</h1>
         <p>
-          Drop images and each one is automatically stripped of metadata and given its own randomized set of
-          imperceptible transforms — no two outputs are alike. Everything runs locally in your browser; nothing
-          is uploaded. Up to {MAX_IMAGES} images per session.
+          Drop your Reddit post screenshots and each one is automatically stripped of metadata and given its own
+          randomized set of imperceptible transforms — no two outputs are alike. Everything runs locally in your
+          browser; nothing is uploaded. Up to {MAX_IMAGES} images per session.
         </p>
       </header>
 
