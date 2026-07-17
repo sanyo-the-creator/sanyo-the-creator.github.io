@@ -1,56 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from '../common/Header/Header';
+import UpshiftMenu from '../common/UpshiftMenu';
 import { Footer } from '../common';
-import UpshiftLogo from '../../assets/icons/upshift_icon_mini.svg';
 
 interface LayoutProps {
   children?: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const items = [
-    {
-      label: "General Information",
-      bgColor: "#140b20",
-      textColor: "#fff",
-      text: 'Explore our in-app features, faq and reviews',
-      links: [
-        { label: "Explore", ariaLabel: "In-App features", href: '/features' },
-      ]
-    },
-    {
-      label: "Download",
-      bgColor: "#1e1133",
-      textColor: "#fff",
-      text: 'Get Upshift from your preferred store',
-      links: [
-        { label: "Get Upshift", ariaLabel: "Home", href: '/download' },
-      ]
-    },
-
-    {
-      label: "Articles",
-      bgColor: "#271e37",
-      textColor: "#fff",
-      text: 'Read helpful articles about productivity',
-      links: [
-        { label: "Read articles", ariaLabel: "Articles", href: '/articles' },
-      ]
-    },
-  ];
-
   return (
     <div className="min-h-screen flex flex-col">
-      <Header
-        logo={UpshiftLogo}
-        items={items}
-        baseColor="#1c0e2d22"
-        menuColor="#fff"
-        buttonBgColor="#111"
-        buttonTextColor="#fff"
-        ease="power3.out"
-      />
+      <UpshiftMenu />
       <main className="flex-1">
         {children || <Outlet />}
       </main>

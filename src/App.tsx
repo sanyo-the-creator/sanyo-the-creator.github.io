@@ -26,6 +26,7 @@ import AdminUserDetail from './pages/Admin/AdminUserDetail';
 import AdminVideoReview from './pages/Admin/AdminVideoReview';
 import AdminRedditReview from './pages/Admin/AdminRedditReview';
 import ProfileLanding from './pages/Profile/ProfileLanding';
+import ImageLab from './pages/ImageLab/ImageLab';
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
         <Route path="/admin/reddit" element={<AdminRedditReview />} />
         
 
+
+        {/* Image cleaner — adversarial transform harness (local, in-browser) */}
+        <Route path="/cleaner" element={<ImageLab />} />
 
         {/* Public profile page: /jergus or /jergus/tiktok */}
         <Route path="/:referralCode" element={<ProfileLanding />} />

@@ -15,6 +15,9 @@ const APP_STORE_LINK = 'https://apps.apple.com/us/app/upshift-1-productivity-app
 // The mock Upshift TestFlight build used to fake streaks/habits + app blocker.
 const TESTFLIGHT_LINK = 'https://testflight.apple.com/join/5CNnTm8Y';
 const NOTION_LINK = 'https://app.notion.com/p/Reddit-Marketing-Tutorial-for-Upshift-App-283e593666a98072b125d6599ff9df73?source=copy_link';
+const GOOGLE_DRIVE_LINK = 'https://drive.google.com/drive/folders/1W1SRKqsCXXG9amyQ48bOW2VdN0gkVVNS?usp=drive_link';
+const CLEANER_LINK = 'https://joinupshift.com/cleaner';
+const DISCORD_LINK = 'https://discord.gg/fcCeW7sxVp';
 
 // --- Reddit payout tiers (cumulative) ---------------------------------------
 const PAYOUT_TIERS = [
@@ -366,9 +369,26 @@ const PortalSubmitReddit = () => {
         <h3 className="requirements-title">How it works</h3>
         <ol style={{ fontSize: 13, color: '#aaa', lineHeight: 1.7, paddingLeft: 20, margin: 0 }}>
           <li>
-            Download the <strong>mock Upshift TestFlight app</strong> (
-            <a href={TESTFLIGHT_LINK} target="_blank" rel="noreferrer" style={{ color: '#3b82f6' }}>get it here</a>
-            ) and build whatever habit streaks + app-blocker screens you want for your screenshots.
+            <strong>Image Requirements:</strong>
+            <div style={{ marginTop: 6, marginBottom: 4 }}>
+              <strong style={{ color: '#e2e8f0' }}>Option 1:</strong> Build all mock screens using our TestFlight app:{' '}
+              <a href={TESTFLIGHT_LINK} target="_blank" rel="noreferrer" style={{ color: '#3b82f6' }}>get it here</a>
+            </div>
+            <ul style={{ paddingLeft: 18, margin: '4px 0', listStyleType: 'disc' }}>
+              <li><strong>How to edit habit streaks (Home Page):</strong> When you add a quest, slide it to the left to reveal a hidden edit button behind the quest. Click it to open the editing page where you can set the streak to whatever you want for the post.</li>
+              <li><strong>How to edit App-Blocker screens:</strong> To edit screen time, click 5 times on it and a popup will open where you can change times, apps, etc. For each block, you can edit it when adding it or by clicking on it.</li>
+              <li><strong>Walk block steps:</strong> For the walk block, change the number of steps you walked by clicking the round arrow for refreshing.</li>
+            </ul>
+            <div style={{ marginTop: 8, marginBottom: 4 }}>
+              <strong style={{ color: '#e2e8f0' }}>Option 2:</strong> Use screenshots from{' '}
+              <a href={GOOGLE_DRIVE_LINK} target="_blank" rel="noreferrer" style={{ color: '#3b82f6' }}>Google Drive</a>
+            </div>
+            <ul style={{ paddingLeft: 18, margin: '4px 0', listStyleType: 'disc' }}>
+              <li>Clean the screenshots in our{' '}
+                <a href={CLEANER_LINK} target="_blank" rel="noreferrer" style={{ color: '#3b82f6' }}>metadata cleaner</a>{' '}
+                so you are not flagged.
+              </li>
+            </ul>
           </li>
           <li>Post to Reddit. <strong>Image 1</strong> = Upshift home page with your streaks. <strong>Image 2/3</strong> = app blocker.</li>
           <li>
@@ -402,6 +422,14 @@ const PortalSubmitReddit = () => {
           <li className="requirement-item"><span className="requirement-bullet">•</span><span className="requirement-text">Add the <strong>app-blocker screenshot</strong> as image 2 or 3 — it's a big reason these posts go viral.</span></li>
           <li className="requirement-item"><span className="requirement-bullet">•</span><span className="requirement-text">Reply to comments as the original poster would to keep engagement high.</span></li>
         </ul>
+      </div>
+
+      {/* Discord */}
+      <div className="requirements-card" style={{ marginBottom: 20, textAlign: 'center' }}>
+        <p style={{ fontSize: 13, color: '#aaa', margin: 0 }}>
+          For more in-depth rules and guides, check our{' '}
+          <a href={DISCORD_LINK} target="_blank" rel="noreferrer" style={{ color: '#3b82f6', fontWeight: 600 }}>Discord</a>.
+        </p>
       </div>
     </div>
   );
