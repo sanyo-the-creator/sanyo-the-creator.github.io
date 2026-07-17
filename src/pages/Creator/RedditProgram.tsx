@@ -4,10 +4,12 @@ import './CreatorProgram.css';
 import { SEO, StructuredData } from '../../components/common/SEO';
 import LightRays from '../../components/common/LightRays/LightRays';
 import RedditProgramSection from './RedditProgramSection';
+import UpshiftMenu from '../../components/common/UpshiftMenu';
 
 const RedditProgram: React.FC = () => {
   return (
     <div className="creator-program-page">
+      <UpshiftMenu />
       <SEO
         title="Upshift Reddit Creator Program | Earn money making posts"
         description="Partner with us to promote Upshift on Reddit and earn money based on your posts."
