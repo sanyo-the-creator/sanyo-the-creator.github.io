@@ -43,9 +43,6 @@ function App() {
         
 
 
-        {/* Image cleaner — adversarial transform harness (local, in-browser) */}
-        <Route path="/cleaner" element={<ImageLab />} />
-
         {/* Public profile page: /jergus or /jergus/tiktok */}
         <Route path="/:referralCode" element={<ProfileLanding />} />
         <Route path="/:referralCode/:platform" element={<ProfileLanding />} />
@@ -74,6 +71,9 @@ function App() {
           <Route path="/creator/mix" element={<Mix />} />
           <Route path="/creator/content" element={<ContentLibrary />} />
           <Route path="/creator/rewrite" element={<Rewrite />} />
+
+          {/* Image cleaner — adversarial transform harness (local, in-browser) */}
+          <Route path="/cleaner" element={<ImageLab />} />
         </Route>
       </Routes>
     </Router>

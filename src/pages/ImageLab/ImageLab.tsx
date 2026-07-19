@@ -7,7 +7,6 @@ import {
   randomOptions,
   OutputFormat,
 } from '../../utils/imagePerturbation';
-import UpshiftMenu from '../../components/common/UpshiftMenu';
 import '../Creator/Creator.css';
 import './ImageLab.css';
 
@@ -133,7 +132,6 @@ const ImageLab: React.FC = () => {
 
   return (
     <div className="imagelab-page">
-      <UpshiftMenu />
       <header className="creator-header">
         <Link to={`/creator${fromPortal ? '?from=portal' : ''}`} className="back-link">
           <RiArrowLeftLine /> Back

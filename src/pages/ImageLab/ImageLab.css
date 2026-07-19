@@ -1,30 +1,15 @@
+/* Same chrome as the other creator tools: the route sits inside Layout, so the
+   Upshift menu and footer come from there, and .creator-header puts the shared
+   .back-link in the 40/40 corner. */
+.imagelab-page {
+  background: #000;
+}
+
 .imagelab {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 120px 20px 80px;
+  padding: 24px 20px 80px;
   color: #e8e8ea;
-}
-
-/* Shares .creator-header / .back-link with the other creator tools, pinned to
-   the same 40/40 corner. This page also renders the floating Upshift menu
-   (centered, max-width 1200px), so under 1440px — where the menu reaches far
-   enough left to collide — the link drops below it instead of overlapping. */
-.imagelab-page .creator-header {
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  padding: 0;
-  z-index: 100;
-}
-
-@media (max-width: 1439px) {
-  .imagelab-page .creator-header {
-    position: static;
-    padding: 112px 40px 0;
-  }
-  .imagelab {
-    padding-top: 24px;
-  }
 }
 
 .il-header h1 {
