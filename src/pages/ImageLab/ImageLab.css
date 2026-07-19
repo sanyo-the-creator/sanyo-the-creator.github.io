@@ -3,6 +3,10 @@
    .back-link in the 40/40 corner. */
 .imagelab-page {
   background: #000;
+  /* Matches .creator-editor-container / .creator-landing: without this the
+     wrapper is only as tall as its content, and the body colour shows through
+     the rest of the stretched <main> as a lighter band above the footer. */
+  min-height: 100vh;
 }
 
 .imagelab {
