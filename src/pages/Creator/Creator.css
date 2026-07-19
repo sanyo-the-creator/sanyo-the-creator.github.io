@@ -745,3 +745,20 @@
     grid-template-columns: 1fr;
   }
 }
+/* The floating Upshift menu is centered with a 1200px cap, so it only clears
+   the back link on very wide viewports. Below that the two collide, so drop
+   the link underneath the menu (its bottom edge sits at 92px) instead.
+   The two breakpoints differ because the links do: ".Back" ends at ~102px and
+   needs the menu past ~1444px, while the wider "Back to Portal" pill ends at
+   ~192px and needs it past ~1624px. */
+@media (max-width: 1459px) {
+  .creator-header {
+    padding-top: 112px;
+  }
+}
+
+@media (max-width: 1679px) {
+  .back-to-portal {
+    top: 112px;
+  }
+}

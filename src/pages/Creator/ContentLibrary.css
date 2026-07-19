@@ -15,6 +15,15 @@
   z-index: 10;
 }
 
+/* Matches the shared rule in Creator.css: below this width the floating menu
+   reaches the back link, so the link drops underneath it. */
+@media (max-width: 1459px) {
+  .content-library .creator-header {
+    top: 112px;
+    padding: 0;
+  }
+}
+
 .library-header {
   margin-bottom: 60px;
   max-width: 800px;
