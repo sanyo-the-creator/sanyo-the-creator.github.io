@@ -8,6 +8,7 @@ import {
   OutputFormat,
 } from '../../utils/imagePerturbation';
 import UpshiftMenu from '../../components/common/UpshiftMenu';
+import '../Creator/Creator.css';
 import './ImageLab.css';
 
 const RiArrowLeftLine = _RiArrowLeftLine as React.ElementType;
@@ -131,11 +132,14 @@ const ImageLab: React.FC = () => {
   const processingCount = items.filter((i) => i.status === 'processing').length;
 
   return (
-    <div className="imagelab">
+    <div className="imagelab-page">
       <UpshiftMenu />
-      <Link to={`/creator${fromPortal ? '?from=portal' : ''}`} className="il-back">
-        <RiArrowLeftLine /> Back
-      </Link>
+      <header className="creator-header">
+        <Link to={`/creator${fromPortal ? '?from=portal' : ''}`} className="back-link">
+          <RiArrowLeftLine /> Back
+        </Link>
+      </header>
+      <div className="imagelab">
       <header className="il-header">
         <h1>Reddit Image Metadata Cleaner</h1>
         <p>
@@ -206,6 +210,7 @@ const ImageLab: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );
