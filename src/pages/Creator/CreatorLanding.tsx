@@ -11,6 +11,7 @@ import {
 } from 'react-icons/ri';
 import './Creator.css';
 import LightRays from '../../components/common/LightRays/LightRays';
+import { useCampaignSettings } from '../../hooks/useCampaignSettings';
 
 const RiMagicLine = _RiMagicLine as any;
 const RiTimeLine = _RiTimeLine as any;
@@ -23,6 +24,7 @@ const RiQuillPenLine = _RiQuillPenLine as any;
 const CreatorLanding: React.FC = () => {
   const [searchParams] = useSearchParams();
   const fromPortal = searchParams.get('from') === 'portal';
+  const { videoEnabled, redditEnabled, settingsLoading } = useCampaignSettings();
 
   return (
     <div className="creator-landing">
@@ -48,6 +50,8 @@ const CreatorLanding: React.FC = () => {
       <h1 className="creator-landing-title">Creator Tools</h1>
 
       <div className="tools-grid">
+        {!settingsLoading && videoEnabled && (
+        <>
         <Link to={`/creator/quests${fromPortal ? '?from=portal' : ''}`} className="tool-card">
           <div className="tool-icon-wrapper">
             <RiMagicLine />
@@ -95,6 +99,8 @@ const CreatorLanding: React.FC = () => {
             </p>
           </div>
         </Link>
+        </>
+        )}
 
         {/* <Link to={`/creator/rewrite${fromPortal ? '?from=portal' : ''}`} className="tool-card">
           <div className="tool-icon-wrapper">
@@ -108,7 +114,8 @@ const CreatorLanding: React.FC = () => {
           </div>
         </Link> */}
 
-        <Link to="/cleaner" className="tool-card">
+        {!settingsLoading && redditEnabled && (
+        <Link to={`/cleaner${fromPortal ? '?from=portal' : ''}`} className="tool-card">
           <div className="tool-icon-wrapper">
             <RiShieldLine />
           </div>
@@ -119,6 +126,7 @@ const CreatorLanding: React.FC = () => {
             </p>
           </div>
         </Link>
+        )}
       </div>
     </div>
   );

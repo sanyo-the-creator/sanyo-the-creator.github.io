@@ -3,6 +3,7 @@ import { FiClock as _FiClock, FiDollarSign as _FiDollarSign, FiVideo as _FiVideo
 import { BiCalendar as _BiCalendar } from 'react-icons/bi';
 import { FaReddit as _FaReddit } from 'react-icons/fa';
 import { supabase } from '../../lib/supabase';
+import { useCampaignSettings } from '../../hooks/useCampaignSettings';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const FiClock = _FiClock as React.ElementType;
@@ -30,8 +31,10 @@ const PortalDashboard = () => {
   const [profile, setProfile] = useState<any>(null);
   const [salesTimeline, setSalesTimeline] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const { videoEnabled, redditEnabled, settingsLoading } = useCampaignSettings();
 
   useEffect(() => {
+    if (settingsLoading) return;
     const fetchStats = async () => {
       try {
         const { data: { user } } = await supabase.auth.getUser();
@@ -87,21 +90,27 @@ const PortalDashboard = () => {
           setSalesTimeline(timeline);
 
         } else {
-          // Fetch Videos for Creator
-          const { data: videos, error: videosError } = await supabase
-            .from('videos')
-            .select('*')
-            .eq('user_id', user.id);
+          // Fetch Videos for Creator (only when the video campaign is on)
+          let videos: any[] = [];
+          if (videoEnabled) {
+            const { data, error: videosError } = await supabase
+              .from('videos')
+              .select('*')
+              .eq('user_id', user.id);
+            if (videosError) throw videosError;
+            videos = data || [];
+          }
 
-          if (videosError) throw videosError;
-
-          // Fetch Reddit Posts for Creator
-          const { data: redditPosts, error: redditError } = await supabase
-            .from('reddit_posts')
-            .select('*')
-            .eq('user_id', user.id);
-
-          if (redditError) throw redditError;
+          // Fetch Reddit Posts for Creator (only when the reddit campaign is on)
+          let redditPosts: any[] = [];
+          if (redditEnabled) {
+            const { data, error: redditError } = await supabase
+              .from('reddit_posts')
+              .select('*')
+              .eq('user_id', user.id);
+            if (redditError) throw redditError;
+            redditPosts = data || [];
+          }
 
           const aggregated = [...(videos || []), ...(redditPosts || [])].reduce((acc, item) => {
             if (item.status === 'approved') {
@@ -124,7 +133,10 @@ const PortalDashboard = () => {
     };
 
     fetchStats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settingsLoading, videoEnabled, redditEnabled]);
 
+  useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         let { d, h, m, s } = prev;
@@ -262,7 +274,9 @@ const PortalDashboard = () => {
                 <div className="portal-metric-left">
                   <span className="portal-metric-title">Total Posts</span>
                   <div className="portal-metric-value">{stats.totalPosts}</div>
-                  <div className="portal-metric-subtext">Videos & Reddit</div>
+                  <div className="portal-metric-subtext">
+                    {videoEnabled && redditEnabled ? 'Videos & Reddit' : videoEnabled ? 'Videos' : 'Reddit'}
+                  </div>
                 </div>
                 <div className="portal-metric-icon-wrapper posts-icon">
                   <FiVideo />
@@ -326,12 +340,19 @@ const PortalDashboard = () => {
             </div>
             <div>
               <h3 className="portal-deal-title">Your Payout Deals</h3>
-              <p className="portal-deal-subtitle">Earn money for engaging videos and Reddit posts</p>
+              <p className="portal-deal-subtitle">
+                {videoEnabled && redditEnabled
+                  ? 'Earn money for engaging videos and Reddit posts'
+                  : videoEnabled
+                    ? 'Earn money for engaging videos'
+                    : 'Earn money for engaging Reddit posts'}
+              </p>
             </div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {/* Video Deal */}
+            {videoEnabled && (
             <div style={{ background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
               <h4 style={{ color: '#fff', marginBottom: '16px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
                 <FiVideo color="#3b82f6" /> TikTok & Reels
@@ -363,8 +384,10 @@ const PortalDashboard = () => {
                 Maximum earnings per video: $100
               </div>
             </div>
+            )}
 
             {/* Reddit Deal */}
+            {redditEnabled && (
             <div style={{ background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
               <h4 style={{ color: '#fff', marginBottom: '16px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
                 <FaReddit color="#ff4500" /> Reddit Posts
@@ -396,6 +419,7 @@ const PortalDashboard = () => {
                 Maximum earnings per post: $50
               </div>
             </div>
+            )}
           </div>
         </div>
       )}

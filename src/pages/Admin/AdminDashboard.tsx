@@ -57,6 +57,8 @@ const AdminDashboard: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'clicks' | 'downloads' | 'trials' | 'revenue' | 'videos' | 'views'>('clicks');
   const [userType, setUserType] = useState<'all' | 'creators' | 'users'>('all');
+  const [campaigns, setCampaigns] = useState<{ video: boolean; reddit: boolean }>({ video: true, reddit: true });
+  const [campaignSaving, setCampaignSaving] = useState<string | null>(null);
 
   const [globalStats, setGlobalStats] = useState({
     totalUsers: 0,
@@ -90,6 +92,17 @@ const AdminDashboard: React.FC = () => {
       
       // If we reach here, user IS an admin
       setIsAdmin(true);
+
+      // Load campaign switches
+      const { data: settings } = await supabase
+        .from('campaign_settings')
+        .select('key, enabled');
+      if (settings) {
+        setCampaigns({
+          video: settings.find((s: any) => s.key === 'video_campaign')?.enabled ?? true,
+          reddit: settings.find((s: any) => s.key === 'reddit_campaign')?.enabled ?? true,
+        });
+      }
 
       try {
         const { data, error } = await supabase
@@ -149,6 +162,23 @@ const AdminDashboard: React.FC = () => {
       }
     });
 
+  const toggleCampaign = async (key: 'video_campaign' | 'reddit_campaign') => {
+    const field = key === 'video_campaign' ? 'video' : 'reddit';
+    const next = !campaigns[field];
+    setCampaignSaving(key);
+    setCampaigns(prev => ({ ...prev, [field]: next }));
+    const { error } = await supabase
+      .from('campaign_settings')
+      .update({ enabled: next, updated_at: new Date().toISOString() })
+      .eq('key', key);
+    if (error) {
+      // revert on failure
+      setCampaigns(prev => ({ ...prev, [field]: !next }));
+      alert(`Failed to update ${field} campaign: ${error.message}`);
+    }
+    setCampaignSaving(null);
+  };
+
   const fmt = (cents: number) => `$${(cents / 100).toFixed(2)}`;
   const fmtNum = (num: number) => {
     if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
@@ -200,8 +230,36 @@ const AdminDashboard: React.FC = () => {
               </span>
             </div>
           </div>
-          <button 
-            className="admin-action-btn" 
+          <div className="admin-campaign-toggles">
+            <div className="admin-toggle-row">
+              <span className="admin-toggle-label">
+                <FiVideo style={{ color: '#3b82f6' }} /> Video Campaign
+              </span>
+              <button
+                className={`admin-switch ${campaigns.video ? 'on' : ''}`}
+                disabled={campaignSaving === 'video_campaign'}
+                onClick={() => toggleCampaign('video_campaign')}
+                aria-label="Toggle video campaign"
+              >
+                <span className="admin-switch-knob" />
+              </button>
+            </div>
+            <div className="admin-toggle-row">
+              <span className="admin-toggle-label">
+                <FiFileText style={{ color: '#ff4500' }} /> Reddit Campaign
+              </span>
+              <button
+                className={`admin-switch ${campaigns.reddit ? 'on' : ''}`}
+                disabled={campaignSaving === 'reddit_campaign'}
+                onClick={() => toggleCampaign('reddit_campaign')}
+                aria-label="Toggle reddit campaign"
+              >
+                <span className="admin-switch-knob" />
+              </button>
+            </div>
+          </div>
+          <button
+            className="admin-action-btn"
             onClick={() => navigate('/admin/videos')}
             style={{ 
               display: 'flex', 

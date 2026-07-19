@@ -11,11 +11,13 @@ import PortalMyVideos from './PortalMyVideos';
 import PortalSubmitReddit from './PortalSubmitReddit';
 import PortalMyRedditPosts from './PortalMyRedditPosts';
 import { supabase } from '../../lib/supabase';
+import { useCampaignSettings } from '../../hooks/useCampaignSettings';
 import './Portal.css';
 
 const PortalRouter = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { videoEnabled, redditEnabled } = useCampaignSettings();
 
   useEffect(() => {
     // Check initial session
@@ -46,10 +48,18 @@ const PortalRouter = () => {
       ) : (
         <Route element={<PortalLayout onLogout={() => setIsAuthenticated(false)} />}>
           <Route path="/" element={<PortalDashboard />} />
-          <Route path="/submit" element={<PortalSubmitVideo />} />
-          <Route path="/videos" element={<PortalMyVideos />} />
-          <Route path="/submit-reddit" element={<PortalSubmitReddit />} />
-          <Route path="/reddit-posts" element={<PortalMyRedditPosts />} />
+          {videoEnabled && (
+            <>
+              <Route path="/submit" element={<PortalSubmitVideo />} />
+              <Route path="/videos" element={<PortalMyVideos />} />
+            </>
+          )}
+          {redditEnabled && (
+            <>
+              <Route path="/submit-reddit" element={<PortalSubmitReddit />} />
+              <Route path="/reddit-posts" element={<PortalMyRedditPosts />} />
+            </>
+          )}
           <Route path="/leaderboard" element={<PortalLeaderboard />} />
           <Route path="/referrals" element={<PortalReferrals />} />
           <Route path="/settings" element={<PortalSettings />} />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
+import { useCampaignSettings } from '../../hooks/useCampaignSettings';
 import { 
   RiDashboardLine as _RiDashboardLine, 
   RiAddCircleLine as _RiAddCircleLine, 
@@ -41,6 +42,7 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { videoEnabled, redditEnabled } = useCampaignSettings();
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -120,23 +122,33 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
           </NavLink>
           {!profile?.is_sales_affiliate && (
             <>
-              <NavLink to="/portal/submit" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-                <RiAddCircleLine className="portal-nav-icon" /> Submit Video
-              </NavLink>
-              <NavLink to="/portal/videos" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-                <RiVideoLine className="portal-nav-icon" /> My Videos
-              </NavLink>
-              <NavLink to="/portal/submit-reddit" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-                <RiRedditLine className="portal-nav-icon" /> Submit Reddit Post
-              </NavLink>
-              <NavLink to="/portal/reddit-posts" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-                <RiFileList3Line className="portal-nav-icon" /> My Reddit Posts
-              </NavLink>
+              {videoEnabled && (
+                <>
+                  <NavLink to="/portal/submit" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+                    <RiAddCircleLine className="portal-nav-icon" /> Submit Video
+                  </NavLink>
+                  <NavLink to="/portal/videos" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+                    <RiVideoLine className="portal-nav-icon" /> My Videos
+                  </NavLink>
+                </>
+              )}
+              {redditEnabled && (
+                <>
+                  <NavLink to="/portal/submit-reddit" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+                    <RiRedditLine className="portal-nav-icon" /> Submit Reddit Post
+                  </NavLink>
+                  <NavLink to="/portal/reddit-posts" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+                    <RiFileList3Line className="portal-nav-icon" /> My Reddit Posts
+                  </NavLink>
+                </>
+              )}
             </>
           )}
-          <NavLink to="/creator?from=portal" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-            <RiMagicLine className="portal-nav-icon" /> Creator Tools
-          </NavLink>
+          {(videoEnabled || redditEnabled) && (
+            <NavLink to="/creator?from=portal" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+              <RiMagicLine className="portal-nav-icon" /> Creator Tools
+            </NavLink>
+          )}
           <NavLink to="/portal/referrals" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
             <RiGroupLine className="portal-nav-icon" /> Referrals
           </NavLink>

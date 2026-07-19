@@ -5,6 +5,27 @@
   color: #e8e8ea;
 }
 
+.il-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  color: #9aa0a6;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  background: #16171b;
+  border: 1px solid #26282e;
+  padding: 8px 16px;
+  border-radius: 99px;
+  transition: all 0.2s;
+}
+.il-back:hover {
+  color: #fff;
+  border-color: #3a3d45;
+  transform: translateX(-3px);
+}
+
 .il-header h1 {
   font-size: 28px;
   font-weight: 700;

@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { RiArrowLeftLine as _RiArrowLeftLine } from 'react-icons/ri';
 import {
   loadImageFromFile,
   perturbImage,
@@ -7,6 +9,8 @@ import {
 } from '../../utils/imagePerturbation';
 import UpshiftMenu from '../../components/common/UpshiftMenu';
 import './ImageLab.css';
+
+const RiArrowLeftLine = _RiArrowLeftLine as React.ElementType;
 
 const MAX_IMAGES = 20;
 
@@ -26,6 +30,8 @@ const extFor = (fmt: OutputFormat) =>
   fmt === 'image/png' ? 'png' : fmt === 'image/webp' ? 'webp' : 'jpg';
 
 const ImageLab: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const fromPortal = searchParams.get('from') === 'portal';
   const [items, setItems] = useState<Item[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const startedRef = useRef<Set<string>>(new Set());
@@ -127,6 +133,9 @@ const ImageLab: React.FC = () => {
   return (
     <div className="imagelab">
       <UpshiftMenu />
+      <Link to={`/creator${fromPortal ? '?from=portal' : ''}`} className="il-back">
+        <RiArrowLeftLine /> Back
+      </Link>
       <header className="il-header">
         <h1>Reddit Image Metadata Cleaner</h1>
         <p>
