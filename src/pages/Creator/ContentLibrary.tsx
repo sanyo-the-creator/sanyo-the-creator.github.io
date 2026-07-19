@@ -42,9 +42,11 @@ const ContentLibrary: React.FC = () => {
 
   return (
     <div className="creator-landing content-library">
-      <Link to={fromPortal ? "/portal" : "/creator"} className="back-to-portal">
-        <RiArrowLeftLine /> {fromPortal ? "Back to Portal" : "Back to Creator Tools"}
-      </Link>
+      <header className="creator-header">
+        <Link to={`/creator${fromPortal ? '?from=portal' : ''}`} className="back-link">
+          <RiArrowLeftLine /> Back
+        </Link>
+      </header>
       
       <LightRays
         raysOrigin="top-center"
