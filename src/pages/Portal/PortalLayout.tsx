@@ -149,9 +149,11 @@ const PortalLayout: React.FC<PortalLayoutProps> = ({ onLogout }) => {
               <RiMagicLine className="portal-nav-icon" /> Creator Tools
             </NavLink>
           )}
-          <NavLink to="/portal/referrals" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
-            <RiGroupLine className="portal-nav-icon" /> Referrals
-          </NavLink>
+          {(videoEnabled || profile?.is_sales_affiliate) && (
+            <NavLink to="/portal/referrals" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
+              <RiGroupLine className="portal-nav-icon" /> Referrals
+            </NavLink>
+          )}
           <NavLink to="/portal/settings" className={({ isActive }) => `portal-nav-item ${isActive ? 'active' : ''}`}>
             <RiSettings4Line className="portal-nav-icon" /> Settings
           </NavLink>
