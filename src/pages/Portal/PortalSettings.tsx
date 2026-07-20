@@ -20,6 +20,7 @@ import {
   SiStripe as _SiStripe 
 } from 'react-icons/si';
 import { supabase } from '../../lib/supabase';
+import { useCampaignSettings } from '../../hooks/useCampaignSettings';
 import { generateInvoicePDF, InvoiceData } from '../../utils/invoiceUtils';
 
 const FiUser = _FiUser as React.ElementType;
@@ -40,6 +41,7 @@ const FiDownload = _FiDownload as React.ElementType;
 const FiEye = _FiEye as React.ElementType;
 
 const PortalSettings = () => {
+  const { videoEnabled } = useCampaignSettings();
   const [isTikTokConnected, setIsTikTokConnected] = useState(false);
   const [tiktokUsername, setTiktokUsername] = useState('@sanyo_creator');
   const [isInstagramConnected, setIsInstagramConnected] = useState(false);
@@ -343,6 +345,7 @@ const PortalSettings = () => {
       </div>
 
       {/* TikTok Section */}
+      {videoEnabled && (
       <div className="settings-section-card">
         <div className="settings-section-header">
           <div className="settings-section-icon"><SiTiktok /></div>
@@ -364,8 +367,10 @@ const PortalSettings = () => {
           )}
         </div>
       </div>
+      )}
 
       {/* Instagram Section */}
+      {videoEnabled && (
       <div className="settings-section-card">
         <div className="settings-section-header">
           <div className="settings-section-icon"><SiInstagram /></div>
@@ -387,6 +392,7 @@ const PortalSettings = () => {
           )}
         </div>
       </div>
+      )}
 
       {/* Payout Stats Section */}
       <div className="settings-section-card">
