@@ -55,7 +55,13 @@ const Privacy: React.FC = () => {
                         <p>Time tracking data, focus session statistics, and activity logs.</p>
                         <p>Group participation data, leaderboard rankings, and social interactions.</p>
 
-                        <p><strong>1.3 Optional Data:</strong></p>
+                        <p><strong>1.3 Health and Wellness Data:</strong></p>
+                        <p>Screen time and app usage data, including daily usage duration per app, app blocking statistics, and focus session metrics.</p>
+                        <p>Habit tracking data related to health and wellness goals you choose to track (e.g., exercise, reading, meditation, sleep, hydration, or other personal health habits).</p>
+                        <p>Digital wellness metrics derived from your screen time and habit data, such as productivity scores, streak progress, and category-based XP (e.g., Health, Strength, Knowledge).</p>
+                        <p>Goal progress and achievement data related to health and personal development objectives.</p>
+
+                        <p><strong>1.4 Optional Data:</strong></p>
                         <p>Profile photos, and custom themes.</p>
                         <p>Friend codes, affiliate referrals, and group invitations.</p>
 
@@ -108,13 +114,21 @@ const Privacy: React.FC = () => {
                         <p>Deliver a seamless and personalized experience.</p>
                         <p>You can control cookie preferences through your device settings.</p>
 
-                        <h3>9. Third-Party Links</h3>
+                        <h3>9. Health Data</h3>
+                        <p>Upshift collects and processes certain data that may be classified as Health Data under applicable data protection regulations and app store policies. This includes:</p>
+                        <p><strong>What We Collect:</strong> Screen time and app usage statistics, habit tracking data (including health-related habits such as exercise, sleep, hydration, and meditation), digital wellness scores, focus session metrics, streak data, and category-based progress data (e.g., Health, Strength, Knowledge XP).</p>
+                        <p><strong>How We Collect It:</strong> Health data is collected directly from your interactions within the app, such as when you create and track habits, log focus sessions, or use the app blocking feature. On iOS, screen time data is accessed through Apple's Screen Time API. On Android, usage data is collected through the Usage Stats permission. We do not access data from external health apps or devices unless you explicitly connect them.</p>
+                        <p><strong>How We Use It:</strong> We use health data solely to provide and improve your in-app experience, including displaying your progress, generating personalized insights and recommendations, powering quest and streak systems, enabling group challenges and leaderboards, and delivering relevant notifications about your goals.</p>
+                        <p><strong>How We Protect It:</strong> Health data is encrypted in transit and at rest. We do not sell, rent, or share your health data with third parties for advertising or marketing purposes. Access to health data within our organization is limited to personnel who require it to maintain and improve the service.</p>
+                        <p><strong>Your Control:</strong> You can view, export, or delete your health data at any time through the app settings or by contacting us at support&#64;joinupshift.com. Upon account deletion, all health data is permanently removed from our systems unless retention is required by law.</p>
+
+                        <h3>10. Third-Party Links</h3>
                         <p>Our app may include links to third-party websites or services. We are not responsible for the privacy practices or content of these third parties. We encourage you to review their privacy policies before providing any information.</p>
 
-                        <h3>10. TikTok Login Kit</h3>
+                        <h3>11. TikTok Login Kit</h3>
                         <p>Upshift (joinupshift.com) uses TikTok Login Kit to allow users to sign in with their TikTok account. When you choose to log in via TikTok, we may receive your TikTok username and profile picture. This information is used solely to create and identify your Upshift account. We do not post to TikTok on your behalf, access your TikTok content, or share your TikTok data with third parties.</p>
 
-                        <h3>11. Updates to this Privacy Policy</h3>
+                        <h3>12. Updates to this Privacy Policy</h3>
                         <p>We may update this Privacy Policy periodically to reflect changes in our practices or for legal reasons. We will notify you of significant updates and encourage you to review this document regularly.</p>
                     </div>
                 </div>
@@ -122,7 +136,7 @@ const Privacy: React.FC = () => {
 
             {/* Last Updated */}
             <div className="last-updated">
-                <p>Last updated: May 2026</p>
+                <p>Last updated: August 2026</p>
             </div>
         </div>
     );
