@@ -10,7 +10,7 @@ export const faqItems: FAQItem[] = [
     },
     {
         question: 'is there an Android version?',
-        answer: 'Yes, we are working on it. Join the waitlist to get notified when it\'s ready!'
+        answer: 'Yes! Upshift is available on Google Play.'
     },
     {
         question: 'What is the Quest Blocker?',

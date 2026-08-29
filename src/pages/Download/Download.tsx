@@ -57,8 +57,8 @@ const Download: React.FC = () => {
           // Redirect to Apple App Store
           window.location.href = 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316';
         } else if (isAndroid) {
-          // Redirect to Google Form
-          window.location.href = 'https://forms.gle/iJa3K3p6LmWkmHxn6#';
+          // Redirect to Google Play
+          window.location.href = 'https://play.google.com/store/apps/details?id=com.upshift.app';
         }
       }
     };
@@ -88,8 +88,8 @@ const Download: React.FC = () => {
         </svg>
       ),
       title: 'Download for Android',
-      subtitle: 'Join waitlist right now!',
-      url: 'https://forms.gle/iJa3K3p6LmWkmHxn6#',
+      subtitle: 'Get it on Google Play',
+      url: 'https://play.google.com/store/apps/details?id=com.upshift.app',
       primary: true
     }
   ];
