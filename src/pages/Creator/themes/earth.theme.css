@@ -1,0 +1,164 @@
+/* Copied verbatim from the Upshift app:
+ * upshift/ionic-upshift/src/app/themes/earth.theme.css
+ *
+ * Only containment changes were made so the theme lives inside the 540x960
+ * mockup instead of the viewport:
+ *   position: fixed  -> position: absolute
+ *   min-height: 100vh -> min-height: 100%
+ *   100vh in keyframes -> 960px (the mockup's height)
+ * Do not restyle by hand - re-copy from the app and re-apply these.
+ */
+.theme-earth {
+  --background-color: #0A0A0F;
+  --text-color: #FFFFFF;
+  --secondary-text: #B8B8B8;
+  --accent-color: #2c62a1;
+  --level-title-color: #5291db;
+  --quest-bg: rgba(28, 28, 30, 0.4);
+  --quest-border: rgba(74, 144, 226, 0.3);
+  --active-date: #4A90E2;
+  --inactive-date: #2C2C2E;
+  --card-bg: rgba(28, 28, 30, 0.4);
+  --card-border: rgba(74, 144, 226, 0.3);
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 30%, #0f0f23 70%, #000000 100%);
+  min-height: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.theme-earth::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: radial-gradient(circle at 30% 40%, rgba(34, 139, 34, 0.8) 0%, transparent 25%), radial-gradient(circle at 70% 30%, rgba(139, 69, 19, 0.6) 0%, transparent 20%), radial-gradient(circle at 20% 70%, rgba(34, 139, 34, 0.7) 0%, transparent 30%), radial-gradient(circle at 80% 60%, rgba(139, 69, 19, 0.5) 0%, transparent 25%), radial-gradient(circle at 50% 20%, rgba(34, 139, 34, 0.6) 0%, transparent 35%), radial-gradient(ellipse at center, rgba(30, 144, 255, 0.9) 0%, rgba(0, 100, 200, 0.8) 40%, rgba(0, 50, 150, 0.6) 80%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(1px);
+  z-index: -3;
+  animation: earthRotate 60s linear infinite;
+  box-shadow: inset -20px -20px 40px rgba(0, 0, 0, 0.4), 0 0 60px rgba(30, 144, 255, 0.3), 0 0 120px rgba(30, 144, 255, 0.1);
+}
+.theme-earth::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 450px;
+  height: 450px;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: radial-gradient(circle at center, transparent 70%, rgba(135, 206, 250, 0.2) 75%, rgba(135, 206, 250, 0.4) 85%, transparent 100%);
+  border-radius: 50%;
+  z-index: -2;
+  animation: atmosphereGlow 8s ease-in-out infinite;
+}
+.theme-earth .stars-layer {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(0.8px 0.8px at 80% 10%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1.2px 1.2px at 30% 80%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(0.6px 0.6px at 90% 70%, rgba(255, 255, 255, 0.3), transparent), radial-gradient(1px 1px at 15% 90%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(0.9px 0.9px at 70% 85%, rgba(255, 255, 255, 0.5), transparent);
+  background-repeat: repeat;
+  background-size: 400px 300px;
+  z-index: -4;
+  animation: starsMove 180s linear infinite, starsTwinkle 6s ease-in-out infinite;
+}
+.theme-earth .cloud-layer {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: radial-gradient(ellipse 80px 40px at 40% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 70%), radial-gradient(ellipse 60px 30px at 70% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 70%), radial-gradient(ellipse 90px 45px at 20% 70%, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: cloudsMove 40s linear infinite;
+}
+.theme-earth ion-content {
+  --background: transparent;
+  --color: var(--text-color);
+  position: relative;
+  z-index: 100;
+  backdrop-filter: blur(0.3px);
+  -webkit-backdrop-filter: blur(0.3px);
+}
+.theme-earth ion-avatar {
+  border: 2px solid var(--card-border);
+}
+.theme-earth .logo span {
+  color: var(--text-color);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.theme-earth .container {
+  background: transparent;
+  position: relative;
+  z-index: 200;
+}
+.theme-earth .falling-star {
+  display: none;
+}
+
+@keyframes earthRotate {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8) rotate(360deg);
+  }
+}
+@keyframes atmosphereGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+}
+@keyframes cloudsMove {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8) rotate(360deg);
+    opacity: 0.7;
+  }
+}
+@keyframes starsMove {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-50px) translateX(10px);
+    opacity: 0.6;
+  }
+}
+@keyframes starsTwinkle {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  25% {
+    filter: brightness(1.3);
+  }
+  50% {
+    filter: brightness(0.8);
+  }
+  75% {
+    filter: brightness(1.1);
+  }
+}

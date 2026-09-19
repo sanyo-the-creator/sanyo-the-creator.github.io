@@ -1,0 +1,53 @@
+/* Copied from the Upshift app:
+ * upshift/ionic-upshift/src/app/components/saturn-animation/saturn-animation.component.css
+ * Containment only: position: fixed -> absolute, 100vh -> the mockup height.
+ */
+#saturn {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin: auto;
+  transform: rotateZ(-15deg);
+  transition: transform 0.1s ease-out;
+}
+
+.rings {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(24, 19, 25, 0) 0%, rgba(53, 52, 51, 0) 34%, rgb(55, 54, 52) 36%, rgb(56, 55, 53) 37%, rgb(68, 67, 66) 38%, rgb(56, 55, 53) 39%, rgb(68, 67, 66) 40%, rgb(56, 55, 53) 41%, rgb(87, 77, 76) 42%, rgb(87, 77, 76) 44%, rgb(113, 110, 103) 46%, rgb(113, 110, 103) 48%, rgb(113, 98, 93) 49%, rgb(113, 98, 93) 51%, rgb(122, 115, 105) 52%, rgb(113, 98, 93) 53%, rgb(113, 98, 93) 54%, rgb(122, 115, 105) 55%, rgb(106, 99, 89) 56%, rgb(106, 99, 89) 58%, rgba(79, 76, 76, 0) 60%, rgb(65, 64, 70) 61%, rgb(65, 64, 70) 62%, rgb(90, 85, 89) 63%, rgb(78, 74, 73) 65%, rgb(78, 73, 74) 67%, rgba(78, 73, 74, 0) 68%, rgb(78, 73, 75) 69%, rgb(78, 73, 75) 70%, rgba(78, 73, 76, 0) 71%, rgba(77, 72, 76, 0) 72%, rgba(24, 19, 25, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00181319", endColorstr="#00181319", GradientType=1);
+  transform: rotateX(75deg);
+}
+
+.planet {
+  background: green;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  border-radius: 50%;
+}
+
+.top {
+  clip: rect(0px, 70px, 35px, 0px);
+}
+
+.bottom {
+  clip: rect(35px, 70px, 70px, 0px);
+}
+
+.planet-bg {
+  background: radial-gradient(circle at top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 40%, rgb(0, 0, 0) 100%), radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 62%, rgb(0, 0, 0) 100%), linear-gradient(to top, rgb(131, 129, 117) 0%, rgb(131, 129, 117) 3%, rgb(150, 144, 130) 5%, rgb(150, 144, 130) 9%, rgb(190, 177, 145) 20%, rgb(190, 177, 145) 32%, rgb(202, 176, 153) 35%, rgb(202, 176, 153) 47%, rgb(205, 186, 156) 48%, rgb(205, 186, 156) 49%, rgb(211, 184, 157) 51%, rgb(211, 184, 157) 59%, rgb(218, 188, 162) 61%, rgb(218, 188, 162) 63%, rgb(208, 180, 158) 64%, rgb(208, 180, 158) 68%, rgb(213, 181, 143) 74%, rgb(213, 181, 143) 78%, rgb(221, 203, 157) 83%, rgb(221, 203, 157) 85%, rgb(212, 203, 174) 90%, rgb(212, 203, 174) 100%);
+}
+
+.stars-canvas {
+  position: absolute;
+  top: 0;
+  left: -75px;
+  width: 300px;
+  height: 150px;
+  pointer-events: none;
+  z-index: 5;
+}

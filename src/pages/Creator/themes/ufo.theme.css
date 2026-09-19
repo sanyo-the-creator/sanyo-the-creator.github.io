@@ -1,0 +1,360 @@
+/* Copied verbatim from the Upshift app:
+ * upshift/ionic-upshift/src/app/themes/ufo.theme.css
+ *
+ * Only containment changes were made so the theme lives inside the 540x960
+ * mockup instead of the viewport:
+ *   position: fixed  -> position: absolute
+ *   min-height: 100vh -> min-height: 100%
+ *   100vh in keyframes -> 960px (the mockup's height)
+ * Do not restyle by hand - re-copy from the app and re-apply these.
+ */
+.theme-ufo {
+  --background-color: #000000;
+  --text-color: #E0E0E0;
+  --secondary-text: #A0A0A0;
+  --accent-color: #40E0D0;
+  --quest-bg: rgba(20, 30, 40, 0.7);
+  --quest-border: rgba(64, 224, 208, 0.3);
+  --active-date: #40E0D0;
+  --inactive-date: #404040;
+  --card-bg: rgba(20, 30, 40, 0.7);
+  --card-border: rgba(64, 224, 208, 0.3);
+  background: #000000;
+  min-height: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.theme-ufo::before {
+  content: "";
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 320px;
+  height: 80px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(180deg, #8A9BA8 0%, #6B7B88 15%, #4A5A67 35%, #3A4A57 50%, #2A3A47 65%, #1A2A37 85%, #0A1A27 100%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: ufoHover 8s ease-in-out infinite, ufoGlow 8s ease-in-out infinite;
+  box-shadow: 0 0 60px rgba(64, 224, 208, 0.4), 0 0 120px rgba(64, 224, 208, 0.2), 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 -8px 16px rgba(0, 0, 0, 0.6), inset 0 8px 16px rgba(255, 255, 255, 0.15), inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+.theme-ufo .ufo-dome {
+  display: block;
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  width: 120px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 30%, rgba(64, 224, 208, 0.1) 50%, rgba(0, 0, 0, 0.1) 80%, transparent 100%);
+  border-radius: 50%;
+  z-index: 0;
+  animation: ufoHover 8s ease-in-out infinite;
+  box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.3), inset 0 6px 12px rgba(255, 255, 255, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.theme-ufo::after {
+  content: "";
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 120px;
+  height: 350px;
+  background: linear-gradient(to bottom, rgba(173, 216, 230, 0.4) 0%, rgba(135, 206, 250, 0.35) 10%, rgba(100, 149, 237, 0.3) 25%, rgba(70, 130, 180, 0.25) 45%, rgba(64, 224, 208, 0.2) 65%, rgba(32, 178, 170, 0.15) 80%, rgba(0, 139, 139, 0.1) 100%), radial-gradient(2px 2px at 15% 10%, rgba(255, 255, 255, 0.9), transparent), radial-gradient(1px 1px at 75% 15%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(1.5px 1.5px at 35% 25%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(1px 1px at 85% 35%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(2px 2px at 25% 45%, rgba(255, 255, 255, 0.9), transparent), radial-gradient(1px 1px at 65% 55%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(1.5px 1.5px at 45% 65%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(1px 1px at 80% 75%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(2px 2px at 20% 85%, rgba(255, 255, 255, 0.9), transparent), radial-gradient(1px 1px at 70% 95%, rgba(255, 255, 255, 0.7), transparent);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+  transform: translateX(-50%);
+  z-index: -2;
+  animation: abductionBeam 8s ease-in-out infinite, beamParticles 8s linear infinite;
+  box-shadow: 0 0 30px rgba(64, 224, 208, 0.5), 0 0 60px rgba(64, 224, 208, 0.3), inset 0 0 20px rgba(173, 216, 230, 0.2);
+}
+.theme-ufo .category-card {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.theme-ufo .ufo-lights {
+  display: block;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 320px;
+  height: 80px;
+  transform: translate(-50%, -50%);
+  background-image: radial-gradient(4px 4px at 8% 75%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 15% 82%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 22% 87%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 30% 90%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 38% 92%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 46% 93%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 54% 93%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 62% 92%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 70% 90%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 78% 87%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 85% 82%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent), radial-gradient(4px 4px at 92% 75%, rgb(255, 255, 255), rgba(173, 216, 230, 0.8) 50%, transparent);
+  background-repeat: no-repeat;
+  z-index: 1;
+  animation: lightsFlicker 8s ease-in-out infinite, ufoHover 8s ease-in-out infinite;
+}
+.theme-ufo .alien-stars {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(2px 2px at 15% 25%, rgba(255, 255, 255, 0.9), transparent), radial-gradient(1.5px 1.5px at 85% 15%, rgba(173, 216, 255, 0.8), transparent), radial-gradient(1px 1px at 25% 75%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(2px 2px at 65% 35%, rgba(135, 206, 250, 0.6), transparent), radial-gradient(1px 1px at 45% 85%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1.5px 1.5px at 75% 65%, rgba(0, 255, 255, 0.6), transparent), radial-gradient(1px 1px at 35% 15%, rgba(0, 200, 255, 0.5), transparent), radial-gradient(2px 2px at 85% 75%, rgba(0, 255, 255, 0.4), transparent), radial-gradient(0.8px 0.8px at 55% 25%, rgba(200, 200, 255, 0.4), transparent), radial-gradient(0.6px 0.6px at 15% 85%, rgba(255, 255, 255, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 600px 500px;
+  z-index: -5;
+  animation: alienStarsDrift 30s linear infinite, alienTwinkle 6s ease-in-out infinite;
+}
+.theme-ufo .energy-field {
+  display: block;
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  width: 400px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  background-image: radial-gradient(ellipse 400px 200px at center, rgba(0, 255, 100, 0.2) 0%, transparent 70%), radial-gradient(ellipse 300px 150px at center, rgba(0, 255, 65, 0.15) 0%, transparent 60%), radial-gradient(ellipse 200px 100px at center, rgba(0, 200, 100, 0.1) 0%, transparent 50%);
+  z-index: -4;
+  animation: energyPulse 8s ease-in-out infinite, ufoHover 8s ease-in-out infinite;
+}
+.theme-ufo .beam-impact {
+  display: block;
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(173, 216, 230, 0.8) 20%, rgba(64, 224, 208, 0.6) 40%, rgba(32, 178, 170, 0.4) 60%, transparent 80%), radial-gradient(circle, transparent 50%, rgba(64, 224, 208, 0.3) 60%, rgba(32, 178, 170, 0.2) 80%, transparent 100%);
+  border-radius: 50%;
+  z-index: -3;
+  animation: impactPulse 4s ease-in-out infinite;
+  box-shadow: 0 0 60px rgba(64, 224, 208, 0.8), 0 0 120px rgba(64, 224, 208, 0.4), 0 0 180px rgba(64, 224, 208, 0.2);
+}
+.theme-ufo ion-content {
+  --background: transparent;
+  --color: var(--text-color);
+  position: relative;
+  z-index: 100;
+  backdrop-filter: blur(0.3px);
+  -webkit-backdrop-filter: blur(0.3px);
+}
+.theme-ufo .logo span {
+  color: var(--text-color);
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.5), 0 0 6px rgba(255, 255, 255, 0.3), 0 2px 6px rgba(0, 0, 0, 0.8);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.theme-ufo .container {
+  background: transparent;
+  position: relative;
+  z-index: 200;
+}
+.theme-ufo .falling-star,
+.theme-ufo .cloud-layer,
+.theme-ufo .earth-layer,
+.theme-ufo .meteor-layer,
+.theme-ufo .stars-layer,
+.theme-ufo .cosmic-dust,
+.theme-ufo .nebula-layer,
+.theme-ufo .saturn-planet,
+.theme-ufo .hawking-radiation,
+.theme-ufo .spacetime-waves {
+  display: none;
+}
+.theme-ufo .ufo-lights,
+.theme-ufo .ufo-dome,
+.theme-ufo .alien-stars,
+.theme-ufo .energy-field,
+.theme-ufo .beam-impact {
+  display: block;
+}
+
+@keyframes ufoHover {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-15px);
+  }
+}
+@keyframes ufoGlow {
+  0%, 100% {
+    box-shadow: 0 0 60px rgba(64, 224, 208, 0.4), 0 0 120px rgba(64, 224, 208, 0.2), 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 -8px 16px rgba(0, 0, 0, 0.6), inset 0 8px 16px rgba(255, 255, 255, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 120px rgba(64, 224, 208, 0.8), 0 0 200px rgba(64, 224, 208, 0.6), 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 -8px 16px rgba(0, 0, 0, 0.6), inset 0 8px 16px rgba(255, 255, 255, 0.25);
+  }
+}
+@keyframes abductionBeam {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateX(-50%) translateY(0px) scaleY(1);
+    filter: brightness(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(-15px) scaleY(1.02);
+    filter: brightness(1);
+  }
+}
+@keyframes lightsRotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes lightsFlicker {
+  0%, 100% {
+    opacity: 0.8;
+    filter: brightness(1) drop-shadow(0 0 10px rgba(173, 216, 230, 0.5));
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.8) drop-shadow(0 0 25px rgb(173, 216, 230));
+  }
+}
+@keyframes alienStarsDrift {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-15px) translateX(8px);
+  }
+  100% {
+    transform: translateY(-30px) translateX(15px);
+    opacity: 0.8;
+  }
+}
+@keyframes alienTwinkle {
+  0%, 100% {
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  25% {
+    filter: brightness(1.5) hue-rotate(90deg);
+  }
+  50% {
+    filter: brightness(0.8) hue-rotate(180deg);
+  }
+  75% {
+    filter: brightness(1.3) hue-rotate(270deg);
+  }
+}
+@keyframes energyPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) translateY(0px) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) translateY(-15px) scale(1.05);
+  }
+}
+@keyframes beamParticles {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+@keyframes impactPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+@keyframes ufoWobble {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(1deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(-1deg);
+  }
+}
+@keyframes ufoTilt {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotateX(2deg) rotateY(1deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotateX(0deg) rotateY(2deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotateX(-1deg) rotateY(-1deg);
+  }
+}
+@keyframes ufoIntensePulse {
+  0%, 100% {
+    filter: brightness(1) drop-shadow(0 0 20px rgba(64, 224, 208, 0.4));
+  }
+  20% {
+    filter: brightness(1.3) drop-shadow(0 0 40px rgba(64, 224, 208, 0.8));
+  }
+  40% {
+    filter: brightness(0.8) drop-shadow(0 0 15px rgba(64, 224, 208, 0.3));
+  }
+  60% {
+    filter: brightness(1.5) drop-shadow(0 0 60px rgb(64, 224, 208));
+  }
+  80% {
+    filter: brightness(0.9) drop-shadow(0 0 25px rgba(64, 224, 208, 0.5));
+  }
+}
+@keyframes beamIntensity {
+  0%, 100% {
+    opacity: 0.6;
+    filter: brightness(1);
+  }
+  25% {
+    opacity: 0.9;
+    filter: brightness(1.4);
+  }
+  50% {
+    opacity: 0.4;
+    filter: brightness(0.8);
+  }
+  75% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+@keyframes energyFlicker {
+  0%, 100% {
+    opacity: 0.5;
+    filter: hue-rotate(0deg);
+  }
+  33% {
+    opacity: 0.8;
+    filter: hue-rotate(30deg);
+  }
+  66% {
+    opacity: 0.3;
+    filter: hue-rotate(-20deg);
+  }
+}
+@keyframes lightsIntensePulse {
+  0%, 100% {
+    opacity: 0.8;
+    filter: brightness(1) drop-shadow(0 0 10px rgba(173, 216, 230, 0.5));
+  }
+  25% {
+    opacity: 1;
+    filter: brightness(1.8) drop-shadow(0 0 20px rgba(173, 216, 230, 0.9));
+  }
+  50% {
+    opacity: 0.6;
+    filter: brightness(0.7) drop-shadow(0 0 5px rgba(173, 216, 230, 0.3));
+  }
+  75% {
+    opacity: 0.9;
+    filter: brightness(1.4) drop-shadow(0 0 15px rgba(173, 216, 230, 0.7));
+  }
+}

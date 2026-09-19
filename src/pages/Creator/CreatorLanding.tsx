@@ -50,8 +50,6 @@ const CreatorLanding: React.FC = () => {
       <h1 className="creator-landing-title">Creator Tools</h1>
 
       <div className="tools-grid">
-        {!settingsLoading && videoEnabled && (
-        <>
         <Link to={`/creator/quests${fromPortal ? '?from=portal' : ''}`} className="tool-card">
           <div className="tool-icon-wrapper">
             <RiMagicLine />
@@ -88,6 +86,7 @@ const CreatorLanding: React.FC = () => {
           </div>
         </Link>
 
+        {!settingsLoading && videoEnabled && (
         <Link to={`/creator/content${fromPortal ? '?from=portal' : ''}`} className="tool-card">
           <div className="tool-icon-wrapper">
             <RiVideoLine />
@@ -99,7 +98,6 @@ const CreatorLanding: React.FC = () => {
             </p>
           </div>
         </Link>
-        </>
         )}
 
         {/* <Link to={`/creator/rewrite${fromPortal ? '?from=portal' : ''}`} className="tool-card">

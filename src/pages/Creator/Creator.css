@@ -82,7 +82,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
+  flex-wrap: nowrap;
   z-index: 20;
 }
 
@@ -93,18 +94,21 @@
 }
 
 .brand-text {
-  font-size: 40px;
+  font-size: 26px;
   font-weight: 700;
   color: #fff;
   letter-spacing: -0.025em;
   margin-bottom: 0;
   line-height: 1;
+  /* Badge + tagline stay on a single line inside the 540px frame. */
+  white-space: nowrap;
 }
 
 .app-store-badge-mock {
-  width: 50px;
-  height: 50px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .circle-image-container {
@@ -761,4 +765,287 @@
   .back-to-portal {
     top: 112px;
   }
+}
+
+/* Profile image inside the circular mockup slot: fill the circle without
+   distorting the photo's aspect ratio. */
+.circle-image-container > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---- Profile picture cropper ---- */
+.crop-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.crop-modal {
+  width: min(380px, 100%);
+  background: #14141a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.crop-modal-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.crop-modal-head h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.crop-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+}
+
+.crop-close:hover { color: #fff; }
+
+.crop-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #000;
+  cursor: grab;
+  touch-action: none;
+  max-width: 100%;
+}
+
+.crop-stage:active { cursor: grabbing; }
+
+.crop-stage > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Circular window over the square stage, matching the mockup's slot. */
+.crop-mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 12px;
+  box-sizing: border-box;
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent calc(50% - 1px),
+    rgba(0, 0, 0, 0.55) 50%
+  );
+}
+
+.crop-mask::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+.crop-zoom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crop-zoom .upshift-slider { flex: 1; }
+
+.crop-hint {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+.crop-actions {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.crop-btn {
+  flex: 1;
+  padding: 11px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.crop-btn.ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.crop-btn.ghost:hover { background: rgba(255, 255, 255, 0.12); }
+
+.crop-btn.primary {
+  background: #667EEA;
+  color: #fff;
+}
+
+.crop-btn.primary:hover { opacity: 0.9; }
+.crop-btn.primary:disabled { opacity: 0.5; cursor: default; }
+
+/* ---- Mockup background themes ---- */
+
+/* The app's themes place their layers at negative z-index, above the themed
+   element's own background. Isolating the frame keeps those layers inside the
+   mockup instead of disappearing behind it. */
+.phone-mockup {
+  isolation: isolate;
+}
+
+.theme-select-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.theme-select-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.theme-select {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.5) 50%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.5) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.theme-select:focus {
+  outline: none;
+  border-color: #667EEA;
+}
+
+/* ---- Good / Chopped stat preset switch ---- */
+
+/* Same shape as the Male/Female toggle, but colour-coded to what it loads. */
+.stat-level-toggle .toggle-opt.active {
+  background: #22c55e;
+  color: #04140a;
+}
+
+.stat-level-toggle .toggle-opt:last-child.active {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* ---- Build / Quit quest type, per habit ---- */
+.habit-edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.quest-type-toggle {
+  display: flex;
+  gap: 6px;
+}
+
+.type-opt {
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #111;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.type-opt.active {
+  background: #22c55e;
+  color: #04140a;
+}
+
+.type-opt.quit.active {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* ---- Saving the current stats as a preset ---- */
+.preset-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: -12px;
+}
+
+.preset-btn {
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  transition: background 0.2s;
+}
+
+.preset-btn.save {
+  flex: 1;
+}
+
+.preset-btn.save:hover {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.preset-btn.reset:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.type-opt.target.active {
+  background: #f59e0b;
+  color: #1a1000;
 }

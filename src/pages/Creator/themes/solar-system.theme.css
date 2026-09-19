@@ -1,0 +1,354 @@
+/* Copied verbatim from the Upshift app:
+ * upshift/ionic-upshift/src/app/themes/solar-system.theme.css
+ *
+ * Only containment changes were made so the theme lives inside the 540x960
+ * mockup instead of the viewport:
+ *   position: fixed  -> position: absolute
+ *   min-height: 100vh -> min-height: 100%
+ *   100vh in keyframes -> 960px (the mockup's height)
+ * Do not restyle by hand - re-copy from the app and re-apply these.
+ */
+.theme-cosmic-window,
+.theme-solar-system {
+  --background-color: #0b101f;
+  --text-color: #E8E8E8;
+  --secondary-text: #A0A0A0;
+  --accent-color: #8B7EC8;
+  --quest-bg: rgba(40, 40, 60, 0.5);
+  --quest-border: rgba(139, 126, 200, 0.3);
+  --active-date: #8B7EC8;
+  --inactive-date: #404040;
+  --card-bg: rgba(40, 40, 60, 0.5);
+  --card-border: rgba(139, 126, 200, 0.3);
+  background: linear-gradient(to bottom, rgb(11, 16, 31) 8%, rgb(35, 25, 45) 22%, rgb(60, 45, 80) 100%);
+  min-height: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.theme-cosmic-window .cosmic-stars,
+.theme-solar-system .cosmic-stars {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+  animation: moveGalaxy 10s ease infinite;
+}
+.theme-cosmic-window .cosmic-star,
+.theme-solar-system .cosmic-star {
+  position: absolute;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0.8;
+}
+.theme-cosmic-window .cosmic-sun,
+.theme-solar-system .cosmic-sun {
+  display: block;
+  position: absolute;
+  top: calc(50% - 90px);
+  left: calc(50% - 90px);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #FFD700 0%, #FFA500 15%, #FF8C00 30%, #FF6347 50%, #FF4500 70%, #DC143C 85%, #B22222 100%);
+  box-shadow: inset -20px -20px 40px rgba(139, 0, 0, 0.3), inset 20px 20px 40px rgba(255, 255, 0, 0.2), 0 0 30px rgba(255, 165, 0, 0.8), 0 0 60px rgba(255, 140, 0, 0.6), 0 0 90px rgba(255, 69, 0, 0.4), 0 0 120px rgba(255, 69, 0, 0.2);
+  z-index: -4;
+  animation: sunPulse 4s ease-in-out infinite alternate, sunRotate 20s linear infinite;
+}
+@keyframes sunPulse {
+  0% {
+    box-shadow: inset -20px -20px 40px rgba(139, 0, 0, 0.3), inset 20px 20px 40px rgba(255, 255, 0, 0.2), 0 0 30px rgba(255, 165, 0, 0.8), 0 0 60px rgba(255, 140, 0, 0.6), 0 0 90px rgba(255, 69, 0, 0.4), 0 0 120px rgba(255, 69, 0, 0.2);
+  }
+  100% {
+    box-shadow: inset -25px -25px 50px rgba(139, 0, 0, 0.4), inset 25px 25px 50px rgba(255, 255, 0, 0.3), 0 0 40px rgb(255, 165, 0), 0 0 80px rgba(255, 140, 0, 0.8), 0 0 120px rgba(255, 69, 0, 0.6), 0 0 160px rgba(255, 69, 0, 0.3);
+  }
+}
+@keyframes sunRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.theme-cosmic-window .solar-mercury,
+.theme-solar-system .solar-mercury {
+  display: block;
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% + 120px);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8C7853 0%, #A0927A 50%, #6B5B47 100%);
+  z-index: -3;
+  transform-origin: -120px 0px;
+  animation: mercuryOrbit 8s linear infinite;
+}
+.theme-cosmic-window .solar-venus,
+.theme-solar-system .solar-venus {
+  display: block;
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% + 150px);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D4A574 0%, #C8956A 50%, #A67C52 100%);
+  z-index: -3;
+  transform-origin: -150px 0px;
+  animation: venusOrbit 12s linear infinite;
+}
+.theme-cosmic-window .solar-earth,
+.theme-solar-system .solar-earth {
+  display: block;
+  position: absolute;
+  top: calc(50% - 12px);
+  left: calc(50% + 185px);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5A7BB8 0%, #4682B4 30%, #2E7D32 60%, #4CAF50 100%);
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 0.2);
+  z-index: -3;
+  transform-origin: -185px 0px;
+  animation: earthOrbit 16s linear infinite;
+}
+.theme-cosmic-window .solar-mars,
+.theme-solar-system .solar-mars {
+  display: block;
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% + 225px);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #CD5C5C 0%, #A0522D 50%, #8B0000 100%);
+  z-index: -3;
+  transform-origin: -225px 0px;
+  animation: marsOrbit 24s linear infinite;
+}
+.theme-cosmic-window .solar-jupiter,
+.theme-solar-system .solar-jupiter {
+  display: block;
+  position: absolute;
+  top: calc(50% - 20px);
+  left: calc(50% + 270px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D2691E 0%, #CD853F 25%, #F4A460 50%, #DEB887 75%, #D2B48C 100%);
+  z-index: -3;
+  transform-origin: -270px 0px;
+  animation: jupiterOrbit 35s linear infinite;
+}
+.theme-cosmic-window .solar-saturn,
+.theme-solar-system .solar-saturn {
+  display: block;
+  position: absolute;
+  top: calc(50% - 18px);
+  left: calc(50% + 320px);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FAD5A5 0%, #FFCC99 50%, #E6B87D 100%);
+  z-index: -3;
+  transform-origin: -320px 0px;
+  animation: saturnOrbit 45s linear infinite;
+}
+.theme-cosmic-window .solar-uranus,
+.theme-solar-system .solar-uranus {
+  display: block;
+  position: absolute;
+  top: calc(50% - 15px);
+  left: calc(50% + 365px);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4FD0E7 0%, #3F9FBF 50%, #2E8B9F 100%);
+  z-index: -3;
+  transform-origin: -365px 0px;
+  animation: uranusOrbit 55s linear infinite;
+}
+.theme-cosmic-window .solar-neptune,
+.theme-solar-system .solar-neptune {
+  display: block;
+  position: absolute;
+  top: calc(50% - 14px);
+  left: calc(50% + 405px);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4169E1 0%, #0000CD 50%, #191970 100%);
+  z-index: -3;
+  transform-origin: -405px 0px;
+  animation: neptuneOrbit 65s linear infinite;
+}
+.theme-cosmic-window ion-content,
+.theme-solar-system ion-content {
+  --background: transparent;
+  --color: var(--text-color);
+  position: relative;
+  z-index: 100;
+  backdrop-filter: blur(0.3px);
+  -webkit-backdrop-filter: blur(0.3px);
+}
+.theme-cosmic-window h1, .theme-cosmic-window h2, .theme-cosmic-window h3,
+.theme-solar-system h1,
+.theme-solar-system h2,
+.theme-solar-system h3 {
+  color: var(--text-color);
+  text-shadow: 0 0 12px rgba(139, 126, 200, 0.4), 0 0 6px rgba(255, 255, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+.theme-cosmic-window .logo span,
+.theme-solar-system .logo span {
+  color: var(--text-color);
+  text-shadow: 0 0 12px rgba(139, 126, 200, 0.4), 0 0 6px rgba(255, 255, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+.theme-cosmic-window .container,
+.theme-solar-system .container {
+  background: transparent;
+  position: relative;
+  z-index: 200;
+}
+.theme-cosmic-window ion-card.category-card,
+.theme-solar-system ion-card.category-card {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.theme-cosmic-window .falling-star,
+.theme-cosmic-window .cloud-layer,
+.theme-cosmic-window .earth-layer,
+.theme-cosmic-window .meteor-layer,
+.theme-cosmic-window .stars-layer,
+.theme-cosmic-window .cosmic-dust,
+.theme-cosmic-window .nebula-layer,
+.theme-cosmic-window .saturn-planet,
+.theme-cosmic-window .hawking-radiation,
+.theme-cosmic-window .spacetime-waves,
+.theme-cosmic-window .ufo-lights,
+.theme-cosmic-window .ufo-dome,
+.theme-cosmic-window .alien-stars,
+.theme-cosmic-window .energy-field,
+.theme-cosmic-window .beam-impact,
+.theme-solar-system .falling-star,
+.theme-solar-system .cloud-layer,
+.theme-solar-system .earth-layer,
+.theme-solar-system .meteor-layer,
+.theme-solar-system .stars-layer,
+.theme-solar-system .cosmic-dust,
+.theme-solar-system .nebula-layer,
+.theme-solar-system .saturn-planet,
+.theme-solar-system .hawking-radiation,
+.theme-solar-system .spacetime-waves,
+.theme-solar-system .ufo-lights,
+.theme-solar-system .ufo-dome,
+.theme-solar-system .alien-stars,
+.theme-solar-system .energy-field,
+.theme-solar-system .beam-impact {
+  display: none;
+}
+.theme-cosmic-window .cosmic-stars,
+.theme-cosmic-window .cosmic-sun,
+.theme-cosmic-window .solar-mercury,
+.theme-cosmic-window .solar-venus,
+.theme-cosmic-window .solar-earth,
+.theme-cosmic-window .solar-mars,
+.theme-cosmic-window .solar-jupiter,
+.theme-cosmic-window .solar-saturn,
+.theme-cosmic-window .solar-uranus,
+.theme-cosmic-window .solar-neptune,
+.theme-solar-system .cosmic-stars,
+.theme-solar-system .cosmic-sun,
+.theme-solar-system .solar-mercury,
+.theme-solar-system .solar-venus,
+.theme-solar-system .solar-earth,
+.theme-solar-system .solar-mars,
+.theme-solar-system .solar-jupiter,
+.theme-solar-system .solar-saturn,
+.theme-solar-system .solar-uranus,
+.theme-solar-system .solar-neptune {
+  display: block;
+}
+
+@keyframes moveGalaxy {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(3%, 4%);
+  }
+  75% {
+    transform: translate(2%, 1%);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+@keyframes mercuryOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes venusOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes earthOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes marsOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes jupiterOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes saturnOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes uranusOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes neptuneOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

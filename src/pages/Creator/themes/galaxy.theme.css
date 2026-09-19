@@ -1,0 +1,239 @@
+/* Copied verbatim from the Upshift app:
+ * upshift/ionic-upshift/src/app/themes/galaxy.theme.css
+ *
+ * Only containment changes were made so the theme lives inside the 540x960
+ * mockup instead of the viewport:
+ *   position: fixed  -> position: absolute
+ *   min-height: 100vh -> min-height: 100%
+ *   100vh in keyframes -> 960px (the mockup's height)
+ * Do not restyle by hand - re-copy from the app and re-apply these.
+ */
+@charset "UTF-8";
+.theme-galaxy {
+  --background-color: #0C0C0F;
+  --text-color: #FFFFFF;
+  --secondary-text: #8E8E93;
+  --accent-color: #4169E1;
+  --level-title-color: #4169E1;
+  --quest-bg: rgba(28, 28, 30, 0.3);
+  --quest-border: rgba(44, 44, 46, 0.5);
+  --active-date: #4169E1;
+  --inactive-date: #2C2C2E;
+  --card-bg: rgba(28, 28, 30, 0.3);
+  --card-border: rgba(44, 44, 46, 0.5);
+  background: #0a0a1a;
+  min-height: 100%;
+  display: block;
+  position: relative;
+}
+.theme-galaxy::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse 400px 300px at 25% 20%, rgba(147, 51, 234, 0.4) 0%, rgba(147, 51, 234, 0.2) 30%, transparent 70%), radial-gradient(ellipse 350px 250px at 75% 40%, rgba(147, 51, 234, 0.25) 0%, rgba(147, 51, 234, 0.12) 40%, transparent 80%), radial-gradient(ellipse 300px 200px at 20% 80%, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0.1) 50%, transparent 90%), radial-gradient(ellipse 250px 180px at 50% 60%, rgba(99, 102, 241, 0.2) 0%, transparent 60%), radial-gradient(ellipse 200px 150px at 80% 15%, rgba(147, 51, 234, 0.2) 0%, transparent 70%), radial-gradient(ellipse 180px 120px at 85% 85%, rgba(168, 85, 247, 0.2) 0%, transparent 60%);
+  z-index: -2;
+  pointer-events: none;
+  animation: galaxyGlow 15s ease-in-out infinite alternate;
+}
+.theme-galaxy::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(1.5px 1.5px at 12% 8%, rgba(255, 255, 255, 0.9), transparent), radial-gradient(1px 1px at 23% 15%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(2px 2px at 67% 12%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.8px 0.8px at 89% 18%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1.2px 1.2px at 34% 28%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1px 1px at 78% 35%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(1.8px 1.8px at 45% 42%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.9px 0.9px at 91% 48%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1.3px 1.3px at 18% 55%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(1px 1px at 56% 62%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1.6px 1.6px at 82% 68%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.7px 0.7px at 29% 75%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1.4px 1.4px at 73% 82%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1px 1px at 41% 88%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(1.1px 1.1px at 85% 92%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(0.9px 0.9px at 5% 25%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1.3px 1.3px at 38% 5%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.6px 0.6px at 52% 18%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1.7px 1.7px at 94% 32%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(1px 1px at 15% 45%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1.2px 1.2px at 63% 38%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(0.8px 0.8px at 87% 55%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(1.5px 1.5px at 26% 65%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.7px 0.7px at 71% 78%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1.1px 1.1px at 48% 95%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1.4px 1.4px at 92% 85%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(0.9px 0.9px at 8% 72%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1.6px 1.6px at 59% 52%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.5px 0.5px at 35% 92%, rgba(255, 255, 255, 0.3), transparent), radial-gradient(1.3px 1.3px at 77% 25%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1px 1px at 14% 38%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(0.6px 0.6px at 42% 8%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1.2px 1.2px at 88% 22%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(0.8px 0.8px at 19% 33%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1.5px 1.5px at 65% 47%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.7px 0.7px at 93% 61%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1.1px 1.1px at 31% 76%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1.4px 1.4px at 76% 89%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(0.9px 0.9px at 11% 52%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1.3px 1.3px at 54% 29%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.5px 0.5px at 83% 43%, rgba(255, 255, 255, 0.3), transparent), radial-gradient(1.6px 1.6px at 27% 67%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(0.8px 0.8px at 69% 81%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1px 1px at 96% 14%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1.2px 1.2px at 37% 96%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(0.6px 0.6px at 81% 7%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1.7px 1.7px at 16% 84%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.9px 0.9px at 58% 16%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1.1px 1.1px at 90% 73%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(0.7px 0.7px at 24% 41%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1.4px 1.4px at 72% 58%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(1px 1px at 6% 19%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1.3px 1.3px at 49% 87%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.8px 0.8px at 86% 36%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1.5px 1.5px at 33% 53%, rgba(255, 255, 255, 0.7), transparent);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: -1;
+  animation: starsTwinkle 4s ease-in-out infinite;
+}
+.theme-galaxy .falling-star {
+  display: block;
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 50%;
+  z-index: 5;
+  pointer-events: none;
+  top: -100px; /* Začína nad obrazovkou */
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+.theme-galaxy .falling-star:nth-child(1) {
+  left: 10%;
+  animation: fallingStar 8s linear infinite;
+  animation-delay: 0.5s;
+}
+.theme-galaxy .falling-star:nth-child(2) {
+  left: 30%;
+  animation: fallingStar 7s linear infinite;
+  animation-delay: 1.5s;
+  width: 2px;
+  height: 2px;
+}
+.theme-galaxy .falling-star:nth-child(3) {
+  left: 60%;
+  animation: fallingStar 9s linear infinite;
+  animation-delay: 3s;
+}
+.theme-galaxy .falling-star:nth-child(4) {
+  left: 80%;
+  animation: fallingStar 7.5s linear infinite;
+  animation-delay: 0.8s;
+  width: 2.5px;
+  height: 2.5px;
+}
+.theme-galaxy .falling-star:nth-child(5) {
+  left: 45%;
+  animation: fallingStar 10s linear infinite;
+  animation-delay: 2.2s;
+  width: 1.5px;
+  height: 1.5px;
+}
+.theme-galaxy .falling-star:nth-child(6) {
+  left: 90%;
+  animation: fallingStar 6.5s linear infinite;
+  animation-delay: 4s;
+  width: 2px;
+  height: 2px;
+}
+.theme-galaxy .falling-star:nth-child(7) {
+  left: 25%;
+  animation: fallingStar 9.5s linear infinite;
+  animation-delay: 1.8s;
+  width: 2.5px;
+  height: 2.5px;
+}
+.theme-galaxy .falling-star:nth-child(8) {
+  left: 55%;
+  animation: fallingStar 7.5s linear infinite;
+  animation-delay: 3.5s;
+  width: 1.8px;
+  height: 1.8px;
+}
+.theme-galaxy .falling-star:nth-child(9) {
+  left: 75%;
+  animation: fallingStar 10.5s linear infinite;
+  animation-delay: 0.5s;
+  width: 2.2px;
+  height: 2.2px;
+}
+.theme-galaxy .falling-star:nth-child(10) {
+  left: 15%;
+  animation: fallingStar 8.2s linear infinite;
+  animation-delay: 2.8s;
+  width: 1.6px;
+  height: 1.6px;
+}
+.theme-galaxy .falling-star:nth-child(11) {
+  left: 65%;
+  animation: fallingStar 7.8s linear infinite;
+  animation-delay: 4.3s;
+  width: 2.8px;
+  height: 2.8px;
+}
+.theme-galaxy .falling-star:nth-child(12) {
+  left: 85%;
+  animation: fallingStar 9.2s linear infinite;
+  animation-delay: 1.2s;
+  width: 1.4px;
+  height: 1.4px;
+}
+.theme-galaxy ion-content {
+  --background: transparent;
+  --color: var(--text-color);
+  position: relative;
+  z-index: 10;
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+  overflow: visible;
+}
+.theme-galaxy .logo span {
+  color: var(--text-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.theme-galaxy .container {
+  background: transparent;
+  position: relative;
+  z-index: 20;
+}
+
+@keyframes galaxyGlow {
+  0% {
+    opacity: 0.8;
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.1) hue-rotate(5deg);
+  }
+  100% {
+    opacity: 0.9;
+    filter: brightness(1.05) hue-rotate(-3deg);
+  }
+}
+@keyframes galaxyRotate {
+  0% {
+    transform: rotate(-15deg) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: rotate(-14.5deg) scale(1.02);
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotate(-14deg) scale(1);
+    opacity: 0.8;
+  }
+}
+@keyframes starsMove {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(5px);
+    opacity: 0.8;
+  }
+}
+@keyframes starsTwinkle {
+  0%, 100% {
+    opacity: 0.8;
+    filter: brightness(1);
+  }
+  25% {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+  50% {
+    opacity: 0.9;
+    filter: brightness(0.9);
+  }
+  75% {
+    opacity: 1;
+    filter: brightness(1.1);
+  }
+}
+@keyframes fallingStar {
+  0% {
+    transform: translateY(-100px) translateX(-20px) rotate(315deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(calc(960px + 200px)) translateX(80px) rotate(315deg);
+    opacity: 0;
+  }
+}

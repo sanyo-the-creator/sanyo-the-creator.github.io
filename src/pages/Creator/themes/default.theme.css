@@ -1,0 +1,81 @@
+/* Copied verbatim from the Upshift app:
+ * upshift/ionic-upshift/src/app/themes/default.theme.css
+ *
+ * Only containment changes were made so the theme lives inside the 540x960
+ * mockup instead of the viewport:
+ *   position: fixed  -> position: absolute
+ *   min-height: 100vh -> min-height: 100%
+ *   100vh in keyframes -> 960px (the mockup's height)
+ * Do not restyle by hand - re-copy from the app and re-apply these.
+ */
+.theme-default {
+  --background-color: #0C0C0F;
+  --text-color: #FFFFFF;
+  --secondary-text: #8E8E93;
+  --accent-color: #2747a7;
+  --level-title-color: #4169E1;
+  --quest-bg: #1C1C1E;
+  --quest-border: #2C2C2E;
+  --active-date: #4169E1;
+  --inactive-date: #2C2C2E;
+  --bg-tertiary: #2C2C2E;
+  --bg-secondary: #1C1C1E;
+  --bg-hover: rgba(255, 255, 255, 0.1);
+  --primary-color: #4169E1;
+  --text-primary: #FFFFFF;
+  --card-border: rgba(255, 255, 255, 0.1);
+  background: var(--background-color);
+  min-height: 100%;
+  position: relative;
+}
+.theme-default::before {
+  display: none;
+}
+.theme-default ion-content {
+  --background: var(--background-color);
+  --color: var(--text-color);
+}
+.theme-default .falling-star {
+  display: none;
+}
+.theme-default .stars-layer,
+.theme-default .cloud-layer {
+  display: none;
+}
+.theme-default .profile-container,
+.theme-default .xp-progress-container,
+.theme-default .goals-section {
+  background: rgba(28, 28, 30, 0.8);
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  border: 1px solid var(--quest-border);
+}
+.theme-default .logo span {
+  color: var(--text-color);
+  text-shadow: none;
+}
+.theme-default .container {
+  background: transparent !important;
+}
+.theme-default .profile-container,
+.theme-default .xp-progress-container,
+.theme-default .goals-section,
+.theme-default ion-card {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+  border: none !important;
+}
+
+.view-all {
+  text-align: right;
+  background: transparent;
+  color: #B8B8B8;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0;
+  color: #8E8E93;
+}

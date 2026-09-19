@@ -1,0 +1,232 @@
+/* Copied verbatim from the Upshift app:
+ * upshift/ionic-upshift/src/app/themes/black-hole.theme.css
+ *
+ * Only containment changes were made so the theme lives inside the 540x960
+ * mockup instead of the viewport:
+ *   position: fixed  -> position: absolute
+ *   min-height: 100vh -> min-height: 100%
+ *   100vh in keyframes -> 960px (the mockup's height)
+ * Do not restyle by hand - re-copy from the app and re-apply these.
+ */
+.theme-black-hole {
+  --background-color: #000000;
+  --text-color: #FFFFFF;
+  --secondary-text: #FF8C00;
+  --accent-color: #FF6600;
+  --quest-bg: rgba(20, 20, 20, 0.8);
+  --quest-border: rgba(255, 102, 0, 0.4);
+  --active-date: #FF6600;
+  --level-title-color: #FF6600;
+  --inactive-date: #333333;
+  --card-bg: rgba(20, 20, 20, 0.8);
+  --card-border: rgba(255, 102, 0, 0.4);
+  background: radial-gradient(1px 1px at 17% 23%, #ffffff, transparent), radial-gradient(1px 1px at 43% 67%, #ffffff, transparent), radial-gradient(1px 1px at 89% 34%, #ffffff, transparent), radial-gradient(2px 2px at 31% 18%, #ffffff, transparent), radial-gradient(1px 1px at 76% 91%, #ffffff, transparent), radial-gradient(1px 1px at 12% 58%, #ffffff, transparent), radial-gradient(2px 2px at 64% 7%, #ffffff, transparent), radial-gradient(1px 1px at 73% 83%, #ffffff, transparent), radial-gradient(1px 1px at 5% 45%, #ffffff, transparent), radial-gradient(1px 1px at 95% 12%, #ffffff, transparent), radial-gradient(1px 1px at 28% 95%, #ffffff, transparent), radial-gradient(2px 2px at 52% 41%, #ffffff, transparent), radial-gradient(1px 1px at 84% 66%, #ffffff, transparent), radial-gradient(1px 1px at 19% 74%, #ffffff, transparent), radial-gradient(1px 1px at 67% 29%, #ffffff, transparent), radial-gradient(1px 1px at 38% 52%, #ffffff, transparent), radial-gradient(2px 2px at 81% 15%, #ffffff, transparent), radial-gradient(1px 1px at 14% 87%, #ffffff, transparent), radial-gradient(1px 1px at 56% 78%, #ffffff, transparent), radial-gradient(1px 1px at 92% 56%, #ffffff, transparent), radial-gradient(circle at center, #000000 0%, #0a0a0a 50%, #000000 100%);
+  background-size: 450px 350px, 380px 280px, 320px 240px, 180px 120px, 420px 330px, 220px 160px, 340px 260px, 480px 370px, 280px 200px, 360px 290px, 400px 310px, 260px 190px, 440px 340px, 300px 220px, 380px 270px, 320px 250px, 460px 360px, 240px 180px, 500px 390px, 350px 270px, 100% 100%;
+  min-height: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.theme-black-hole .progress-bar {
+  background: linear-gradient(90deg, #FF4500 0%, #FF6600 50%, #FF8C00 100%) !important;
+  box-shadow: 0 0 15px rgba(255, 102, 0, 0.8);
+}
+.theme-black-hole .settings-button {
+  box-shadow: 0 6px 20px rgba(225, 137, 65, 0.4);
+}
+.theme-black-hole .blackhole-container {
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  z-index: -5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.theme-black-hole .blackhole {
+  width: 6em;
+  height: 6em;
+}
+@media (max-width: 768px) {
+  .theme-black-hole .blackhole {
+    width: 4em;
+    height: 4em;
+  }
+}
+@media (max-width: 480px) {
+  .theme-black-hole .blackhole {
+    width: 3em;
+    height: 3em;
+  }
+}
+.theme-black-hole .blackhole .megna {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background: linear-gradient(#ff4500, #ff4500, #ff9900);
+  box-shadow: 0 0 60px 30px #fcbd3e, 0 0 100px 60px #fd7a4d, 0 0 140px 90px #ff0b6b; /* outer cyan */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: blur(5px);
+  animation: blackHoleRotate 20s linear infinite;
+}
+.theme-black-hole .blackhole .black {
+  width: 90%;
+  height: 90%;
+  border-radius: 45% 50% 50% 50%;
+  background-color: black;
+  transform: rotate(0deg);
+  animation: blackHoleDistortion 8s ease-in-out infinite;
+}
+.theme-black-hole .hawking-radiation {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(1px 1px at 23% 37%, rgba(255, 102, 0, 0.9), transparent), radial-gradient(1.5px 1.5px at 78% 21%, rgba(255, 140, 0, 0.8), transparent), radial-gradient(1px 1px at 61% 79%, rgba(255, 165, 0, 0.7), transparent), radial-gradient(2px 2px at 39% 63%, rgba(255, 69, 0, 0.6), transparent), radial-gradient(1px 1px at 87% 41%, rgba(255, 140, 0, 0.5), transparent), radial-gradient(1.5px 1.5px at 13% 89%, rgba(255, 102, 0, 0.4), transparent), radial-gradient(1px 1px at 54% 16%, rgba(255, 165, 0, 0.6), transparent), radial-gradient(1px 1px at 91% 72%, rgba(255, 102, 0, 0.5), transparent), radial-gradient(2px 2px at 7% 48%, rgba(255, 69, 0, 0.7), transparent), radial-gradient(1px 1px at 46% 94%, rgba(255, 140, 0, 0.4), transparent), radial-gradient(0.5px 0.5px at 72% 11%, rgba(255, 255, 255, 0.9), transparent), radial-gradient(0.8px 0.8px at 41% 59%, rgba(255, 200, 150, 0.8), transparent), radial-gradient(0.6px 0.6px at 84% 76%, rgba(255, 255, 255, 0.7), transparent), radial-gradient(0.7px 0.7px at 18% 33%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(0.5px 0.5px at 96% 27%, rgba(255, 200, 150, 0.6), transparent), radial-gradient(0.9px 0.9px at 29% 68%, rgba(255, 255, 255, 0.7), transparent);
+  background-repeat: repeat;
+  background-size: 450px 350px;
+  z-index: -3;
+  animation: radiationEscape 30s linear infinite, particleFlicker 4s ease-in-out infinite;
+}
+.theme-black-hole .spacetime-waves {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.05) 20%, transparent 25%, rgba(255, 255, 255, 0.03) 40%, transparent 45%, rgba(255, 255, 255, 0.02) 60%, transparent 65%);
+  border-radius: 50%;
+  z-index: -4;
+  animation: spacetimeRipple 12s ease-in-out infinite;
+}
+@media (max-width: 768px) {
+  .theme-black-hole .spacetime-waves {
+    width: 400px;
+    height: 400px;
+  }
+}
+@media (max-width: 480px) {
+  .theme-black-hole .spacetime-waves {
+    width: 300px;
+    height: 300px;
+  }
+}
+.theme-black-hole ion-content {
+  --background: transparent;
+  --color: var(--text-color);
+  position: relative;
+  z-index: 100;
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+}
+.theme-black-hole .logo span {
+  color: var(--text-color);
+}
+.theme-black-hole .container {
+  background: transparent;
+  position: relative;
+  z-index: 200;
+}
+.theme-black-hole .falling-star,
+.theme-black-hole .cloud-layer,
+.theme-black-hole .earth-layer,
+.theme-black-hole .meteor-layer,
+.theme-black-hole .stars-layer,
+.theme-black-hole .cosmic-dust,
+.theme-black-hole .nebula-layer,
+.theme-black-hole .saturn-planet {
+  display: none;
+}
+.theme-black-hole .hawking-radiation,
+.theme-black-hole .spacetime-waves,
+.theme-black-hole .blackhole-container {
+  display: block;
+}
+
+@keyframes blackHoleRotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes blackHolePulse {
+  0%, 100% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+    filter: brightness(1.2);
+  }
+}
+@keyframes blackHoleDistortion {
+  0%, 100% {
+    border-radius: 45% 50% 50% 50%;
+    transform: rotate(0deg);
+  }
+  25% {
+    border-radius: 50% 45% 50% 50%;
+    transform: rotate(90deg);
+  }
+  50% {
+    border-radius: 50% 50% 45% 50%;
+    transform: rotate(180deg);
+  }
+  75% {
+    border-radius: 50% 50% 50% 45%;
+    transform: rotate(270deg);
+  }
+}
+@keyframes radiationEscape {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-20px) translateX(10px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(-40px) translateX(20px) rotate(360deg);
+    opacity: 0.8;
+  }
+}
+@keyframes particleFlicker {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  25% {
+    filter: brightness(1.8);
+  }
+  50% {
+    filter: brightness(0.6);
+  }
+  75% {
+    filter: brightness(1.4);
+  }
+}
+@keyframes spacetimeRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.2;
+  }
+}
