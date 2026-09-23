@@ -20,6 +20,7 @@ import { MOCKUP_THEMES, DEFAULT_THEME_ID, getMockupTheme, ThemeLayers } from './
 import { useStatPresets } from './useStatPresets';
 import { freezeAnimationsAt } from './captureAnimations';
 import { makeShadowsExportSafe } from './exportSafeShadows';
+import ScoreCard, { ScoreCardData, ScoreStat, GOOD_SCORECARD, CHOPPED_SCORECARD, CHOPPED_SCREEN_TIME } from './ScoreCard';
 
 import { AVAILABLE_APPS, PRODUCTIVE_IDS } from './ScreenTime';
 
@@ -295,6 +296,18 @@ const Mix: React.FC = () => {
   const [imageX, setImageX] = useState(0);
   const [imageY, setImageY] = useState(0);
   const [imageZoom, setImageZoom] = useState(50);
+  const [layout, setLayout] = useState<'Classic' | 'Scorecard'>('Classic');
+  const [scoreCard, setScoreCard] = useState<ScoreCardData>(GOOD_SCORECARD);
+
+  // The Good / Chopped switch drives the scorecard numbers too.
+  useEffect(() => {
+    setScoreCard(prev => {
+      const preset = statLevel === 'Chopped' ? CHOPPED_SCORECARD : GOOD_SCORECARD;
+      return { ...preset, name: prev.name, handle: prev.handle, verified: prev.verified };
+    });
+  }, [statLevel]);
+
+  const updateScoreCard = (updates: Partial<ScoreCardData>) => setScoreCard(prev => ({ ...prev, ...updates }));
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -622,6 +635,37 @@ const Mix: React.FC = () => {
     }
   };
 
+  /** The same card as a scorecard tile. */
+  const toScoreStat = (card: MixCard): ScoreStat => {
+    if (card.mode === 'quest') {
+      const status = getHabitStatus(card.achieved, card.goal, gender, resolveQuestType(card));
+      return {
+        emoji: card.emoji,
+        name: card.name,
+        value: formatNumber(getDisplayValue(card.achieved, videoProgress)),
+        goal: `/${formatNumber(card.goal)}${card.unit && card.unit !== '\u200B' ? ` ${card.unit}` : ''}`,
+        status: status.text,
+        color: status.color,
+        gradient: status.gradient,
+        fill: getProgressWidth(card, videoProgress),
+      };
+    }
+    const status = getScreenTimeStatus(card.minutes, PRODUCTIVE_IDS.includes(card.appId));
+    const appDef = AVAILABLE_APPS.find(a => a.id === card.appId) || AVAILABLE_APPS[0];
+    return {
+      emoji: '',
+      iconUrl: appDef.imageUrl,
+      name: appDef.name,
+      nameColor: appDef.color,
+      value: formatTime(getDisplayValue(card.minutes, videoProgress)),
+      goal: ' avg daily',
+      status: status.text,
+      color: status.color,
+      gradient: status.gradient,
+      fill: Math.min(100, videoProgress * 100),
+    };
+  };
+
   const renderCardVisual = (card: MixCard) => {
     if (card.mode === 'quest') {
       const status = getHabitStatus(card.achieved, card.goal, gender, resolveQuestType(card));
@@ -722,6 +766,18 @@ const Mix: React.FC = () => {
               ref={mockupRef}
             >
               <ThemeLayers themeId={themeId} />
+              {layout === 'Scorecard' ? (
+                <ScoreCard
+                  data={scoreCard}
+                  stats={cards.map(toScoreStat)}
+                  image={image}
+                  imageX={imageX}
+                  imageY={imageY}
+                  imageZoom={imageZoom}
+                  progress={videoProgress}
+                  onPickImage={() => fileInputRef.current?.click()}
+                />
+              ) : (
               <div className="mockup-content">
                 <div className="upshift-logo-container">
                   <img src={appStoreImg} alt="Download on App Store" className="app-store-badge-mock" />
@@ -745,7 +801,6 @@ const Mix: React.FC = () => {
                       <span className="insert-label">Insert Image Here</span>
                     </div>
                   )}
-                  <input type="file" ref={fileInputRef} hidden accept="image/*" onChange={handleImageUpload} />
                 </div>
 
                 <div className="cards-container-mock">
@@ -762,6 +817,8 @@ const Mix: React.FC = () => {
                   </div>
                 </div>
               </div>
+              )}
+              <input type="file" ref={fileInputRef} hidden accept="image/*" onChange={handleImageUpload} />
             </div>
           </div>
         </section>
@@ -769,6 +826,15 @@ const Mix: React.FC = () => {
         {/* MIDDLE: CUSTOMIZE RATINGS */}
         <section className="controls-column">
           <h2>Customize Ratings</h2>
+
+          <div className="gender-toggle">
+            <button className={`toggle-opt ${layout === 'Classic' ? 'active' : ''}`} onClick={() => setLayout('Classic')}>
+              Classic
+            </button>
+            <button className={`toggle-opt ${layout === 'Scorecard' ? 'active' : ''}`} onClick={() => setLayout('Scorecard')}>
+              Scorecard
+            </button>
+          </div>
 
           <div className="gender-toggle stat-level-toggle">
             <button
@@ -870,6 +936,46 @@ const Mix: React.FC = () => {
               Reset Position & Zoom
             </button>
           </div>
+
+          {layout === 'Scorecard' && (
+            <div className="adjust-box">
+              <h3 className="adjust-title">Scorecard</h3>
+              <div className="scorecard-edit-grid">
+                <div className="input-group">
+                  <label>Name</label>
+                  <input className="name-input" value={scoreCard.name} onChange={(e) => updateScoreCard({ name: e.target.value })} />
+                </div>
+                <div className="input-group">
+                  <label>Handle</label>
+                  <input className="name-input" value={scoreCard.handle} onChange={(e) => updateScoreCard({ handle: e.target.value.replace(/^@/, '') })} />
+                </div>
+                <div className="input-group">
+                  <label>Verified badge</label>
+                  <input type="checkbox" checked={scoreCard.verified} onChange={(e) => updateScoreCard({ verified: e.target.checked })} />
+                </div>
+                <div className="input-group">
+                  <label>Score</label>
+                  <input className="name-input" type="number" value={scoreCard.score} onChange={(e) => updateScoreCard({ score: Number(e.target.value) || 0 })} />
+                </div>
+                <div className="input-group">
+                  <label>Screen time (min/day){statLevel === 'Chopped' ? ' \u00b7 8h\u201314h' : ''}</label>
+                  <input className="name-input" type="number" value={scoreCard.screenTime} onChange={(e) => updateScoreCard({ screenTime: Number(e.target.value) || 0 })}
+                  // Chopped keeps screen time in its 8h-14h band.
+                  onBlur={() => statLevel === 'Chopped' && updateScoreCard({
+                    screenTime: Math.min(CHOPPED_SCREEN_TIME.max, Math.max(CHOPPED_SCREEN_TIME.min, scoreCard.screenTime)),
+                  })} />
+                </div>
+                <div className="input-group">
+                  <label>vs last week %</label>
+                  <input className="name-input" type="number" value={scoreCard.screenTimeChange} onChange={(e) => updateScoreCard({ screenTimeChange: Number(e.target.value) || 0 })} />
+                </div>
+                <div className="input-group">
+                  <label>Apps blocked</label>
+                  <input type="checkbox" checked={scoreCard.appsBlocked} onChange={(e) => updateScoreCard({ appsBlocked: e.target.checked })} />
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="edit-list">
             <h3 className="adjust-title">Customize Grid</h3>
