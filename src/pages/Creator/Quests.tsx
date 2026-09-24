@@ -19,6 +19,7 @@ import { MOCKUP_THEMES, DEFAULT_THEME_ID, getMockupTheme, ThemeLayers } from './
 import { useStatPresets } from './useStatPresets';
 import { freezeAnimationsAt } from './captureAnimations';
 import { makeShadowsExportSafe } from './exportSafeShadows';
+import { warmUpCapture } from './warmUpCapture';
 import ScoreCard, { ScoreCardData, GOOD_SCORECARD, CHOPPED_SCORECARD, CHOPPED_SCREEN_TIME } from './ScoreCard';
 
 const RiArrowLeftLine = _RiArrowLeftLine as any;
@@ -421,6 +422,8 @@ const Quests: React.FC = () => {
       const rampSeconds = Math.min(durationSeconds * 0.6, 2);
       const rampFrames = Math.max(2, Math.round(rampSeconds * fps));
 
+      await warmUpCapture(mockupRef.current!, exportScale);
+
       for (let fi = 0; fi < numFrames; fi++) {
         const linear = Math.min(1, fi / Math.max(rampFrames - 1, 1));
         // Eased out, so the values slow into their final number.
@@ -521,6 +524,7 @@ const Quests: React.FC = () => {
     const chunks: BlobPart[] = [];
     recorder.ondataavailable = (e: BlobEvent) => { if (e.data.size > 0) chunks.push(e.data); };
 
+    await warmUpCapture(mockupRef.current!, exportScale);
     recorder.start();
 
     try {
