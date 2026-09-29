@@ -1,7 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import UpshiftMenu from '../common/UpshiftMenu';
-import { Footer } from '../common';
+import { SiteNav, SiteFooter, Starfield } from '../site/SiteChrome';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -9,12 +8,13 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <UpshiftMenu />
-      <main className="flex-1">
+    <div className="site">
+      <Starfield />
+      <SiteNav />
+      <main>
         {children || <Outlet />}
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 };

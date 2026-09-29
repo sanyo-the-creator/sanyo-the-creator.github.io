@@ -7,7 +7,7 @@ const BASE_URL = 'https://joinupshift.com';
 // Static routes
 const routes = [
   '/',
-  '/features',
+  '/faq',
   '/download',
   '/about',
   '/articles',

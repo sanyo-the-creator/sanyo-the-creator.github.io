@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { articles } from '../../data/articles';
 import './Articles.css';
-import LightRays from '../../components/common/LightRays/LightRays';
 import { SEO, StructuredData } from '../../components/common/SEO';
 
 const Articles: React.FC = () => {
@@ -21,20 +20,6 @@ const Articles: React.FC = () => {
         description="Read helpful articles about productivity and personal development"
         url="https://joinupshift.com/articles"
       />
-      <LightRays
-        raysOrigin="top-center"
-        raysColor="#667EEA"
-        raysSpeed={0.6}
-        lightSpread={1.5}
-        rayLength={2}
-        pulsating={true}
-        fadeDistance={1.2}
-        saturation={0.8}
-        followMouse={true}
-        mouseInfluence={0.1}
-        noiseAmount={0.05}
-        distortion={0.1}
-      />
       <div className="articles-container">
         {/* <Breadcrumbs
           customItems={[
@@ -42,7 +27,11 @@ const Articles: React.FC = () => {
             { label: 'Articles', path: '/articles' }
           ]}
         /> */}
-        <h1 className="articles-title gradient-text">Articles</h1>
+        <div className="articles-head">
+          <span className="site-eyebrow">Blog</span>
+          <h1 className="articles-title">Guides for <span className="grad-blue">Less Scrolling</span></h1>
+          <p className="articles-lead">How to block distracting apps, build better habits and take your time back.</p>
+        </div>
 
         <div className="articles-list">
           {articles.map((article) => (
