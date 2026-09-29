@@ -79,7 +79,7 @@
 }
 .site-store:hover { opacity: .85; transform: translateY(-1px); }
 .site-store svg { width: 26px; height: 26px; flex-shrink: 0; }
-.site-store span { display: flex; flex-direction: column; line-height: 1.15; }
+.site-store span { text-align: left; display: flex; flex-direction: column; line-height: 1.15; }
 .site-store small { font-size: .7rem; color: #cfd3df; }
 .site-store strong { font-size: 1.05rem; font-weight: 700; }
 

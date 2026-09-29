@@ -73,10 +73,13 @@ export const SiteNav: React.FC = () => {
   );
 };
 
-export const SiteFooter: React.FC = () => (
+export const SiteFooter: React.FC = () => {
+  // The home page already ends with its own store buttons.
+  const isHome = useLocation().pathname === '/';
+  return (
   <footer className="site-footer">
     <div className="site-footer-inner">
-      <StoreButtons />
+      {!isHome && <StoreButtons />}
       <div className="site-footer-cols">
         <div>
           <h3>Product</h3>
@@ -99,7 +102,8 @@ export const SiteFooter: React.FC = () => (
       <p className="site-footer-copy">&copy; {new Date().getFullYear()} Upshift. All rights reserved.</p>
     </div>
   </footer>
-);
+  );
+};
 
 // Drifting, twinkling starfield behind every public page.
 export const Starfield: React.FC = () => {
