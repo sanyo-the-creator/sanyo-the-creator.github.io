@@ -55,7 +55,7 @@ const Download: React.FC = () => {
       if (isExplicitDownloadPath && isMobile) {
         if (isIOS) {
           // Redirect to Apple App Store
-          window.location.href = 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316';
+          window.location.href = 'https://apps.apple.com/us/app/upshift-1-productivity-app/id6749509316';
         } else if (isAndroid) {
           // Redirect to Google Play
           window.location.href = 'https://play.google.com/store/apps/details?id=com.upshift.app';
@@ -77,7 +77,7 @@ const Download: React.FC = () => {
       ),
       title: 'Download for iPhone',
       subtitle: 'Available on the App Store',
-      url: 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316',
+      url: 'https://apps.apple.com/us/app/upshift-1-productivity-app/id6749509316',
       primary: true
     },
     {

@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import upshiftIcon from '../../assets/upshiftIcon.png';
 import './Site.css';
 
-export const APP_STORE_URL = 'https://apps.apple.com/us/app/upshift-level-up-your-life/id6749509316';
+export const APP_STORE_URL = 'https://apps.apple.com/us/app/upshift-1-productivity-app/id6749509316';
 export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.upshift.app';
 export const SUPPORT_EMAIL = 'support@joinupshift.com';
 
@@ -77,31 +77,31 @@ export const SiteFooter: React.FC = () => {
   // The home page already ends with its own store buttons.
   const isHome = useLocation().pathname === '/';
   return (
-  <footer className="site-footer">
-    <div className="site-footer-inner">
-      {!isHome && <StoreButtons />}
-      <div className="site-footer-cols">
-        <div>
-          <h3>Product</h3>
-          <Link to="/#features">Features</Link>
-          <Link to="/faq">FAQ</Link>
-          <Link to="/download">Download</Link>
+    <footer className="site-footer">
+      <div className="site-footer-inner">
+        {!isHome && <StoreButtons />}
+        <div className="site-footer-cols">
+          <div>
+            <h3>Product</h3>
+            <Link to="/#features">Features</Link>
+            <Link to="/faq">FAQ</Link>
+            <Link to="/download">Download</Link>
+          </div>
+          <div>
+            <h3>Resources</h3>
+            <Link to="/articles">Blog</Link>
+            <a href={`mailto:${SUPPORT_EMAIL}`}>Contact</a>
+          </div>
+          <div>
+            <h3>Legal</h3>
+            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/terms">Terms &amp; Conditions</Link>
+            <a href="https://support.apple.com/en-gb/118223" target="_blank" rel="noopener noreferrer">Request a refund</a>
+          </div>
         </div>
-        <div>
-          <h3>Resources</h3>
-          <Link to="/articles">Blog</Link>
-          <a href={`mailto:${SUPPORT_EMAIL}`}>Contact</a>
-        </div>
-        <div>
-          <h3>Legal</h3>
-          <Link to="/privacy">Privacy Policy</Link>
-          <Link to="/terms">Terms &amp; Conditions</Link>
-          <a href="https://support.apple.com/en-gb/118223" target="_blank" rel="noopener noreferrer">Request a refund</a>
-        </div>
+        <p className="site-footer-copy">&copy; {new Date().getFullYear()} Upshift. All rights reserved.</p>
       </div>
-      <p className="site-footer-copy">&copy; {new Date().getFullYear()} Upshift. All rights reserved.</p>
-    </div>
-  </footer>
+    </footer>
   );
 };
 
