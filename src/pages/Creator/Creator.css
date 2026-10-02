@@ -76,7 +76,8 @@
 
 .upshift-logo-container {
   position: absolute;
-  top: 52px;
+  /* Below TikTok's "Following | For You" tabs, which cover the top ~95px. */
+  top: 96px;
   left: 0;
   right: 0;
   display: flex;
@@ -113,7 +114,7 @@
 
 .circle-image-container {
   position: absolute;
-  top: 120px;
+  top: 164px;
   left: 50%;
   transform: translateX(-50%);
   width: 240px;
@@ -144,7 +145,7 @@
 
 .cards-container-mock {
   position: absolute;
-  top: 320px;
+  top: 364px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -1049,3 +1050,170 @@
   background: #f59e0b;
   color: #1a1000;
 }
+
+/* ===== Scorecard layout: full-bleed photo + one big score, for TikTok / Reels ===== */
+.scorecard {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+/* Square, to match the 1:1 crop from the image picker: at zoom 100 the crop fills it exactly. */
+.scorecard-photo {
+  position: absolute;
+  top: 0; left: 0;
+  width: 540px; height: 540px;
+  overflow: hidden;
+  cursor: pointer;
+  background: radial-gradient(circle at 50% 45%, #1b2140 0%, #05060d 75%);
+}
+.scorecard-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.scorecard-photo-empty {
+  height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  color: rgba(255, 255, 255, 0.4); font-size: 48px;
+}
+.scorecard-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, transparent 16%),
+    linear-gradient(to top, #04050b 0%, #04050b 44%, rgba(4, 5, 11, 0.8) 52%, transparent 66%);
+}
+.scorecard-body {
+  position: absolute;
+  left: 28px; right: 28px; bottom: 150px;
+  display: flex; flex-direction: column;
+  pointer-events: none;
+}
+.scorecard-blocker {
+  display: flex; align-items: center; gap: 12px;
+  align-self: flex-start;
+  padding: 8px 14px 8px 8px;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  background: rgba(10, 12, 24, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.scorecard-blocker-apps { display: flex; }
+.scorecard-blocker-app {
+  position: relative;
+  width: 38px; height: 38px;
+  margin-left: 6px;
+  border-radius: 10px;
+}
+.scorecard-blocker-app:first-child { margin-left: 0; }
+.scorecard-blocker-app img { width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 10px; }
+.scorecard-blocker.on .scorecard-blocker-app img { filter: grayscale(1); opacity: 0.55; }
+.scorecard-blocker-lock {
+  position: absolute; right: -5px; bottom: -5px;
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #2f6bff; color: #fff;
+  border: 2px solid #0a0c18;
+}
+.scorecard-blocker-lock svg { width: 11px; height: 11px; }
+.scorecard-blocker-text { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; }
+.scorecard-blocker-text b { color: #6f93ff; font-weight: 800; }
+.scorecard-blocker-inline { width: 17px; height: 17px; color: #6f93ff; }
+.scorecard-blocker.off { border-color: rgba(255, 77, 106, 0.55); background: rgba(40, 6, 14, 0.7); }
+.scorecard-blocker-lock.warn {
+  background: #ff3b52;
+  font-size: 13px; font-weight: 900; line-height: 1;
+}
+.scorecard-blocker-warn { display: flex; flex-direction: column; gap: 2px; }
+.scorecard-blocker-warn-title { font-size: 16px; font-weight: 800; color: #ff4d6a; }
+.scorecard-blocker-warn-sub { font-size: 12px; font-weight: 600; color: rgba(255, 255, 255, 0.6); }
+.scorecard-name { display: flex; align-items: center; gap: 8px; font-size: 24px; font-weight: 700; }
+.scorecard-check { width: 22px; height: 22px; }
+.scorecard-hero { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 6px; }
+.scorecard-score { display: flex; align-items: flex-end; gap: 10px; }
+.scorecard-score-num { font-size: 150px; font-weight: 900; line-height: 0.8; letter-spacing: -0.06em; }
+.scorecard-score-side { display: flex; flex-direction: column; gap: 6px; padding-bottom: 6px; }
+.scorecard-score-max { font-size: 26px; font-weight: 800; color: rgba(255, 255, 255, 0.35); }
+.scorecard-score-label { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.scorecard-screen {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
+  padding-bottom: 4px;
+}
+.scorecard-screen-label { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
+.scorecard-screen-num { font-size: 40px; font-weight: 900; letter-spacing: -0.02em; line-height: 1; }
+.scorecard-screen-change { font-size: 13px; font-weight: 800; padding: 3px 8px; border-radius: 999px; }
+.scorecard-screen.down .scorecard-screen-change { color: #34c759; background: rgba(52, 199, 89, 0.15); }
+.scorecard-screen.up .scorecard-screen-change { color: #ff4d6a; background: rgba(255, 77, 106, 0.15); }
+.scorecard-screen.up .scorecard-screen-num { color: #ff4d6a; }
+.scorecard-score-bar {
+  height: 8px; margin-top: 18px; border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12); overflow: hidden;
+}
+.scorecard-score-bar > div { height: 100%; border-radius: 4px; }
+.scorecard-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 22px; }
+.scorecard-stat {
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 10px 10px 11px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-width: 0;
+}
+.scorecard-stat-icon { width: 24px; height: 24px; object-fit: contain; flex-shrink: 0; }
+.scorecard-stat-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.scorecard-stat-name {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.scorecard-stat-value { font-size: 19px; font-weight: 800; line-height: 1.1; white-space: nowrap; }
+.scorecard-stat-goal { font-size: 11px; font-weight: 600; color: rgba(255, 255, 255, 0.4); margin-left: 2px; }
+.scorecard-stat-status {
+  flex-shrink: 0;
+  padding: 3px 7px; border-radius: 999px; border: 1px solid;
+  font-size: 10px; font-weight: 800; white-space: nowrap;
+}
+.scorecard-footer {
+  position: absolute; left: 0; right: 0; bottom: -114px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  font-size: 14px; font-weight: 700; color: rgba(255, 255, 255, 0.7);
+}
+.scorecard-badge { height: 30px; width: auto; }
+.scorecard-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ===== POV video tool ===== */
+.pov-preview {
+  width: min(100%, 420px);
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 100px rgba(0, 0, 0, 0.9);
+}
+.pov-canvas { width: 100%; height: 100%; display: block; }
+.pov-transport { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.pov-time { font-size: 13px; color: rgba(255, 255, 255, 0.5); font-variant-numeric: tabular-nums; }
+.pov-hint { font-size: 12px; color: rgba(255, 255, 255, 0.4); margin: 8px 0 0; }
+.pov-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.06);
+  color: #fff; font-size: 16px; cursor: pointer; flex-shrink: 0;
+}
+.pov-text-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.06);
+  color: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.pov-icon-btn:disabled, .pov-text-btn:disabled { opacity: 0.4; cursor: default; }
+.pov-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255, 255, 255, 0.75); margin-top: 10px; cursor: pointer; }
+.pov-clip-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.pov-clip-name { font-size: 13px; color: rgba(255, 255, 255, 0.8); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pov-apps-head { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.75); margin: 14px 0 8px; }
+.pov-total { color: #f4574b; }
+.pov-app-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.pov-app-row select { flex: 1; min-width: 0; }
+.pov-minutes { width: 72px !important; flex: 0 0 72px; }
+.pov-unit { font-size: 12px; color: rgba(255, 255, 255, 0.45); }
+.pov-presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+.pov-presets .pov-text-btn { text-transform: capitalize; }

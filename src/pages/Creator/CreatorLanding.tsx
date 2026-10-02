@@ -7,12 +7,14 @@ import {
   RiArrowLeftLine as _RiArrowLeftLine,
   RiVideoLine as _RiVideoLine,
   RiShieldLine as _RiShieldLine,
-  RiQuillPenLine as _RiQuillPenLine
+  RiQuillPenLine as _RiQuillPenLine,
+  RiSmartphoneLine as _RiSmartphoneLine
 } from 'react-icons/ri';
 import './Creator.css';
 import LightRays from '../../components/common/LightRays/LightRays';
 import { useCampaignSettings } from '../../hooks/useCampaignSettings';
 
+const RiSmartphoneLine = _RiSmartphoneLine as any;
 const RiMagicLine = _RiMagicLine as any;
 const RiTimeLine = _RiTimeLine as any;
 const RiLayoutMasonryLine = _RiLayoutMasonryLine as any;
@@ -82,6 +84,18 @@ const CreatorLanding: React.FC = () => {
             <h2 className="tool-title">Mix & Match</h2>
             <p className="tool-description">
               Combine Quests and Screen Time apps seamlessly in a single layout
+            </p>
+          </div>
+        </Link>
+
+        <Link to={`/creator/pov${fromPortal ? '?from=portal' : ''}`} className="tool-card">
+          <div className="tool-icon-wrapper">
+            <RiSmartphoneLine />
+          </div>
+          <div className="tool-info">
+            <h2 className="tool-title">POV Video</h2>
+            <p className="tool-description">
+              Your character clip cut into the Upshift screen time reveal, exported as a 9:16 MP4
             </p>
           </div>
         </Link>

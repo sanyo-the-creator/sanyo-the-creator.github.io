@@ -19,6 +19,8 @@ import { MOCKUP_THEMES, DEFAULT_THEME_ID, getMockupTheme, ThemeLayers } from './
 import { useStatPresets } from './useStatPresets';
 import { freezeAnimationsAt } from './captureAnimations';
 import { makeShadowsExportSafe } from './exportSafeShadows';
+import { warmUpCapture } from './warmUpCapture';
+import ScoreCard, { ScoreCardData, GOOD_SCORECARD, CHOPPED_SCORECARD, CHOPPED_SCREEN_TIME } from './ScoreCard';
 
 const RiArrowLeftLine = _RiArrowLeftLine as any;
 const RiDownloadLine = _RiDownloadLine as any;
@@ -235,6 +237,18 @@ const Quests: React.FC = () => {
   const [imageX, setImageX] = useState(0);
   const [imageY, setImageY] = useState(0);
   const [imageZoom, setImageZoom] = useState(50);
+  const [layout, setLayout] = useState<'Classic' | 'Scorecard'>('Classic');
+  const [scoreCard, setScoreCard] = useState<ScoreCardData>(GOOD_SCORECARD);
+
+  // The Good / Chopped switch drives the scorecard numbers too.
+  useEffect(() => {
+    setScoreCard(prev => {
+      const preset = statLevel === 'Chopped' ? CHOPPED_SCORECARD : GOOD_SCORECARD;
+      return { ...preset, name: prev.name, handle: prev.handle, verified: prev.verified };
+    });
+  }, [statLevel]);
+
+  const updateScoreCard = (updates: Partial<ScoreCardData>) => setScoreCard(prev => ({ ...prev, ...updates }));
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -408,6 +422,8 @@ const Quests: React.FC = () => {
       const rampSeconds = Math.min(durationSeconds * 0.6, 2);
       const rampFrames = Math.max(2, Math.round(rampSeconds * fps));
 
+      await warmUpCapture(mockupRef.current!, exportScale);
+
       for (let fi = 0; fi < numFrames; fi++) {
         const linear = Math.min(1, fi / Math.max(rampFrames - 1, 1));
         // Eased out, so the values slow into their final number.
@@ -508,6 +524,7 @@ const Quests: React.FC = () => {
     const chunks: BlobPart[] = [];
     recorder.ondataavailable = (e: BlobEvent) => { if (e.data.size > 0) chunks.push(e.data); };
 
+    await warmUpCapture(mockupRef.current!, exportScale);
     recorder.start();
 
     try {
@@ -590,6 +607,31 @@ const Quests: React.FC = () => {
               ref={mockupRef}
             >
               <ThemeLayers themeId={themeId} />
+              {layout === 'Scorecard' ? (
+                <ScoreCard
+                  data={scoreCard}
+                  stats={habits.map(habit => {
+                    const status = getHabitStatus(habit.achieved, habit.goal, gender, resolveQuestType(habit));
+                    return {
+                      emoji: habit.emoji,
+                      name: habit.name,
+                      value: formatNumber(getDisplayValue(habit.achieved, videoProgress)),
+                      goal: `/${formatNumber(habit.goal)}${habit.unit && habit.unit !== '\u200B' ? ` ${habit.unit}` : ''}`,
+                      status: status.text,
+                      color: status.color,
+                      gradient: status.gradient,
+                      fill: getProgressWidth(habit, videoProgress),
+                    };
+                  })}
+                  image={image}
+                  imageX={imageX}
+                  imageY={imageY}
+                  imageZoom={imageZoom}
+                  progress={videoProgress}
+                  onPickImage={() => fileInputRef.current?.click()}
+                />
+              ) : (
+              <>
               {/* Header Matching Provided HTML */}
               <div className="upshift-logo-container">
                 <img src={appStoreImg} alt="Download on App Store" className="app-store-badge-mock" />
@@ -617,13 +659,6 @@ const Quests: React.FC = () => {
                     <span className="insert-label">Insert Image Here</span>
                   </div>
                 )}
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  hidden
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
               </div>
 
               {/* Cards Grid Matching Provided HTML structure */}
@@ -777,6 +812,9 @@ const Quests: React.FC = () => {
                   </div>
                 </div>
               </div>
+              </>
+              )}
+              <input type="file" ref={fileInputRef} hidden accept="image/*" onChange={handleImageUpload} />
             </div>
           </div>
         </section>
@@ -784,6 +822,21 @@ const Quests: React.FC = () => {
         {/* MIDDLE: CUSTOMIZE RATINGS */}
         <section className="controls-column">
           <h2>Customize Ratings</h2>
+
+          <div className="gender-toggle">
+            <button
+              className={`toggle-opt ${layout === 'Classic' ? 'active' : ''}`}
+              onClick={() => setLayout('Classic')}
+            >
+              Classic
+            </button>
+            <button
+              className={`toggle-opt ${layout === 'Scorecard' ? 'active' : ''}`}
+              onClick={() => setLayout('Scorecard')}
+            >
+              Scorecard
+            </button>
+          </div>
 
           <div className="gender-toggle stat-level-toggle">
             <button
@@ -895,6 +948,46 @@ const Quests: React.FC = () => {
               Reset Position & Zoom
             </button>
           </div>
+
+          {layout === 'Scorecard' && (
+            <div className="adjust-box">
+              <h3 className="adjust-title">Scorecard</h3>
+              <div className="scorecard-edit-grid">
+                <div className="input-group">
+                  <label>Name</label>
+                  <input className="name-input" value={scoreCard.name} onChange={(e) => updateScoreCard({ name: e.target.value })} />
+                </div>
+                <div className="input-group">
+                  <label>Handle</label>
+                  <input className="name-input" value={scoreCard.handle} onChange={(e) => updateScoreCard({ handle: e.target.value.replace(/^@/, '') })} />
+                </div>
+                <div className="input-group">
+                  <label>Verified badge</label>
+                  <input type="checkbox" checked={scoreCard.verified} onChange={(e) => updateScoreCard({ verified: e.target.checked })} />
+                </div>
+                <div className="input-group">
+                  <label>Score</label>
+                  <input className="name-input" type="number" value={scoreCard.score} onChange={(e) => updateScoreCard({ score: Number(e.target.value) || 0 })} />
+                </div>
+                <div className="input-group">
+                  <label>Screen time (min/day){statLevel === 'Chopped' ? ' \u00b7 8h\u201314h' : ''}</label>
+                  <input className="name-input" type="number" value={scoreCard.screenTime} onChange={(e) => updateScoreCard({ screenTime: Number(e.target.value) || 0 })}
+                  // Chopped keeps screen time in its 8h-14h band.
+                  onBlur={() => statLevel === 'Chopped' && updateScoreCard({
+                    screenTime: Math.min(CHOPPED_SCREEN_TIME.max, Math.max(CHOPPED_SCREEN_TIME.min, scoreCard.screenTime)),
+                  })} />
+                </div>
+                <div className="input-group">
+                  <label>vs last week %</label>
+                  <input className="name-input" type="number" value={scoreCard.screenTimeChange} onChange={(e) => updateScoreCard({ screenTimeChange: Number(e.target.value) || 0 })} />
+                </div>
+                <div className="input-group">
+                  <label>Apps blocked</label>
+                  <input type="checkbox" checked={scoreCard.appsBlocked} onChange={(e) => updateScoreCard({ appsBlocked: e.target.checked })} />
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="edit-list">
             <h3 className="adjust-title">Customize Habits</h3>
