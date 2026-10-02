@@ -18,6 +18,7 @@ import RedditProgram from './pages/Creator/RedditProgram';
 import Quests from './pages/Creator/Quests';
 import ScreenTime from './pages/Creator/ScreenTime';
 import Mix from './pages/Creator/Mix';
+import Pov from './pages/Creator/Pov';
 import ContentLibrary from './pages/Creator/ContentLibrary';
 import Rewrite from './pages/Creator/Rewrite';
 import './styles/globals.css';
@@ -69,6 +70,7 @@ function App() {
           <Route path="/creator/quests" element={<Quests />} />
           <Route path="/creator/screentime" element={<ScreenTime />} />
           <Route path="/creator/mix" element={<Mix />} />
+          <Route path="/creator/pov" element={<Pov />} />
           <Route path="/creator/content" element={<ContentLibrary />} />
           <Route path="/creator/rewrite" element={<Rewrite />} />
 

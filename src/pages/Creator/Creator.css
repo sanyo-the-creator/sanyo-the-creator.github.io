@@ -76,7 +76,8 @@
 
 .upshift-logo-container {
   position: absolute;
-  top: 52px;
+  /* Below TikTok's "Following | For You" tabs, which cover the top ~95px. */
+  top: 96px;
   left: 0;
   right: 0;
   display: flex;
@@ -113,7 +114,7 @@
 
 .circle-image-container {
   position: absolute;
-  top: 120px;
+  top: 164px;
   left: 50%;
   transform: translateX(-50%);
   width: 240px;
@@ -144,7 +145,7 @@
 
 .cards-container-mock {
   position: absolute;
-  top: 320px;
+  top: 364px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -1178,3 +1179,41 @@
 }
 .scorecard-badge { height: 30px; width: auto; }
 .scorecard-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ===== POV video tool ===== */
+.pov-preview {
+  width: min(100%, 420px);
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 100px rgba(0, 0, 0, 0.9);
+}
+.pov-canvas { width: 100%; height: 100%; display: block; }
+.pov-transport { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.pov-time { font-size: 13px; color: rgba(255, 255, 255, 0.5); font-variant-numeric: tabular-nums; }
+.pov-hint { font-size: 12px; color: rgba(255, 255, 255, 0.4); margin: 8px 0 0; }
+.pov-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.06);
+  color: #fff; font-size: 16px; cursor: pointer; flex-shrink: 0;
+}
+.pov-text-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.06);
+  color: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.pov-icon-btn:disabled, .pov-text-btn:disabled { opacity: 0.4; cursor: default; }
+.pov-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255, 255, 255, 0.75); margin-top: 10px; cursor: pointer; }
+.pov-clip-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.pov-clip-name { font-size: 13px; color: rgba(255, 255, 255, 0.8); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pov-apps-head { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.75); margin: 14px 0 8px; }
+.pov-total { color: #f4574b; }
+.pov-app-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.pov-app-row select { flex: 1; min-width: 0; }
+.pov-minutes { width: 72px !important; flex: 0 0 72px; }
+.pov-unit { font-size: 12px; color: rgba(255, 255, 255, 0.45); }
+.pov-presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+.pov-presets .pov-text-btn { text-transform: capitalize; }
