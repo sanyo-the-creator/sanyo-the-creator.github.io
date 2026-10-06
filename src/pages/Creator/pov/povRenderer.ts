@@ -1,7 +1,8 @@
 /**
  * Draws every frame of a POV video on a 1080x1920 canvas: the Upshift screen
  * time onboarding (guess, scan, reality, reality check, most toxic apps)
- * filling the screen, with an optional facecam bubble of the character
+ * filling the screen, then committing to block the top app and hitting it
+ * (the iOS Screen Time shield, or a blocked page in Safari), with an optional facecam bubble of the character
  * reacting while they go through it.
  *
  * The onboarding screens mirror MockRealityCheckFlowView in the mock iOS app.
@@ -55,6 +56,60 @@ export type PovApp = { id: string; minutes: number };
 
 export type FaceShape = 'circle' | 'square';
 
+/** Upshift's block types, each with its own shield. */
+export type ShieldKind = 'timeLimit' | 'walk' | 'quest' | 'appBlocked' | 'focus';
+
+type ShieldConfig = {
+  label: string;
+  /** Key of the character image in PovAssets.icons. */
+  icon: string;
+  /** ShieldConfiguration.backgroundColor, laid over the dark blur. */
+  tint: string;
+  title: string;
+  subtitle: string;
+  subtitleColor: string;
+  button: string;
+};
+
+const LIGHT_GRAY = '#aaaaaa'; // UIColor.lightGray
+
+/** Copied from ShieldConfigurationExtension.swift in the iOS app. */
+export const SHIELDS: Record<ShieldKind, ShieldConfig> = {
+  timeLimit: {
+    label: 'Time limit', icon: 'shield_hodziny', tint: 'rgba(25,25,25,0.5)',
+    title: 'Time Limit Reached',
+    subtitle: 'Come back tomorrow and use your screen time wisely!',
+    subtitleColor: '#fff', button: 'See you tomorrow!',
+  },
+  walk: {
+    label: 'Walk', icon: 'shield_earthTuxedoWalk', tint: 'rgba(25,51,25,0.5)',
+    title: 'Time to Walk! 🏃',
+    subtitle: '\nApp is blocked until you walk more steps.\n\nKeep moving to earn more screen time!',
+    subtitleColor: LIGHT_GRAY, button: "Let's Go!",
+  },
+  quest: {
+    label: 'Quest', icon: 'shield_earthShhh', tint: 'rgba(25,25,25,0.5)',
+    title: 'Complete Quests',
+    subtitle: '\nApp is blocked by a quest block 👀\n\n1. Open Upshift app\n2. Complete assigned quests\n3. Apps will unlock after completion',
+    subtitleColor: LIGHT_GRAY, button: 'Back to quests!',
+  },
+  appBlocked: {
+    label: 'App blocked', icon: 'shield_shrug', tint: 'rgba(25,25,25,0.5)',
+    title: '\nApp Blocked',
+    subtitle: 'This app is currently restricted by you :)',
+    subtitleColor: LIGHT_GRAY, button: 'I understand..',
+  },
+  focus: {
+    label: 'Focus mode', icon: 'shield_work', tint: 'rgba(25,25,51,0.5)',
+    title: 'Focus Mode 🧠',
+    subtitle: "\nYou're in Focus Mode! Stay focused on what's important right now.",
+    subtitleColor: LIGHT_GRAY, button: "I'm focusing 💪",
+  },
+};
+
+/** How the video ends: the top app's shield, the top site blocked in Safari, or no ending. */
+export type PovEnding = 'app' | 'web' | 'none';
+
 export type PovSettings = {
   guessHours: number;
   apps: PovApp[];
@@ -72,6 +127,9 @@ export type PovSettings = {
   faceStart: number;
   /** App content scale while a facecam is showing, so the bubble has room. */
   appScale: number;
+  ending: PovEnding;
+  /** Which block's shield the app ending shows. */
+  shield: ShieldKind;
 };
 
 export type PovAssets = {
@@ -79,7 +137,7 @@ export type PovAssets = {
   icons: Record<string, HTMLImageElement | undefined>;
 };
 
-export type SceneKind = 'guess' | 'scan' | 'comparison' | 'reality' | 'toxic';
+export type SceneKind = 'guess' | 'scan' | 'comparison' | 'reality' | 'toxic' | 'commit' | 'blockApp' | 'blockWeb';
 export type Scene = { kind: SceneKind; start: number; duration: number };
 
 const APP_SCENES: { kind: SceneKind; duration: number }[] = [
@@ -90,11 +148,33 @@ const APP_SCENES: { kind: SceneKind; duration: number }[] = [
   { kind: 'toxic', duration: 3.6 },
 ];
 
+const ENDING_SCENES: Record<PovEnding, { kind: SceneKind; duration: number }[]> = {
+  app: [{ kind: 'commit', duration: 3.2 }, { kind: 'blockApp', duration: 3.4 }],
+  web: [{ kind: 'commit', duration: 3.2 }, { kind: 'blockWeb', duration: 4.8 }],
+  none: [],
+};
+
+/** Chapter names for the preview's timeline. */
+export const SCENE_LABELS: Record<SceneKind, string> = {
+  guess: 'Guess',
+  scan: 'Scan',
+  comparison: 'Comparison',
+  reality: 'Reality check',
+  toxic: 'Toxic apps',
+  commit: 'Commit',
+  blockApp: 'App blocked',
+  blockWeb: 'Site blocked',
+};
+
 const FADE = 0.3; // crossfade between app screens
 
-export function buildTimeline(): Scene[] {
+export function buildTimeline(ending: PovEnding): Scene[] {
   let t = 0;
-  return APP_SCENES.map(a => { const sc = { kind: a.kind, start: t, duration: a.duration }; t += a.duration; return sc; });
+  return [...APP_SCENES, ...ENDING_SCENES[ending]].map(a => {
+    const sc = { kind: a.kind, start: t, duration: a.duration };
+    t += a.duration;
+    return sc;
+  });
 }
 
 export const timelineDuration = (scenes: Scene[]) =>
@@ -142,7 +222,8 @@ export function renderFrame(
   const hasFace = !!assets.face;
   applyLayout(s.layout);
 
-  if (prev && u < FADE) {
+  // The shield cuts in like an app launch rather than crossfading.
+  if (prev && u < FADE && sc.kind !== 'blockApp') {
     const sctx = scratch.getContext('2d')!;
     drawScene(sctx, sc, u, s, assets, hasFace);
     drawScene(out, prev, prev.duration, s, assets, hasFace);
@@ -164,7 +245,9 @@ function drawScene(ctx: CanvasRenderingContext2D, sc: Scene, u: number, s: PovSe
   ctx.filter = 'none';
   ctx.globalAlpha = 1;
   const red = sc.kind === 'reality' || sc.kind === 'toxic';
-  drawGlow(ctx, sc.start + u, red);
+  // The shield is fullscreen, so its backdrop goes on before the facecam shrink.
+  if (sc.kind === 'blockApp') drawShieldBackdrop(ctx, u, SHIELDS[s.shield]);
+  else drawGlow(ctx, sc.start + u, red);
 
   // With a facecam the app shrinks toward the top so the bubble has room.
   if (shrink && s.appScale < 1) {
@@ -172,7 +255,7 @@ function drawScene(ctx: CanvasRenderingContext2D, sc: Scene, u: number, s: PovSe
     ctx.scale(s.appScale, s.appScale);
     ctx.translate(-CX, -SAFE.top);
   }
-  if (s.layout === 'safe' && s.showLabel) drawLabel(ctx, a);
+  if (s.layout === 'safe' && s.showLabel && sc.kind !== 'blockApp') drawLabel(ctx, a);
 
   const d = derive(s);
   switch (sc.kind) {
@@ -181,6 +264,9 @@ function drawScene(ctx: CanvasRenderingContext2D, sc: Scene, u: number, s: PovSe
     case 'comparison': drawComparison(ctx, u, s, d); break;
     case 'reality': drawReality(ctx, u, d); break;
     case 'toxic': drawToxic(ctx, u, d, a); break;
+    case 'commit': drawCommit(ctx, u, d, a); break;
+    case 'blockApp': drawBlockApp(ctx, u, a, SHIELDS[s.shield]); break;
+    case 'blockWeb': drawBlockWeb(ctx, u, d, a); break;
   }
   ctx.restore();
 }
@@ -709,6 +795,396 @@ function drawToxic(ctx: CanvasRenderingContext2D, u: number, d: Derived, a: PovA
     });
     ctx.globalAlpha = 1;
   }
+}
+
+// MARK: - 6. Blocked
+
+
+// Sites shown in Safari's address bar; anything else is "<id>.com".
+const DOMAINS: Record<string, string> = { pornhub: 'cornhub.com', twitter: 'x.com' };
+const domainFor = (id: string) => DOMAINS[id] ?? `${id}.com`;
+
+/** Upshift asks them to block their #1 app; they hold the fingerprint until it's done. */
+function drawCommit(ctx: CanvasRenderingContext2D, u: number, d: Derived, a: PovAssets) {
+  const item = d.toxic[0] ?? { id: 'tiktok', minutes: 0 };
+  const name = d.names[item.id] ?? item.id;
+  const bottom = drawTitle(ctx, 'Ready to take your life back?', `Block ${name}, your #1 time thief.`);
+  const hold = prog(u, 1.0, 2.2);
+  const done = prog(u, 2.2, 2.4);
+
+  // The app, which locks once the hold completes.
+  const cx = SAFE.left + 10, cw = CW - 20, ch = 80;
+  let y = bottom + 20;
+  drawCard(ctx, cx, y, cw, ch);
+  drawAppIcon(ctx, a, item.id, cx + 16, y + 14, 52, { gray: done >= 1 });
+  if (done > 0) {
+    ctx.save();
+    ctx.globalAlpha = done;
+    ctx.beginPath();
+    ctx.arc(cx + 64, y + 62, 12, 0, Math.PI * 2);
+    ctx.fillStyle = GREEN;
+    ctx.fill();
+    drawLock(ctx, cx + 64, y + 62, 10);
+    ctx.restore();
+  }
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = '#fff';
+  ctx.font = `700 18px ${FONT}`;
+  ctx.fillText(name, cx + 84, y + 20);
+  ctx.font = `600 15px ${ROUNDED}`;
+  ctx.fillStyle = done >= 1 ? GREEN : RED;
+  ctx.fillText(done >= 1 ? 'Blocked' : `${formatHM(item.minutes)}/day`, cx + 84, y + 44);
+
+  // The hook: wanting it isn't the same as doing it.
+  y += ch + 18;
+  ctx.save();
+  ctx.globalAlpha = prog(u, 0.3, 0.7);
+  ctx.textAlign = 'center';
+  ctx.font = `400 15px ${FONT}`;
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.fillText('Most people say they want to quit.', CX, y);
+  ctx.font = `700 16px ${FONT}`;
+  ctx.fillStyle = '#fff';
+  ctx.fillText('Only 1 in 5 actually do it.', CX, y + 22);
+  ctx.restore();
+
+  // Fingerprint in the middle, with a ring that fills while it's held.
+  const r = 62;
+  const fy = Math.max(y + 44 + r + 20, (SAFE.top + SAFE.bottom) / 2);
+  const pulse = 1 + 0.06 * Math.sin(done * Math.PI);
+  ctx.save();
+  ctx.translate(CX, fy);
+  ctx.scale(pulse, pulse);
+  ctx.beginPath();
+  ctx.arc(0, 0, r, 0, Math.PI * 2);
+  ctx.fillStyle = done > 0 ? withAlpha(GREEN, 0.12 * done) : 'rgba(255,255,255,0.05)';
+  ctx.fill();
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  ctx.stroke();
+  if (hold > 0) {
+    ctx.beginPath();
+    ctx.arc(0, 0, r, -Math.PI / 2, -Math.PI / 2 + hold * Math.PI * 2);
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = done > 0 ? GREEN : phoneGradient(ctx, -r, r);
+    ctx.stroke();
+  }
+  drawFingerprint(ctx, r * 0.68, hold, done);
+  ctx.restore();
+
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.font = `700 17px ${FONT}`;
+  ctx.fillStyle = done >= 1 ? GREEN : '#fff';
+  ctx.fillText(done >= 1 ? `✓ ${name} blocked` : `Hold to block ${name}`, CX, fy + r + 16);
+  ctx.save();
+  ctx.globalAlpha = 0.55 * (1 - done);
+  ctx.fillStyle = GRAY;
+  ctx.font = `500 14px ${FONT}`;
+  ctx.fillText('Maybe later', CX, fy + r + 44);
+  ctx.restore();
+
+  drawTouch(ctx, CX + 4, fy + 6, prog(u, 0.75, 0.95) * (1 - prog(u, 2.3, 2.5)));
+}
+
+// Touch ID ridges: radius (0-1) and the arc in degrees, 270 being the top.
+const RIDGES: [number, number, number][] = [
+  [0.12, 140, 400], [0.27, 150, 330], [0.27, 350, 400], [0.42, 165, 390],
+  [0.57, 135, 300], [0.57, 320, 405], [0.72, 170, 380], [0.87, 195, 345],
+  [1.0, 215, 325],
+];
+
+/** A fingerprint glyph centred on 0,0 that colours in from the bottom as it's held. */
+function drawFingerprint(ctx: CanvasRenderingContext2D, size: number, hold: number, done: number) {
+  const ridges = () => {
+    ctx.beginPath();
+    RIDGES.forEach(([k, a0, a1]) => {
+      const rx = size * k * 0.82, ry = size * k;
+      ctx.moveTo(rx * Math.cos((a0 * Math.PI) / 180), size * 0.12 + ry * Math.sin((a0 * Math.PI) / 180));
+      ctx.ellipse(0, size * 0.12, rx, ry, 0, (a0 * Math.PI) / 180, (a1 * Math.PI) / 180);
+    });
+  };
+  ctx.lineWidth = 4.5;
+  ctx.lineCap = 'round';
+  ridges();
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+  ctx.stroke();
+  if (hold <= 0) return;
+  ctx.save();
+  const top = size * 1.15 - hold * size * 2.3;
+  ctx.beginPath();
+  ctx.rect(-size * 1.2, top, size * 2.4, size * 2.4);
+  ctx.clip();
+  ridges();
+  ctx.strokeStyle = done > 0 ? GREEN : phoneGradient(ctx, -size, size);
+  ctx.stroke();
+  ctx.restore();
+}
+
+/**
+ * The Screen Time shield exactly as iOS shows an Upshift block: dark blur with
+ * the block's tint over the app, its character, title, subtitle, white button.
+ * The backdrop fills the frame; the content stays inside the safe area.
+ */
+function drawShieldBackdrop(ctx: CanvasRenderingContext2D, u: number, cfg: ShieldConfig) {
+  const full = { x: 0, y: 0, w: W, h: H };
+  ctx.save();
+  ctx.filter = `blur(${30 * S}px)`;
+  drawFeed(ctx, full, u);
+  ctx.restore();
+  ctx.fillStyle = 'rgba(0,0,0,0.6)'; // .dark blur material
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = cfg.tint;
+  ctx.fillRect(0, 0, W, H);
+  drawStatusBar(ctx);
+  ctx.fillStyle = 'rgba(255,255,255,0.8)';
+  roundRect(ctx, W / 2 - 67, H - 13, 134, 5, 2.5);
+  ctx.fill();
+}
+
+function drawBlockApp(ctx: CanvasRenderingContext2D, u: number, a: PovAssets, cfg: ShieldConfig) {
+  // Laid out in iPhone points (16pt margins, so 358 wide) and scaled to fit
+  // the safe area, so line breaks and proportions match a real phone.
+  const k = CW / 358;
+  const vh = (SAFE.bottom - SAFE.top) / k;
+  const open = easeOut(prog(u, 0, 0.35));
+  ctx.save();
+  ctx.globalAlpha = open;
+  ctx.translate(CX, SAFE.top + (SAFE.bottom - SAFE.top) / 2);
+  ctx.scale(k * lerp(0.92, 1, open), k * lerp(0.92, 1, open));
+  ctx.translate(0, -vh / 2);
+
+  const bh = 50, by = vh - 16 - bh;
+  const icon = 76;
+  // UIKit keeps "\n"s as empty lines, including a leading one.
+  const split = (text: string, font: string) => {
+    ctx.font = font;
+    return text.split('\n').flatMap(p => (p ? wrap(ctx, p, 340) : ['']));
+  };
+  const titleFont = `700 22px ${FONT}`, subFont = `400 17px ${FONT}`;
+  const titleLines = split(cfg.title, titleFont);
+  const lines = split(cfg.subtitle, subFont);
+  const th = 28, lh = 22;
+  const blockH = icon + 18 + titleLines.length * th + 6 + lines.length * lh;
+  let y = (by - 20 - blockH) / 2;
+
+  const img = a.icons[cfg.icon];
+  if (img && img.complete && img.naturalWidth) ctx.drawImage(img, -icon / 2, y, icon, icon);
+  y += icon + 18;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = '#fff';
+  ctx.font = titleFont;
+  titleLines.forEach(l => { if (l) ctx.fillText(l, 0, y); y += th; });
+  y += 6;
+  ctx.font = subFont;
+  ctx.fillStyle = cfg.subtitleColor;
+  lines.forEach(l => { if (l) ctx.fillText(l, 0, y); y += lh; });
+
+  drawButton(ctx, cfg.button, 0, by, 358, bh, prog(u, 2.45, 2.6) * (1 - prog(u, 2.75, 2.9)));
+  drawTouch(ctx, 36, by + bh / 2, prog(u, 2.25, 2.4) * (1 - prog(u, 2.85, 3.05)));
+  ctx.restore();
+}
+
+/** A short-video feed, enough to read as the app being open behind the shield. */
+function drawFeed(ctx: CanvasRenderingContext2D, p: { x: number; y: number; w: number; h: number }, u: number) {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(p.x, p.y, p.w, p.h);
+  const drift = Math.sin(u * 1.5) * 10;
+  const blob = (x: number, y: number, r: number, color: string) => {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, color);
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+  };
+  blob(p.x + p.w * 0.35 + drift, p.y + p.h * 0.4, p.w * 0.7, 'rgba(254,44,85,0.75)');
+  blob(p.x + p.w * 0.7 - drift, p.y + p.h * 0.6, p.w * 0.6, 'rgba(37,244,238,0.55)');
+  blob(p.x + p.w * 0.5, p.y + p.h * 0.25, p.w * 0.45, 'rgba(255,200,90,0.45)');
+}
+
+/** iPhone status bar across the top of the frame: time, Dynamic Island, battery. */
+function drawStatusBar(ctx: CanvasRenderingContext2D) {
+  roundRect(ctx, W / 2 - 63, 11, 126, 37, 18.5);
+  ctx.fillStyle = '#000';
+  ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.font = `600 17px ${FONT}`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('9:41', 64, 30);
+  const bx = W - 62, by = 24;
+  roundRect(ctx, bx, by, 26, 12, 3.5);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+  ctx.stroke();
+  roundRect(ctx, bx + 2, by + 2, 18, 8, 2);
+  ctx.fill();
+}
+
+/** The top site typed into Safari, landing on Upshift's blocked page. */
+function drawBlockWeb(ctx: CanvasRenderingContext2D, u: number, d: Derived, a: PovAssets) {
+  const target = d.toxic[0]?.id ?? 'pornhub';
+  const domain = domainFor(target);
+  const bottom = drawTitle(ctx, 'The next night, 3am.', 'Just one quick look…');
+
+  const x = SAFE.left, w = CW, top = bottom + 18, bot = SAFE.bottom;
+  ctx.save();
+  roundRect(ctx, x, top, w, bot - top, 24);
+  ctx.fillStyle = '#1c1c1e';
+  ctx.fill();
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.stroke();
+  ctx.clip();
+
+  const barH = 40, barX = x + 12, barW = w - 24, barY = bot - barH - 12;
+  const pageBottom = barY - 10;
+  const loaded = easeOut(prog(u, 2.0, 2.35));
+
+  // Start page with blank favourites
+  if (loaded < 1) {
+    ctx.save();
+    ctx.globalAlpha = 1 - loaded;
+    ctx.fillStyle = '#fff';
+    ctx.font = `700 18px ${FONT}`;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillText('Favorites', x + 18, top + 22);
+    const gap = 14;
+    const tile = (w - 36 - gap * 3) / 4;
+    for (let i = 0; i < 8; i++) {
+      const c = i % 4, r = Math.floor(i / 4);
+      roundRect(ctx, x + 18 + c * (tile + gap), top + 56 + r * (tile + 30), tile, tile, 12);
+      ctx.fillStyle = 'rgba(255,255,255,0.08)';
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  // Upshift's blocked page
+  if (loaded > 0) {
+    ctx.save();
+    ctx.globalAlpha = loaded;
+    const g = ctx.createLinearGradient(0, top, 0, pageBottom);
+    g.addColorStop(0, 'rgba(77,153,255,0.28)');
+    g.addColorStop(0.65, 'rgba(28,28,30,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(x, top, w, pageBottom - top);
+    ctx.translate(0, (1 - loaded) * 16);
+
+    let y = top + 20;
+    drawUpshiftIcon(ctx, a, CX - 26, y, 52);
+    y += 62;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = '#fff';
+    ctx.font = `700 24px ${FONT}`;
+    ctx.fillText('Not today. 🧠', CX, y);
+    y += 36;
+    ctx.font = `400 14px ${FONT}`;
+    ctx.fillStyle = 'rgba(235,235,245,0.6)';
+    [`${domain} is blocked by Upshift.`, "The urge passes in a few minutes. Your streak doesn't come back."].forEach((para, i) => {
+      if (i) y += 8;
+      wrap(ctx, para, w - 50).forEach(l => { ctx.fillText(l, CX, y); y += 19; });
+    });
+
+    y += 14;
+    ctx.font = `600 14px ${ROUNDED}`;
+    const streak = '🔥 12 day streak';
+    const pw = ctx.measureText(streak).width + 28;
+    roundRect(ctx, CX - pw / 2, y, pw, 30, 15);
+    ctx.fillStyle = 'rgba(255,149,0,0.18)';
+    ctx.fill();
+    ctx.fillStyle = '#ff9f0a';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(streak, CX, y + 15);
+
+    const by = pageBottom - 54;
+    drawButton(ctx, 'Back to my quests', CX, by, w - 60, 46, prog(u, 3.7, 3.85) * (1 - prog(u, 4.0, 4.15)));
+    drawTouch(ctx, CX + 40, by + 24, prog(u, 3.5, 3.65) * (1 - prog(u, 4.1, 4.3)));
+    ctx.restore();
+  }
+
+  // Address bar: tap, type the site, go, load.
+  roundRect(ctx, barX, barY, barW, barH, 12);
+  ctx.fillStyle = '#2c2c2e';
+  ctx.fill();
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center';
+  const cy = barY + barH / 2;
+  if (u < 1.5) {
+    const typed = domain.slice(0, Math.round(prog(u, 0.55, 1.35) * domain.length));
+    ctx.font = `400 16px ${FONT}`;
+    ctx.fillStyle = typed ? '#fff' : GRAY;
+    const text = typed || 'Search or enter website name';
+    ctx.fillText(text, CX, cy);
+    if (u > 0.4 && Math.floor(u * 3) % 2 === 0) {
+      const cx = typed ? CX + ctx.measureText(text).width / 2 + 2 : CX - ctx.measureText(text).width / 2 - 4;
+      ctx.fillStyle = BLUE;
+      ctx.fillRect(cx, cy - 10, 2, 20);
+    }
+  } else {
+    ctx.font = `600 15px ${FONT}`;
+    ctx.fillStyle = '#fff';
+    const tw = ctx.measureText(domain).width;
+    ctx.fillText(domain, CX + 8, cy);
+    ctx.save();
+    ctx.globalAlpha *= 0.6;
+    drawLock(ctx, CX - tw / 2 - 6, cy, 9);
+    ctx.restore();
+    const load = easeOut(prog(u, 1.5, 2.0));
+    const fade = 1 - prog(u, 2.05, 2.25);
+    if (fade > 0) {
+      ctx.fillStyle = withAlpha(BLUE, fade);
+      ctx.fillRect(barX + 10, barY + barH - 3, (barW - 20) * load, 2.5);
+    }
+  }
+  drawTouch(ctx, CX + 20, cy, prog(u, 0.1, 0.25) * (1 - prog(u, 0.4, 0.55)));
+  drawTouch(ctx, CX + 110, cy, prog(u, 1.35, 1.42) * (1 - prog(u, 1.5, 1.6)));
+  ctx.restore();
+}
+
+/** A fingertip on the glass. */
+function drawTouch(ctx: CanvasRenderingContext2D, x: number, y: number, alpha: number) {
+  if (alpha <= 0) return;
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(x, y, 22, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(255,255,255,${0.28 * alpha})`;
+  ctx.fill();
+  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = `rgba(255,255,255,${0.5 * alpha})`;
+  ctx.stroke();
+  ctx.restore();
+}
+
+/** White button like the shield's primary one; `press` shrinks it a touch. */
+function drawButton(ctx: CanvasRenderingContext2D, label: string, cx: number, y: number, w: number, h: number, press: number) {
+  ctx.save();
+  ctx.translate(cx, y + h / 2);
+  const k = 1 - 0.04 * press;
+  ctx.scale(k, k);
+  roundRect(ctx, -w / 2, -h / 2, w, h, 14);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+  ctx.fillStyle = '#000';
+  ctx.font = `600 17px ${FONT}`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(label, 0, 1);
+  ctx.restore();
+}
+
+function drawUpshiftIcon(ctx: CanvasRenderingContext2D, a: PovAssets, x: number, y: number, size: number) {
+  const icon = a.icons.upshift;
+  ctx.save();
+  roundRect(ctx, x, y, size, size, size * 0.22);
+  ctx.clip();
+  if (icon && icon.complete && icon.naturalWidth) ctx.drawImage(icon, x, y, size, size);
+  else { ctx.fillStyle = '#333'; ctx.fill(); }
+  ctx.restore();
 }
 
 function drawCrown(ctx: CanvasRenderingContext2D, cx: number, bottom: number) {
