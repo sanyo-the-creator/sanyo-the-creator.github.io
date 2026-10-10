@@ -1,0 +1,33 @@
+<!doctype html><meta charset="utf-8"><title>Send saved presets</title>
+<style>
+  body{background:#111;color:#eee;font:14px/1.6 system-ui;margin:0;padding:24px}
+  h1{font-size:18px;margin:0 0 4px}
+  .browser{font-size:20px;font-weight:700;margin:10px 0;padding:10px 14px;border-radius:8px;display:inline-block}
+  .safari{background:#0a4;color:#fff} .other{background:#a30;color:#fff}
+  pre{background:#000;padding:12px;border-radius:8px;white-space:pre-wrap;word-break:break-all;
+      font:12px monospace;color:#8f8;max-height:45vh;overflow:auto}
+  #status{font-size:16px;margin:12px 0;color:#ffd479}
+</style>
+<h1>Saved Good / Chopped presets</h1>
+<div id="browser" class="browser">…</div>
+<div id="status">reading…</div>
+<pre id="out"></pre>
+<script>
+const ua = navigator.userAgent;
+const isSafari = /AppleWebKit/.test(ua) && !/Chrome|Chromium|Edg\//.test(ua);
+const b = document.getElementById('browser');
+b.className = 'browser ' + (isSafari ? 'safari' : 'other');
+b.textContent = isSafari ? '✓ This IS Safari — good' : '✗ This is NOT Safari (open this URL in Safari instead)';
+
+const keys = ['upshift-creator-quests-presets', 'upshift-creator-mix-presets'];
+const data = { _browser: isSafari ? 'safari' : 'other', _ua: ua };
+for (const k of keys) { try { data[k] = JSON.parse(localStorage.getItem(k)); } catch (e) { data[k] = null; } }
+const text = JSON.stringify(data, null, 2);
+document.getElementById('out').textContent = text;
+const found = keys.filter(k => data[k]);
+fetch('http://localhost:3100/presets.json', { method: 'POST', body: text })
+  .then(() => { document.getElementById('status').textContent = found.length
+      ? 'SENT from ' + (isSafari ? 'Safari' : 'NOT-Safari') + ' — found: ' + found.join(', ')
+      : 'SENT — but NOTHING is saved in this browser (press "Save current as Good stats" on the Mix page first).'; })
+  .catch(e => { document.getElementById('status').textContent = 'Could not send — copy the text below to Claude.'; });
+</script>
