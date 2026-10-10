@@ -62,6 +62,18 @@ export const CHOPPED_SCORECARD: ScoreCardData = {
   appsBlocked: false,
 };
 
+/** Gooner: screen time eaten by the adult sites. */
+export const GOONER_SCORECARD: ScoreCardData = {
+  name: 'Jake Miller',
+  handle: 'jakemiller',
+  verified: true,
+  score: 12,
+  topPercent: 91,
+  screenTime: 772,
+  screenTimeChange: 52,
+  appsBlocked: false,
+};
+
 type Props = {
   data: ScoreCardData;
   stats: ScoreStat[];
@@ -72,6 +84,8 @@ type Props = {
   /** 0..1, used to count values up when exporting video. */
   progress: number;
   onPickImage: () => void;
+  /** App ids for the blocker row; defaults to the usual distracting apps. */
+  blockedAppIds?: string[];
 };
 
 // The double chevron from the in-app header.
@@ -91,7 +105,8 @@ const scoreTier = (score: number) => {
 
 // The apps people most want gone, shown as locked (or not) by Upshift.
 const BLOCKED_APP_IDS = ['tiktok', 'instagram', 'pornhub', 'twitter'];
-const BLOCKED_APPS = BLOCKED_APP_IDS.map(id => AVAILABLE_APPS.find(a => a.id === id)!).filter(Boolean);
+/** The gooner set: the adult sites and the feeds that lead there. */
+export const GOONER_BLOCKED_APP_IDS = ['pornhub', 'onlyfans', 'reddit', 'twitter'];
 
 const formatMinutes = (min: number) => {
   const m = Math.round(min);
@@ -106,7 +121,8 @@ const LockIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-const ScoreCard: React.FC<Props> = ({ data, image, imageX, imageY, imageZoom, progress, onPickImage }) => {
+const ScoreCard: React.FC<Props> = ({ data, image, imageX, imageY, imageZoom, progress, onPickImage, blockedAppIds = BLOCKED_APP_IDS }) => {
+  const blockedApps = blockedAppIds.map(id => AVAILABLE_APPS.find(a => a.id === id)!).filter(Boolean);
   const shown = (n: number) => Math.round(n * progress);
   const tier = scoreTier(data.score);
   const down = data.screenTimeChange <= 0;
@@ -134,7 +150,7 @@ const ScoreCard: React.FC<Props> = ({ data, image, imageX, imageY, imageZoom, pr
         {/* App blocker: the apps that eat the day, locked (or wide open) */}
         <div className={`scorecard-blocker ${data.appsBlocked ? 'on' : 'off'}`}>
           <div className="scorecard-blocker-apps">
-            {BLOCKED_APPS.map(app => (
+            {blockedApps.map(app => (
               <span key={app.id} className="scorecard-blocker-app">
                 <img src={app.imageUrl} alt={app.name} crossOrigin="anonymous" />
                 {data.appsBlocked ? (

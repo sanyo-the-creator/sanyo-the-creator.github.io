@@ -159,7 +159,7 @@ export const AVAILABLE_APPS = [
   { id: 'bible', name: 'BIBLE', color: '#835332', imageUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f6/7a/a5/f67aa591-e6f2-7946-6aef-a98651601a3b/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-0-85-220.png/100x100bb.jpg' },
   { id: 'tinder', name: 'TINDER', color: '#FE3C72', imageUrl: 'https://icon.horse/icon/tinder.com' },
   { id: 'bumble', name: 'BUMBLE', color: '#FFC629', imageUrl: 'https://icon.horse/icon/bumble.com' },
-  { id: 'pornhub', name: 'PORNHUB', color: '#ff9900', imageUrl: 'https://icon.horse/icon/pornhub.com' },
+  { id: 'pornhub', name: 'CORNHUB', color: '#ff9900', imageUrl: 'https://icon.horse/icon/pornhub.com' },
   { id: 'onlyfans', name: 'ONLYFANS', color: '#00AFF0', imageUrl: 'https://icon.horse/icon/onlyfans.com' },
   { id: 'upshift', name: 'UPSHIFT', color: '#75FFF1', imageUrl: upshiftIcon },
 

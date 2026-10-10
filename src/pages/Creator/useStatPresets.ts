@@ -2,17 +2,18 @@ import { useCallback, useEffect, useState } from 'react';
 
 export type StatLevel = 'Good' | 'Chopped';
 
-type Presets<T> = Record<StatLevel, T[]>;
+type Presets<T, L extends string> = Record<L, T[]>;
 
 /**
- * Keeps the Good / Chopped stat sets in localStorage so whatever is set up on
+ * Keeps the stat sets (Good / Chopped, plus any extra levels) in localStorage so whatever is set up on
  * the page survives a reload (and a redeploy) instead of living only in React
  * state. `defaults` seed the presets the first time the page is opened.
  */
-export function useStatPresets<T>(storageKey: string, defaults: Presets<T>) {
-  const [level, setLevel] = useState<StatLevel>('Good');
-  const [presets, setPresets] = useState<Presets<T>>(defaults);
-  const [items, setItems] = useState<T[]>(defaults.Good);
+export function useStatPresets<T, L extends string = StatLevel>(storageKey: string, defaults: Presets<T, L>) {
+  const levels = Object.keys(defaults) as L[];
+  const [level, setLevel] = useState<L>(levels[0]);
+  const [presets, setPresets] = useState<Presets<T, L>>(defaults);
+  const [items, setItems] = useState<T[]>(defaults[levels[0]]);
   const [savedAt, setSavedAt] = useState<number | null>(null);
 
   // Restore saved presets once, on mount.
@@ -20,20 +21,18 @@ export function useStatPresets<T>(storageKey: string, defaults: Presets<T>) {
     try {
       const raw = localStorage.getItem(storageKey);
       if (!raw) return;
-      const stored = JSON.parse(raw) as Partial<Presets<T>>;
-      const merged: Presets<T> = {
-        Good: stored.Good ?? defaults.Good,
-        Chopped: stored.Chopped ?? defaults.Chopped,
-      };
+      const stored = JSON.parse(raw) as Partial<Presets<T, L>>;
+      const merged = { ...defaults };
+      levels.forEach(l => { merged[l] = stored[l] ?? defaults[l]; });
       setPresets(merged);
-      setItems(merged.Good);
+      setItems(merged[levels[0]]);
     } catch {
       // Corrupt or unavailable storage: fall back to the built-in defaults.
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storageKey]);
 
-  const selectLevel = useCallback((next: StatLevel) => {
+  const selectLevel = useCallback((next: L) => {
     setLevel(next);
     setItems(presets[next]);
   }, [presets]);

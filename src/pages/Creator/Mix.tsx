@@ -21,7 +21,7 @@ import { useStatPresets } from './useStatPresets';
 import { freezeAnimationsAt } from './captureAnimations';
 import { makeShadowsExportSafe } from './exportSafeShadows';
 import { warmUpCapture } from './warmUpCapture';
-import ScoreCard, { ScoreCardData, ScoreStat, GOOD_SCORECARD, CHOPPED_SCORECARD, CHOPPED_SCREEN_TIME } from './ScoreCard';
+import ScoreCard, { ScoreCardData, ScoreStat, GOOD_SCORECARD, CHOPPED_SCORECARD, GOONER_SCORECARD, GOONER_BLOCKED_APP_IDS, CHOPPED_SCREEN_TIME } from './ScoreCard';
 
 import { AVAILABLE_APPS, PRODUCTIVE_IDS } from './ScreenTime';
 
@@ -219,7 +219,7 @@ const getProgressWidth = (card: MixCard, videoProgress: number): number => {
 };
 
 /**
- * The two stat presets behind the Good / Chopped switch, as set up on the page
+ * The Good / Chopped stat presets behind the level switch, as set up on the page
  * and saved from there. The Save button still overrides these per browser;
  * these are what a fresh browser (or a Reset) starts from.
  */
@@ -240,6 +240,28 @@ const CHOPPED_CARDS: MixCard[] = [
   { id: "5", mode: "quest", emoji: '😴', name: "Sleep", achieved: 12, goal: 8, unit: "h", appId: "whatsapp", minutes: 90 },
   { id: "6", mode: "quest", emoji: '❌', name: "RELAPSES", achieved: 2, goal: 0, unit: '\u200B', type: "quit", appId: "spotify", minutes: 180 },
 ];
+
+/** Gooner variant of Good: the adult sites barely get opened. */
+const GOOD_GOONER_CARDS: MixCard[] = [
+  { id: "1", mode: "screentime", emoji: '🔞', name: "CORNHUB", achieved: 0, goal: 0, unit: "", appId: "pornhub", minutes: 0 },
+  { id: "2", mode: "screentime", emoji: '🔞', name: "ONLYFANS", achieved: 0, goal: 0, unit: "", appId: "onlyfans", minutes: 0 },
+  { id: "3", mode: "screentime", emoji: '📱', name: "REDDIT", achieved: 0, goal: 0, unit: "", appId: "reddit", minutes: 14 },
+  { id: "4", mode: "screentime", emoji: '📱', name: "X", achieved: 0, goal: 0, unit: "", appId: "twitter", minutes: 9 },
+  { id: "5", mode: "quest", emoji: '😴', name: "sleep", achieved: 7.3, goal: 8, unit: "h", appId: "whatsapp", minutes: 15 },
+  { id: "6", mode: "quest", emoji: '❌', name: "RELAPSES", achieved: 0, goal: 0, unit: '\u200B', type: "quit", appId: "spotify", minutes: 60 },
+];
+
+/** Gooner variant of Chopped: the day goes to Cornhub, OnlyFans, Reddit and X. */
+const CHOPPED_GOONER_CARDS: MixCard[] = [
+  { id: "1", mode: "screentime", emoji: '🔞', name: "CORNHUB", achieved: 0, goal: 0, unit: "", appId: "pornhub", minutes: 284 },
+  { id: "2", mode: "screentime", emoji: '🔞', name: "ONLYFANS", achieved: 0, goal: 0, unit: "", appId: "onlyfans", minutes: 197 },
+  { id: "3", mode: "screentime", emoji: '📱', name: "REDDIT", achieved: 0, goal: 0, unit: "", appId: "reddit", minutes: 126 },
+  { id: "4", mode: "screentime", emoji: '📱', name: "X", achieved: 0, goal: 0, unit: "", appId: "twitter", minutes: 94 },
+  { id: "5", mode: "quest", emoji: '😴', name: "Sleep", achieved: 4.5, goal: 8, unit: "h", appId: "whatsapp", minutes: 90 },
+  { id: "6", mode: "quest", emoji: '❌', name: "RELAPSES", achieved: 9, goal: 0, unit: '\u200B', type: "quit", appId: "spotify", minutes: 180 },
+];
+
+type MixLevel = 'Good' | 'Chopped' | 'GoodGooner' | 'ChoppedGooner';
 
 const UNITS = [
   { label: 'None', value: '' },
@@ -286,10 +308,18 @@ const Mix: React.FC = () => {
     saveCurrent: saveStatPreset,
     resetPresets: resetStatPresets,
     savedAt,
-  } = useStatPresets<MixCard>('upshift-creator-mix-presets', {
+  } = useStatPresets<MixCard, MixLevel>('upshift-creator-mix-presets', {
     Good: GOOD_CARDS,
     Chopped: CHOPPED_CARDS,
+    GoodGooner: GOOD_GOONER_CARDS,
+    ChoppedGooner: CHOPPED_GOONER_CARDS,
   });
+  // Good / Chopped and Normal / Gooner are two switches over the four presets.
+  const isGooner = statLevel.endsWith('Gooner');
+  const baseLevel: 'Good' | 'Chopped' = statLevel.startsWith('Chopped') ? 'Chopped' : 'Good';
+  const levelLabel = isGooner ? `${baseLevel} gooner` : baseLevel;
+  const pickLevel = (base: 'Good' | 'Chopped', gooner: boolean) =>
+    applyStatLevel(gooner ? `${base}Gooner` : base);
 
   // Image Adjustment States
   const [pendingCropSrc, setPendingCropSrc] = useState<string | null>(null);
@@ -300,10 +330,11 @@ const Mix: React.FC = () => {
   const [layout, setLayout] = useState<'Classic' | 'Scorecard'>('Classic');
   const [scoreCard, setScoreCard] = useState<ScoreCardData>(GOOD_SCORECARD);
 
-  // The Good / Chopped switch drives the scorecard numbers too.
+  // The Good / Chopped and Gooner switches drive the scorecard numbers too.
   useEffect(() => {
     setScoreCard(prev => {
-      const preset = statLevel === 'Chopped' ? CHOPPED_SCORECARD : GOOD_SCORECARD;
+      const preset = statLevel === 'ChoppedGooner' ? GOONER_SCORECARD
+        : statLevel === 'Chopped' ? CHOPPED_SCORECARD : GOOD_SCORECARD;
       return { ...preset, name: prev.name, handle: prev.handle, verified: prev.verified };
     });
   }, [statLevel]);
@@ -780,6 +811,7 @@ const Mix: React.FC = () => {
                   imageZoom={imageZoom}
                   progress={videoProgress}
                   onPickImage={() => fileInputRef.current?.click()}
+                  blockedAppIds={isGooner ? GOONER_BLOCKED_APP_IDS : undefined}
                 />
               ) : (
               <div className="mockup-content">
@@ -842,22 +874,31 @@ const Mix: React.FC = () => {
 
           <div className="gender-toggle stat-level-toggle">
             <button
-              className={`toggle-opt ${statLevel === 'Good' ? 'active' : ''}`}
-              onClick={() => applyStatLevel('Good')}
+              className={`toggle-opt ${baseLevel === 'Good' ? 'active' : ''}`}
+              onClick={() => pickLevel('Good', isGooner)}
             >
               Good
             </button>
             <button
-              className={`toggle-opt ${statLevel === 'Chopped' ? 'active' : ''}`}
-              onClick={() => applyStatLevel('Chopped')}
+              className={`toggle-opt ${baseLevel === 'Chopped' ? 'active' : ''}`}
+              onClick={() => pickLevel('Chopped', isGooner)}
             >
               Chopped
             </button>
           </div>
 
+          <div className="gender-toggle stat-level-toggle">
+            <button className={`toggle-opt ${!isGooner ? 'active' : ''}`} onClick={() => pickLevel(baseLevel, false)}>
+              Normal
+            </button>
+            <button className={`toggle-opt ${isGooner ? 'active' : ''}`} onClick={() => pickLevel(baseLevel, true)}>
+              Gooner
+            </button>
+          </div>
+
           <div className="preset-actions">
             <button className="preset-btn save" onClick={saveStatPreset}>
-              {savedAt ? `Saved \u2713 \u2014 update ${statLevel} stats` : `Save current as ${statLevel} stats`}
+              {savedAt ? `Saved \u2713 \u2014 update ${levelLabel} stats` : `Save current as ${levelLabel} stats`}
             </button>
             <button className="preset-btn reset" onClick={resetStatPresets}>
               Reset
@@ -962,10 +1003,10 @@ const Mix: React.FC = () => {
                   <input className="name-input" type="number" value={scoreCard.score} onChange={(e) => updateScoreCard({ score: Number(e.target.value) || 0 })} />
                 </div>
                 <div className="input-group">
-                  <label>Screen time (min/day){statLevel === 'Chopped' ? ' \u00b7 8h\u201314h' : ''}</label>
+                  <label>Screen time (min/day){baseLevel === 'Chopped' ? ' \u00b7 8h\u201314h' : ''}</label>
                   <input className="name-input" type="number" value={scoreCard.screenTime} onChange={(e) => updateScoreCard({ screenTime: Number(e.target.value) || 0 })}
                   // Chopped keeps screen time in its 8h-14h band.
-                  onBlur={() => statLevel === 'Chopped' && updateScoreCard({
+                  onBlur={() => baseLevel === 'Chopped' && updateScoreCard({
                     screenTime: Math.min(CHOPPED_SCREEN_TIME.max, Math.max(CHOPPED_SCREEN_TIME.min, scoreCard.screenTime)),
                   })} />
                 </div>

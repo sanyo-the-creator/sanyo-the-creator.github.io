@@ -11,11 +11,16 @@ import {
 } from 'react-icons/ri';
 import { Muxer, ArrayBufferTarget } from 'mp4-muxer';
 import upshiftIcon from '../../assets/icons/icon.png';
+import shieldWalkIcon from '../../assets/images/pov/earthTuxedoWalk.png';
+import shieldTimeIcon from '../../assets/images/pov/hodziny.png';
+import shieldQuestIcon from '../../assets/images/pov/earthShhh.png';
+import shieldShrugIcon from '../../assets/images/pov/shrug.png';
+import shieldWorkIcon from '../../assets/images/pov/work.png';
 import './Creator.css';
 import { AVAILABLE_APPS, PRODUCTIVE_IDS } from './ScreenTime';
 import {
-  OUT_W, OUT_H, PovApp, PovAssets, PovSettings, FaceShape, PovLayout,
-  buildTimeline, faceTimeAt, drawSafeZones, renderFrame, timelineDuration,
+  OUT_W, OUT_H, PovApp, PovAssets, PovSettings, FaceShape, PovLayout, PovEnding, ShieldKind,
+  SCENE_LABELS, SHIELDS, buildTimeline, faceTimeAt, drawSafeZones, renderFrame, timelineDuration,
 } from './pov/povRenderer';
 
 const RiArrowLeftLine = _RiArrowLeftLine as any;
@@ -39,14 +44,30 @@ const appName = (id: string) => {
   return raw.charAt(0) + raw.slice(1).toLowerCase();
 };
 
-/** 11h a day, led by the three apps that make people stop scrolling. */
-const DEFAULT_APPS: PovApp[] = [
-  { id: 'tiktok', minutes: 251 },
-  { id: 'pornhub', minutes: 163 },
-  { id: 'onlyfans', minutes: 118 },
-  { id: 'instagram', minutes: 72 },
-  { id: 'safari', minutes: 56 },
-];
+type StatsMode = 'screentime' | 'gooner';
+
+/** Each stats mode ends on its own block: the app's shield, or the site in Safari. */
+const MODE_ENDING: Record<StatsMode, PovEnding> = { screentime: 'app', gooner: 'web' };
+
+/** App presets for each stats mode; the toggle swaps between them. */
+const PRESET_APPS: Record<StatsMode, PovApp[]> = {
+  // ~10h a day of social media.
+  screentime: [
+    { id: 'tiktok', minutes: 251 },
+    { id: 'instagram', minutes: 142 },
+    { id: 'snapchat', minutes: 96 },
+    { id: 'youtube', minutes: 72 },
+    { id: 'safari', minutes: 56 },
+  ],
+  // ~11h a day, led by the adult sites.
+  gooner: [
+    { id: 'pornhub', minutes: 284 },
+    { id: 'onlyfans', minutes: 197 },
+    { id: 'tiktok', minutes: 88 },
+    { id: 'reddit', minutes: 64 },
+    { id: 'safari', minutes: 41 },
+  ],
+};
 
 type Clip = { url: string; duration: number; name: string };
 
@@ -68,9 +89,10 @@ const Pov: React.FC = () => {
   const fromPortal = searchParams.get('from') === 'portal';
 
   const [face, setFace] = useState<Clip | null>(null);
+  const [mode, setMode] = useState<StatsMode>('screentime');
   const [settings, setSettings] = useState<PovSettings>({
     guessHours: 3,
-    apps: DEFAULT_APPS,
+    apps: PRESET_APPS.screentime,
     productiveIds: PRODUCTIVE_IDS,
     names: {},
     showLabel: true,
@@ -80,6 +102,8 @@ const Pov: React.FC = () => {
     faceSize: 300,
     faceStart: 0,
     appScale: 0.76,
+    ending: 'app',
+    shield: 'timeLimit',
   });
   const [playing, setPlaying] = useState(true);
   const [showSafe, setShowSafe] = useState(true);
@@ -92,6 +116,9 @@ const Pov: React.FC = () => {
   const faceVideo = useRef<HTMLVideoElement>(null);
   const iconsRef = useRef<Record<string, HTMLImageElement>>({});
   const clockRef = useRef({ start: performance.now(), offset: 0 });
+  const trackRef = useRef<HTMLDivElement>(null);
+  const scrubRef = useRef<{ wasPlaying: boolean } | null>(null);
+  const [hover, setHover] = useState<number | null>(null);
 
   const isIphone = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const supportsExport = !isIphone && typeof (window as any).VideoEncoder !== 'undefined';
@@ -101,7 +128,7 @@ const Pov: React.FC = () => {
     names: Object.fromEntries(settings.apps.map(a => [a.id, appName(a.id)])),
   }), [settings]);
 
-  const scenes = useMemo(() => buildTimeline(), []);
+  const scenes = useMemo(() => buildTimeline(settings.ending), [settings.ending]);
   const total = timelineDuration(scenes);
 
   // Icons for every app that can appear, loaded with CORS so the canvas stays exportable.
@@ -114,6 +141,11 @@ const Pov: React.FC = () => {
       iconsRef.current[id] = img;
     };
     load('upshift', upshiftIcon);
+    load('shield_earthTuxedoWalk', shieldWalkIcon);
+    load('shield_hodziny', shieldTimeIcon);
+    load('shield_earthShhh', shieldQuestIcon);
+    load('shield_shrug', shieldShrugIcon);
+    load('shield_work', shieldWorkIcon);
     settings.apps.forEach(a => {
       const def = AVAILABLE_APPS.find(x => x.id === a.id);
       if (def) load(a.id, def.imageUrl);
@@ -180,6 +212,45 @@ const Pov: React.FC = () => {
     clockRef.current = { start: performance.now(), offset: 0 };
     if (!playing) setPlaying(true);
   };
+
+  // MARK: - Timeline
+
+  const timeAtPointer = (clientX: number) => {
+    const rect = trackRef.current!.getBoundingClientRect();
+    return Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1) * total;
+  };
+
+  const seekPreview = (t: number) => {
+    clockRef.current = { start: performance.now(), offset: Math.min(t, total - 0.001) };
+  };
+
+  // Scrubbing pauses the preview, like YouTube, and picks up again on release.
+  const startScrub = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (exporting) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    scrubRef.current = { wasPlaying: playing };
+    setPlaying(false);
+    seekPreview(timeAtPointer(e.clientX));
+  };
+
+  const moveScrub = (e: React.PointerEvent<HTMLDivElement>) => {
+    const t = timeAtPointer(e.clientX);
+    setHover(t);
+    if (scrubRef.current) seekPreview(t);
+  };
+
+  const endScrub = () => {
+    const scrub = scrubRef.current;
+    if (!scrub) return;
+    scrubRef.current = null;
+    if (scrub.wasPlaying) {
+      clockRef.current.start = performance.now();
+      setPlaying(true);
+    }
+  };
+
+  const chapterAt = (t: number) =>
+    scenes.find(sc => t >= sc.start && t < sc.start + sc.duration) ?? scenes[scenes.length - 1];
 
   const onClip = (setter: (c: Clip | null) => void) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -300,12 +371,35 @@ const Pov: React.FC = () => {
           <div className="pov-preview">
             <canvas ref={canvasRef} width={OUT_W} height={OUT_H} className="pov-canvas" />
           </div>
+          <div
+            ref={trackRef}
+            className={`pov-timeline ${exporting ? 'disabled' : ''}`}
+            onPointerDown={startScrub}
+            onPointerMove={moveScrub}
+            onPointerUp={endScrub}
+            onPointerCancel={endScrub}
+            onPointerLeave={() => setHover(null)}
+          >
+            {scenes.map(sc => (
+              <div key={sc.kind} className="pov-chapter" style={{ flexGrow: sc.duration }}>
+                <div className="pov-chapter-fill"
+                  style={{ width: `${Math.min(Math.max((time - sc.start) / sc.duration, 0), 1) * 100}%` }} />
+              </div>
+            ))}
+            <div className="pov-thumb" style={{ left: `${(time / Math.max(total, 0.01)) * 100}%` }} />
+            {hover !== null && (
+              <div className="pov-hover-label" style={{ left: `${(hover / Math.max(total, 0.01)) * 100}%` }}>
+                {SCENE_LABELS[chapterAt(hover).kind]} · {hover.toFixed(1)}s
+              </div>
+            )}
+          </div>
           <div className="pov-transport">
             <button className="pov-icon-btn" onClick={togglePlay} disabled={exporting}>
               {playing ? <RiPauseFill /> : <RiPlayFill />}
             </button>
             <button className="pov-text-btn" onClick={restart} disabled={exporting}>Restart</button>
             <span className="pov-time">{time.toFixed(1)}s / {total.toFixed(1)}s</span>
+            {scenes.length > 0 && <span className="pov-chapter-name">{SCENE_LABELS[chapterAt(time).kind]}</span>}
             <label className="pov-check">
               <input type="checkbox" checked={showSafe} onChange={e => setShowSafe(e.target.checked)} />
               Show TikTok UI
@@ -383,6 +477,19 @@ const Pov: React.FC = () => {
 
           <div className="adjust-box">
             <h3 className="adjust-title">2. Onboarding</h3>
+            <div className="gender-toggle">
+              {([['screentime', 'Screen time'], ['gooner', 'Gooner stats']] as [StatsMode, string][]).map(([key, label]) => (
+                <button key={key} className={`toggle-opt ${mode === key ? 'active' : ''}`}
+                  onClick={() => { setMode(key); update({ apps: PRESET_APPS[key], ending: MODE_ENDING[key] }); }}>
+                  {label}
+                </button>
+              ))}
+            </div>
+            <p className="pov-hint">
+              {mode === 'screentime'
+                ? 'Heavy social media use.'
+                : 'Most of the screen time on Cornhub and OnlyFans.'}
+            </p>
             <div className="slider-item">
               <div className="slider-meta">
                 <span className="slider-label">Their guess</span>
@@ -421,6 +528,35 @@ const Pov: React.FC = () => {
                 <input type="checkbox" checked={settings.showLabel} onChange={e => update({ showLabel: e.target.checked })} />
                 "Upshift App" label on the app screens
               </label>
+            )}
+          </div>
+
+          <div className="adjust-box">
+            <h3 className="adjust-title">3. Blocking ending</h3>
+            <div className="gender-toggle">
+              {([['app', 'Blocked app'], ['web', 'Blocked site'], ['none', 'Off']] as [PovEnding, string][]).map(([key, label]) => (
+                <button key={key} className={`toggle-opt ${settings.ending === key ? 'active' : ''}`}
+                  onClick={() => { update({ ending: key }); restart(); }}>
+                  {label}
+                </button>
+              ))}
+            </div>
+            <p className="pov-hint">
+              {settings.ending === 'app'
+                ? 'They hold the fingerprint to block their #1 app, then open it and hit the block screen.'
+                : settings.ending === 'web'
+                  ? 'They hold the fingerprint to block their #1 site, then type it into Safari and land on the Upshift blocked page.'
+                  : 'Ends on the toxic apps podium.'}
+            </p>
+            {settings.ending === 'app' && (
+              <div className="pov-presets">
+                {(Object.keys(SHIELDS) as ShieldKind[]).map(key => (
+                  <button key={key} className={`toggle-opt ${settings.shield === key ? 'active' : ''}`}
+                    onClick={() => update({ shield: key })}>
+                    {SHIELDS[key].label}
+                  </button>
+                ))}
+              </div>
             )}
           </div>
 
