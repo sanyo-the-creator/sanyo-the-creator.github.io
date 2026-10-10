@@ -8,13 +8,15 @@ import {
   RiVideoLine as _RiVideoLine,
   RiShieldLine as _RiShieldLine,
   RiQuillPenLine as _RiQuillPenLine,
-  RiSmartphoneLine as _RiSmartphoneLine
+  RiSmartphoneLine as _RiSmartphoneLine,
+  RiChatSmile2Line as _RiChatSmile2Line
 } from 'react-icons/ri';
 import './Creator.css';
 import LightRays from '../../components/common/LightRays/LightRays';
 import { useCampaignSettings } from '../../hooks/useCampaignSettings';
 
 const RiSmartphoneLine = _RiSmartphoneLine as any;
+const RiChatSmile2Line = _RiChatSmile2Line as any;
 const RiMagicLine = _RiMagicLine as any;
 const RiTimeLine = _RiTimeLine as any;
 const RiLayoutMasonryLine = _RiLayoutMasonryLine as any;
@@ -96,6 +98,18 @@ const CreatorLanding: React.FC = () => {
             <h2 className="tool-title">POV Video</h2>
             <p className="tool-description">
               Your character clip cut into the Upshift screen time reveal, exported as a 9:16 MP4
+            </p>
+          </div>
+        </Link>
+
+        <Link to={`/creator/snap${fromPortal ? '?from=portal' : ''}`} className="tool-card">
+          <div className="tool-icon-wrapper">
+            <RiChatSmile2Line />
+          </div>
+          <div className="tool-info">
+            <h2 className="tool-title">Snap Video</h2>
+            <p className="tool-description">
+              Upload a video and add Snapchat-style text bars and the digital time sticker
             </p>
           </div>
         </Link>

@@ -1225,3 +1225,21 @@
 .pov-unit { font-size: 12px; color: rgba(255, 255, 255, 0.45); }
 .pov-presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
 .pov-presets .pov-text-btn { text-transform: capitalize; }
+
+/* ---- Snap creator ---- */
+.snap-canvas { cursor: grab; touch-action: none; }
+.snap-canvas:active { cursor: grabbing; }
+.snap-item { border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 12px; margin-top: 12px; }
+.snap-item-kind { font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.75); }
+.snap-input {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  padding: 10px 12px;
+}
