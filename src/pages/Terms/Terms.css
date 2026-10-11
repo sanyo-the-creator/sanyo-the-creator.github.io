@@ -80,11 +80,12 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .terms-page {
-        padding: var(--spacing-lg) 0;
+        padding: 0 0 var(--spacing-lg);
     }
 
     .terms-section {
         padding: 0 var(--spacing-md);
+        margin-top: 96px;
     }
 
     .terms-card {
