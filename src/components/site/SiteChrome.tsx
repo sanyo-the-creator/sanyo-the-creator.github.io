@@ -74,12 +74,13 @@ export const SiteNav: React.FC = () => {
 };
 
 export const SiteFooter: React.FC = () => {
-  // The home page already ends with its own store buttons.
-  const isHome = useLocation().pathname === '/';
+  // Home and /download already show their own store buttons.
+  const { pathname } = useLocation();
+  const showStores = pathname !== '/' && !pathname.startsWith('/download');
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
-        {!isHome && <StoreButtons />}
+        {showStores && <StoreButtons />}
         <div className="site-footer-cols">
           <div>
             <h3>Product</h3>
