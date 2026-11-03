@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { SEO, StructuredData } from '../../components/common/SEO';
 import { SUPPORT_EMAIL } from '../../components/site/SiteChrome';
-import { faqGroups, faqItems } from '../../data/faqs';
+import { useLocale, rich } from '../../i18n';
 import './Faq.css';
 
 const Faq: React.FC = () => {
+  const { t, lang } = useLocale();
+  const F = t.faqPage;
   const [query, setQuery] = useState('');
   const q = query.trim().toLowerCase();
+  const faqGroups = t.faq.groups;
+  const faqItems = faqGroups.flatMap((g) => g.items);
 
   const groups = faqGroups
     .map((g) => ({
@@ -18,24 +22,31 @@ const Faq: React.FC = () => {
   return (
     <div className="faq-page">
       <SEO
-        title="FAQ - Upshift | Quests, Quest Blocker, Goals and More"
-        description="Answers about Upshift: quests and sidequests, the Quest Blocker, app blocks, goals, time tracking, friends, pricing and privacy."
-        keywords="upshift faq, quest blocker, app blocker help, habit tracker questions, screen time privacy"
+        title={t.meta.faq.title}
+        description={t.meta.faq.description}
+        keywords={t.meta.faq.keywords}
         image="https://joinupshift.com/icon.png"
         type="website"
       />
       <StructuredData type="faq" items={faqItems} />
+      <StructuredData
+        type="breadcrumb"
+        items={[
+          { name: 'Upshift', url: `https://joinupshift.com${lang === 'en' ? '/' : `/${lang}`}` },
+          { name: t.nav.faq, url: `https://joinupshift.com${lang === 'en' ? '' : `/${lang}`}/faq` },
+        ]}
+      />
 
       <section className="faq-intro">
-        <span className="site-eyebrow">Need Help?</span>
-        <h1>Frequently Asked <span className="faq-grad">Questions</span></h1>
-        <p>Everything about quests, the blocker, goals, friends and your account.</p>
+        <span className="site-eyebrow">{F.eyebrow}</span>
+        <h1>{rich(F.h1, 'faq-grad')}</h1>
+        <p>{F.intro}</p>
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search questions"
-          aria-label="Search questions"
+          placeholder={F.search}
+          aria-label={F.search}
         />
       </section>
 
@@ -56,12 +67,12 @@ const Faq: React.FC = () => {
         </section>
       ))}
 
-      {groups.length === 0 && <p className="faq-empty">No questions match your search.</p>}
+      {groups.length === 0 && <p className="faq-empty">{F.empty}</p>}
 
       <section className="faq-contact">
-        <h2>Still stuck?</h2>
-        <p>Email us and we'll get back to you.</p>
-        <a href={`mailto:${SUPPORT_EMAIL}`} className="site-cta">Email Support</a>
+        <h2>{F.stuckTitle}</h2>
+        <p>{F.stuckText}</p>
+        <a href={`mailto:${SUPPORT_EMAIL}`} className="site-cta">{F.stuckCta}</a>
       </section>
     </div>
   );

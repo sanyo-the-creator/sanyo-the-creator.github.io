@@ -43,7 +43,7 @@
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "dev:scraper": "node scripts/instagram-server.js",
     "start": "node scripts/generate-sitemap.js && cross-env NODE_OPTIONS=--max-old-space-size=8192 react-scripts start",
-    "build": "node scripts/generate-sitemap.js && cross-env NODE_OPTIONS=--max-old-space-size=8192 react-scripts build",
+    "build": "node scripts/generate-sitemap.js && cross-env NODE_OPTIONS=--max-old-space-size=8192 react-scripts build && node scripts/prerender.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

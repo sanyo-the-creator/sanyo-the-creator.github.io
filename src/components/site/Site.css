@@ -90,6 +90,10 @@
 .site-footer-cols h3 { font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
 .site-footer-cols div > a { display: block; color: #8b93a7; margin-bottom: 8px; transition: color .15s; }
 .site-footer-cols div > a:hover { color: #fff; }
+.site-langs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; max-width: 760px; }
+.site-langs a { color: #8b93a7; font-size: .9rem; transition: color .15s; }
+.site-langs a:hover, .site-langs a.active { color: #fff; }
+.site-langs a.active { font-weight: 700; }
 .site-footer-copy { color: #6f7789; font-size: .9rem; }
 @media (max-width: 640px) {
   .site-footer-cols { grid-template-columns: 1fr; text-align: center; }

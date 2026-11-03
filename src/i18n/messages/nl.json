@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "home": {
+      "title": "Upshift - Level up je leven | Gewoontetracker & Appblokker",
+      "description": "Maak van gewoontes quests, verdien XP en houd afleidende apps geblokkeerd tot je quests klaar zijn. Upshift voor iPhone en Android.",
+      "keywords": "upshift, gewoontetracker, apps blokkeren, appblokkering, schermtijd, productiviteit, gamification, doelen"
+    },
+    "faq": {
+      "title": "FAQ - Upshift | Quests, Quest Blocker, Doelen en meer",
+      "description": "Antwoorden over Upshift: quests en sidequests, de Quest Blocker, appblokkades, doelen, tijdregistratie, vrienden, prijzen en privacy.",
+      "keywords": "upshift faq, quest blocker, hulp appblokkering, vragen gewoontetracker, privacy schermtijd"
+    },
+    "download": {
+      "title": "Download Upshift - Level up je leven | iOS & Android app",
+      "description": "Download Upshift voor iPhone en Android. Maak van gewoontes quests, blokkeer afleidende apps, stel doelen en volg je voortgang.",
+      "keywords": "download upshift, ios app, android app, gewoontetracker downloaden, appblokkering, schermtijd beheren"
+    }
+  },
+  "nav": {
+    "features": "Functies",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "download": "Download",
+    "menu": "Menu",
+    "homeLabel": "Upshift startpagina",
+    "mainNav": "Hoofdnavigatie",
+    "product": "Product",
+    "resources": "Meer info",
+    "legal": "Juridisch",
+    "blog": "Blog",
+    "privacy": "Privacybeleid",
+    "terms": "Algemene voorwaarden",
+    "refund": "Terugbetaling aanvragen",
+    "rights": "Alle rechten voorbehouden.",
+    "language": "Taal"
+  },
+  "stores": {
+    "appStoreSmall": "Download in de",
+    "playSmall": "Ontdek het op"
+  },
+  "landing": {
+    "badge": "Je leven, gespeeld als een game.",
+    "h1": "Je telefoon is je [[gereedschap]],|niet je {{afleiding}}",
+    "heroText": "Upshift verandert je gewoontes in quests. Voltooi ze om XP te verdienen en de apps die je blokkeerde te ontgrendelen, en zie je streaks, doelen en level elke dag groeien.",
+    "heroAlt": "Upshift op iPhone: appblokkering, dagelijkse quests en tijdtracker",
+    "statement": "Je pakt je telefoon even op en bent een uur kwijt. | Met Upshift blijven je apps op slot tot je quests klaar zijn.",
+    "featuresEyebrow": "Zo werkt het",
+    "featuresTitle": "Zo maakt Upshift van gewoontes echte vooruitgang",
+    "features": [
+      {
+        "chip": "⚔️ Quests",
+        "title": ["Je gewoontes", "worden quests"],
+        "text": "Verander dagelijkse gewoontes in quests en sidequests. Verdien XP in Geld, Kracht, Gezondheid en Kennis, bouw streaks op en level up je leven.",
+        "alt": "Upshift vandaag-scherm met dagelijkse quests",
+        "cta": "Begin met levelen"
+      },
+      {
+        "chip": "🛡️ Quest Blocker",
+        "title": ["Verdien je", "Schermtijd"],
+        "text": "Afleidende apps blijven geblokkeerd tot je je dagelijkse quests hebt afgerond. Voeg Nu blokkeren, tijdslimieten en werkschema's toe als je meer nodig hebt.",
+        "alt": "Upshift Quest Blocker instellen",
+        "cta": "Blokkeer mijn apps"
+      },
+      {
+        "chip": "⏳ Appblokkering",
+        "title": ["Weet waar", "je tijd blijft"],
+        "text": "Bekijk je totale gebruik per app en stel daarna werkschema's, blokkades voor volwassen content en gokken, tijdslimieten of Nu blokkeren in met één tik. Zet de strikte modus aan en de blokkade is niet te omzeilen tot hij afloopt.",
+        "alt": "Upshift appblokkering met totaal gebruik",
+        "cta": "Pak de controle"
+      },
+      {
+        "chip": "🎯 Doelen",
+        "title": ["Doelen met", "een echt plan"],
+        "text": "Stel doelen voor de lange termijn, splits ze op in microdoelen en houd een dagboek bij met je plan en je gedachten.",
+        "alt": "Upshift doelenscherm",
+        "cta": "Mijn doelen instellen"
+      },
+      {
+        "chip": "⏱️ Tijdtracker",
+        "title": ["Zie waar", "je dag blijft"],
+        "text": "Volg je focussessies en dagelijkse activiteit in een kalender, houd je dagstreak levend en blik op elk moment terug op je geschiedenis.",
+        "alt": "Upshift tijdtracker met kalender en dagstreak",
+        "cta": "Mijn tijd bijhouden"
+      },
+      {
+        "chip": "📈 Profiel",
+        "title": ["Zie jezelf", "levelen"],
+        "text": "Je profiel toont je level, XP in elke categorie, badges en streaks. Voeg vrienden toe, word lid van groepen en klim in de ranglijsten om scherp te blijven.",
+        "alt": "Upshift profiel met XP-voortgang",
+        "cta": "Bekijk mijn stats"
+      }
+    ],
+    "faqEyebrow": "Hulp nodig?",
+    "faqTitle": "Veelgestelde vragen",
+    "seeAll": "Alle vragen bekijken",
+    "ctaTitle": "Vervang {{doomscrollen}}|door [[levelen]]",
+    "ctaAlt": "Upshift"
+  },
+  "faqPage": {
+    "eyebrow": "Hulp nodig?",
+    "h1": "Veelgestelde [[vragen]]",
+    "intro": "Alles over quests, de blocker, doelen, vrienden en je account.",
+    "search": "Zoek in vragen",
+    "empty": "Geen vragen gevonden voor je zoekopdracht.",
+    "stuckTitle": "Kom je er nog niet uit?",
+    "stuckText": "Mail ons en we komen bij je terug.",
+    "stuckCta": "Mail de support"
+  },
+  "downloadPage": {
+    "eyebrow": "Haal de app",
+    "h1": "Download [[Upshift]]",
+    "text": "Verander je gewoontes in quests en houd afleidende apps geblokkeerd tot ze klaar zijn. Beschikbaar voor iPhone en Android."
+  },
+  "faq": {
+    "groups": [
+      {
+        "icon": "🚀",
+        "title": "Aan de slag",
+        "items": [
+          {
+            "question": "Wat is Upshift?",
+            "summary": "De app in één zin.",
+            "answer": "Upshift is een alles-in-één productiviteitsapp die je helpt je leven van onderaf te veranderen. Je gewoontes worden quests, je verdient XP en gaat een level omhoog, en afleidende apps blijven geblokkeerd tot het belangrijke werk gedaan is."
+          },
+          {
+            "question": "Is er een Android-versie?",
+            "summary": "iPhone en Android.",
+            "answer": "Ja! Upshift is beschikbaar in de App Store en op Google Play."
+          },
+          {
+            "question": "Is er een gratis versie van Upshift?",
+            "summary": "Proefperiode en prijzen.",
+            "answer": "Upshift biedt 7 dagen gratis proefperiode, zodat je zelf ziet waarom dit de app is waar je naar op zoek was :)"
+          },
+          {
+            "question": "Hoe werken XP en levels?",
+            "summary": "Voortgang, badges en stats.",
+            "answer": "Elke quest die je voltooit levert XP op in zijn categorie: Geld, Kracht, Gezondheid of Kennis. XP verhoogt je totale level, ontgrendelt badges en prestaties en verschijnt op je profiel samen met de rest van je stats."
+          }
+        ]
+      },
+      {
+        "icon": "⚔️",
+        "title": "Quests & gewoontes",
+        "items": [
+          {
+            "question": "Wat is het verschil tussen Quests en Sidequests?",
+            "summary": "Hoofdgewoontes versus dagelijkse uitdagingen.",
+            "answer": "Quests zijn je belangrijkste dagelijkse gewoontes die je op de lange termijn wilt opbouwen. Sidequests zijn dagelijkse uitdagingen die de app voor je maakt, met extra XP en meer afwisseling. Voltooi sidequests voor bonusbeloningen en variatie!"
+          },
+          {
+            "question": "Wat voor quests kan ik maken?",
+            "summary": "Eendaagse, wekelijkse, maandelijkse, stop- en roulettequests.",
+            "answer": "Eendaagse quests werken als een to-dolijst en kun je op toekomstige dagen inplannen. Wekelijkse en maandelijkse quests lopen op de dagen die jij kiest. Stopquests helpen je slechte gewoontes af te leren door ze dagelijks bij te houden, en roulettequests gooien willekeurige uitdagingen op je pad. Via Ontdekken vind je ook nieuwe gewoontes."
+          },
+          {
+            "question": "Herinnert Upshift me aan mijn quests?",
+            "summary": "Slimme herinneringen.",
+            "answer": "Ja. Slimme herinneringen geven je een duwtje om je gewoontes af te ronden, zonder irritant te worden."
+          },
+          {
+            "question": "Wat gebeurt er als ik een streak vasthoud?",
+            "summary": "Feestmomenten en badges.",
+            "answer": "Streak- en dagvieringen verschijnen als je consequent blijft of je dagdoelen haalt, en mijlpalen ontgrendelen badges en prestaties."
+          }
+        ]
+      },
+      {
+        "icon": "🛡️",
+        "title": "Appblokkering",
+        "items": [
+          {
+            "question": "Wat is de Quest Blocker?",
+            "summary": "Apps blijven geblokkeerd tot je quests klaar zijn.",
+            "answer": "De Quest Blocker is onze unieke functie die afleidende apps blokkeert tot je je dagelijkse quests hebt voltooid. Een krachtige motivatie om eerst de belangrijke dingen te doen voordat je naar entertainment-apps gaat."
+          },
+          {
+            "question": "Welke andere blokkades kan ik instellen?",
+            "summary": "Nu blokkeren, tijdslimieten, schema's en meer.",
+            "answer": "Nu blokkeren blokkeert direct apps als je je wilt focussen. Tijdslimieten begrenzen het dagelijkse gebruik van apps en websites. Werkschema blokkeert afleidende apps tijdens werkuren. Er zijn ook kant-en-klare blokkades, zoals de pornoblokkering, en elk type blokkade heeft een eigen overlay."
+          },
+          {
+            "question": "Kan ik een blokkade omzeilen?",
+            "summary": "Strikte modus.",
+            "answer": "Met de strikte modus aan kan een blokkade niet worden omzeild tot de app weer wordt gedeblokkeerd (afhankelijk van het type blokkade). Dat is precies de bedoeling, zelfs bij de makkelijkste instellingen."
+          },
+          {
+            "question": "Kan ik jullie mijn Schermtijd-gegevens toevertrouwen?",
+            "summary": "Gebouwd op Apple Schermtijd.",
+            "answer": "Dat hoeft niet eens! Upshift is gebouwd op Apples Schermtijd-technologie. Apple heeft die met privacy in gedachten ontwikkeld, dus wij kunnen je schermtijd niet inzien, zelfs als we dat wilden."
+          }
+        ]
+      },
+      {
+        "icon": "🎯",
+        "title": "Doelen & focus",
+        "items": [
+          {
+            "question": "Hoe werken doelen?",
+            "summary": "Mijlpalen en een dagboek.",
+            "answer": "Stel doelen voor de lange termijn en splits ze op in microdoelen. Elk doel heeft een dagboek waarin je je plan en gedachten opschrijft, en onderweg krijg je herinneringen voor deadlines."
+          },
+          {
+            "question": "Kan ik mijn tijd bijhouden?",
+            "summary": "Tijdtracker en focustimer.",
+            "answer": "Ja. De tijdtracker laat zien waar je dag blijft, en de focustimer meet je sessies zodat je ziet hoe productief je was."
+          }
+        ]
+      },
+      {
+        "icon": "👥",
+        "title": "Vrienden & profiel",
+        "items": [
+          {
+            "question": "Kan ik Upshift met vrienden gebruiken?",
+            "summary": "Vrienden, groepen en ranglijsten.",
+            "answer": "Voeg vrienden toe, deel je voortgang en word lid van groepen met gedeelde uitdagingen en ranglijsten om scherp te blijven."
+          },
+          {
+            "question": "Kan ik de app aanpassen?",
+            "summary": "Thema's en widgets.",
+            "answer": "Kies uit 9 thema's voor je profiel en zet Upshift-widgets op je beginscherm."
+          },
+          {
+            "question": "Wat is het Affiliateprogramma?",
+            "summary": "Verdien beloningen door Upshift te delen.",
+            "answer": "Deel Upshift met anderen en verdien beloningen via ons Affiliateprogramma. Als mensen zich aanmelden met jouw verwijzingscode of gebruikersnaam, verdien je tegoed dat je kunt inwisselen voor allerlei beloningen."
+          }
+        ]
+      }
+    ]
+  }
+}

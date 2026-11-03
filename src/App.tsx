@@ -22,6 +22,7 @@ import Pov from './pages/Creator/Pov';
 import Snap from './pages/Creator/Snap';
 import ContentLibrary from './pages/Creator/ContentLibrary';
 import Rewrite from './pages/Creator/Rewrite';
+import { LOCALES, DEFAULT_LOCALE } from './i18n';
 import './styles/globals.css';
 import PortalRouter from './pages/Portal/PortalRouter';
 import AdminDashboard from './pages/Admin/AdminDashboard';
@@ -55,6 +56,14 @@ function App() {
 
         <Route element={<Layout />}>
           <Route path="/" element={<Landing />} />
+          {/* Translated pages: /de, /de/faq, /de/download ... Anything else under a language prefix goes to the English page. */}
+          {LOCALES.filter((l) => l.code !== DEFAULT_LOCALE).map((l) => [
+            <Route key={`${l.code}-home`} path={`/${l.code}`} element={<Landing />} />,
+            <Route key={`${l.code}-faq`} path={`/${l.code}/faq`} element={<Faq />} />,
+            <Route key={`${l.code}-dl`} path={`/${l.code}/download`} element={<Download />} />,
+            <Route key={`${l.code}-dlp`} path={`/${l.code}/download/:platform`} element={<Download />} />,
+            <Route key={`${l.code}-rest`} path={`/${l.code}/*`} element={<Navigate to="/" replace />} />,
+          ])}
           <Route path="/home" element={<Home />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/about" element={<About />} />

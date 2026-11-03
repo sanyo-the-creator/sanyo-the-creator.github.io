@@ -1,0 +1,23 @@
+{
+  "siteUrl": "https://joinupshift.com",
+  "defaultLocale": "en",
+  "localizedPaths": ["/", "/faq", "/download"],
+  "locales": [
+    { "code": "en", "hreflang": "en", "ogLocale": "en_US", "name": "English" },
+    { "code": "de", "hreflang": "de", "ogLocale": "de_DE", "name": "Deutsch" },
+    { "code": "es", "hreflang": "es", "ogLocale": "es_ES", "name": "Español" },
+    { "code": "fr", "hreflang": "fr", "ogLocale": "fr_FR", "name": "Français" },
+    { "code": "it", "hreflang": "it", "ogLocale": "it_IT", "name": "Italiano" },
+    { "code": "pt", "hreflang": "pt", "ogLocale": "pt_PT", "name": "Português" },
+    { "code": "nl", "hreflang": "nl", "ogLocale": "nl_NL", "name": "Nederlands" },
+    { "code": "sv", "hreflang": "sv", "ogLocale": "sv_SE", "name": "Svenska" },
+    { "code": "da", "hreflang": "da", "ogLocale": "da_DK", "name": "Dansk" },
+    { "code": "fi", "hreflang": "fi", "ogLocale": "fi_FI", "name": "Suomi" },
+    { "code": "no", "hreflang": "no", "ogLocale": "nb_NO", "name": "Norsk" },
+    { "code": "pl", "hreflang": "pl", "ogLocale": "pl_PL", "name": "Polski" },
+    { "code": "cs", "hreflang": "cs", "ogLocale": "cs_CZ", "name": "Čeština" },
+    { "code": "sk", "hreflang": "sk", "ogLocale": "sk_SK", "name": "Slovenčina" },
+    { "code": "ja", "hreflang": "ja", "ogLocale": "ja_JP", "name": "日本語" },
+    { "code": "ko", "hreflang": "ko", "ogLocale": "ko_KR", "name": "한국어" }
+  ]
+}

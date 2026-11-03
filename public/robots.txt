@@ -1,30 +1,32 @@
 # https://www.robotstxt.org/robotstxt.html
+# One shared rule set for search engines and AI crawlers (GPTBot, ClaudeBot, PerplexityBot, ...):
+# all public pages are open so Upshift can be found and cited in search and AI answers.
 User-agent: *
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: DuckAssistBot
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: MistralAI-User
+User-agent: CCBot
+User-agent: Googlebot
 Allow: /
 Disallow: /api/
 Disallow: /admin/
-# Disallow direct access to static HTML article files
-# Only allow React routes (e.g., /articles/slug-name)
-Disallow: /articles/*.html
+Disallow: /portal/
+Disallow: /creator/
+Disallow: /cleaner
 
-# Sitemap
 Sitemap: https://joinupshift.com/sitemap.xml
-
-# Crawl-delay for polite crawlers
-# Crawl-delay removed for better indexing
-
-# Allow all major search engines
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /

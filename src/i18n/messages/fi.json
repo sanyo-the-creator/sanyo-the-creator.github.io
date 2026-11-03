@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "home": {
+      "title": "Upshift - Levelöi elämäsi | Tapaseuranta & Sovellusesto",
+      "description": "Muuta tavat tehtäviksi, kerää XP:tä ja pidä häiritsevät sovellukset estettyinä, kunnes tehtäväsi on tehty. Upshift iPhonelle ja Androidille.",
+      "keywords": "upshift, tapaseuranta, sovellusesto, sovellusten esto, ruutuaika, tuottavuus, pelillistäminen, tavoitteet, päivittäiset tavat"
+    },
+    "faq": {
+      "title": "UKK - Upshift | Tehtävät, Tehtäväblokkeri, Tavoitteet",
+      "description": "Vastauksia Upshiftistä: tehtävät ja sivutehtävät, Tehtäväblokkeri, sovellusesto, tavoitteet, ajanseuranta, kaverit, hinta ja yksityisyys.",
+      "keywords": "upshift ukk, tehtäväblokkeri, sovellusesto ohje, tapaseuranta kysymykset, ruutuaika yksityisyys"
+    },
+    "download": {
+      "title": "Lataa Upshift - Levelöi elämäsi | iOS & Android",
+      "description": "Lataa Upshift iPhonelle ja Androidille. Muuta tavat tehtäviksi, estä häiritsevät sovellukset, aseta tavoitteita ja seuraa edistymistäsi.",
+      "keywords": "lataa upshift, ios sovellus, android sovellus, tapaseuranta, sovellusesto, ruutuajan vähentäminen, ruutuaika"
+    }
+  },
+  "nav": {
+    "features": "Ominaisuudet",
+    "faq": "UKK",
+    "contact": "Yhteystiedot",
+    "download": "Lataa",
+    "menu": "Valikko",
+    "homeLabel": "Upshiftin etusivu",
+    "mainNav": "Päänavigointi",
+    "product": "Tuote",
+    "resources": "Resurssit",
+    "legal": "Lakiasiat",
+    "blog": "Blogi",
+    "privacy": "Tietosuojakäytäntö",
+    "terms": "Käyttöehdot",
+    "refund": "Pyydä hyvitystä",
+    "rights": "Kaikki oikeudet pidätetään.",
+    "language": "Kieli"
+  },
+  "stores": {
+    "appStoreSmall": "Lataa kohteesta",
+    "playSmall": "Lataa palvelusta"
+  },
+  "landing": {
+    "badge": "Elämäsi, pelattuna kuin peli.",
+    "h1": "Puhelimesi on [[työkalusi]],|ei {{häiriötekijäsi}}",
+    "heroText": "Upshift muuttaa tapasi tehtäviksi. Suorita ne kerätäksesi XP:tä ja avataksesi estämäsi sovellukset, ja seuraa, kuinka putkesi, tavoitteesi ja levelisi kasvavat joka päivä.",
+    "heroAlt": "Upshift iPhonella: sovellusesto, päivittäiset tehtävät ja ajanseuranta",
+    "statement": "Avaat puhelimen minuutiksi ja menetät tunnin. | Upshiftin kanssa sovellukset pysyvät lukittuina, kunnes tehtäväsi on tehty.",
+    "featuresEyebrow": "Näin se toimii",
+    "featuresTitle": "Näin Upshift muuttaa tavat edistykseksi",
+    "features": [
+      {
+        "chip": "⚔️ Tehtävät",
+        "title": ["Tapasi", "muuttuvat tehtäviksi"],
+        "text": "Muuta päivittäiset tavat tehtäviksi ja sivutehtäviksi. Kerää XP:tä Rahasta, Voimasta, Terveydestä ja Tiedosta, rakenna putkia ja levelöi elämäsi.",
+        "alt": "Upshiftin tämän päivän näkymä päivittäisine tehtävineen",
+        "cta": "Aloita levelöinti"
+      },
+      {
+        "chip": "🛡️ Tehtäväblokkeri",
+        "title": ["Ansaitse", "ruutuaikasi"],
+        "text": "Häiritsevät sovellukset pysyvät estettyinä, kunnes olet suorittanut päivän tehtävät. Lisää Estä nyt, aikarajat ja työaikataulut, kun tarvitset enemmän.",
+        "alt": "Upshiftin Tehtäväblokkerin asetukset",
+        "cta": "Estä sovellukseni"
+      },
+      {
+        "chip": "⏳ Sovellusesto",
+        "title": ["Tiedä minne", "aikasi menee"],
+        "text": "Näe kokonaiskäyttösi sovelluksittain ja ota sitten käyttöön työaikataulut, aikuissisällön ja uhkapelien esto, aikarajat tai Estä nyt yhdellä napautuksella. Kytke tiukka tila päälle, niin estoa ei voi ohittaa ennen kuin se päättyy.",
+        "alt": "Upshiftin sovellusesto ja kokonaiskäyttö",
+        "cta": "Ota ohjat"
+      },
+      {
+        "chip": "🎯 Tavoitteet",
+        "title": ["Tavoitteet", "ja oikea suunnitelma"],
+        "text": "Aseta pitkän aikavälin tavoitteita, pilko ne pienempiin välitavoitteisiin ja pidä päiväkirjaa suunnitelmastasi ja pohdinnoistasi.",
+        "alt": "Upshiftin tavoitenäkymä",
+        "cta": "Aseta tavoitteeni"
+      },
+      {
+        "chip": "⏱️ Ajanseuranta",
+        "title": ["Näe minne", "päiväsi kuluu"],
+        "text": "Seuraa keskittymisjaksojasi ja päivittäistä aktiivisuuttasi kalenterissa, pidä päiväputkesi hengissä ja katso historiaasi milloin tahansa.",
+        "alt": "Upshiftin ajanseuranta kalenterilla ja päiväputkella",
+        "cta": "Seuraa aikaani"
+      },
+      {
+        "chip": "📈 Profiili",
+        "title": ["Katso itsesi", "levelöivän"],
+        "text": "Profiilisi näyttää levelisi, XP:n jokaisessa kategoriassa, merkit ja putket. Lisää kavereita, liity ryhmiin ja nouse tulostaululle pysyäksesi vastuullisena.",
+        "alt": "Upshift-profiili XP-edistymisellä",
+        "cta": "Katso tilastoni"
+      }
+    ],
+    "faqEyebrow": "Tarvitsetko apua?",
+    "faqTitle": "Usein kysytyt kysymykset",
+    "seeAll": "Näytä kaikki kysymykset",
+    "ctaTitle": "Korvaa {{doomscrollaus}}|[[levelöinnillä]]",
+    "ctaAlt": "Upshift"
+  },
+  "faqPage": {
+    "eyebrow": "Tarvitsetko apua?",
+    "h1": "Usein kysytyt [[kysymykset]]",
+    "intro": "Kaikki tehtävistä, blokkerista, tavoitteista, kavereista ja tilistäsi.",
+    "search": "Hae kysymyksiä",
+    "empty": "Haullasi ei löytynyt kysymyksiä.",
+    "stuckTitle": "Jäitkö vielä jumiin?",
+    "stuckText": "Lähetä meille sähköpostia, niin palaamme asiaan.",
+    "stuckCta": "Lähetä sähköpostia tukeen"
+  },
+  "downloadPage": {
+    "eyebrow": "Hanki sovellus",
+    "h1": "Lataa [[Upshift]]",
+    "text": "Muuta tapasi tehtäviksi ja pidä häiritsevät sovellukset estettyinä, kunnes ne on tehty. Saatavilla iPhonelle ja Androidille."
+  },
+  "faq": {
+    "groups": [
+      {
+        "icon": "🚀",
+        "title": "Aloittaminen",
+        "items": [
+          {
+            "question": "Mikä Upshift on?",
+            "summary": "Sovellus yhdellä lauseella.",
+            "answer": "Upshift on kaikki-yhdessä-tuottavuussovellus, joka auttaa sinua muuttamaan elämääsi alusta alkaen. Tapasi muuttuvat tehtäviksi, keräät XP:tä ja levelöit, ja häiritsevät sovellukset pysyvät estettyinä, kunnes tärkeät asiat on hoidettu."
+          },
+          {
+            "question": "Onko Androidille versiota?",
+            "summary": "iPhone ja Android.",
+            "answer": "Kyllä! Upshift on saatavilla App Storesta ja Google Playsta."
+          },
+          {
+            "question": "Onko Upshiftistä ilmaista versiota?",
+            "summary": "Kokeilu ja hinta.",
+            "answer": "Upshift tarjoaa 7 päivän ilmaisen kokeilun, jotta näet, miksi tämä on se sovellus, jota etsit :)"
+          },
+          {
+            "question": "Miten XP ja levelit toimivat?",
+            "summary": "Edistyminen, merkit ja tilastot.",
+            "answer": "Jokainen suorittamasi tehtävä tuottaa XP:tä omassa kategoriassaan: Raha, Voima, Terveys tai Tieto. XP nostaa yleistä leveliäsi, avaa merkkejä ja saavutuksia ja näkyy profiilissasi muiden tilastojesi rinnalla."
+          }
+        ]
+      },
+      {
+        "icon": "⚔️",
+        "title": "Tehtävät & tavat",
+        "items": [
+          {
+            "question": "Mitä eroa on tehtävillä ja sivutehtävillä?",
+            "summary": "Päätavat vastaan päivittäiset haasteet.",
+            "answer": "Tehtävät ovat päivittäisiä päätapojasi, joita haluat rakentaa pitkällä aikavälillä. Sivutehtävät ovat sovelluksen luomia päivittäisiä haasteita, jotka tuovat lisää XP:tä ja pitävät arjen mielenkiintoisena. Suorita sivutehtäviä saadaksesi bonuspalkintoja ja vaihtelua!"
+          },
+          {
+            "question": "Minkälaisia tehtäviä voin luoda?",
+            "summary": "Yhden päivän, viikoittaiset, kuukausittaiset, lopetus- ja rulettitehtävät.",
+            "answer": "Yhden päivän tehtävät toimivat kuin tehtävälista, ja ne voi ajoittaa tuleville päiville. Viikoittaiset ja kuukausittaiset tehtävät toistuvat valitseminasi päivinä. Lopetustehtävät auttavat luopumaan huonoista tavoista seuraamalla niitä päivittäin, ja rulettitehtävät heittävät eteesi satunnaisia haasteita. Voit myös selata Tutustu-osiota löytääksesi uusia tapoja."
+          },
+          {
+            "question": "Muistuttaako Upshift tehtävistäni?",
+            "summary": "Älykkäät muistutukset.",
+            "answer": "Kyllä. Älykkäät muistutukset tuuppaavat sinua suorittamaan tapasi ärsyttämättä."
+          },
+          {
+            "question": "Mitä tapahtuu, kun pidän putkea yllä?",
+            "summary": "Juhlat ja merkit.",
+            "answer": "Putki- ja päiväjuhlat ponnahtavat esiin, kun pysyt johdonmukaisena tai suoritat päivän tavoitteesi, ja virstanpylväät avaavat merkkejä ja saavutuksia."
+          }
+        ]
+      },
+      {
+        "icon": "🛡️",
+        "title": "Sovellusesto",
+        "items": [
+          {
+            "question": "Mikä Tehtäväblokkeri on?",
+            "summary": "Sovellukset pysyvät estettyinä, kunnes tehtävät on tehty.",
+            "answer": "Tehtäväblokkeri on ainutlaatuinen ominaisuutemme, joka estää häiritsevät sovellukset, kunnes olet suorittanut päivän tehtävät. Se on tehokas motivaattori hoitaa tärkeät asiat ensin ennen viihdesovelluksiin siirtymistä."
+          },
+          {
+            "question": "Mitä muita estoja voin ottaa käyttöön?",
+            "summary": "Estä nyt, aikarajat, aikataulut ja paljon muuta.",
+            "answer": "Estä nyt estää sovellukset heti, kun tarvitset keskittymistä. Aikarajat rajoittavat sovellusten ja verkkosivustojen päivittäistä käyttöä. Työaikataulu estää häiritsevät sovellukset työaikana. Tarjolla on myös valmiita estoja, kuten pornoesto, ja jokaisella estotyypillä on oma mukautettu peittonäkymänsä."
+          },
+          {
+            "question": "Voinko kiertää eston?",
+            "summary": "Tiukka tila.",
+            "answer": "Kun tiukka tila on päällä, estoa ei voi ohittaa ennen kuin sovelluksen esto puretaan (estotyypistä riippuen). Se on koko pointti, jopa helpoimmilla asetuksilla."
+          },
+          {
+            "question": "Voinko luottaa teihin ruutuaikatietojeni kanssa?",
+            "summary": "Rakennettu Applen Ruutuajan päälle.",
+            "answer": "Sinun ei tarvitse! Upshift on rakennettu Applen Ruutuaika-teknologian päälle. Apple on suunnitellut sen yksityisyys edellä, joten emme voi nähdä ruutuaikaasi, vaikka haluaisimme."
+          }
+        ]
+      },
+      {
+        "icon": "🎯",
+        "title": "Tavoitteet & keskittyminen",
+        "items": [
+          {
+            "question": "Miten tavoitteet toimivat?",
+            "summary": "Välitavoitteet ja päiväkirja.",
+            "answer": "Aseta pitkän aikavälin tavoitteita ja pilko ne pienempiin välitavoitteisiin. Jokaisella tavoitteella on päiväkirja, johon kirjoitat suunnitelmasi ja pohdintasi, ja saat määräaikamuistutuksia matkan varrella."
+          },
+          {
+            "question": "Voinko seurata aikaani?",
+            "summary": "Ajanseuranta ja keskittymisajastin.",
+            "answer": "Kyllä. Ajanseuranta näyttää, minne päiväsi kuluu, ja keskittymisajastin ajastaa jaksosi, jotta näet kuinka tuottava olit."
+          }
+        ]
+      },
+      {
+        "icon": "👥",
+        "title": "Kaverit & profiili",
+        "items": [
+          {
+            "question": "Voinko käyttää Upshiftiä kavereiden kanssa?",
+            "summary": "Kaverit, ryhmät ja tulostaulut.",
+            "answer": "Lisää kavereita, jaa edistymisesi ja liity ryhmiin, joissa on yhteisiä haasteita ja tulostauluja, jotta pysyt vastuullisena."
+          },
+          {
+            "question": "Voinko mukauttaa sovellusta?",
+            "summary": "Teemat ja widgetit.",
+            "answer": "Valitse profiilillesi 9 teeman joukosta ja lisää Upshift-widgetit aloitusnäytölle."
+          },
+          {
+            "question": "Mikä on kumppaniohjelma?",
+            "summary": "Ansaitse palkintoja jakamalla Upshiftiä.",
+            "answer": "Jaa Upshiftiä muille ja ansaitse palkintoja kumppaniohjelmamme kautta. Kun ihmiset rekisteröityvät suosituskoodillasi tai käyttäjänimelläsi, ansaitset krediittejä, joita voi lunastaa moniin palkintoihin."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+# Upshift
+
+> Upshift is a habit tracker and app blocker for iPhone and Android. Habits become quests, you earn XP and level up, and distracting apps stay blocked until your daily quests are done (the Quest Blocker). Built on Apple Screen Time, so Upshift cannot see your screen time data.
+
+Available in 16 languages. The home page, FAQ and download page are translated; guides and legal pages are in English.
+
+## Product
+- [Home](https://joinupshift.com/): what Upshift is and how quests, the Quest Blocker, goals and time tracking work
+- [FAQ](https://joinupshift.com/faq): answers about quests, blocking, goals, friends, pricing and privacy
+- [Download](https://joinupshift.com/download): App Store and Google Play links
+- [About](https://joinupshift.com/about): mission and values
+- [Full text for LLMs](https://joinupshift.com/llms-full.txt): product facts and the whole FAQ in one file
+
+## Guides
+- [Blog](https://joinupshift.com/articles): how to block apps, websites and limit screen time on iPhone
+
+## Translations
+- [Deutsch](https://joinupshift.com/de) | [Español](https://joinupshift.com/es) | [Français](https://joinupshift.com/fr) | [Italiano](https://joinupshift.com/it) | [Português](https://joinupshift.com/pt) | [Nederlands](https://joinupshift.com/nl) | [Svenska](https://joinupshift.com/sv) | [Dansk](https://joinupshift.com/da) | [Suomi](https://joinupshift.com/fi) | [Norsk](https://joinupshift.com/no) | [Polski](https://joinupshift.com/pl) | [Čeština](https://joinupshift.com/cs) | [Slovenčina](https://joinupshift.com/sk) | [日本語](https://joinupshift.com/ja) | [한국어](https://joinupshift.com/ko)
+
+## Optional
+- [Privacy Policy](https://joinupshift.com/privacy)
+- [Terms & Conditions](https://joinupshift.com/terms)
+- Support: support@joinupshift.com

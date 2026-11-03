@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "home": {
+      "title": "Upshift - Suivi d'habitudes et bloqueur d'apps",
+      "description": "Transforme tes habitudes en quêtes, gagne de l'XP et garde les apps distrayantes bloquées jusqu'à la fin de tes quêtes. Upshift pour iPhone et Android.",
+      "keywords": "upshift, suivi d'habitudes, bloqueur d'applications, temps d'écran, productivité, gamification, objectifs, bloquer des apps"
+    },
+    "faq": {
+      "title": "FAQ - Upshift | Quêtes, bloqueur de quêtes et objectifs",
+      "description": "Réponses sur Upshift : quêtes et quêtes secondaires, bloqueur de quêtes, blocage d'apps, objectifs, suivi du temps, amis, tarifs et confidentialité.",
+      "keywords": "upshift faq, bloqueur de quêtes, aide bloqueur d'apps, questions suivi d'habitudes, temps d'écran confidentialité"
+    },
+    "download": {
+      "title": "Télécharger Upshift - Suivi d'habitudes et bloqueur d'apps",
+      "description": "Télécharge Upshift pour iPhone et Android. Transforme tes habitudes en quêtes, bloque les apps distrayantes, fixe tes objectifs et suis ta progression.",
+      "keywords": "télécharger upshift, appli ios, appli android, application habitudes, bloqueur d'applications, réduire temps d'écran"
+    }
+  },
+  "nav": {
+    "features": "Fonctionnalités",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "download": "Télécharger",
+    "menu": "Menu",
+    "homeLabel": "Accueil Upshift",
+    "mainNav": "Navigation principale",
+    "product": "Produit",
+    "resources": "Ressources",
+    "legal": "Mentions légales",
+    "blog": "Blog",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions générales",
+    "refund": "Demander un remboursement",
+    "rights": "Tous droits réservés.",
+    "language": "Langue"
+  },
+  "stores": {
+    "appStoreSmall": "Télécharger dans l'",
+    "playSmall": "Disponible sur"
+  },
+  "landing": {
+    "badge": "Ta vie, jouée comme un jeu.",
+    "h1": "Ton téléphone est ton [[outil]],|pas ta {{distraction}}",
+    "heroText": "Upshift transforme tes habitudes en quêtes. Termine-les pour gagner de l'XP et débloquer les apps que tu as bloquées, et regarde tes séries, tes objectifs et ton niveau grandir chaque jour.",
+    "heroAlt": "Upshift sur iPhone : bloqueur d'apps, quêtes quotidiennes et suivi du temps",
+    "statement": "Tu ouvres ton téléphone une minute et tu perds une heure. | Avec Upshift, les apps restent verrouillées tant que tes quêtes ne sont pas terminées.",
+    "featuresEyebrow": "Comment ça marche",
+    "featuresTitle": "Comment Upshift transforme tes habitudes en progrès",
+    "features": [
+      {
+        "chip": "⚔️ Quêtes",
+        "title": ["Tes habitudes", "deviennent des quêtes"],
+        "text": "Transforme tes habitudes quotidiennes en quêtes et en quêtes secondaires. Gagne de l'XP en Argent, Force, Santé et Savoir, construis des séries et fais monter ta vie en niveau.",
+        "alt": "Écran Aujourd'hui d'Upshift avec les quêtes quotidiennes",
+        "cta": "Commencer à progresser"
+      },
+      {
+        "chip": "🛡️ Bloqueur de quêtes",
+        "title": ["Mérite ton", "temps d'écran"],
+        "text": "Les apps distrayantes restent bloquées tant que tu n'as pas terminé tes quêtes quotidiennes. Ajoute Bloquer maintenant, des limites de temps et des horaires de travail quand il t'en faut plus.",
+        "alt": "Configuration du bloqueur de quêtes Upshift",
+        "cta": "Bloquer mes apps"
+      },
+      {
+        "chip": "⏳ Bloqueur d'apps",
+        "title": ["Sache où passe", "ton temps"],
+        "text": "Consulte ton usage total par app, puis configure en un geste des horaires de travail, des blocages de contenu adulte et de jeux d'argent, des limites de temps ou Bloquer maintenant. Active le mode strict et impossible de contourner le blocage avant sa fin.",
+        "alt": "Bloqueur d'apps Upshift avec l'usage total",
+        "cta": "Reprendre le contrôle"
+      },
+      {
+        "chip": "🎯 Objectifs",
+        "title": ["Des objectifs avec", "un vrai plan"],
+        "text": "Fixe des objectifs à long terme, découpe-les en micro-objectifs et tiens un journal avec ton plan et tes réflexions.",
+        "alt": "Écran des objectifs Upshift",
+        "cta": "Fixer mes objectifs"
+      },
+      {
+        "chip": "⏱️ Suivi du temps",
+        "title": ["Vois où passe", "ta journée"],
+        "text": "Suis tes sessions de concentration et ton activité quotidienne dans un calendrier, garde ta série de jours en vie et revois ton historique quand tu veux.",
+        "alt": "Suivi du temps Upshift avec calendrier et série de jours",
+        "cta": "Suivre mon temps"
+      },
+      {
+        "chip": "📈 Profil",
+        "title": ["Regarde-toi", "monter en niveau"],
+        "text": "Ton profil affiche ton niveau, ton XP dans chaque catégorie, tes badges et tes séries. Ajoute des amis, rejoins des groupes et grimpe dans les classements pour rester motivé.",
+        "alt": "Profil Upshift avec progression de l'XP",
+        "cta": "Voir mes stats"
+      }
+    ],
+    "faqEyebrow": "Besoin d'aide ?",
+    "faqTitle": "Questions fréquentes",
+    "seeAll": "Voir toutes les questions",
+    "ctaTitle": "Remplace le {{doomscrolling}}|par la [[montée en niveau]]",
+    "ctaAlt": "Upshift"
+  },
+  "faqPage": {
+    "eyebrow": "Besoin d'aide ?",
+    "h1": "Questions [[fréquentes]]",
+    "intro": "Tout sur les quêtes, le bloqueur, les objectifs, les amis et ton compte.",
+    "search": "Rechercher une question",
+    "empty": "Aucune question ne correspond à ta recherche.",
+    "stuckTitle": "Toujours bloqué ?",
+    "stuckText": "Écris-nous un e-mail et nous te répondrons.",
+    "stuckCta": "Contacter le support"
+  },
+  "downloadPage": {
+    "eyebrow": "Récupère l'appli",
+    "h1": "Télécharger [[Upshift]]",
+    "text": "Transforme tes habitudes en quêtes et garde les apps distrayantes bloquées jusqu'à leur réalisation. Disponible sur iPhone et Android."
+  },
+  "faq": {
+    "groups": [
+      {
+        "icon": "🚀",
+        "title": "Premiers pas",
+        "items": [
+          {
+            "question": "Qu'est-ce qu'Upshift ?",
+            "summary": "L'appli en une phrase.",
+            "answer": "Upshift est une appli de productivité tout-en-un qui t'aide à transformer ta vie de fond en comble. Tes habitudes deviennent des quêtes, tu gagnes de l'XP et tu montes en niveau, et les apps distrayantes restent bloquées tant que l'essentiel n'est pas fait."
+          },
+          {
+            "question": "Existe-t-il une version Android ?",
+            "summary": "iPhone et Android.",
+            "answer": "Oui ! Upshift est disponible sur l'App Store et sur Google Play."
+          },
+          {
+            "question": "Y a-t-il une version gratuite d'Upshift ?",
+            "summary": "Essai et tarifs.",
+            "answer": "Upshift propose 7 jours d'essai gratuit, pour te montrer pourquoi c'est l'appli que tu cherchais :)"
+          },
+          {
+            "question": "Comment fonctionnent l'XP et les niveaux ?",
+            "summary": "Progression, badges et stats.",
+            "answer": "Chaque quête terminée te rapporte de l'XP dans sa catégorie : Argent, Force, Santé ou Savoir. L'XP fait monter ton niveau global, débloque des badges et des succès, et s'affiche sur ton profil avec le reste de tes stats."
+          }
+        ]
+      },
+      {
+        "icon": "⚔️",
+        "title": "Quêtes et habitudes",
+        "items": [
+          {
+            "question": "Quelle est la différence entre les quêtes et les quêtes secondaires ?",
+            "summary": "Habitudes principales et défis quotidiens.",
+            "answer": "Les quêtes sont tes habitudes quotidiennes principales, celles que tu veux ancrer sur la durée. Les quêtes secondaires sont des défis quotidiens générés par l'appli, qui offrent de l'XP en plus et du changement. Termine-les pour des récompenses bonus et de la variété !"
+          },
+          {
+            "question": "Quels types de quêtes puis-je créer ?",
+            "summary": "D'un jour, hebdomadaires, mensuelles, arrêt et roulette.",
+            "answer": "Les quêtes d'un jour fonctionnent comme une to-do list et peuvent être programmées pour des jours à venir. Les quêtes hebdomadaires et mensuelles reviennent les jours que tu choisis. Les quêtes d'arrêt t'aident à te défaire des mauvaises habitudes grâce à un suivi quotidien, et les quêtes roulette te lancent des défis au hasard. Tu peux aussi parcourir Explorer pour découvrir de nouvelles habitudes."
+          },
+          {
+            "question": "Upshift me rappellera-t-il mes quêtes ?",
+            "summary": "Rappels intelligents.",
+            "answer": "Oui. Les rappels intelligents te poussent à accomplir tes habitudes sans être pesants."
+          },
+          {
+            "question": "Que se passe-t-il quand je garde une série ?",
+            "summary": "Célébrations et badges.",
+            "answer": "Des célébrations de série et de journée s'affichent quand tu restes régulier ou que tu atteins tes objectifs du jour, et les paliers débloquent des badges et des succès."
+          }
+        ]
+      },
+      {
+        "icon": "🛡️",
+        "title": "Bloqueur d'apps",
+        "items": [
+          {
+            "question": "Qu'est-ce que le bloqueur de quêtes ?",
+            "summary": "Les apps restent bloquées jusqu'à la fin des quêtes.",
+            "answer": "Le bloqueur de quêtes est notre fonctionnalité exclusive qui bloque les apps distrayantes jusqu'à ce que tu aies terminé tes quêtes quotidiennes. C'est un excellent moteur pour t'occuper d'abord de l'important avant d'ouvrir les apps de divertissement."
+          },
+          {
+            "question": "Quels autres blocages puis-je configurer ?",
+            "summary": "Bloquer maintenant, limites de temps, horaires et plus.",
+            "answer": "Bloquer maintenant verrouille instantanément des apps quand tu as besoin de te concentrer. Les limites de temps plafonnent l'usage quotidien des apps et des sites web. L'horaire de travail bloque les apps distrayantes pendant tes heures de travail. Il existe aussi des blocages prêts à l'emploi, comme le bloqueur de contenu porno, et chaque type de blocage a son propre écran personnalisé."
+          },
+          {
+            "question": "Puis-je contourner un blocage ?",
+            "summary": "Mode strict.",
+            "answer": "Avec le mode strict activé, un blocage ne peut pas être contourné tant que l'app n'est pas débloquée (selon le type de blocage). C'est le but, même avec les réglages les plus souples."
+          },
+          {
+            "question": "Puis-je vous confier mes données de temps d'écran ?",
+            "summary": "Basé sur Temps d'écran d'Apple.",
+            "answer": "Tu n'as pas à le faire ! Upshift repose sur la technologie Temps d'écran d'Apple. Apple l'a conçue dans le respect de la vie privée, donc nous ne pouvons pas consulter ton temps d'écran, même si nous le voulions."
+          }
+        ]
+      },
+      {
+        "icon": "🎯",
+        "title": "Objectifs et concentration",
+        "items": [
+          {
+            "question": "Comment fonctionnent les objectifs ?",
+            "summary": "Étapes et journal.",
+            "answer": "Fixe des objectifs à long terme et découpe-les en micro-objectifs. Chaque objectif a un journal où tu notes ton plan et tes réflexions, et tu reçois des rappels d'échéance en chemin."
+          },
+          {
+            "question": "Puis-je suivre mon temps ?",
+            "summary": "Suivi du temps et minuteur de concentration.",
+            "answer": "Oui. Le suivi du temps montre où passe ta journée, et le minuteur de concentration chronomètre tes sessions pour que tu voies à quel point tu as été productif."
+          }
+        ]
+      },
+      {
+        "icon": "👥",
+        "title": "Amis et profil",
+        "items": [
+          {
+            "question": "Puis-je utiliser Upshift avec des amis ?",
+            "summary": "Amis, groupes et classements.",
+            "answer": "Ajoute des amis, partage ta progression et rejoins des groupes avec des défis communs et des classements pour rester motivé."
+          },
+          {
+            "question": "Puis-je personnaliser l'appli ?",
+            "summary": "Thèmes et widgets.",
+            "answer": "Choisis parmi 9 thèmes pour ton profil et ajoute des widgets Upshift à ton écran d'accueil."
+          },
+          {
+            "question": "Qu'est-ce que le programme d'affiliation ?",
+            "summary": "Gagne des récompenses en partageant Upshift.",
+            "answer": "Partage Upshift avec d'autres personnes et gagne des récompenses grâce à notre programme d'affiliation. Quand des gens s'inscrivent avec ton code de parrainage ou ton nom d'utilisateur, tu gagnes des crédits à échanger contre tout un tas de récompenses."
+          }
+        ]
+      }
+    ]
+  }
+}

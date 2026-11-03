@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "home": {
+      "title": "Upshift - Level op i dit liv | Vanetracker & Appblokering",
+      "description": "Gør vaner til missioner, optjen XP og hold distraherende apps blokeret, indtil dine missioner er klaret. Upshift til iPhone og Android.",
+      "keywords": "upshift, vanetracker, appblokering, bloker apps, skærmtid, produktivitet, gamification, mål, daglige vaner"
+    },
+    "faq": {
+      "title": "FAQ - Upshift | Missioner, Missionsblokering, Mål og mere",
+      "description": "Svar om Upshift: missioner og sidemissioner, Missionsblokeringen, appblokering, mål, tidsregistrering, venner, pris og privatliv.",
+      "keywords": "upshift faq, missionsblokering, appblokering hjælp, vanetracker spørgsmål, skærmtid privatliv"
+    },
+    "download": {
+      "title": "Download Upshift - Level op i dit liv | iOS & Android",
+      "description": "Download Upshift til iPhone og Android. Gør vaner til missioner, bloker distraherende apps, sæt mål og følg dine fremskridt.",
+      "keywords": "download upshift, ios app, android app, vanetracker, appblokering, mindre skærmtid, skærmtid"
+    }
+  },
+  "nav": {
+    "features": "Funktioner",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "download": "Download",
+    "menu": "Menu",
+    "homeLabel": "Upshift forside",
+    "mainNav": "Hovednavigation",
+    "product": "Produkt",
+    "resources": "Ressourcer",
+    "legal": "Juridisk",
+    "blog": "Blog",
+    "privacy": "Privatlivspolitik",
+    "terms": "Vilkår og betingelser",
+    "refund": "Anmod om refusion",
+    "rights": "Alle rettigheder forbeholdes.",
+    "language": "Sprog"
+  },
+  "stores": {
+    "appStoreSmall": "Download fra",
+    "playSmall": "Hent det på"
+  },
+  "landing": {
+    "badge": "Dit liv, spillet som et spil.",
+    "h1": "Din telefon er dit [[værktøj]],|ikke din {{distraktion}}",
+    "heroText": "Upshift gør dine vaner til missioner. Klar dem for at optjene XP og låse op for de apps, du har blokeret, og se dine streaks, mål og dit level vokse hver dag.",
+    "heroAlt": "Upshift på iPhone: appblokering, daglige missioner og tidsregistrering",
+    "statement": "Du åbner telefonen i et minut og mister en time. | Med Upshift forbliver apps låst, indtil dine missioner er klaret.",
+    "featuresEyebrow": "Sådan virker det",
+    "featuresTitle": "Sådan gør Upshift vaner til fremskridt",
+    "features": [
+      {
+        "chip": "⚔️ Missioner",
+        "title": ["Dine vaner", "bliver til missioner"],
+        "text": "Gør daglige vaner til missioner og sidemissioner. Optjen XP i Penge, Styrke, Sundhed og Viden, byg streaks og level op i dit liv.",
+        "alt": "Upshifts i dag-skærm med daglige missioner",
+        "cta": "Begynd at level op"
+      },
+      {
+        "chip": "🛡️ Missionsblokering",
+        "title": ["Fortjen din", "skærmtid"],
+        "text": "Distraherende apps forbliver blokeret, indtil du har klaret dine daglige missioner. Tilføj Bloker nu, tidsgrænser og arbejdsplaner, når du vil have mere.",
+        "alt": "Opsætning af Upshifts Missionsblokering",
+        "cta": "Bloker mine apps"
+      },
+      {
+        "chip": "⏳ Appblokering",
+        "title": ["Se hvor", "din tid går hen"],
+        "text": "Se dit samlede forbrug pr. app, og opsæt derefter arbejdsplaner, blokering af voksenindhold og gambling, tidsgrænser eller Bloker nu med et enkelt tryk. Slå streng tilstand til, så kan blokeringen ikke omgås, før den slutter.",
+        "alt": "Upshifts appblokering med samlet forbrug",
+        "cta": "Tag kontrol"
+      },
+      {
+        "chip": "🎯 Mål",
+        "title": ["Mål med", "en rigtig plan"],
+        "text": "Sæt langsigtede mål, del dem op i delmål og før en dagbog med din plan og dine refleksioner.",
+        "alt": "Upshifts målskærm",
+        "cta": "Sæt mine mål"
+      },
+      {
+        "chip": "⏱️ Tidsregistrering",
+        "title": ["Se hvor", "din dag går hen"],
+        "text": "Følg dine fokussessioner og din daglige aktivitet i en kalender, hold din dagsstreak i live og se tilbage på din historik, når du vil.",
+        "alt": "Upshifts tidsregistrering med kalender og dagsstreak",
+        "cta": "Registrer min tid"
+      },
+      {
+        "chip": "📈 Profil",
+        "title": ["Se dig selv", "level op"],
+        "text": "Din profil viser dit level, XP i hver kategori, badges og streaks. Tilføj venner, bliv medlem af grupper og kravl op ad ranglisterne for at holde dig på sporet.",
+        "alt": "Upshift-profil med XP-fremskridt",
+        "cta": "Se min statistik"
+      }
+    ],
+    "faqEyebrow": "Brug for hjælp?",
+    "faqTitle": "Ofte stillede spørgsmål",
+    "seeAll": "Se alle spørgsmål",
+    "ctaTitle": "Byt {{doomscrolling}}|ud med [[at level op]]",
+    "ctaAlt": "Upshift"
+  },
+  "faqPage": {
+    "eyebrow": "Brug for hjælp?",
+    "h1": "Ofte stillede [[spørgsmål]]",
+    "intro": "Alt om missioner, blokeringen, mål, venner og din konto.",
+    "search": "Søg i spørgsmål",
+    "empty": "Ingen spørgsmål matcher din søgning.",
+    "stuckTitle": "Sidder du stadig fast?",
+    "stuckText": "Skriv til os, så vender vi tilbage.",
+    "stuckCta": "Skriv til support"
+  },
+  "downloadPage": {
+    "eyebrow": "Hent appen",
+    "h1": "Download [[Upshift]]",
+    "text": "Gør dine vaner til missioner og hold distraherende apps blokeret, indtil de er klaret. Fås til iPhone og Android."
+  },
+  "faq": {
+    "groups": [
+      {
+        "icon": "🚀",
+        "title": "Kom godt i gang",
+        "items": [
+          {
+            "question": "Hvad er Upshift?",
+            "summary": "Appen i én sætning.",
+            "answer": "Upshift er en alt-i-en produktivitetsapp, der hjælper dig med at forandre dit liv fra bunden. Dine vaner bliver til missioner, du optjener XP og levler op, og distraherende apps forbliver blokeret, indtil det vigtige er gjort."
+          },
+          {
+            "question": "Findes der en Android-version?",
+            "summary": "iPhone og Android.",
+            "answer": "Ja! Upshift findes i App Store og på Google Play."
+          },
+          {
+            "question": "Findes der en gratis version af Upshift?",
+            "summary": "Prøveperiode og pris.",
+            "answer": "Upshift tilbyder 7 dages gratis prøveperiode, så du kan se, hvorfor det er den app, du har ledt efter :)"
+          },
+          {
+            "question": "Hvordan virker XP og levels?",
+            "summary": "Fremskridt, badges og statistik.",
+            "answer": "Hver mission, du klarer, giver XP i sin kategori: Penge, Styrke, Sundhed eller Viden. XP hæver dit globale level, låser op for badges og præstationer og vises på din profil sammen med resten af din statistik."
+          }
+        ]
+      },
+      {
+        "icon": "⚔️",
+        "title": "Missioner & vaner",
+        "items": [
+          {
+            "question": "Hvad er forskellen på missioner og sidemissioner?",
+            "summary": "Hovedvaner kontra daglige udfordringer.",
+            "answer": "Missioner er dine vigtigste daglige vaner, som du vil bygge op på lang sigt. Sidemissioner er daglige udfordringer, som appen genererer, med ekstra XP og lidt afveksling. Klar sidemissioner for bonusbelønninger og variation!"
+          },
+          {
+            "question": "Hvilke typer missioner kan jeg oprette?",
+            "summary": "Endagsmissioner, ugentlige, månedlige, drop-missioner og roulette.",
+            "answer": "Endagsmissioner fungerer som en huskeliste og kan planlægges til kommende dage. Ugentlige og månedlige missioner kører på de dage, du vælger. Drop-missioner hjælper dig med at bryde dårlige vaner ved at følge dem dagligt, og roulette-missioner giver dig tilfældige udfordringer. Du kan også gennemse Udforsk for at finde nye vaner."
+          },
+          {
+            "question": "Minder Upshift mig om mine missioner?",
+            "summary": "Smarte påmindelser.",
+            "answer": "Ja. Smarte påmindelser skubber dig til at klare dine vaner uden at være irriterende."
+          },
+          {
+            "question": "Hvad sker der, når jeg holder en streak?",
+            "summary": "Fejringer og badges.",
+            "answer": "Fejringer af streaks og dage dukker op, når du er konsekvent eller klarer dine daglige mål, og milepæle låser op for badges og præstationer."
+          }
+        ]
+      },
+      {
+        "icon": "🛡️",
+        "title": "Appblokering",
+        "items": [
+          {
+            "question": "Hvad er Missionsblokeringen?",
+            "summary": "Apps forbliver blokeret, indtil missionerne er klaret.",
+            "answer": "Missionsblokeringen er vores unikke funktion, der blokerer distraherende apps, indtil du har klaret dine daglige missioner. Det er en stærk motivation til at få det vigtige fra hånden først, før du åbner underholdningsapps."
+          },
+          {
+            "question": "Hvilke andre blokeringer kan jeg sætte op?",
+            "summary": "Bloker nu, tidsgrænser, planer og mere.",
+            "answer": "Bloker nu blokerer apps med det samme, når du skal fokusere. Tidsgrænser sætter en grænse for dagligt forbrug af apps og hjemmesider. Arbejdsplan blokerer distraherende apps i arbejdstiden. Der er også færdige blokeringer, fx pornoblokeringen, og hver blokeringstype har sit eget tilpassede overlay."
+          },
+          {
+            "question": "Kan jeg komme udenom en blokering?",
+            "summary": "Streng tilstand.",
+            "answer": "Med streng tilstand slået til kan en blokering ikke omgås, før appen er afblokeret (afhængigt af blokeringstypen). Det er hele pointen, selv på de letteste indstillinger."
+          },
+          {
+            "question": "Kan jeg stole på jer med mine skærmtidsdata?",
+            "summary": "Bygget på Apples Skærmtid.",
+            "answer": "Det behøver du ikke! Upshift er bygget oven på Apples Skærmtid-teknologi. Apple har bygget den med privatlivet i tankerne, så vi kan ikke se din skærmtid, selv hvis vi ville."
+          }
+        ]
+      },
+      {
+        "icon": "🎯",
+        "title": "Mål & fokus",
+        "items": [
+          {
+            "question": "Hvordan virker mål?",
+            "summary": "Delmål og en dagbog.",
+            "answer": "Sæt langsigtede mål og del dem op i delmål. Hvert mål har en dagbog, hvor du skriver din plan og dine refleksioner, og du får påmindelser om deadlines undervejs."
+          },
+          {
+            "question": "Kan jeg registrere min tid?",
+            "summary": "Tidsregistrering og fokustimer.",
+            "answer": "Ja. Tidsregistreringen viser, hvor din dag går hen, og fokustimeren tager tid på dine sessioner, så du kan se, hvor produktiv du var."
+          }
+        ]
+      },
+      {
+        "icon": "👥",
+        "title": "Venner & profil",
+        "items": [
+          {
+            "question": "Kan jeg bruge Upshift sammen med venner?",
+            "summary": "Venner, grupper og ranglister.",
+            "answer": "Tilføj venner, del dine fremskridt og bliv medlem af grupper med fælles udfordringer og ranglister, så du holder dig på sporet."
+          },
+          {
+            "question": "Kan jeg tilpasse appen?",
+            "summary": "Temaer og widgets.",
+            "answer": "Vælg mellem 9 temaer til din profil og tilføj Upshift-widgets til din startskærm."
+          },
+          {
+            "question": "Hvad er affiliateprogrammet?",
+            "summary": "Optjen belønninger ved at dele Upshift.",
+            "answer": "Del Upshift med andre og optjen belønninger gennem vores affiliateprogram. Når folk tilmelder sig med din henvisningskode eller dit brugernavn, optjener du kreditter, som du kan indløse til en række belønninger."
+          }
+        ]
+      }
+    ]
+  }
+}

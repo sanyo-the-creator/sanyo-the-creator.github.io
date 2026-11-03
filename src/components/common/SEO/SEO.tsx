@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { LOCALES, LOCALIZED_PATHS, SITE_URL, localizePath, localeFromPath, stripLocale } from '../../../i18n';
 
 interface SEOProps {
   title?: string;
@@ -14,11 +15,29 @@ interface SEOProps {
   noindex?: boolean;
 }
 
+const setMeta = (name: string, content: string, isProperty = false) => {
+  const attribute = isProperty ? 'property' : 'name';
+  let element = document.querySelector(`meta[${attribute}="${name}"]`);
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute(attribute, name);
+    document.head.appendChild(element);
+  }
+  element.setAttribute('content', content);
+};
+
+const canonicalPath = (pathname: string) => {
+  let p = pathname.replace(/\/+$/, '') || '/';
+  // /download/:platform and the vanity redirects all canonicalise to /download
+  p = p.replace(/^(\/(?:[a-z]{2}\/)?download)\/.+$/, '$1');
+  return p;
+};
+
 const SEO: React.FC<SEOProps> = ({
   title = 'Upshift - Level up your life',
-  description = 'Transform your life with Upshift - The most engaging personal development app. Block distracting apps, set time limits, and achieve your goals.',
-  keywords = 'upshift, productivity, app blocker, screen time, focus, personal development, time management, digital wellness',
-  image = 'https://joinupshift.com/icon.png',
+  description = 'Turn habits into quests, earn XP and keep distracting apps blocked until your quests are done. Upshift for iPhone and Android.',
+  keywords = 'upshift, habit tracker, quest blocker, app blocker, screen time, productivity, gamification, goals',
+  image = `${SITE_URL}/icon.png`,
   article = false,
   author = 'Upshift Team',
   publishedTime,
@@ -27,70 +46,46 @@ const SEO: React.FC<SEOProps> = ({
   noindex = false,
 }) => {
   const location = useLocation();
-  const canonicalUrl = `https://joinupshift.com${location.pathname}`;
+  const path = canonicalPath(location.pathname);
+  const canonicalUrl = `${SITE_URL}${path}`;
+  const lang = localeFromPath(location.pathname);
   const siteName = 'Upshift';
 
   useEffect(() => {
-    // Update document title
     document.title = title;
+    document.documentElement.lang = lang;
 
-    // Update or create meta tags
-    const updateMetaTag = (name: string, content: string, isProperty = false) => {
-      const attribute = isProperty ? 'property' : 'name';
-      let element = document.querySelector(`meta[${attribute}="${name}"]`);
-      
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute(attribute, name);
-        document.head.appendChild(element);
-      }
-      
-      element.setAttribute('content', content);
-    };
+    setMeta('description', description);
+    setMeta('keywords', keywords);
+    setMeta('author', author);
+    setMeta(
+      'robots',
+      noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+    );
 
-    // Basic meta tags
-    updateMetaTag('description', description);
-    updateMetaTag('keywords', keywords);
-    updateMetaTag('author', author);
-    
-    if (noindex) {
-      updateMetaTag('robots', 'noindex, nofollow');
-    } else {
-      updateMetaTag('robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
-    }
+    const current = LOCALES.find((l) => l.code === lang) || LOCALES[0];
+    setMeta('og:title', title, true);
+    setMeta('og:description', description, true);
+    setMeta('og:image', image, true);
+    setMeta('og:url', canonicalUrl, true);
+    setMeta('og:type', article ? 'article' : type, true);
+    setMeta('og:site_name', siteName, true);
+    setMeta('og:locale', current.ogLocale, true);
 
-    // Open Graph tags
-    updateMetaTag('og:title', title, true);
-    updateMetaTag('og:description', description, true);
-    updateMetaTag('og:image', image, true);
-    updateMetaTag('og:url', canonicalUrl, true);
-    updateMetaTag('og:type', article ? 'article' : type, true);
-    updateMetaTag('og:site_name', siteName, true);
-    updateMetaTag('og:locale', 'en_US', true);
-
-    // Article specific tags
     if (article) {
-      if (publishedTime) {
-        updateMetaTag('article:published_time', publishedTime, true);
-      }
-      if (modifiedTime) {
-        updateMetaTag('article:modified_time', modifiedTime, true);
-      }
-      if (author) {
-        updateMetaTag('article:author', author, true);
-      }
+      if (publishedTime) setMeta('article:published_time', publishedTime, true);
+      if (modifiedTime) setMeta('article:modified_time', modifiedTime, true);
+      if (author) setMeta('article:author', author, true);
     }
 
-    // Twitter Card tags
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:title', title);
-    updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', image);
-    updateMetaTag('twitter:site', '@upshift');
-    updateMetaTag('twitter:creator', '@upshift');
+    setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:title', title);
+    setMeta('twitter:description', description);
+    setMeta('twitter:image', image);
+    setMeta('twitter:site', '@upshift');
+    setMeta('twitter:creator', '@upshift');
 
-    // Update canonical link
-    let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');
       canonicalLink.setAttribute('rel', 'canonical');
@@ -98,20 +93,32 @@ const SEO: React.FC<SEOProps> = ({
     }
     canonicalLink.setAttribute('href', canonicalUrl);
 
-    // Add alternate language links (if needed in future)
-    let alternateLang = document.querySelector('link[rel="alternate"][hreflang="en"]') as HTMLLinkElement;
-    if (!alternateLang) {
-      alternateLang = document.createElement('link');
-      alternateLang.setAttribute('rel', 'alternate');
-      alternateLang.setAttribute('hreflang', 'en');
-      document.head.appendChild(alternateLang);
-    }
-    alternateLang.setAttribute('href', canonicalUrl);
+    // Alternate language versions: replace whatever is in <head> with the set for this page.
+    document.head
+      .querySelectorAll('link[rel="alternate"][hreflang], meta[property="og:locale:alternate"]')
+      .forEach((el) => el.remove());
 
-  }, [title, description, keywords, image, canonicalUrl, article, author, publishedTime, modifiedTime, type, noindex, siteName]);
+    const basePath = stripLocale(path);
+    if (LOCALIZED_PATHS.includes(basePath)) {
+      const addAlternate = (hreflang: string, href: string) => {
+        const link = document.createElement('link');
+        link.setAttribute('rel', 'alternate');
+        link.setAttribute('hreflang', hreflang);
+        link.setAttribute('href', href);
+        document.head.appendChild(link);
+      };
+      LOCALES.forEach((l) => addAlternate(l.hreflang, `${SITE_URL}${localizePath(l.code, basePath)}`));
+      addAlternate('x-default', `${SITE_URL}${localizePath('en', basePath)}`);
+      LOCALES.filter((l) => l.code !== lang).forEach((l) => {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', 'og:locale:alternate');
+        meta.setAttribute('content', l.ogLocale);
+        document.head.appendChild(meta);
+      });
+    }
+  }, [title, description, keywords, image, canonicalUrl, path, lang, article, author, publishedTime, modifiedTime, type, noindex, siteName]);
 
   return null;
 };
 
 export default SEO;
-

@@ -1,153 +1,1095 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://joinupshift.com/</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/de</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/es</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/fr</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/it</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/pt</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/nl</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/sv</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/da</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/fi</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/no</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/pl</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/cs</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/sk</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/ja</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/ko</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/" />
   </url>
   <url>
     <loc>https://joinupshift.com/faq</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/de/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/es/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/fr/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/it/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/pt/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/nl/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/sv/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/da/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/fi/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/no/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/pl/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/cs/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/sk/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/ja/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/ko/faq</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/faq" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/faq" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/faq" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/faq" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/faq" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/faq" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/faq" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/faq" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/faq" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/faq" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/faq" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/faq" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/faq" />
   </url>
   <url>
     <loc>https://joinupshift.com/download</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/de/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/es/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/fr/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/it/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/pt/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/nl/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/sv/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/da/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/fi/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/no/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/pl/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/cs/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/sk/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/ja/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
+  </url>
+  <url>
+    <loc>https://joinupshift.com/ko/download</loc>
+    <lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joinupshift.com/download" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://joinupshift.com/de/download" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://joinupshift.com/es/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://joinupshift.com/fr/download" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://joinupshift.com/it/download" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://joinupshift.com/pt/download" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://joinupshift.com/nl/download" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://joinupshift.com/sv/download" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://joinupshift.com/da/download" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://joinupshift.com/fi/download" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://joinupshift.com/no/download" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://joinupshift.com/pl/download" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://joinupshift.com/cs/download" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://joinupshift.com/sk/download" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://joinupshift.com/ja/download" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://joinupshift.com/ko/download" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://joinupshift.com/download" />
   </url>
   <url>
     <loc>https://joinupshift.com/about</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/privacy</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/terms</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-apps-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-01</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-websites-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-02</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/app-blockers-science-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-03</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-limit-screen-time-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://joinupshift.com/articles/how-to-lock-apps-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-04</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-time-limit-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-05</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-youtube-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-instagram-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-facebook-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-tiktok-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-snapchat-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-twitter-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-reddit-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-clash-royale-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-clash-of-clans-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-block-porn-iphone-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-06</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/why-feel-unmotivated-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-07</lastmod>
   </url>
   <url>
     <loc>https://joinupshift.com/articles/how-to-stop-procrastinating-upshift</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-07</lastmod>
   </url>
 </urlset>

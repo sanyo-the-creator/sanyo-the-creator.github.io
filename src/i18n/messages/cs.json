@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "home": {
+      "title": "Upshift - Zvyšte level svého života | Návyky a blokátor aplikací",
+      "description": "Změňte návyky v questy, získávejte XP a držte rušivé aplikace zablokované, dokud questy nesplníte. Upshift pro iPhone a Android.",
+      "keywords": "upshift, sledování návyků, blokátor aplikací, blokování aplikací, čas u obrazovky, produktivita, gamifikace, cíle"
+    },
+    "faq": {
+      "title": "Časté dotazy - Upshift | Questy, Blokátor questů a cíle",
+      "description": "Odpovědi o Upshift: questy a vedlejší questy, Blokátor questů, blokování aplikací, cíle, sledování času, přátelé, cena a soukromí.",
+      "keywords": "upshift časté dotazy, blokátor questů, blokování aplikací nápověda, sledování návyků, čas u obrazovky soukromí"
+    },
+    "download": {
+      "title": "Stáhnout Upshift - Zvyšte level života | Aplikace iOS a Android",
+      "description": "Stáhněte si Upshift pro iPhone a Android. Změňte návyky v questy, blokujte rušivé aplikace, stanovte si cíle a sledujte pokrok.",
+      "keywords": "stáhnout upshift, aplikace ios, aplikace android, sledování návyků ke stažení, blokátor aplikací, čas u obrazovky"
+    }
+  },
+  "nav": {
+    "features": "Funkce",
+    "faq": "Dotazy",
+    "contact": "Kontakt",
+    "download": "Stáhnout",
+    "menu": "Menu",
+    "homeLabel": "Úvodní stránka Upshift",
+    "mainNav": "Hlavní navigace",
+    "product": "Produkt",
+    "resources": "Zdroje",
+    "legal": "Právní informace",
+    "blog": "Blog",
+    "privacy": "Zásady ochrany osobních údajů",
+    "terms": "Obchodní podmínky",
+    "refund": "Požádat o vrácení peněz",
+    "rights": "Všechna práva vyhrazena.",
+    "language": "Jazyk"
+  },
+  "stores": {
+    "appStoreSmall": "Stáhnout z",
+    "playSmall": "Stáhnout z"
+  },
+  "landing": {
+    "badge": "Váš život jako hra.",
+    "h1": "Váš telefon je [[nástroj]],|ne {{rozptýlení}}",
+    "heroText": "Upshift mění vaše návyky v questy. Plňte je, získávejte XP a odemykejte zablokované aplikace, a sledujte, jak každým dnem rostou vaše série, cíle i level.",
+    "heroAlt": "Upshift na iPhonu: blokátor aplikací, denní questy a sledování času",
+    "statement": "Otevřete telefon na minutu a ztratíte hodinu. | S Upshift zůstanou aplikace zamčené, dokud nesplníte své questy.",
+    "featuresEyebrow": "Jak to funguje",
+    "featuresTitle": "Jak Upshift mění návyky v pokrok",
+    "features": [
+      {
+        "chip": "⚔️ Questy",
+        "title": ["Vaše návyky", "se mění v questy"],
+        "text": "Změňte denní návyky v questy a vedlejší questy. Získávejte XP v kategoriích Peníze, Síla, Zdraví a Znalosti, budujte série a zvyšujte level svého života.",
+        "alt": "Obrazovka Dnes v Upshift s denními questy",
+        "cta": "Začít zvyšovat level"
+      },
+      {
+        "chip": "🛡️ Blokátor questů",
+        "title": ["Zasloužte si", "svůj čas u obrazovky"],
+        "text": "Rušivé aplikace zůstanou zablokované, dokud nesplníte denní questy. Až budete chtít víc, přidejte Blokovat hned, časové limity a pracovní rozvrhy.",
+        "alt": "Nastavení Blokátoru questů v Upshift",
+        "cta": "Zablokovat mé aplikace"
+      },
+      {
+        "chip": "⏳ Blokátor aplikací",
+        "title": ["Vězte, kam", "utíká váš čas"],
+        "text": "Podívejte se na celkové využití každé aplikace a jedním klepnutím nastavte pracovní rozvrhy, blokování obsahu pro dospělé a hazardu, časové limity nebo Blokovat hned. Zapněte přísný režim a blokaci nepůjde obejít, dokud neskončí.",
+        "alt": "Blokátor aplikací Upshift s celkovým využitím",
+        "cta": "Převzít kontrolu"
+      },
+      {
+        "chip": "🎯 Cíle",
+        "title": ["Cíle se", "skutečným plánem"],
+        "text": "Stanovte si dlouhodobé cíle, rozdělte je na dílčí a veďte deník s plánem a postřehy.",
+        "alt": "Obrazovka cílů v Upshift",
+        "cta": "Nastavit mé cíle"
+      },
+      {
+        "chip": "⏱️ Sledování času",
+        "title": ["Podívejte se, kam", "mizí váš den"],
+        "text": "Sledujte své sezení soustředění a denní aktivitu v kalendáři, udržujte sérii dnů a kdykoli se vraťte k historii.",
+        "alt": "Sledování času v Upshift s kalendářem a sérií dnů",
+        "cta": "Sledovat můj čas"
+      },
+      {
+        "chip": "📈 Profil",
+        "title": ["Sledujte, jak", "rostete"],
+        "text": "Váš profil ukazuje level, XP v každé kategorii, odznaky a série. Přidávejte přátele, vstupujte do skupin a stoupejte v žebříčcích, ať vydržíte.",
+        "alt": "Profil v Upshift s pokrokem XP",
+        "cta": "Zobrazit mé statistiky"
+      }
+    ],
+    "faqEyebrow": "Potřebujete pomoc?",
+    "faqTitle": "Často kladené dotazy",
+    "seeAll": "Zobrazit všechny dotazy",
+    "ctaTitle": "Nahraďte {{doomscrolling}}|za [[zvyšování levelu]]",
+    "ctaAlt": "Upshift"
+  },
+  "faqPage": {
+    "eyebrow": "Potřebujete pomoc?",
+    "h1": "Často kladené [[dotazy]]",
+    "intro": "Vše o questech, blokátoru, cílech, přátelích a vašem účtu.",
+    "search": "Hledat v dotazech",
+    "empty": "Vašemu hledání neodpovídá žádný dotaz.",
+    "stuckTitle": "Pořád si nevíte rady?",
+    "stuckText": "Napište nám a ozveme se vám.",
+    "stuckCta": "Napsat podpoře"
+  },
+  "downloadPage": {
+    "eyebrow": "Získejte aplikaci",
+    "h1": "Stáhněte si [[Upshift]]",
+    "text": "Změňte návyky v questy a držte rušivé aplikace zablokované, dokud je nesplníte. K dispozici pro iPhone a Android."
+  },
+  "faq": {
+    "groups": [
+      {
+        "icon": "🚀",
+        "title": "Začínáme",
+        "items": [
+          {
+            "question": "Co je Upshift?",
+            "summary": "Aplikace v jedné větě.",
+            "answer": "Upshift je komplexní aplikace pro produktivitu, která vám pomůže změnit život od základů. Z vašich návyků se stanou questy, získáváte XP a postupujete na vyšší level a rušivé aplikace zůstanou zablokované, dokud neuděláte to důležité."
+          },
+          {
+            "question": "Existuje verze pro Android?",
+            "summary": "iPhone a Android.",
+            "answer": "Ano! Upshift je dostupný v App Store i na Google Play."
+          },
+          {
+            "question": "Je Upshift k dispozici zdarma?",
+            "summary": "Zkušební doba a cena.",
+            "answer": "Upshift nabízí 7 dní zkušební doby zdarma, abyste viděli, proč je to právě ta aplikace, kterou jste hledali :)"
+          },
+          {
+            "question": "Jak fungují XP a levely?",
+            "summary": "Pokrok, odznaky a statistiky.",
+            "answer": "Každý splněný quest vám přinese XP ve své kategorii: Peníze, Síla, Zdraví nebo Znalosti. XP zvyšuje váš celkový level, odemyká odznaky a úspěchy a objevuje se na vašem profilu spolu s ostatními statistikami."
+          }
+        ]
+      },
+      {
+        "icon": "⚔️",
+        "title": "Questy a návyky",
+        "items": [
+          {
+            "question": "Jaký je rozdíl mezi questy a vedlejšími questy?",
+            "summary": "Hlavní návyky a denní výzvy.",
+            "answer": "Questy jsou vaše hlavní denní návyky, které chcete budovat dlouhodobě. Vedlejší questy jsou denní výzvy generované aplikací, které dávají extra XP a přinášejí rozmanitost. Plňte vedlejší questy pro bonusové odměny a změnu!"
+          },
+          {
+            "question": "Jaké questy mohu vytvářet?",
+            "summary": "Jednodenní, týdenní, měsíční, odvykací a ruleta.",
+            "answer": "Jednodenní questy fungují jako seznam úkolů a lze je naplánovat na budoucí dny. Týdenní a měsíční questy se opakují ve dnech, které si vyberete. Odvykací questy vám pomohou zbavit se zlozvyků díky každodennímu sledování a questy ruleta na vás vrhají náhodné výzvy. V části Objevovat najdete také nové návyky."
+          },
+          {
+            "question": "Připomene mi Upshift moje questy?",
+            "summary": "Chytrá upozornění.",
+            "answer": "Ano. Chytrá upozornění vás nenásilně postrčí ke splnění návyků."
+          },
+          {
+            "question": "Co se stane, když držím sérii?",
+            "summary": "Oslavy a odznaky.",
+            "answer": "Oslavy série a dne se objeví, když jste důslední nebo splníte denní cíle, a milníky odemykají odznaky a úspěchy."
+          }
+        ]
+      },
+      {
+        "icon": "🛡️",
+        "title": "Blokátor aplikací",
+        "items": [
+          {
+            "question": "Co je Blokátor questů?",
+            "summary": "Aplikace zablokované, dokud nesplníte questy.",
+            "answer": "Blokátor questů je naše unikátní funkce, která blokuje rušivé aplikace, dokud nesplníte denní questy. Je to silná motivace udělat nejdřív to důležité, než sáhnete po zábavě."
+          },
+          {
+            "question": "Jaké další blokace mohu nastavit?",
+            "summary": "Blokovat hned, časové limity, rozvrhy a další.",
+            "answer": "Blokovat hned okamžitě zablokuje aplikace, když se potřebujete soustředit. Časové limity omezují denní používání aplikací a webů. Pracovní rozvrh blokuje rušivé aplikace během pracovní doby. K dispozici jsou i hotové blokace, například blokování pornografie, a každý typ blokace má vlastní upravitelný překryv."
+          },
+          {
+            "question": "Dá se blokace obejít?",
+            "summary": "Přísný režim.",
+            "answer": "Se zapnutým přísným režimem nelze blokaci obejít, dokud se aplikace neodblokuje (podle typu blokace). Právě o to jde, i při nejmírnějším nastavení."
+          },
+          {
+            "question": "Můžu vám svěřit data o čase u obrazovky?",
+            "summary": "Postaveno na Času u obrazovky od Applu.",
+            "answer": "Nemusíte! Upshift je postaven na technologii Čas u obrazovky od Applu. Apple ji vytvořil s ohledem na soukromí, takže váš čas u obrazovky nevidíme, ani kdybychom chtěli."
+          }
+        ]
+      },
+      {
+        "icon": "🎯",
+        "title": "Cíle a soustředění",
+        "items": [
+          {
+            "question": "Jak fungují cíle?",
+            "summary": "Milníky a deník.",
+            "answer": "Stanovte si dlouhodobé cíle a rozdělte je na dílčí. Každý cíl má deník, do kterého zapisujete plán a postřehy, a po cestě dostáváte upozornění na termíny."
+          },
+          {
+            "question": "Mohu sledovat svůj čas?",
+            "summary": "Sledování času a časovač soustředění.",
+            "answer": "Ano. Sledování času ukazuje, kam utíká váš den, a časovač soustředění měří vaše sezení, takže uvidíte, jak jste byli produktivní."
+          }
+        ]
+      },
+      {
+        "icon": "👥",
+        "title": "Přátelé a profil",
+        "items": [
+          {
+            "question": "Mohu používat Upshift s přáteli?",
+            "summary": "Přátelé, skupiny a žebříčky.",
+            "answer": "Přidávejte přátele, sdílejte pokrok a vstupujte do skupin se společnými výzvami a žebříčky, ať vydržíte."
+          },
+          {
+            "question": "Mohu si aplikaci přizpůsobit?",
+            "summary": "Motivy a widgety.",
+            "answer": "Vyberte si z 9 motivů pro svůj profil a přidejte widgety Upshift na domovskou obrazovku."
+          },
+          {
+            "question": "Co je Affiliate program?",
+            "summary": "Získávejte odměny za sdílení Upshift.",
+            "answer": "Sdílejte Upshift s ostatními a získávejte odměny v našem Affiliate programu. Když se lidé zaregistrují s vaším referenčním kódem nebo uživatelským jménem, získáte kredity, které můžete vyměnit za řadu odměn."
+          }
+        ]
+      }
+    ]
+  }
+}

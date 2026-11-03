@@ -3,14 +3,22 @@ import { useParams } from 'react-router-dom';
 import { SEO, StructuredData } from '../../components/common/SEO';
 import { trackReferralClick } from '../../utils/referralUtils';
 import { StoreButtons } from '../../components/site/SiteChrome';
+import { useLocale, rich, localizePath } from '../../i18n';
 import './Download.css';
 
 const Download: React.FC = () => {
   const { platform } = useParams<{ platform: string }>();
+  const { t, lang } = useLocale();
 
   useEffect(() => {
     // Only auto-redirect if user is on /download, /download/:platform, or /
-    if (!window.location.pathname.startsWith('/download') && window.location.pathname !== '/') {
+    const downloadRoot = localizePath(lang, '/download');
+    if (!window.location.pathname.startsWith(downloadRoot) && window.location.pathname !== '/') {
+      return;
+    }
+
+    // Never bounce crawlers to a store listing, they need to see this page.
+    if (/bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|lighthouse/i.test(navigator.userAgent || '')) {
       return;
     }
 
@@ -19,15 +27,15 @@ const Download: React.FC = () => {
       // BEFORE we rewrite the URL below. Landing on the bare root "/" must NOT
       // auto-redirect to the store — only an explicit /download (or a referral
       // redirect into /download/...) should.
-      const isExplicitDownloadPath = window.location.pathname.startsWith('/download');
+      const isExplicitDownloadPath = window.location.pathname.startsWith(downloadRoot);
 
       // Check for referral code in URL
       const params = new URLSearchParams(window.location.search);
       const refCode = params.get('ref');
 
       // Clean up the URL to just /download without reloading the page
-      if (window.location.pathname !== '/download' || window.location.search) {
-        window.history.replaceState({}, '', '/download');
+      if (window.location.pathname !== downloadRoot || window.location.search) {
+        window.history.replaceState({}, '', downloadRoot);
       }
 
       if (refCode) {
@@ -59,29 +67,31 @@ const Download: React.FC = () => {
     };
 
     runRedirectLogic();
-  }, [platform]);
+  }, [platform, lang]);
 
+
+  const downloadUrlPath = localizePath(lang, '/download');
 
   return (
     <div className="download-page">
       <SEO
-        title="Download Upshift - Level up your life | iOS & Android App"
-        description="Download Upshift app for iOS and Android. Transform your life with the most engaging personal development app. Block distracting apps, set goals, and track your progress."
-        keywords="download upshift, ios app, android app, personal development app, habit tracker download, productivity app, app blocker, screen time management"
+        title={t.meta.download.title}
+        description={t.meta.download.description}
+        keywords={t.meta.download.keywords}
         image="https://joinupshift.com/icon.png"
         type="website"
       />
       <StructuredData
         type="webpage"
-        title="Download Upshift"
-        description="Download Upshift app for iOS and Android"
-        url="https://joinupshift.com/download"
+        title={t.meta.download.title}
+        description={t.meta.download.description}
+        url={`https://joinupshift.com${downloadUrlPath}`}
       />
 
       <section className="download-intro">
-        <span className="site-eyebrow">Get the App</span>
-        <h1>Download <span className="grad-blue">Upshift</span></h1>
-        <p>Transform your life with the most engaging personal development app. Available on iPhone and Android.</p>
+        <span className="site-eyebrow">{t.downloadPage.eyebrow}</span>
+        <h1>{rich(t.downloadPage.h1)}</h1>
+        <p>{t.downloadPage.text}</p>
         <StoreButtons className="download-stores" />
       </section>
     </div>

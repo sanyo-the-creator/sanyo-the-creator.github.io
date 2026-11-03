@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "home": {
+      "title": "Upshift - Rastreador de hábitos y bloqueador de apps",
+      "description": "Convierte tus hábitos en misiones, gana XP y mantén bloqueadas las apps que distraen hasta cumplirlas. Upshift para iPhone y Android.",
+      "keywords": "upshift, app de hábitos, bloqueador de apps, tiempo de uso, productividad, gamificación, objetivos, bloquear aplicaciones"
+    },
+    "faq": {
+      "title": "Preguntas frecuentes - Upshift | Misiones y bloqueador",
+      "description": "Respuestas sobre Upshift: misiones y misiones secundarias, bloqueador de misiones, bloqueo de apps, objetivos, tiempo, amigos, precios y privacidad.",
+      "keywords": "upshift preguntas, bloqueador de misiones, ayuda bloqueador de apps, app de hábitos dudas, tiempo de uso privacidad"
+    },
+    "download": {
+      "title": "Descargar Upshift - App de hábitos y bloqueador de apps",
+      "description": "Descarga Upshift para iPhone y Android. Convierte hábitos en misiones, bloquea las apps que distraen, fija objetivos y sigue tu progreso.",
+      "keywords": "descargar upshift, app ios, app android, app de hábitos, bloqueador de apps, reducir tiempo de pantalla"
+    }
+  },
+  "nav": {
+    "features": "Funciones",
+    "faq": "Preguntas frecuentes",
+    "contact": "Contacto",
+    "download": "Descargar",
+    "menu": "Menú",
+    "homeLabel": "Inicio de Upshift",
+    "mainNav": "Navegación principal",
+    "product": "Producto",
+    "resources": "Recursos",
+    "legal": "Legal",
+    "blog": "Blog",
+    "privacy": "Política de privacidad",
+    "terms": "Términos y condiciones",
+    "refund": "Solicitar un reembolso",
+    "rights": "Todos los derechos reservados.",
+    "language": "Idioma"
+  },
+  "stores": {
+    "appStoreSmall": "Descargar en el",
+    "playSmall": "Disponible en"
+  },
+  "landing": {
+    "badge": "Tu vida, jugada como un videojuego.",
+    "h1": "Tu móvil es tu [[herramienta]],|no tu {{distracción}}",
+    "heroText": "Upshift convierte tus hábitos en misiones. Complétalas para ganar XP y desbloquear las apps que bloqueaste, y mira cómo crecen tus rachas, tus objetivos y tu nivel cada día.",
+    "heroAlt": "Upshift en iPhone: bloqueador de apps, misiones diarias y control del tiempo",
+    "statement": "Abres el móvil un minuto y pierdes una hora. | Con Upshift las apps siguen bloqueadas hasta que cumples tus misiones.",
+    "featuresEyebrow": "Cómo funciona",
+    "featuresTitle": "Cómo Upshift convierte los hábitos en progreso",
+    "features": [
+      {
+        "chip": "⚔️ Misiones",
+        "title": ["Tus hábitos", "se vuelven misiones"],
+        "text": "Convierte tus hábitos diarios en misiones y misiones secundarias. Gana XP en Dinero, Fuerza, Salud y Conocimiento, crea rachas y sube de nivel tu vida.",
+        "alt": "Pantalla de hoy de Upshift con misiones diarias",
+        "cta": "Empieza a subir de nivel"
+      },
+      {
+        "chip": "🛡️ Bloqueador de misiones",
+        "title": ["Gánate tu", "tiempo de uso"],
+        "text": "Las apps que distraen siguen bloqueadas hasta que termines tus misiones diarias. Añade Bloquear ahora, límites de tiempo y horarios de trabajo cuando necesites más.",
+        "alt": "Configuración del bloqueador de misiones de Upshift",
+        "cta": "Bloquear mis apps"
+      },
+      {
+        "chip": "⏳ Bloqueador de apps",
+        "title": ["Descubre adónde", "se va tu tiempo"],
+        "text": "Consulta tu uso total por app y configura horarios de trabajo, bloqueos de contenido adulto y apuestas, límites de tiempo o Bloquear ahora con un toque. Activa el modo estricto y no habrá forma de saltarse el bloqueo hasta que termine.",
+        "alt": "Bloqueador de apps de Upshift con el uso total",
+        "cta": "Toma el control"
+      },
+      {
+        "chip": "🎯 Objetivos",
+        "title": ["Objetivos con", "un plan real"],
+        "text": "Fija objetivos a largo plazo, divídelos en microobjetivos y lleva un diario con tu plan y tus reflexiones.",
+        "alt": "Pantalla de objetivos de Upshift",
+        "cta": "Fijar mis objetivos"
+      },
+      {
+        "chip": "⏱️ Control del tiempo",
+        "title": ["Mira adónde", "se va tu día"],
+        "text": "Registra tus sesiones de enfoque y tu actividad diaria en un calendario, mantén viva tu racha de días y revisa tu historial cuando quieras.",
+        "alt": "Control del tiempo de Upshift con calendario y racha de días",
+        "cta": "Controlar mi tiempo"
+      },
+      {
+        "chip": "📈 Perfil",
+        "title": ["Mira cómo", "subes de nivel"],
+        "text": "Tu perfil muestra tu nivel, tu XP en cada categoría, insignias y rachas. Añade amigos, únete a grupos y sube en las clasificaciones para no abandonar.",
+        "alt": "Perfil de Upshift con progreso de XP",
+        "cta": "Ver mis estadísticas"
+      }
+    ],
+    "faqEyebrow": "¿Necesitas ayuda?",
+    "faqTitle": "Preguntas frecuentes",
+    "seeAll": "Ver todas las preguntas",
+    "ctaTitle": "Cambia el {{doomscrolling}}|por [[subir de nivel]]",
+    "ctaAlt": "Upshift"
+  },
+  "faqPage": {
+    "eyebrow": "¿Necesitas ayuda?",
+    "h1": "Preguntas [[frecuentes]]",
+    "intro": "Todo sobre misiones, el bloqueador, objetivos, amigos y tu cuenta.",
+    "search": "Buscar preguntas",
+    "empty": "Ninguna pregunta coincide con tu búsqueda.",
+    "stuckTitle": "¿Sigues con dudas?",
+    "stuckText": "Escríbenos un correo y te responderemos.",
+    "stuckCta": "Escribir al soporte"
+  },
+  "downloadPage": {
+    "eyebrow": "Consigue la app",
+    "h1": "Descargar [[Upshift]]",
+    "text": "Convierte tus hábitos en misiones y mantén bloqueadas las apps que distraen hasta cumplirlas. Disponible para iPhone y Android."
+  },
+  "faq": {
+    "groups": [
+      {
+        "icon": "🚀",
+        "title": "Primeros pasos",
+        "items": [
+          {
+            "question": "¿Qué es Upshift?",
+            "summary": "La app en una frase.",
+            "answer": "Upshift es una app de productividad todo en uno que te ayuda a transformar tu vida desde la base. Tus hábitos se convierten en misiones, ganas XP y subes de nivel, y las apps que distraen siguen bloqueadas hasta que lo importante esté hecho."
+          },
+          {
+            "question": "¿Hay una versión para Android?",
+            "summary": "iPhone y Android.",
+            "answer": "¡Sí! Upshift está disponible en la App Store y en Google Play."
+          },
+          {
+            "question": "¿Existe una versión gratuita de Upshift?",
+            "summary": "Prueba y precios.",
+            "answer": "Upshift ofrece 7 días de prueba gratis, para que veas por qué esta es la app que estabas buscando :)"
+          },
+          {
+            "question": "¿Cómo funcionan el XP y los niveles?",
+            "summary": "Progreso, insignias y estadísticas.",
+            "answer": "Cada misión que completas te da XP en su categoría: Dinero, Fuerza, Salud o Conocimiento. El XP sube tu nivel global, desbloquea insignias y logros, y aparece en tu perfil junto con el resto de tus estadísticas."
+          }
+        ]
+      },
+      {
+        "icon": "⚔️",
+        "title": "Misiones y hábitos",
+        "items": [
+          {
+            "question": "¿Cuál es la diferencia entre misiones y misiones secundarias?",
+            "summary": "Hábitos principales y retos diarios.",
+            "answer": "Las misiones son tus hábitos diarios principales, los que quieres construir a largo plazo. Las misiones secundarias son retos diarios que genera la app, con XP extra y mucha variedad. ¡Complétalas para ganar recompensas extra y no caer en la rutina!"
+          },
+          {
+            "question": "¿Qué tipos de misiones puedo crear?",
+            "summary": "De un día, semanales, mensuales, dejar un hábito y ruleta.",
+            "answer": "Las misiones de un día funcionan como una lista de tareas y se pueden programar para días futuros. Las semanales y mensuales se repiten los días que elijas. Las misiones para dejar un hábito te ayudan a romper malas costumbres con un seguimiento diario, y las misiones ruleta te lanzan retos al azar. También puedes explorar la sección Explorar para descubrir nuevos hábitos."
+          },
+          {
+            "question": "¿Upshift me recordará mis misiones?",
+            "summary": "Recordatorios inteligentes.",
+            "answer": "Sí. Los recordatorios inteligentes te animan a cumplir tus hábitos sin resultar pesados."
+          },
+          {
+            "question": "¿Qué pasa cuando mantengo una racha?",
+            "summary": "Celebraciones e insignias.",
+            "answer": "Aparecen celebraciones de racha y de día cuando eres constante o terminas tus objetivos diarios, y los hitos desbloquean insignias y logros."
+          }
+        ]
+      },
+      {
+        "icon": "🛡️",
+        "title": "Bloqueador de apps",
+        "items": [
+          {
+            "question": "¿Qué es el bloqueador de misiones?",
+            "summary": "Las apps siguen bloqueadas hasta cumplir las misiones.",
+            "answer": "El bloqueador de misiones es nuestra función exclusiva que bloquea las apps que distraen hasta que completes tus misiones diarias. Es un gran motivador para hacer primero lo importante antes de abrir las apps de entretenimiento."
+          },
+          {
+            "question": "¿Qué otros bloqueos puedo configurar?",
+            "summary": "Bloquear ahora, límites de tiempo, horarios y más.",
+            "answer": "Bloquear ahora bloquea apps al instante cuando necesitas concentrarte. Los límites de tiempo ponen un tope diario al uso de apps y sitios web. El horario de trabajo bloquea las apps que distraen durante tu jornada. También hay bloqueos ya preparados, como el bloqueador de porno, y cada tipo de bloqueo tiene su propia pantalla personalizada."
+          },
+          {
+            "question": "¿Puedo saltarme un bloqueo?",
+            "summary": "Modo estricto.",
+            "answer": "Con el modo estricto activado, un bloqueo no se puede saltar hasta que la app se desbloquee (según el tipo de bloqueo). Ese es el objetivo, incluso en los ajustes más suaves."
+          },
+          {
+            "question": "¿Puedo confiaros mis datos de tiempo de uso?",
+            "summary": "Basado en Tiempo de uso de Apple.",
+            "answer": "¡No hace falta! Upshift está construido sobre la tecnología Tiempo de uso de Apple. Apple la diseñó pensando en la privacidad, así que no podemos ver tu tiempo de uso aunque quisiéramos."
+          }
+        ]
+      },
+      {
+        "icon": "🎯",
+        "title": "Objetivos y enfoque",
+        "items": [
+          {
+            "question": "¿Cómo funcionan los objetivos?",
+            "summary": "Hitos y un diario.",
+            "answer": "Fija objetivos a largo plazo y divídelos en microobjetivos. Cada objetivo tiene un diario donde escribes tu plan y tus reflexiones, y recibes recordatorios de las fechas límite por el camino."
+          },
+          {
+            "question": "¿Puedo controlar mi tiempo?",
+            "summary": "Control del tiempo y temporizador de enfoque.",
+            "answer": "Sí. El control del tiempo te muestra adónde se va tu día, y el temporizador de enfoque cronometra tus sesiones para que veas lo productivo que fuiste."
+          }
+        ]
+      },
+      {
+        "icon": "👥",
+        "title": "Amigos y perfil",
+        "items": [
+          {
+            "question": "¿Puedo usar Upshift con amigos?",
+            "summary": "Amigos, grupos y clasificaciones.",
+            "answer": "Añade amigos, comparte tu progreso y únete a grupos con retos compartidos y clasificaciones para mantener la constancia."
+          },
+          {
+            "question": "¿Puedo personalizar la app?",
+            "summary": "Temas y widgets.",
+            "answer": "Elige entre 9 temas para tu perfil y añade widgets de Upshift a tu pantalla de inicio."
+          },
+          {
+            "question": "¿Qué es el programa de afiliados?",
+            "summary": "Gana recompensas compartiendo Upshift.",
+            "answer": "Comparte Upshift con otras personas y gana recompensas con nuestro programa de afiliados. Cuando alguien se registre con tu código de referido o nombre de usuario, recibirás créditos que podrás canjear por un montón de recompensas."
+          }
+        ]
+      }
+    ]
+  }
+}

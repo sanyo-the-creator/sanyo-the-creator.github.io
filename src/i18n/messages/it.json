@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "home": {
+      "title": "Upshift - Fai level up | Habit Tracker e Blocco App",
+      "description": "Trasforma le abitudini in quest, guadagna XP e tieni bloccate le app che ti distraggono finché non le completi. Upshift per iPhone e Android.",
+      "keywords": "upshift, habit tracker, blocco app, bloccare app distraenti, tempo di utilizzo, produttività, gamification, obiettivi"
+    },
+    "faq": {
+      "title": "FAQ - Upshift | Quest, Blocco Quest, Obiettivi e altro",
+      "description": "Risposte su Upshift: quest e missioni secondarie, Blocco Quest, blocco delle app, obiettivi, tracciamento del tempo, amici, prezzi e privacy.",
+      "keywords": "upshift faq, blocco quest, aiuto blocco app, domande habit tracker, privacy tempo di utilizzo"
+    },
+    "download": {
+      "title": "Scarica Upshift - Fai level up | App iOS e Android",
+      "description": "Scarica Upshift per iPhone e Android. Trasforma le abitudini in quest, blocca le app che ti distraggono, fissa obiettivi e segui i tuoi progressi.",
+      "keywords": "scarica upshift, app ios, app android, habit tracker download, blocco app, gestione tempo di utilizzo"
+    }
+  },
+  "nav": {
+    "features": "Funzionalità",
+    "faq": "FAQ",
+    "contact": "Contatti",
+    "download": "Scarica",
+    "menu": "Menu",
+    "homeLabel": "Home di Upshift",
+    "mainNav": "Navigazione principale",
+    "product": "Prodotto",
+    "resources": "Risorse",
+    "legal": "Note legali",
+    "blog": "Blog",
+    "privacy": "Informativa sulla privacy",
+    "terms": "Termini e condizioni",
+    "refund": "Richiedi un rimborso",
+    "rights": "Tutti i diritti riservati.",
+    "language": "Lingua"
+  },
+  "stores": {
+    "appStoreSmall": "Scarica su",
+    "playSmall": "Disponibile su"
+  },
+  "landing": {
+    "badge": "La tua vita, giocata come un videogioco.",
+    "h1": "Il tuo telefono è uno [[strumento]],|non una {{distrazione}}",
+    "heroText": "Upshift trasforma le tue abitudini in quest. Completale per guadagnare XP e sbloccare le app che hai bloccato, e guarda crescere ogni giorno serie, obiettivi e livello.",
+    "heroAlt": "Upshift su iPhone: blocco app, quest giornaliere e time tracker",
+    "statement": "Apri il telefono per un minuto e ne perdi un'ora. | Con Upshift le app restano bloccate finché non completi le tue quest.",
+    "featuresEyebrow": "Come funziona",
+    "featuresTitle": "Come Upshift trasforma le abitudini in progressi",
+    "features": [
+      {
+        "chip": "⚔️ Quest",
+        "title": ["Le tue abitudini", "diventano quest"],
+        "text": "Trasforma le abitudini quotidiane in quest e missioni secondarie. Guadagna XP in Denaro, Forza, Salute e Conoscenza, costruisci serie e fai level up alla tua vita.",
+        "alt": "Schermata Oggi di Upshift con le quest giornaliere",
+        "cta": "Inizia a salire di livello"
+      },
+      {
+        "chip": "🛡️ Blocco Quest",
+        "title": ["Guadagnati il tuo", "Tempo di utilizzo"],
+        "text": "Le app che ti distraggono restano bloccate finché non completi le quest di giornata. Aggiungi Blocca ora, limiti di tempo e orari di lavoro quando ti serve di più.",
+        "alt": "Configurazione del Blocco Quest in Upshift",
+        "cta": "Blocca le mie app"
+      },
+      {
+        "chip": "⏳ Blocco App",
+        "title": ["Scopri dove va", "il tuo tempo"],
+        "text": "Guarda l'utilizzo totale di ogni app, poi imposta orari di lavoro, blocchi per contenuti per adulti e gioco d'azzardo, limiti di tempo o Blocca ora con un tocco. Attiva la modalità rigorosa e non c'è modo di aggirare il blocco finché non finisce.",
+        "alt": "Blocco app di Upshift con utilizzo totale",
+        "cta": "Prendi il controllo"
+      },
+      {
+        "chip": "🎯 Obiettivi",
+        "title": ["Obiettivi con", "un piano vero"],
+        "text": "Fissa obiettivi a lungo termine, suddividili in micro-obiettivi e tieni un diario con il tuo piano e le tue riflessioni.",
+        "alt": "Schermata Obiettivi di Upshift",
+        "cta": "Fissa i miei obiettivi"
+      },
+      {
+        "chip": "⏱️ Time Tracker",
+        "title": ["Guarda dove va", "la tua giornata"],
+        "text": "Monitora le sessioni di concentrazione e l'attività quotidiana su un calendario, mantieni viva la tua serie di giorni e rivedi la cronologia quando vuoi.",
+        "alt": "Time tracker di Upshift con calendario e serie di giorni",
+        "cta": "Monitora il mio tempo"
+      },
+      {
+        "chip": "📈 Profilo",
+        "title": ["Guardati", "salire di livello"],
+        "text": "Il tuo profilo mostra livello, XP in ogni categoria, badge e serie. Aggiungi amici, unisciti ai gruppi e scala le classifiche per restare costante.",
+        "alt": "Profilo di Upshift con i progressi XP",
+        "cta": "Vedi le mie statistiche"
+      }
+    ],
+    "faqEyebrow": "Serve aiuto?",
+    "faqTitle": "Domande frequenti",
+    "seeAll": "Vedi tutte le domande",
+    "ctaTitle": "Sostituisci il {{doomscrolling}}|con il [[level up]]",
+    "ctaAlt": "Upshift"
+  },
+  "faqPage": {
+    "eyebrow": "Serve aiuto?",
+    "h1": "Domande [[frequenti]]",
+    "intro": "Tutto su quest, blocco, obiettivi, amici e il tuo account.",
+    "search": "Cerca nelle domande",
+    "empty": "Nessuna domanda corrisponde alla tua ricerca.",
+    "stuckTitle": "Hai ancora dubbi?",
+    "stuckText": "Scrivici una email e ti risponderemo.",
+    "stuckCta": "Scrivi al supporto"
+  },
+  "downloadPage": {
+    "eyebrow": "Scarica l'app",
+    "h1": "Scarica [[Upshift]]",
+    "text": "Trasforma le abitudini in quest e tieni bloccate le app che ti distraggono finché non le completi. Disponibile su iPhone e Android."
+  },
+  "faq": {
+    "groups": [
+      {
+        "icon": "🚀",
+        "title": "Per iniziare",
+        "items": [
+          {
+            "question": "Che cos'è Upshift?",
+            "summary": "L'app in una frase.",
+            "answer": "Upshift è un'app di produttività tutto-in-uno che ti aiuta a cambiare la vita partendo dalle basi. Le tue abitudini diventano quest, guadagni XP e sali di livello, e le app che ti distraggono restano bloccate finché non hai fatto le cose importanti."
+          },
+          {
+            "question": "Esiste una versione per Android?",
+            "summary": "iPhone e Android.",
+            "answer": "Sì! Upshift è disponibile su App Store e su Google Play."
+          },
+          {
+            "question": "Esiste una versione gratuita di Upshift?",
+            "summary": "Prova e prezzi.",
+            "answer": "Upshift offre 7 giorni di prova gratuita, per mostrarti perché è l'app che stavi cercando :)"
+          },
+          {
+            "question": "Come funzionano XP e livelli?",
+            "summary": "Progressi, badge e statistiche.",
+            "answer": "Ogni quest completata ti fa guadagnare XP nella sua categoria: Denaro, Forza, Salute o Conoscenza. Gli XP fanno salire il tuo livello globale, sbloccano badge e traguardi e compaiono sul tuo profilo insieme alle altre statistiche."
+          }
+        ]
+      },
+      {
+        "icon": "⚔️",
+        "title": "Quest e abitudini",
+        "items": [
+          {
+            "question": "Qual è la differenza tra Quest e Missioni secondarie?",
+            "summary": "Abitudini principali e sfide giornaliere.",
+            "answer": "Le quest sono le tue abitudini quotidiane principali, quelle che vuoi costruire nel lungo periodo. Le missioni secondarie sono sfide giornaliere generate dall'app, che danno XP extra e tengono tutto più interessante. Completale per ottenere ricompense bonus e un po' di varietà!"
+          },
+          {
+            "question": "Che tipi di quest posso creare?",
+            "summary": "Giornaliere, settimanali, mensili, di rinuncia e roulette.",
+            "answer": "Le quest di un giorno funzionano come una lista di cose da fare e si possono programmare per i giorni futuri. Le quest settimanali e mensili si ripetono nei giorni che scegli. Le quest di rinuncia ti aiutano a spezzare le cattive abitudini monitorandole ogni giorno, mentre le quest roulette ti lanciano sfide a sorpresa. Puoi anche sfogliare Esplora per scoprire nuove abitudini."
+          },
+          {
+            "question": "Upshift mi ricorderà di fare le mie quest?",
+            "summary": "Promemoria intelligenti.",
+            "answer": "Sì. I promemoria intelligenti ti danno la spinta giusta per completare le tue abitudini senza diventare fastidiosi."
+          },
+          {
+            "question": "Cosa succede quando mantengo una serie?",
+            "summary": "Festeggiamenti e badge.",
+            "answer": "Quando sei costante o completi gli obiettivi del giorno compaiono i festeggiamenti per serie e giornate, e i traguardi sbloccano badge e achievement."
+          }
+        ]
+      },
+      {
+        "icon": "🛡️",
+        "title": "Blocco App",
+        "items": [
+          {
+            "question": "Che cos'è il Blocco Quest?",
+            "summary": "Le app restano bloccate finché le quest non sono fatte.",
+            "answer": "Il Blocco Quest è la nostra funzione esclusiva che blocca le app che ti distraggono finché non completi le quest di giornata. È una spinta potentissima per sbrigare prima le cose importanti e solo dopo passare alle app di intrattenimento."
+          },
+          {
+            "question": "Quali altri blocchi posso impostare?",
+            "summary": "Blocca ora, limiti di tempo, orari e altro.",
+            "answer": "Blocca ora blocca subito le app quando hai bisogno di concentrarti. I Limiti di tempo fissano un tetto all'uso giornaliero di app e siti web. L'Orario di lavoro blocca le app che ti distraggono durante le ore di lavoro. Ci sono anche blocchi già pronti, come quello per i contenuti porno, e ogni tipo di blocco ha una sua schermata personalizzata."
+          },
+          {
+            "question": "Posso aggirare un blocco?",
+            "summary": "Modalità rigorosa.",
+            "answer": "Con la modalità rigorosa attiva, un blocco non si può aggirare finché l'app non viene sbloccata (a seconda del tipo di blocco). È proprio questo il punto, anche con le impostazioni più leggere."
+          },
+          {
+            "question": "Posso fidarmi di voi con i miei dati di Tempo di utilizzo?",
+            "summary": "Basato su Tempo di utilizzo di Apple.",
+            "answer": "Non devi nemmeno farlo! Upshift è costruita sulla tecnologia Tempo di utilizzo di Apple. Apple l'ha progettata pensando alla privacy, quindi non possiamo vedere il tuo tempo di utilizzo nemmeno volendo."
+          }
+        ]
+      },
+      {
+        "icon": "🎯",
+        "title": "Obiettivi e concentrazione",
+        "items": [
+          {
+            "question": "Come funzionano gli obiettivi?",
+            "summary": "Traguardi intermedi e un diario.",
+            "answer": "Fissa obiettivi a lungo termine e suddividili in micro-obiettivi. Ogni obiettivo ha un diario dove scrivere il tuo piano e le tue riflessioni, e lungo il percorso ricevi promemoria sulle scadenze."
+          },
+          {
+            "question": "Posso monitorare il mio tempo?",
+            "summary": "Time tracker e timer di concentrazione.",
+            "answer": "Sì. Il time tracker mostra dove va la tua giornata e il timer di concentrazione cronometra le tue sessioni, così vedi quanto sei stato produttivo."
+          }
+        ]
+      },
+      {
+        "icon": "👥",
+        "title": "Amici e profilo",
+        "items": [
+          {
+            "question": "Posso usare Upshift con gli amici?",
+            "summary": "Amici, gruppi e classifiche.",
+            "answer": "Aggiungi amici, condividi i tuoi progressi e unisciti a gruppi con sfide condivise e classifiche per restare costante."
+          },
+          {
+            "question": "Posso personalizzare l'app?",
+            "summary": "Temi e widget.",
+            "answer": "Scegli tra 9 temi per il tuo profilo e aggiungi i widget di Upshift alla schermata Home."
+          },
+          {
+            "question": "Che cos'è il Programma di affiliazione?",
+            "summary": "Guadagna ricompense condividendo Upshift.",
+            "answer": "Condividi Upshift con gli altri e guadagna ricompense con il nostro Programma di affiliazione. Quando le persone si iscrivono usando il tuo codice referral o nome utente, ottieni crediti che puoi usare per riscattare tante ricompense."
+          }
+        ]
+      }
+    ]
+  }
+}
