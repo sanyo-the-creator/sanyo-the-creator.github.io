@@ -113,3 +113,35 @@ export const rich = (text: string, blueClass = 'grad-blue', orangeClass = 'grad-
 
 /** Strip the rich markers for plain-text use (alt text, meta, JSON-LD). */
 export const plain = (text: string) => text.replace(/\[\[|\]\]|\{\{|\}\}/g, '').replace(/\s*\|\s*/g, ' ');
+
+const LANG_KEY = 'upshift-lang';
+const BOT_RE = /bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|lighthouse|headless/i;
+
+/** Remember an explicit language choice (footer switcher) so we never override it. */
+export const rememberLocale = (code: string) => {
+  try {
+    localStorage.setItem(LANG_KEY, code);
+  } catch {
+    // storage blocked: fine, we just won't remember
+  }
+};
+
+/**
+ * Locale to send a first-time visitor on the English home page to, based on the browser's language list.
+ * Returns null when they should stay on English: bots, a stored choice, or no supported language.
+ */
+export const detectLocale = (): string | null => {
+  try {
+    if (BOT_RE.test(navigator.userAgent || '')) return null;
+    if (localStorage.getItem(LANG_KEY)) return null;
+    for (const raw of navigator.languages?.length ? navigator.languages : [navigator.language]) {
+      let code = (raw || '').toLowerCase().split('-')[0];
+      if (code === 'nb' || code === 'nn') code = 'no';
+      if (code === DEFAULT_LOCALE) return null;
+      if (isLocale(code)) return code;
+    }
+  } catch {
+    // ignore, stay on English
+  }
+  return null;
+};

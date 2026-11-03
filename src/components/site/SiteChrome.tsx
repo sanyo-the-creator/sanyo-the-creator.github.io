@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import upshiftIcon from '../../assets/upshiftIcon.png';
-import { LOCALES, LOCALIZED_PATHS, localizePath, stripLocale, useLocale } from '../../i18n';
+import { LOCALES, LOCALIZED_PATHS, localizePath, rememberLocale, stripLocale, useLocale } from '../../i18n';
 import './Site.css';
 
 export const APP_STORE_URL = 'https://apps.apple.com/us/app/upshift-1-productivity-app/id6749509316';
@@ -113,6 +113,7 @@ export const SiteFooter: React.FC = () => {
               key={l.code}
               to={localizePath(l.code, switchTarget)}
               hrefLang={l.hreflang}
+              onClick={() => rememberLocale(l.code)}
               lang={l.hreflang}
               aria-current={l.code === lang ? 'true' : undefined}
               className={l.code === lang ? 'active' : ''}
