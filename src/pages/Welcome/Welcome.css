@@ -573,3 +573,12 @@
   position: relative;
   z-index: 2;
 }
+/* The shared `.site h1 / .site p { margin: 0 }` rules win over the single-class rules above,
+   which left the subtitle stuck to the left of its box. Match their specificity. */
+.welcome-page .welcome-title {
+  margin: 0 0 var(--spacing-xl);
+}
+
+.welcome-page .welcome-subtitle {
+  margin: 0 auto var(--spacing-4xl);
+}
