@@ -67,5 +67,15 @@
       "source": "/(.*)",
       "destination": "/_shell.html"
     }
-  ]
+  ],
+  "proxy": {
+    "entrypoint": "proxy.js",
+    "matcher": [
+      "/",
+      "/(de|es|fr|it|pt|nl|sv|da|fi|no|pl|cs|sk|ja|ko)",
+      "/(de|es|fr|it|pt|nl|sv|da|fi|no|pl|cs|sk|ja|ko)/(faq|download)",
+      "/(faq|download|about|articles|privacy|terms|ai-info)",
+      "/articles/:slug"
+    ]
+  }
 }
