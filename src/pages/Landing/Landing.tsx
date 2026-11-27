@@ -63,6 +63,7 @@ const Landing: React.FC = () => {
       <StructuredData type="organization" description={t.meta.home.description} />
       <StructuredData type="website" description={t.meta.home.description} />
       <StructuredData type="software" description={t.meta.home.description} />
+      <StructuredData type="faq" items={previewFaq} />
 
       <section id="download" className="landing-hero">
         <div className="landing-hero-glow" aria-hidden="true" />
@@ -131,7 +132,7 @@ const Landing: React.FC = () => {
                   {item.question}
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
                 </button>
-                {open && <p>{item.answer}</p>}
+                <p hidden={!open}>{item.answer}</p>
               </div>
             );
           })}

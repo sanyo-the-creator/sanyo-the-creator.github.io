@@ -135,6 +135,16 @@ for (const l of LOCALES) {
       ld('organization', orgLd(t.meta.home.description)),
       ld('website', websiteLd(l.code, t.meta.home.description)),
       ld('software', appLd(t.meta.home.description)),
+      ld('faq', {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        inLanguage: l.code,
+        mainEntity: allFaq.slice(0, 6).map((it) => ({
+          '@type': 'Question',
+          name: it.question,
+          acceptedAnswer: { '@type': 'Answer', text: it.answer },
+        })),
+      }),
     ],
     body: wrap(
       `${navHtml(l.code, t)}<h1>${esc(plain(L.h1))}</h1><p>${esc(L.heroText)}</p>${storesHtml(t)}` +
