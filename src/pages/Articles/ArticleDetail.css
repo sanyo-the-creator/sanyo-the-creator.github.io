@@ -220,3 +220,21 @@
     padding: 1rem;
   }
 }
+
+/* Tables inside article HTML (comparisons) */
+.article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+}
+.article-content th,
+.article-content td {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: left;
+  vertical-align: top;
+}
+.article-content th {
+  background: rgba(255, 255, 255, 0.05);
+}
