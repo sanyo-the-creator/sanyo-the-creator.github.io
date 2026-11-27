@@ -2,7 +2,7 @@
 
 > Turn habits into quests, earn XP and keep distracting apps blocked until your quests are done. Upshift for iPhone and Android.
 
-Website: https://joinupshift.com/
+Website: https://www.joinupshift.com/
 iPhone: https://apps.apple.com/us/app/upshift-1-productivity-app/id6749509316
 Android: https://play.google.com/store/apps/details?id=com.upshift.app
 Support: support@joinupshift.com
@@ -119,24 +119,50 @@ Share Upshift with others and earn rewards through our Affiliate Program. When p
 
 ## Languages
 
-The home page, FAQ and download page are available in: English (https://joinupshift.com/), Deutsch (https://joinupshift.com/de), Español (https://joinupshift.com/es), Français (https://joinupshift.com/fr), Italiano (https://joinupshift.com/it), Português (https://joinupshift.com/pt), Nederlands (https://joinupshift.com/nl), Svenska (https://joinupshift.com/sv), Dansk (https://joinupshift.com/da), Suomi (https://joinupshift.com/fi), Norsk (https://joinupshift.com/no), Polski (https://joinupshift.com/pl), Čeština (https://joinupshift.com/cs), Slovenčina (https://joinupshift.com/sk), 日本語 (https://joinupshift.com/ja), 한국어 (https://joinupshift.com/ko).
+The home page, FAQ and download page are available in: English (https://www.joinupshift.com/), Deutsch (https://www.joinupshift.com/de), Español (https://www.joinupshift.com/es), Français (https://www.joinupshift.com/fr), Italiano (https://www.joinupshift.com/it), Português (https://www.joinupshift.com/pt), Nederlands (https://www.joinupshift.com/nl), Svenska (https://www.joinupshift.com/sv), Dansk (https://www.joinupshift.com/da), Suomi (https://www.joinupshift.com/fi), Norsk (https://www.joinupshift.com/no), Polski (https://www.joinupshift.com/pl), Čeština (https://www.joinupshift.com/cs), Slovenčina (https://www.joinupshift.com/sk), 日本語 (https://www.joinupshift.com/ja), 한국어 (https://www.joinupshift.com/ko).
 
 ## Guides
 
-- [How To Block Apps on iPhone [2025]](https://joinupshift.com/articles/how-to-block-apps-iphone-upshift): Learn the most effective ways to block distracting apps on your iPhone with Upshift
-- [How To Block Websites on iPhone (Safari or Chrome)](https://joinupshift.com/articles/how-to-block-websites-iphone-upshift): Complete guide to blocking websites on iPhone using built-in tools and Upshift
-- [How To Use App Blockers: A Scientific Approach To Reducing Screen Time](https://joinupshift.com/articles/app-blockers-science-upshift): Learn how to use app blockers like Upshift to limit screen time and regain control
-- [How To Limit Screen Time on iPhone: 6 Proven Tips [2025]](https://joinupshift.com/articles/how-to-limit-screen-time-iphone-upshift): 7 actionable steps for reducing time spent on your phone with Upshift and other methods
-- [How To Set Time Limits on iPhone [2025]](https://joinupshift.com/articles/how-to-time-limit-iphone-upshift): Learn how to set time limits on apps using Apple Screen Time and Upshift
-- [How To Block YouTube on iPhone](https://joinupshift.com/articles/how-to-block-youtube-iphone-upshift): Learn how to block YouTube on iPhone using built-in tools and Upshift
-- [How To Block Instagram on iPhone](https://joinupshift.com/articles/how-to-block-instagram-iphone-upshift): Learn how to block Instagram on iPhone using built-in tools and Upshift
-- [How To Block Facebook on iPhone](https://joinupshift.com/articles/how-to-block-facebook-iphone-upshift): Learn how to block Facebook on iPhone using built-in tools and Upshift
-- [How To Block Tiktok on iPhone](https://joinupshift.com/articles/how-to-block-tiktok-iphone-upshift): Learn how to block Tiktok on iPhone using built-in tools and Upshift
-- [How To Block Snapchat on iPhone](https://joinupshift.com/articles/how-to-block-snapchat-upshift): Learn how to block Snapchat on iPhone using built-in tools and Upshift
-- [How To Block Twitter on iPhone](https://joinupshift.com/articles/how-to-block-twitter-iphone-upshift): Learn how to block Twitter on iPhone using built-in tools and Upshift
-- [How To Block Reddit on iPhone](https://joinupshift.com/articles/how-to-block-reddit-iphone-upshift): Learn how to block Reddit on iPhone using built-in tools and Upshift
-- [How To Block Clash Royale on iPhone](https://joinupshift.com/articles/how-to-block-clash-royale-iphone-upshift): Learn how to block Clash Royale on iPhone using built-in tools and Upshift
-- [How To Block Clash of Clans on iPhone](https://joinupshift.com/articles/how-to-block-clash-of-clans-iphone-upshift): Learn how to block Clash of Clans on iPhone using built-in tools and Upshift
-- [How To Block Porn on iPhone](https://joinupshift.com/articles/how-to-block-porn-iphone-upshift): Learn how to block porn on iPhone using built-in tools and Upshift
-- [Why Do I Feel So Unmotivated? 9 Reasons and 6 Solutions](https://joinupshift.com/articles/why-feel-unmotivated-upshift): Learn how to block porn on iPhone using built-in tools and Upshift
-- [How To Limit Screen Time on iPhone: 7 Proven Tips to Boost Productivity [Updated 2025]](https://joinupshift.com/articles/how-to-stop-procrastinating-upshift): Learn how to stop procrastinating
+- [Upshift Features: Every Feature Explained [2026]](https://www.joinupshift.com/articles/upshift-features-explained): A complete walkthrough of Upshift: quests, XP, Quest Blocker, time limits, goals, time tracker, friends, themes and privacy via Apple Screen Time.
+- [Upshift Pricing and 7-Day Free Trial Explained](https://www.joinupshift.com/articles/upshift-pricing-and-free-trial): Upshift offers a 7-day free trial on the App Store and Google Play. See what to expect, how to cancel a trial, and where to check current pricing.
+- [Upshift for Students: Study Habits and Focus](https://www.joinupshift.com/articles/upshift-for-students): How students can use Upshift to turn study habits into quests, block distracting apps with Quest Blocker and Work Schedule, and track focus time.
+- [Upshift for Remote Work: Stay Focused at Home](https://www.joinupshift.com/articles/upshift-for-remote-work-focus): Use Work Schedule, Block Now, Time Limits and the focus timer in Upshift to block distracting apps and protect deep work while working from home.
+- [Upshift on Android: Google Play Availability](https://www.joinupshift.com/articles/upshift-on-android): Upshift is available on Google Play. See what we can confirm, why iPhone blocking uses Apple Screen Time, and what to check in the Android listing.
+- [What Is Gamified Habit Tracking? Quests, XP, Streaks](https://www.joinupshift.com/articles/what-is-gamified-habit-tracking): Gamified habit tracking uses quests, XP, levels and streaks to make habits rewarding. Learn how it works and how Upshift applies it with app blocking.
+- [Quest Blocker Explained: Block Apps Until Quests Are Done](https://www.joinupshift.com/articles/quest-blocker-explained): Quest Blocker keeps distracting apps locked until your daily quests are complete. Learn how it works, how to set it up, and how it beats plain time limits.
+- [Upshift vs Todoist: Which Is Better for Habits? [2026]](https://www.joinupshift.com/articles/upshift-vs-todoist): Upshift vs Todoist compared: habits as quests with XP and app blocking, versus a classic task manager. See which fits your habits and focus.
+- [Upshift vs Streaks: Which Habit Tracker Is Better? [2026]](https://www.joinupshift.com/articles/upshift-vs-streaks): Upshift vs Streaks compared: XP, levels, friends and an app blocker versus a minimal streak-based tracker. Find the habit app that fits you.
+- [Upshift vs Habitica: Which Gamified Habit App? [2026]](https://www.joinupshift.com/articles/upshift-vs-habitica): Upshift vs Habitica compared: real-life quests with XP and app blocking versus a fantasy RPG for habits. See which gamified tracker suits you.
+- [Upshift vs Habitify: Which Habit Tracker Is Better? [2026]](https://www.joinupshift.com/articles/upshift-vs-habitify): Upshift vs Habitify compared: gamified quests, XP and app blocking versus a focused habit tracker. Pick the right habit app for your routine.
+- [Upshift vs TickTick: Habits and Productivity [2026]](https://www.joinupshift.com/articles/upshift-vs-ticktick): Upshift vs TickTick compared: gamified habits with an app blocker versus a task manager and planner. See which one fits your productivity needs.
+- [Upshift vs Opal: Which App Blocker Is Better? [2026]](https://www.joinupshift.com/articles/upshift-vs-opal): Upshift vs Opal compared on blocking approach: quest-based unlocks with habits and XP versus a focus-first screen time app. Find your fit.
+- [Best Habit Tracker Apps for iPhone [2026]](https://www.joinupshift.com/articles/best-habit-tracker-apps-iphone-2026): Compare 7 habit tracker apps for iPhone in 2026, from minimal streak trackers to gamified quests, and learn how to pick the one you will keep using.
+- [Best App Blockers for iPhone [2026]: 7 Options Compared](https://www.joinupshift.com/articles/best-app-blockers-iphone-2026): Compare 7 app blockers for iPhone in 2026, from built-in Screen Time to strict focus apps, and find the right level of friction for your habits.
+- [Best Apps to Reduce Screen Time [2026]](https://www.joinupshift.com/articles/best-apps-to-reduce-screen-time-2026): Seven apps that help you cut screen time in 2026, from usage insights and pauses to hard blocks and habit-based rewards. Find your best fit.
+- [Best Gamified Productivity Apps [2026]](https://www.joinupshift.com/articles/best-gamified-productivity-apps-2026): Six gamified productivity apps for 2026 that use XP, levels, streaks and rewards to make habits stick, and how to pick the right game layer.
+- [Best Free Habit Tracker Apps [2026]](https://www.joinupshift.com/articles/best-free-habit-tracker-apps-2026): Seven habit trackers with free tiers or trials in 2026, what free usually means, and what to check on the store page before you commit.
+- [Best Apps to Stop Doomscrolling [2026]](https://www.joinupshift.com/articles/best-apps-to-stop-doomscrolling-2026): Seven apps that help you stop doomscrolling in 2026 with friction, time limits, strict blocks and replacement habits. Pick the right fit for you.
+- [How To Build a Habit That Sticks: 9 Steps [2026]](https://www.joinupshift.com/articles/how-to-build-a-habit-that-sticks): Learn how to build a habit that sticks with 9 simple steps: start tiny, use cues, add friction, track your streak and recover from missed days.
+- [How To Stop Doomscrolling: 9 Steps That Work [2026]](https://www.joinupshift.com/articles/how-to-stop-doomscrolling): Stop doomscrolling with 9 practical steps: find your triggers, add friction, block feeds in danger hours, set limits and replace the habit.
+- [How To Block Apps Until You Finish Your Tasks [2026]](https://www.joinupshift.com/articles/how-to-block-apps-until-you-finish-your-tasks): Lock distracting apps until your tasks are done. Learn how to choose tasks, pick apps, make the block hard to cheat and earn your screen time.
+- [How To Build a Morning Routine You Will Keep [2026]](https://www.joinupshift.com/articles/how-to-build-a-morning-routine): Build a morning routine that lasts: start with two or three small actions, prepare the night before, protect the first minutes from your phone.
+- [How To Stay Focused While Studying: 9 Steps [2026]](https://www.joinupshift.com/articles/how-to-stay-focused-while-studying): Stay focused while studying with 9 steps: clear goals, timed blocks, real breaks, active study methods and a phone that is out of reach.
+- [How To Set Goals and Actually Reach Them: 9 Steps](https://www.joinupshift.com/articles/how-to-set-goals-and-actually-reach-them): Set goals you can reach: make them specific, add deadlines, break them into milestones, schedule daily actions and review your progress weekly.
+- [How To Reduce Screen Time Without Willpower [2026]](https://www.joinupshift.com/articles/how-to-reduce-screen-time-without-willpower): Cut screen time without relying on willpower: add friction, set limits in advance, create phone-free zones and replace the habit with something better.
+- [How To Block Apps on iPhone [2025]](https://www.joinupshift.com/articles/how-to-block-apps-iphone-upshift): Learn the most effective ways to block distracting apps on your iPhone with Upshift
+- [How To Block Websites on iPhone (Safari or Chrome)](https://www.joinupshift.com/articles/how-to-block-websites-iphone-upshift): Complete guide to blocking websites on iPhone using built-in tools and Upshift
+- [How To Use App Blockers: A Scientific Approach To Reducing Screen Time](https://www.joinupshift.com/articles/app-blockers-science-upshift): Learn how to use app blockers like Upshift to limit screen time and regain control
+- [How To Limit Screen Time on iPhone: 6 Proven Tips [2025]](https://www.joinupshift.com/articles/how-to-limit-screen-time-iphone-upshift): 7 actionable steps for reducing time spent on your phone with Upshift and other methods
+- [How To Set Time Limits on iPhone [2025]](https://www.joinupshift.com/articles/how-to-time-limit-iphone-upshift): Learn how to set time limits on apps using Apple Screen Time and Upshift
+- [How To Block YouTube on iPhone](https://www.joinupshift.com/articles/how-to-block-youtube-iphone-upshift): Learn how to block YouTube on iPhone using built-in tools and Upshift
+- [How To Block Instagram on iPhone](https://www.joinupshift.com/articles/how-to-block-instagram-iphone-upshift): Learn how to block Instagram on iPhone using built-in tools and Upshift
+- [How To Block Facebook on iPhone](https://www.joinupshift.com/articles/how-to-block-facebook-iphone-upshift): Learn how to block Facebook on iPhone using built-in tools and Upshift
+- [How To Block Tiktok on iPhone](https://www.joinupshift.com/articles/how-to-block-tiktok-iphone-upshift): Learn how to block Tiktok on iPhone using built-in tools and Upshift
+- [How To Block Snapchat on iPhone](https://www.joinupshift.com/articles/how-to-block-snapchat-upshift): Learn how to block Snapchat on iPhone using built-in tools and Upshift
+- [How To Block Twitter on iPhone](https://www.joinupshift.com/articles/how-to-block-twitter-iphone-upshift): Learn how to block Twitter on iPhone using built-in tools and Upshift
+- [How To Block Reddit on iPhone](https://www.joinupshift.com/articles/how-to-block-reddit-iphone-upshift): Learn how to block Reddit on iPhone using built-in tools and Upshift
+- [How To Block Clash Royale on iPhone](https://www.joinupshift.com/articles/how-to-block-clash-royale-iphone-upshift): Learn how to block Clash Royale on iPhone using built-in tools and Upshift
+- [How To Block Clash of Clans on iPhone](https://www.joinupshift.com/articles/how-to-block-clash-of-clans-iphone-upshift): Learn how to block Clash of Clans on iPhone using built-in tools and Upshift
+- [How To Block Porn on iPhone](https://www.joinupshift.com/articles/how-to-block-porn-iphone-upshift): Learn how to block porn on iPhone using built-in tools and Upshift
+- [Why Do I Feel So Unmotivated? 9 Reasons and 6 Solutions](https://www.joinupshift.com/articles/why-feel-unmotivated-upshift): Learn how to block porn on iPhone using built-in tools and Upshift
+- [How To Limit Screen Time on iPhone: 7 Proven Tips to Boost Productivity [Updated 2025]](https://www.joinupshift.com/articles/how-to-stop-procrastinating-upshift): Learn how to stop procrastinating

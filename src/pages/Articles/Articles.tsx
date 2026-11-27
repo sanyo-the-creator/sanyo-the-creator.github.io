@@ -11,14 +11,14 @@ const Articles: React.FC = () => {
         title="Articles - Productivity & Personal Development Tips | Upshift"
         description="Read helpful articles about productivity, app blocking, screen time management, digital wellness, and personal development. Learn how to improve focus and achieve your goals."
         keywords="productivity articles, app blocker guide, screen time tips, digital wellness, focus improvement, personal development, time management, how to block apps"
-        image="https://joinupshift.com/icon.png"
+        image="https://www.joinupshift.com/icon.png"
         type="website"
       />
       <StructuredData
         type="webpage"
         title="Upshift Articles - Productivity & Personal Development"
         description="Read helpful articles about productivity and personal development"
-        url="https://joinupshift.com/articles"
+        url="https://www.joinupshift.com/articles"
       />
       <div className="articles-container">
         {/* <Breadcrumbs

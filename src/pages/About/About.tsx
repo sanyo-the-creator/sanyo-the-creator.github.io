@@ -13,14 +13,14 @@ const About: React.FC = () => {
         title="About Upshift - Our Mission | Personal Development App"
         description="Learn about Upshift's mission to transform lives through gamified personal development. Discover our story, vision, and commitment to helping you achieve your goals."
         keywords="about upshift, mission, personal development, gamification, life transformation, productivity app, our story"
-        image="https://joinupshift.com/icon.png"
+        image="https://www.joinupshift.com/icon.png"
         type="website"
       />
       <StructuredData
         type="webpage"
         title="About Upshift - Our Mission"
         description="Learn about Upshift's mission to transform lives through personal development"
-        url="https://joinupshift.com/about"
+        url="https://www.joinupshift.com/about"
       />
       {/* Hero Section */}
       <section className="about-hero section">

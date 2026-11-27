@@ -96,7 +96,7 @@ const ArticleDetail: React.FC = () => {
         image={articleContent.mainImage}
         datePublished={article.publishedDate || new Date().toISOString()}
         author="Upshift Team"
-        url={`https://joinupshift.com/articles/${slug}`}
+        url={`https://www.joinupshift.com/articles/${slug}`}
       />
       <LightRays
         raysOrigin="top-center"

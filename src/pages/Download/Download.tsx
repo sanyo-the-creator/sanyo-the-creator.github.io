@@ -78,14 +78,14 @@ const Download: React.FC = () => {
         title={t.meta.download.title}
         description={t.meta.download.description}
         keywords={t.meta.download.keywords}
-        image="https://joinupshift.com/icon.png"
+        image="https://www.joinupshift.com/icon.png"
         type="website"
       />
       <StructuredData
         type="webpage"
         title={t.meta.download.title}
         description={t.meta.download.description}
-        url={`https://joinupshift.com${downloadUrlPath}`}
+        url={`https://www.joinupshift.com${downloadUrlPath}`}
       />
 
       <section className="download-intro">

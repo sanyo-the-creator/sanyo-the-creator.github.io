@@ -99,6 +99,7 @@ export const SiteFooter: React.FC = () => {
             <h3>{t.nav.resources}</h3>
             <Link to="/articles">{t.nav.blog}</Link>
             <a href={`mailto:${SUPPORT_EMAIL}`}>{t.nav.contact}</a>
+            <Link to="/ai-info">Facts for AI</Link>
           </div>
           <div>
             <h3>{t.nav.legal}</h3>

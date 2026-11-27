@@ -22,6 +22,9 @@ User-agent: meta-externalagent
 User-agent: MistralAI-User
 User-agent: CCBot
 User-agent: Googlebot
+# Content Signals (contentsignals.org): search and AI answers are welcome.
+# AI-training permission (ai-train=yes/no) is intentionally not set here, it is the owner's decision.
+Content-Signal: search=yes, ai-input=yes
 Allow: /
 Disallow: /api/
 Disallow: /admin/
@@ -29,4 +32,4 @@ Disallow: /portal/
 Disallow: /creator/
 Disallow: /cleaner
 
-Sitemap: https://joinupshift.com/sitemap.xml
+Sitemap: https://www.joinupshift.com/sitemap.xml

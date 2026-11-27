@@ -112,7 +112,7 @@ const Home: React.FC = () => {
         title="Upshift - Level up your life | Personal Development & Productivity App"
         description="Transform your life with Upshift - The most engaging personal development app. Build habits, track progress, achieve goals with gamification. Block distracting apps and boost productivity."
         keywords="upshift, personal development, habit tracking, goal setting, productivity, gamification, life improvement, app blocker, screen time, focus, time management"
-        image="https://joinupshift.com/icon.png"
+        image="https://www.joinupshift.com/icon.png"
         type="website"
       />
       <StructuredData type="organization" />

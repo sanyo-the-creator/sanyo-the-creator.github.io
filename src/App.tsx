@@ -10,6 +10,7 @@ import Faq from './pages/Faq/Faq';
 import Articles from './pages/Articles/Articles';
 import ArticleDetail from './pages/Articles/ArticleDetail';
 import Download from './pages/Download/Download';
+import AiInfo from './pages/AiInfo/AiInfo';
 import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
 import CreatorLanding from './pages/Creator/CreatorLanding';
@@ -72,6 +73,7 @@ function App() {
           <Route path="/features/:slug" element={<Navigate to="/faq" replace />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:slug" element={<ArticleDetail />} />
+          <Route path="/ai-info" element={<AiInfo />} />
           <Route path="/download" element={<Download />} />
           <Route path="/download/:platform" element={<Download />} />
           <Route path="/privacy" element={<Privacy />} />

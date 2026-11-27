@@ -6,6 +6,8 @@ const {
   ROOT, SITE_URL, LOCALES, DEFAULT_LOCALE, messages, STATIC_PAGES, LOCALIZED_PATHS,
   localizePath, absolute, readArticles, escapeHtml: esc, plain,
 } = require('./seo-lib');
+const { htmlToMd, faqMd } = require('./md-lib');
+const aiInfo = require('../src/i18n/aiInfo.json');
 
 const BUILD = path.join(ROOT, 'build');
 const APP_STORE_URL = 'https://apps.apple.com/us/app/upshift-1-productivity-app/id6749509316';
@@ -146,6 +148,16 @@ for (const l of LOCALES) {
           .join('')}<p><a href="${localizePath(l.code, '/faq')}">${esc(L.seeAll)}</a></p></section>` +
         `<h2>${esc(plain(L.ctaTitle))}</h2>${storesHtml(t)}${footerHtml(l.code, t, '/')}`
     ),
+    md: [
+      `# ${plain(L.h1)}`,
+      L.heroText,
+      `[App Store](${APP_STORE_URL}) | [Google Play](${PLAY_STORE_URL})`,
+      `## ${L.featuresTitle}`,
+      ...L.features.map((f) => `### ${f.chip}: ${f.title.join(' ')}\n\n${f.text}`),
+      `## ${L.faqTitle}`,
+      ...allFaq.slice(0, 6).map((it) => `### ${it.question}\n\n${it.answer}`),
+      `[${L.seeAll}](${absolute(localizePath(l.code, '/faq'))})`,
+    ].join('\n\n'),
   });
 
   // FAQ
@@ -178,6 +190,7 @@ for (const l of LOCALES) {
       `${navHtml(l.code, t)}<h1>${esc(plain(t.faqPage.h1))}</h1><p>${esc(t.faqPage.intro)}</p>${faqHtml(t.faq.groups)}` +
         `<h2>${esc(t.faqPage.stuckTitle)}</h2><p>${esc(t.faqPage.stuckText)} <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a></p>${footerHtml(l.code, t, '/faq')}`
     ),
+    md: `# ${plain(t.faqPage.h1)}\n\n${t.faqPage.intro}\n\n${faqMd(t.faq.groups)}\n\n## ${t.faqPage.stuckTitle}\n\n${t.faqPage.stuckText} ${SUPPORT_EMAIL}`,
   });
 
   // Download
@@ -190,6 +203,7 @@ for (const l of LOCALES) {
     body: wrap(
       `${navHtml(l.code, t)}<h1>${esc(plain(t.downloadPage.h1))}</h1><p>${esc(t.downloadPage.text)}</p>${storesHtml(t)}${footerHtml(l.code, t, '/download')}`
     ),
+    md: `# ${plain(t.downloadPage.h1)}\n\n${t.downloadPage.text}\n\n- [App Store](${APP_STORE_URL})\n- [Google Play](${PLAY_STORE_URL})`,
   });
 }
 
@@ -202,8 +216,30 @@ for (const p of STATIC_PAGES) {
     meta: { title: p.title, description: p.description, keywords: '' },
     ld: [ld('webpage', pageLd('en', p.title, p.description, absolute(p.path)))],
     body: wrap(`${navHtml('en', en)}<h1>${esc(p.h1)}</h1><p>${esc(p.description)}</p>${footerHtml('en', en, '/')}`),
+    md: `# ${p.h1}\n\n${p.description}`,
   });
 }
+
+// Facts page for AI assistants (text shared with the React page through src/i18n/aiInfo.json)
+pages.push({
+  lang: 'en',
+  path: '/ai-info',
+  meta: { title: aiInfo.title, description: aiInfo.description, keywords: '' },
+  ld: [ld('webpage', pageLd('en', aiInfo.title, aiInfo.description, absolute('/ai-info')))],
+  body: wrap(
+    `${navHtml('en', en)}<h1>${esc(aiInfo.title)}</h1><p>Last updated ${esc(aiInfo.updated)}.</p>${aiInfo.sections
+      .map(
+        (s) =>
+          `<section><h2>${esc(s.heading)}</h2>${(s.paragraphs || []).map((x) => `<p>${esc(x)}</p>`).join('')}${
+            s.list ? `<ul>${s.list.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''
+          }</section>`
+      )
+      .join('')}${footerHtml('en', en, '/')}`
+  ),
+  md: `# ${aiInfo.title}\n\nLast updated ${aiInfo.updated}.\n\n${aiInfo.sections
+    .map((s) => `## ${s.heading}\n\n${(s.paragraphs || []).join('\n\n')}${(s.list || []).map((x) => `\n- ${x}`).join('')}`)
+    .join('\n\n')}`,
+});
 
 for (const a of readArticles()) {
   const file = path.join(BUILD, a.htmlContentPath.replace(/^\//, ''));
@@ -245,6 +281,7 @@ for (const a of readArticles()) {
         ])
       ),
     ],
+    md: `# ${a.title}\n\n${a.subtitle}\n\n${htmlToMd(content)}`,
     body: wrap(`${navHtml('en', en)}<article><h1>${esc(a.title)}</h1><p>${esc(a.subtitle)}</p>${content}</article>${footerHtml('en', en, '/')}`),
   });
 }
@@ -301,6 +338,13 @@ for (const pg of pages) {
   const out = pg.path === '/' ? path.join(BUILD, 'index.html') : path.join(BUILD, pg.path, 'index.html');
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, html);
+
+  // Markdown twin, served when a client sends `Accept: text/markdown` (rewrites in vercel.json).
+  if (pg.md) {
+    const mdOut = path.join(BUILD, 'md', pg.path === '/' ? 'index.md' : `${pg.path.slice(1)}.md`);
+    fs.mkdirSync(path.dirname(mdOut), { recursive: true });
+    fs.writeFileSync(mdOut, `${pg.md}\n\nSource: ${canonical}\n`);
+  }
 }
 
 console.log(`Prerendered ${pages.length} pages (+ _shell.html)`);

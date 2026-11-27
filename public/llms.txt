@@ -5,19 +5,20 @@
 Available in 16 languages. The home page, FAQ and download page are translated; guides and legal pages are in English.
 
 ## Product
-- [Home](https://joinupshift.com/): what Upshift is and how quests, the Quest Blocker, goals and time tracking work
-- [FAQ](https://joinupshift.com/faq): answers about quests, blocking, goals, friends, pricing and privacy
-- [Download](https://joinupshift.com/download): App Store and Google Play links
-- [About](https://joinupshift.com/about): mission and values
-- [Full text for LLMs](https://joinupshift.com/llms-full.txt): product facts and the whole FAQ in one file
+- [Home](https://www.joinupshift.com/): what Upshift is and how quests, the Quest Blocker, goals and time tracking work
+- [FAQ](https://www.joinupshift.com/faq): answers about quests, blocking, goals, friends, pricing and privacy
+- [Download](https://www.joinupshift.com/download): App Store and Google Play links
+- [About](https://www.joinupshift.com/about): mission and values
+- [Facts for AI assistants](https://www.joinupshift.com/ai-info): quotable facts, platforms, free trial, languages, contact
+- [Full text for LLMs](https://www.joinupshift.com/llms-full.txt): product facts and the whole FAQ in one file
 
 ## Guides
-- [Blog](https://joinupshift.com/articles): how to block apps, websites and limit screen time on iPhone
+- [Blog](https://www.joinupshift.com/articles): how to block apps, websites and limit screen time on iPhone
 
 ## Translations
-- [Deutsch](https://joinupshift.com/de) | [Español](https://joinupshift.com/es) | [Français](https://joinupshift.com/fr) | [Italiano](https://joinupshift.com/it) | [Português](https://joinupshift.com/pt) | [Nederlands](https://joinupshift.com/nl) | [Svenska](https://joinupshift.com/sv) | [Dansk](https://joinupshift.com/da) | [Suomi](https://joinupshift.com/fi) | [Norsk](https://joinupshift.com/no) | [Polski](https://joinupshift.com/pl) | [Čeština](https://joinupshift.com/cs) | [Slovenčina](https://joinupshift.com/sk) | [日本語](https://joinupshift.com/ja) | [한국어](https://joinupshift.com/ko)
+- [Deutsch](https://www.joinupshift.com/de) | [Español](https://www.joinupshift.com/es) | [Français](https://www.joinupshift.com/fr) | [Italiano](https://www.joinupshift.com/it) | [Português](https://www.joinupshift.com/pt) | [Nederlands](https://www.joinupshift.com/nl) | [Svenska](https://www.joinupshift.com/sv) | [Dansk](https://www.joinupshift.com/da) | [Suomi](https://www.joinupshift.com/fi) | [Norsk](https://www.joinupshift.com/no) | [Polski](https://www.joinupshift.com/pl) | [Čeština](https://www.joinupshift.com/cs) | [Slovenčina](https://www.joinupshift.com/sk) | [日本語](https://www.joinupshift.com/ja) | [한국어](https://www.joinupshift.com/ko)
 
 ## Optional
-- [Privacy Policy](https://joinupshift.com/privacy)
-- [Terms & Conditions](https://joinupshift.com/terms)
+- [Privacy Policy](https://www.joinupshift.com/privacy)
+- [Terms & Conditions](https://www.joinupshift.com/terms)
 - Support: support@joinupshift.com

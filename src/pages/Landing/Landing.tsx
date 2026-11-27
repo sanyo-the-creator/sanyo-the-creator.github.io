@@ -57,7 +57,7 @@ const Landing: React.FC = () => {
         title={t.meta.home.title}
         description={t.meta.home.description}
         keywords={t.meta.home.keywords}
-        image="https://joinupshift.com/icon.png"
+        image="https://www.joinupshift.com/icon.png"
         type="website"
       />
       <StructuredData type="organization" description={t.meta.home.description} />

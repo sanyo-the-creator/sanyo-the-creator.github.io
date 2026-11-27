@@ -25,15 +25,15 @@ const Faq: React.FC = () => {
         title={t.meta.faq.title}
         description={t.meta.faq.description}
         keywords={t.meta.faq.keywords}
-        image="https://joinupshift.com/icon.png"
+        image="https://www.joinupshift.com/icon.png"
         type="website"
       />
       <StructuredData type="faq" items={faqItems} />
       <StructuredData
         type="breadcrumb"
         items={[
-          { name: 'Upshift', url: `https://joinupshift.com${lang === 'en' ? '/' : `/${lang}`}` },
-          { name: t.nav.faq, url: `https://joinupshift.com${lang === 'en' ? '' : `/${lang}`}/faq` },
+          { name: 'Upshift', url: `https://www.joinupshift.com${lang === 'en' ? '/' : `/${lang}`}` },
+          { name: t.nav.faq, url: `https://www.joinupshift.com${lang === 'en' ? '' : `/${lang}`}/faq` },
         ]}
       />
 

@@ -52,7 +52,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, customItems }) => {
       '@type': 'ListItem',
       position: index + 1,
       name: item.label,
-      item: `https://joinupshift.com${item.path}`
+      item: `https://www.joinupshift.com${item.path}`
     }));
 
     return {

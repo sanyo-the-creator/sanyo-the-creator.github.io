@@ -21,6 +21,7 @@ for (const p of LOCALIZED_PATHS) {
 
 const pagesDate = gitDate('src/pages');
 for (const p of STATIC_PAGES) urls.push({ loc: absolute(p.path), lastmod: pagesDate });
+urls.push({ loc: absolute('/ai-info'), lastmod: i18nDate });
 for (const a of articles) {
   urls.push({ loc: absolute(`/articles/${a.slug}`), lastmod: (a.publishedDate || '').slice(0, 10) || pagesDate });
 }
