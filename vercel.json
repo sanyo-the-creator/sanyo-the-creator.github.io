@@ -18,10 +18,6 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Vary",
-          "value": "Accept"
         }
       ]
     },
@@ -31,22 +27,6 @@
         {
           "key": "Link",
           "value": "</llms.txt>; rel=\"describedby\"; type=\"text/markdown\", </sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\""
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "header",
-          "key": "accept",
-          "value": ".*text/markdown.*"
-        }
-      ],
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/markdown; charset=utf-8"
         }
       ]
     },
@@ -83,61 +63,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "header",
-          "key": "accept",
-          "value": ".*text/markdown.*"
-        }
-      ],
-      "destination": "/md/index.md"
-    },
-    {
-      "source": "/:lang(de|es|fr|it|pt|nl|sv|da|fi|no|pl|cs|sk|ja|ko)",
-      "has": [
-        {
-          "type": "header",
-          "key": "accept",
-          "value": ".*text/markdown.*"
-        }
-      ],
-      "destination": "/md/:lang.md"
-    },
-    {
-      "source": "/:lang(de|es|fr|it|pt|nl|sv|da|fi|no|pl|cs|sk|ja|ko)/:page(faq|download)",
-      "has": [
-        {
-          "type": "header",
-          "key": "accept",
-          "value": ".*text/markdown.*"
-        }
-      ],
-      "destination": "/md/:lang/:page.md"
-    },
-    {
-      "source": "/:page(faq|download|about|articles|privacy|terms|ai-info)",
-      "has": [
-        {
-          "type": "header",
-          "key": "accept",
-          "value": ".*text/markdown.*"
-        }
-      ],
-      "destination": "/md/:page.md"
-    },
-    {
-      "source": "/articles/:slug",
-      "has": [
-        {
-          "type": "header",
-          "key": "accept",
-          "value": ".*text/markdown.*"
-        }
-      ],
-      "destination": "/md/articles/:slug.md"
-    },
     {
       "source": "/(.*)",
       "destination": "/_shell.html"
